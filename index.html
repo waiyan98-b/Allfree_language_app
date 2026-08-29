@@ -3,407 +3,594 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Global Free Language Hub</title>
+  <title>LingoFree - Basic to Native</title>
   <style>
     :root {
-      --primary: #00897b;
-      --primary-dark: #004d40;
-      --accent: #ff6f00;
-      --bg: #f4f7f6;
-      --card: #ffffff;
-      --text: #212121;
+      --green: #58cc02;
+      --green-dark: #46a302;
+      --green-light: #d7ffb8;
+      --red: #ff4b4b;
+      --red-light: #ffdfe0;
+      --blue: #1cb0f6;
+      --gold: #ffc800;
+      --gray: #e5e5e5;
+      --text: #3c3c3c;
     }
-    * { box-sizing: border-box; }
+    * { box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
     body {
       margin: 0;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-      background-color: var(--bg);
+      background-color: #f7f7f7;
       color: var(--text);
       display: flex;
       flex-direction: column;
       height: 100vh;
+      overflow: hidden;
     }
-    header {
-      background-color: var(--primary);
-      color: white;
-      padding: 14px 16px;
-      text-align: center;
-      font-size: 18px;
-      font-weight: bold;
-    }
-    .lang-selector-bar {
+    .top-bar {
       display: flex;
-      background: white;
-      padding: 10px 16px;
-      gap: 10px;
+      justify-content: space-between;
       align-items: center;
-      border-bottom: 1px solid #e0e0e0;
-    }
-    .lang-selector-bar select {
-      flex: 1;
-      padding: 8px 12px;
-      border-radius: 8px;
-      border: 1px solid var(--primary);
-      font-size: 14px;
-      outline: none;
-      background: #fdfdfd;
+      padding: 12px 18px;
+      background: white;
+      border-bottom: 2px solid var(--gray);
       font-weight: bold;
-      color: var(--primary-dark);
+      font-size: 15px;
+    }
+    .stat-item {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+    .lang-select {
+      border: 2px solid var(--gray);
+      border-radius: 12px;
+      padding: 4px 8px;
+      font-weight: bold;
+      font-size: 13px;
+      outline: none;
     }
     main {
       flex: 1;
       overflow-y: auto;
       padding: 16px;
-      padding-bottom: 75px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
-    .card {
-      background: var(--card);
-      border-radius: 12px;
-      padding: 16px;
-      margin-bottom: 14px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
-    }
-    .input-box {
+    .path-container {
       width: 100%;
-      height: 70px;
-      padding: 10px;
-      border: 1px solid #ccc;
-      border-radius: 8px;
-      font-size: 15px;
-      resize: none;
-      outline: none;
+      max-width: 420px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 18px;
+      padding-bottom: 70px;
     }
-    .btn-main {
+    .unit-card {
       width: 100%;
-      padding: 12px;
-      background: var(--primary);
+      background: var(--green);
       color: white;
-      border: none;
-      border-radius: 8px;
-      font-size: 15px;
-      font-weight: bold;
-      margin-top: 8px;
-      cursor: pointer;
+      padding: 14px 18px;
+      border-radius: 16px;
+      box-shadow: 0 4px 0 var(--green-dark);
+      margin-top: 10px;
     }
-    .btn-speak {
-      background: #e0f2f1;
-      border: none;
+    .unit-card.adv { background: #9c27b0; box-shadow: 0 4px 0 #7b1fa2; }
+    .unit-card.native { background: var(--gold); color: #4a3800; box-shadow: 0 4px 0 #c79a00; }
+
+    .node-row {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+      gap: 14px;
+    }
+    .level-node {
+      width: 70px;
+      height: 70px;
       border-radius: 50%;
-      width: 40px;
-      height: 40px;
-      font-size: 18px;
+      background: var(--green);
+      border: none;
+      box-shadow: 0 5px 0 var(--green-dark);
+      font-size: 26px;
+      color: white;
       cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: center;
+      transition: transform 0.1s;
     }
-    .badge {
-      display: inline-block;
-      font-size: 11px;
-      background: #e0f2f1;
-      color: #00796b;
-      padding: 3px 8px;
-      border-radius: 4px;
-      margin-bottom: 6px;
+    .level-node:active { transform: translateY(3px); box-shadow: 0 2px 0 var(--green-dark); }
+    .level-node.locked {
+      background: var(--gray) !important;
+      box-shadow: 0 5px 0 #b0bec5 !important;
+      cursor: not-allowed;
+    }
+    .node-label {
+      font-size: 13px;
       font-weight: bold;
-    }
-    .nav {
-      position: fixed;
-      bottom: 0;
-      width: 100%;
-      background: white;
-      display: flex;
-      border-top: 1px solid #ddd;
-      height: 55px;
-    }
-    .nav button {
-      flex: 1;
-      border: none;
-      background: none;
-      font-size: 14px;
-      font-weight: bold;
-      color: #777;
-      cursor: pointer;
-    }
-    .nav button.active {
-      color: var(--primary);
-      border-top: 3px solid var(--primary);
-    }
-    .quiz-card {
-      background: white;
-      border-radius: 12px;
-      padding: 20px;
+      color: #555;
       text-align: center;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
     }
-    .quiz-option {
+
+    /* Game Screen */
+    .game-container {
+      display: none;
       width: 100%;
-      padding: 14px;
-      margin: 8px 0;
-      border-radius: 8px;
-      border: 2px solid #e0e0e0;
+      max-width: 450px;
+      flex-direction: column;
+      height: 100%;
+    }
+    .progress-bar {
+      width: 100%;
+      height: 12px;
+      background: var(--gray);
+      border-radius: 10px;
+      overflow: hidden;
+      margin-bottom: 16px;
+    }
+    .progress-fill {
+      height: 100%;
+      width: 0%;
+      background: var(--green);
+      transition: width 0.3s;
+    }
+    .speaker-btn {
+      background: var(--blue);
+      color: white;
+      border: none;
+      border-radius: 10px;
+      padding: 8px 14px;
+      font-size: 16px;
+      box-shadow: 0 3px 0 #0f86be;
+      cursor: pointer;
+      align-self: flex-start;
+      margin-bottom: 10px;
+    }
+    .prompt-box {
+      font-size: 19px;
+      font-weight: bold;
+      margin: 10px 0 16px 0;
+      line-height: 1.4;
+    }
+    .answer-slot {
+      min-height: 48px;
+      border-bottom: 2px solid var(--gray);
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      padding: 4px 0;
+      margin-bottom: 20px;
+    }
+    .word-pool {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: center;
+    }
+    .word-bubble {
       background: white;
+      border: 2px solid var(--gray);
+      box-shadow: 0 3px 0 var(--gray);
+      padding: 10px 14px;
+      border-radius: 12px;
+      font-weight: bold;
       font-size: 15px;
       cursor: pointer;
     }
-    .quiz-option.correct { background: #c8e6c9; border-color: #4caf50; }
-    .quiz-option.wrong { background: #ffcdd2; border-color: #f44336; }
+    .word-bubble.used { opacity: 0.2; pointer-events: none; }
+    .choice-btn {
+      width: 100%;
+      background: white;
+      border: 2px solid var(--gray);
+      box-shadow: 0 3px 0 var(--gray);
+      border-radius: 12px;
+      padding: 14px;
+      font-size: 15px;
+      font-weight: bold;
+      text-align: left;
+      margin-bottom: 10px;
+      cursor: pointer;
+    }
+    .choice-btn.selected { border-color: var(--blue); background: #ddf4ff; }
+    .bottom-bar {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 14px 20px;
+      background: white;
+      border-top: 2px solid var(--gray);
+    }
+    .btn-action {
+      width: 100%;
+      padding: 14px;
+      border-radius: 12px;
+      font-size: 16px;
+      font-weight: bold;
+      border: none;
+      background: var(--green);
+      color: white;
+      box-shadow: 0 4px 0 var(--green-dark);
+      cursor: pointer;
+    }
+    .feedback-sheet {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 18px 20px;
+      display: none;
+      flex-direction: column;
+      gap: 8px;
+      z-index: 100;
+    }
+    .feedback-sheet.correct { background: var(--green-light); color: var(--green-dark); }
+    .feedback-sheet.wrong { background: var(--red-light); color: var(--red); }
   </style>
 </head>
 <body>
 
-  <header id="appTitle">Global Free Language Hub</header>
-
-  <!-- Global Language Selector -->
-  <div class="lang-selector-bar">
-    <span style="font-size: 13px; font-weight: bold; color: #555;">လေ့လာမည့် ဘာသာ:</span>
-    <select id="targetLangSelect" onchange="onLanguageChange()">
-      <option value="en" data-voice="en-US">🇬🇧 English (အင်္ဂလိပ်)</option>
-      <option value="th" data-voice="th-TH">🇹🇭 ไทย (ထိုင်း)</option>
-      <option value="ja" data-voice="ja-JP">🇯🇵 日本語 (ဂျပန်)</option>
-      <option value="ko" data-voice="ko-KR">🇰🇷 한국어 (ကိုရီးယား)</option>
-      <option value="zh-CN" data-voice="zh-CN">🇨🇳 中文 (တရုတ်)</option>
-      <option value="de" data-voice="de-DE">🇩🇪 Deutsch (ဂျာမန်)</option>
-      <option value="fr" data-voice="fr-FR">🇫🇷 Français (ပြင်သစ်)</option>
-      <option value="es" data-voice="es-ES">🇪🇸 Español (စပိန်)</option>
-      <option value="ru" data-voice="ru-RU">🇷🇺 Русский (ရုရှား)</option>
-      <option value="ar" data-voice="ar-SA">🇸🇦 العربية (အာရဗီ)</option>
+  <div class="top-bar">
+    <select class="lang-select" id="langPicker" onchange="changeLanguage()">
+      <option value="en">🇬🇧 English</option>
+      <option value="th">🇹🇭 Thai</option>
+      <option value="ja">🇯🇵 Japanese</option>
+      <option value="ko">🇰🇷 Korean</option>
     </select>
+    <div class="stat-item" style="color: #ff9600;">🔥 <span id="streakCount">1</span></div>
+    <div class="stat-item" style="color: #1cb0f6;">⭐ <span id="xpCount">0</span> XP</div>
+    <div class="stat-item" style="color: #ff4b4b; font-size: 18px;">❤️ ∞</div>
   </div>
 
-  <!-- TAB 1: စကားလုံးများ လေ့လာရန် -->
-  <main id="tabLearn">
-    <!-- Google AI Instant Dictionary Search -->
-    <div class="card">
-      <div style="font-weight: bold; margin-bottom: 6px; font-size: 14px; color: var(--primary);">🔍 Google ဖြင့် စကားလုံး/ဝါကျ အသစ်လေ့လာရန်</div>
-      <textarea id="searchWordInput" class="input-box" placeholder="မြန်မာလို (သို့) လေ့လာလိုသည့် ဘာသာစကားဖြင့် ရိုက်ထည့်ပါ..."></textarea>
-      <button class="btn-main" onclick="searchGoogleWord()">ရှာဖွေပြီး လေ့လာမှုစာရင်းထဲ ထည့်မည်</button>
-      <div id="searchResult" style="display:none; margin-top:12px; padding:10px; background:#e8f5e9; border-radius:8px;">
-        <div style="display:flex; justify-content:space-between; align-items:center;">
-          <div>
-            <div id="resTarget" style="font-size:18px; font-weight:bold; color:var(--primary-dark);">-</div>
-            <div id="resMeaning" style="font-size:14px; color:#333; margin-top:3px;">-</div>
-          </div>
-          <button class="btn-speak" onclick="speakText(currentSearchResult, currentVoice)">🔊</button>
+  <main>
+    <!-- Learning Path Screen -->
+    <div id="pathScreen" class="path-container">
+
+      <!-- Section 1 -->
+      <div class="unit-card">
+        <div style="font-size: 12px; opacity: 0.9;">LEVEL 1 • BASIC (A1-A2)</div>
+        <div style="font-size: 16px; font-weight: bold; margin-top: 2px;">အခြေခံ နှုတ်ဆက်ခြင်းနှင့် စကားပြော</div>
+      </div>
+      <div class="node-row">
+        <div>
+          <button class="level-node" id="node0" onclick="startLevel(0)">🌱</button>
+          <div class="node-label">အခြေခံ မင်္ဂလာပါ</div>
         </div>
       </div>
+
+      <!-- Section 2 -->
+      <div class="unit-card" style="background: var(--blue); box-shadow: 0 4px 0 #0288d1;">
+        <div style="font-size: 12px; opacity: 0.9;">LEVEL 2 • INTERMEDIATE (B1)</div>
+        <div style="font-size: 16px; font-weight: bold; margin-top: 2px;">ခရီးသွား၊ ဈေးဝယ်နှင့် နေ့စဉ်ဘဝ</div>
+      </div>
+      <div class="node-row">
+        <div>
+          <button class="level-node" id="node1" onclick="startLevel(1)">🛒</button>
+          <div class="node-label">ဈေးဝယ်နှင့် လမ်းမေးခြင်း</div>
+        </div>
+      </div>
+
+      <!-- Section 3 -->
+      <div class="unit-card adv">
+        <div style="font-size: 12px; opacity: 0.9;">LEVEL 3 • ADVANCED (B2-C1)</div>
+        <div style="font-size: 16px; font-weight: bold; margin-top: 2px;">လုပ်ငန်းခွင်သုံးနှင့် အစည်းအဝေး</div>
+      </div>
+      <div class="node-row">
+        <div>
+          <button class="level-node" id="node2" onclick="startLevel(2)">💼</button>
+          <div class="node-label">Professional Business</div>
+        </div>
+      </div>
+
+      <!-- Section 4 -->
+      <div class="unit-card native">
+        <div style="font-size: 12px; opacity: 0.9;">LEVEL 4 • NATIVE SPEAKER (C2)</div>
+        <div style="font-size: 16px; font-weight: bold; margin-top: 2px;">ဒေသသုံး စကားထာများနှင့် သဘာဝကျသော အသုံးအနှုန်းများ</div>
+      </div>
+      <div class="node-row">
+        <div>
+          <button class="level-node" id="node3" onclick="startLevel(3)">👑</button>
+          <div class="node-label">Native Idioms & Fluency</div>
+        </div>
+      </div>
+
     </div>
 
-    <div style="font-weight: bold; margin: 16px 0 8px 0; color: #555; font-size: 14px;">📖 လေ့လာရန် မရှိမဖြစ် စကားလုံးများ</div>
-    <div id="vocabList"></div>
-  </main>
-
-  <!-- TAB 2: Quiz လေ့ကျင့်ရန် -->
-  <main id="tabQuiz" style="display: none;">
-    <div class="quiz-card">
-      <span class="badge" id="quizBadge">Quiz Time</span>
-      <h2 id="quizQuestion" style="color: var(--primary); margin: 12px 0 6px 0;">-</h2>
-      <button class="btn-speak" style="margin: 0 auto 14px auto;" onclick="speakText(currentQuizWord, currentVoice)">🔊</button>
-      <p style="color: #666; font-size: 14px; margin-bottom: 16px;">မှန်ကန်သော မြန်မာအဓိပ္ပာယ်ကို ရွေးချယ်ပါ</p>
-      <div id="quizOptions"></div>
-      <button id="btnNextQuiz" class="btn-main" style="display:none; margin-top:16px;" onclick="loadNextQuiz()">နောက်တစ်ခု ➡</button>
+    <!-- Game Screen -->
+    <div id="gameScreen" class="game-container">
+      <div class="progress-bar">
+        <div class="progress-fill" id="progressFill"></div>
+      </div>
+      <button class="speaker-btn" onclick="speakCurrent()">🔊 အသံနားထောင်မည်</button>
+      <div class="prompt-box" id="promptText">-</div>
+      
+      <div id="sentenceBuilderArea" style="display: none;">
+        <div class="answer-slot" id="answerSlot"></div>
+        <div class="word-pool" id="wordPool"></div>
+      </div>
+      <div id="multipleChoiceArea" style="display: none; width: 100%;"></div>
     </div>
   </main>
 
-  <!-- Bottom Navigation -->
-  <div class="nav">
-    <button id="navLearn" class="active" onclick="switchTab('learn')">📚 လေ့လာရန်</button>
-    <button id="navQuiz" onclick="switchTab('quiz')">🎯 လေ့ကျင့်ရန် (Quiz)</button>
+  <div class="bottom-bar" id="bottomBar" style="display: none;">
+    <button class="btn-action" id="checkBtn" onclick="checkAnswer()">စစ်ဆေးမည် (CHECK)</button>
+  </div>
+
+  <div class="feedback-sheet" id="feedbackSheet">
+    <div style="font-size: 18px; font-weight: bold;" id="feedbackTitle">အဖြေမှန်ပါတယ်!</div>
+    <div id="feedbackDetail" style="font-size: 13px;"></div>
+    <button class="btn-action" onclick="nextQuestion()">ဆက်သွားမည် ➡</button>
   </div>
 
   <script>
-    // Essential starter databases for instant offline learning
-    const starterPacks = {
-      en: [
-        { word: "Hello", meaning: "မင်္ဂလာပါ", cat: "နှုတ်ဆက်ခြင်း" },
-        { word: "Thank you", meaning: "ကျေးဇူးတင်ပါတယ်", cat: "ယဉ်ကျေးမှု" },
-        { word: "How much is this?", meaning: "ဒါ ဘယ်လောက်ကျပါသလဲ", cat: "ဈေးဝယ်" },
-        { word: "Where is the station?", meaning: "ဘူတာ ဘယ်မှာလဲ", cat: "ခရီးသွား" },
-        { word: "Excuse me", meaning: "တစ်ဆိတ်လောက်", cat: "နေ့စဉ်သုံး" },
-        { word: "Delicious", meaning: "အရသာရှိသော", cat: "စားသောက်" }
-      ],
-      th: [
-        { word: "สวัสดี (Sawasdee)", meaning: "မင်္ဂလာပါ", cat: "နှုတ်ဆက်ခြင်း" },
-        { word: "ขอบคุณ (Khob khun)", meaning: "ကျေးဇူးတင်ပါတယ်", cat: "ယဉ်ကျေးမှု" },
-        { word: "เท่าไหร่ (Thao rai)", meaning: "ဘယ်လောက်ကျလဲ", cat: "ဈေးဝယ်" },
-        { word: "ห้องน้ำอยู่ที่ไหน", meaning: "အိမ်သာ ဘယ်မှာလဲ", cat: "ခရီးသွား" },
-        { word: "อร่อยมาก (Aroi mak)", meaning: "အရမ်းစားကောင်းတယ်", cat: "စားသောက်" },
-        { word: "ช่วยด้วย (Chuay duay)", meaning: "ကူညီပါဦး / ကယ်ပါ", cat: "အရေးပေါ်" }
-      ],
-      ja: [
-        { word: "こんにちは (Konnichiwa)", meaning: "မင်္ဂလာပါ", cat: "နှုတ်ဆက်ခြင်း" },
-        { word: "ありがとう (Arigatou)", meaning: "ကျေးဇူးတင်ပါတယ်", cat: "ယဉ်ကျေးမှု" },
-        { word: "いくらですか (Ikura desu ka)", meaning: "ဘယ်လောက်ကျပါသလဲ", cat: "ဈေးဝယ်" },
-        { word: "すみません (Sumimasen)", meaning: "တစ်ဆိတ်လောက် / တောင်းပန်ပါတယ်", cat: "နေ့စဉ်သုံး" },
-        { word: "おいしい (Oishii)", meaning: "အရသာရှိသော", cat: "စားသောက်" },
-        { word: "たすけて (Tasukete)", meaning: "ကယ်ပါ / ကူညီပါဦး", cat: "အရေးပေါ်" }
-      ],
-      ko: [
-        { word: "안녕하세요 (Annyeonghaseyo)", meaning: "မင်္ဂလာပါ", cat: "နှုတ်ဆက်ခြင်း" },
-        { word: "감사합니다 (Gamsahamnida)", meaning: "ကျေးဇူးတင်ပါတယ်", cat: "ယဉ်ကျေးမှု" },
-        { word: "얼마예요? (Eolmayeyo?)", meaning: "ဘယ်လောက်လဲ", cat: "ဈေးဝယ်" },
-        { word: "맛있어요 (Masisseoyo)", meaning: "အရသာရှိတယ်", cat: "စားသောက်" },
-        { word: "화장실 어디예요?", meaning: "အိမ်သာ ဘယ်မှာလဲ", cat: "ခရီးသွား" }
-      ],
-      zh: [
-        { word: "你好 (Nǐ hǎo)", meaning: "မင်္ဂလာပါ", cat: "နှုတ်ဆက်ခြင်း" },
-        { word: "谢谢 (Xièxiè)", meaning: "ကျေးဇူးတင်ပါတယ်", cat: "ယဉ်ကျေးမှု" },
-        { word: "多少钱？(Duōshǎo qián?)", meaning: "ဘယ်လောက်ကျပါသလဲ", cat: "ဈေးဝယ်" },
-        { word: "好吃 (Hào chī)", meaning: "စားကောင်းတယ် / အရသာရှိတယ်", cat: "စားသောက်" },
-        { word: "厕所在哪里？", meaning: "အိမ်သာ ဘယ်မှာလဲ", cat: "ခရီးသွား" }
-      ]
+    const courseData = {
+      en: {
+        voice: 'en-US',
+        levels: [
+          // LEVEL 1: BASIC
+          {
+            title: "Basic Greetings",
+            questions: [
+              { type: "choice", prompt: "'မင်္ဂလာပါ' ၏ အင်္ဂလိပ်စာကို ရွေးပါ", audio: "Hello", choices: ["Hello", "Goodbye", "Thanks"], correct: "Hello" },
+              { type: "build", prompt: "ဝါကျစီပါ: 'တွေ့ရတာ ဝမ်းသာပါတယ်'", audio: "Nice to meet you", words: ["meet", "Nice", "to", "you", "bad"], correct: ["Nice", "to", "meet", "you"] }
+            ]
+          },
+          // LEVEL 2: INTERMEDIATE
+          {
+            title: "Shopping & Travel",
+            questions: [
+              { type: "choice", prompt: "'ဒါ ဘယ်လောက်ကျလဲ' ကို ရွေးပါ", audio: "How much is this?", choices: ["Where are you?", "How much is this?", "What is that?"], correct: "How much is this?" },
+              { type: "build", prompt: "ဝါကျစီပါ: 'အိမ်သာ ဘယ်မှာရှိလဲ'", audio: "Where is the restroom?", words: ["the", "Where", "restroom?", "is", "car"], correct: ["Where", "is", "the", "restroom?"] }
+            ]
+          },
+          // LEVEL 3: ADVANCED
+          {
+            title: "Business & Work",
+            questions: [
+              { type: "choice", prompt: "'Deadline' ၏ မြန်မာအဓိပ္ပာယ်ကို ရွေးပါ", audio: "Deadline", choices: ["နောက်ဆုံးသတ်မှတ်ရက်", "အလုပ်ဆင်းချိန်", "လစာတိုးခြင်း"], correct: "နောက်ဆုံးသတ်မှတ်ရက်" },
+              { type: "build", prompt: "ဝါကျစီပါ: 'အစီရင်ခံစာကို အီးမေးလ်ဖြင့် ပို့ပေးပါမည်'", audio: "I will send the report", words: ["send", "I", "report", "the", "will"], correct: ["I", "will", "send", "the", "report"] }
+            ]
+          },
+          // LEVEL 4: NATIVE
+          {
+            title: "Native Idioms & Fluency",
+            questions: [
+              { type: "choice", prompt: "'Piece of cake' (Native Idiom) ၏ အဓိပ္ပာယ်ကို ရွေးပါ", audio: "Piece of cake", choices: ["ကိတ်မုန့်တစ်တုံး", "အရမ်းလွယ်ကူသော အရာ", "စားစရာ မရှိတော့ခြင်း"], correct: "အရမ်းလွယ်ကူသော အရာ" },
+              { type: "build", prompt: "Native အသုံးအနှုန်းစီပါ: 'Under the weather (နေမကောင်းဖြစ်သည်)'", audio: "I feel under the weather", words: ["under", "I", "the", "feel", "weather"], correct: ["I", "feel", "under", "the", "weather"] }
+            ]
+          }
+        ]
+      },
+      th: {
+        voice: 'th-TH',
+        levels: [
+          // LEVEL 1: BASIC
+          {
+            title: "Basic Greetings",
+            questions: [
+              { type: "choice", prompt: "'မင်္ဂလာပါ' ၏ ထိုင်းစာကို ရွေးပါ", audio: "สวัสดี", choices: ["สวัสดี (Sawasdee)", "ขอบคุณ (Khob khun)", "อร่อย (Aroi)"], correct: "สวัสดี (Sawasdee)" },
+              { type: "build", prompt: "ဝါကျစီပါ: 'မင်္ဂလာပါခင်ဗျာ'", audio: "สวัสดีครับ", words: ["ครับ", "สวัสดี", "ขอบคุณ"], correct: ["สวัสดี", "ครับ"] }
+            ]
+          },
+          // LEVEL 2: INTERMEDIATE
+          {
+            title: "Intermediate Travel",
+            questions: [
+              { type: "choice", prompt: "'ဈေးလျှော့ပေးလို့ရမလား' ကို ရွေးပါ", audio: "ลดได้ไหม", choices: ["ลดได้ไหม", "แพงมาก", "อร่อย"], correct: "ลดได้ไหม" },
+              { type: "build", prompt: "ဝါကျစီပါ: 'အိမ်သာဘယ်မှာလဲ'", audio: "ห้องน้ำอยู่ที่ไหน", words: ["ห้องน้ำ", "อยู่ที่ไหน", "ครับ"], correct: ["ห้องน้ำ", "อยู่ที่ไหน"] }
+            ]
+          },
+          // LEVEL 3: ADVANCED
+          {
+            title: "Advanced Work",
+            questions: [
+              { type: "choice", prompt: "'အစည်းအဝေး' ၏ ထိုင်းစာကို ရွေးပါ", audio: "การประชุม", choices: ["การประชุม (Pra-chum)", "เงินเดือน", "ลาพักร้อน"], correct: "การประชุม (Pra-chum)" },
+              { type: "build", prompt: "ဝါကျစီပါ: 'ဒီနေ့ အချိန်ပို(OT) ဆင်းမည်'", audio: "วันนี้ทำโอที", words: ["ทำโอที", "วันนี้", "ครับ"], correct: ["วันนี้", "ทำโอที"] }
+            ]
+          },
+          // LEVEL 4: NATIVE
+          {
+            title: "Native Slang & Expressions",
+            questions: [
+              { type: "choice", prompt: "'ใจเย็นๆ (Jai yen yen)' ၏ အဓိပ္ပာယ်ကို ရွေးပါ", audio: "ใจเย็นๆ", choices: ["စိတ်အေးအေးထားပါ", "ရေခဲသောက်ပါ", "ဗိုက်ဆာတယ်"], correct: "စိတ်အေးအေးထားပါ" },
+              { type: "build", prompt: "Native စကားစီပါ: 'สุดปัง (အရမ်းမိုက်တယ်/အရမ်းတော်တယ်)'", audio: "อันนี้สุดปังมาก", words: ["สุดปัง", "อันนี้", "มาก"], correct: ["อันนี้", "สุดปัง", "มาก"] }
+            ]
+          }
+        ]
+      }
     };
 
-    let currentLang = 'en';
-    let currentVoice = 'en-US';
-    let currentSearchResult = '';
-    let currentQuizWord = '';
-    let currentQuizIndex = 0;
-    let quizList = [];
+    let curLang = 'en';
+    let xp = parseInt(localStorage.getItem('lingo_xp')) || 0;
+    let unlockedLevels = JSON.parse(localStorage.getItem('lingo_unlock')) || { en: 0, th: 0, ja: 0, ko: 0 };
 
-    function onLanguageChange() {
-      const select = document.getElementById('targetLangSelect');
-      currentLang = select.value;
-      currentVoice = select.options[select.selectedIndex].getAttribute('data-voice');
-      document.getElementById('searchResult').style.display = 'none';
-      renderVocabList();
+    let curLevelIndex = 0;
+    let curQIndex = 0;
+    let userSelectedChoice = '';
+    let userBuiltSentence = [];
+
+    document.getElementById('xpCount').innerText = xp;
+
+    function updateTreeUI() {
+      const maxUnlocked = unlockedLevels[curLang] || 0;
+      for (let i = 0; i < 4; i++) {
+        const node = document.getElementById(`node${i}`);
+        if (node) {
+          if (i <= maxUnlocked) {
+            node.classList.remove('locked');
+          } else {
+            node.classList.add('locked');
+          }
+        }
+      }
     }
 
-    function speakText(text, voice) {
+    function changeLanguage() {
+      curLang = document.getElementById('langPicker').value;
+      if (!courseData[curLang]) {
+        alert('ဤဘာသာစကား သင်ခန်းစာများကို မကြာမီ ထည့်သွင်းပေးပါမည်။');
+        document.getElementById('langPicker').value = 'en';
+        curLang = 'en';
+      }
+      updateTreeUI();
+    }
+
+    function speakText(text) {
       if ('speechSynthesis' in window && text) {
         window.speechSynthesis.cancel();
-        const utter = new SpeechSynthesisUtterance(text.split('(')[0]);
-        utter.lang = voice || currentVoice;
+        const utter = new SpeechSynthesisUtterance(text.replace(/\(.*\)/, '').trim());
+        utter.lang = (courseData[curLang] && courseData[curLang].voice) || 'en-US';
         window.speechSynthesis.speak(utter);
       }
     }
 
-    function getStorageKey() {
-      return `custom_vocab_${currentLang}`;
+    function startLevel(lvlIdx) {
+      const maxUnlocked = unlockedLevels[curLang] || 0;
+      if (lvlIdx > maxUnlocked) {
+        return alert('🔒 ဤ Level ကို ဖွင့်ရန် ရှေ့ Level ကို အရင် အောင်မြင်အောင် ဖြေဆိုပါ!');
+      }
+
+      curLevelIndex = lvlIdx;
+      curQIndex = 0;
+
+      document.getElementById('pathScreen').style.display = 'none';
+      document.getElementById('gameScreen').style.display = 'flex';
+      document.getElementById('bottomBar').style.display = 'flex';
+
+      loadQuestion();
     }
 
-    function getCombinedWords() {
-      const base = starterPacks[currentLang] || [
-        { word: "Hello", meaning: "မင်္ဂလာပါ", cat: "အခြေခံ" },
-        { word: "Thank you", meaning: "ကျေးဇူးတင်ပါတယ်", cat: "အခြေခံ" }
-      ];
-      const custom = JSON.parse(localStorage.getItem(getStorageKey())) || [];
-      return [...custom, ...base];
-    }
+    function loadQuestion() {
+      const q = courseData[curLang].levels[curLevelIndex].questions[curQIndex];
+      const totalQ = courseData[curLang].levels[curLevelIndex].questions.length;
+      document.getElementById('progressFill').style.width = `${(curQIndex / totalQ) * 100}%`;
+      document.getElementById('promptText').innerText = q.prompt;
+      userSelectedChoice = '';
+      userBuiltSentence = [];
 
-    function renderVocabList() {
-      const list = getCombinedWords();
-      const container = document.getElementById('vocabList');
-      container.innerHTML = '';
+      if (q.audio) speakText(q.audio);
 
-      list.forEach((item, index) => {
-        container.innerHTML += `
-          <div class="card">
-            <div style="display:flex; justify-content:space-between; align-items:center;">
-              <div>
-                <span class="badge">${item.cat || 'လေ့လာထားသောစကားလုံး'}</span>
-                <div style="font-size:18px; font-weight:bold; color:var(--primary-dark);">${item.word}</div>
-                <div style="font-size:14px; color:#444; margin-top:4px;">မြန်မာလို: ${item.meaning}</div>
-              </div>
-              <button class="btn-speak" onclick="speakText('${item.word.replace(/'/g, "\\'")}', '${currentVoice}')">🔊</button>
-            </div>
-          </div>
-        `;
-      });
-    }
+      if (q.type === 'choice') {
+        document.getElementById('sentenceBuilderArea').style.display = 'none';
+        const choiceArea = document.getElementById('multipleChoiceArea');
+        choiceArea.style.display = 'block';
+        choiceArea.innerHTML = '';
 
-    async function searchGoogleWord() {
-      const text = document.getElementById('searchWordInput').value.trim();
-      if (!text) return alert('ကျေးဇူးပြု၍ စာရိုက်ထည့်ပါ');
-
-      document.getElementById('searchResult').style.display = 'block';
-      document.getElementById('resTarget').innerText = 'Google မှ ရှာဖွေနေပါသည်...';
-      document.getElementById('resMeaning').innerText = '';
-
-      try {
-        const url = `https://translate.googleapis.com/translate_a/single?client=gtx&sl=auto&tl=${currentLang}&dt=t&q=${encodeURI(text)}`;
-        const res = await fetch(url);
-        const data = await res.json();
+        q.choices.forEach(c => {
+          const btn = document.createElement('button');
+          btn.className = 'choice-btn';
+          btn.innerText = c;
+          btn.onclick = () => {
+            document.querySelectorAll('.choice-btn').forEach(b => b.classList.remove('selected'));
+            btn.classList.add('selected');
+            userSelectedChoice = c;
+            speakText(c);
+          };
+          choiceArea.appendChild(btn);
+        });
+      } else if (q.type === 'build') {
+        document.getElementById('multipleChoiceArea').style.display = 'none';
+        document.getElementById('sentenceBuilderArea').style.display = 'block';
         
-        const translated = data[0].map(item => item[0]).join('');
-        currentSearchResult = translated;
+        const slot = document.getElementById('answerSlot');
+        const pool = document.getElementById('wordPool');
+        slot.innerHTML = '';
+        pool.innerHTML = '';
 
-        document.getElementById('resTarget').innerText = translated;
-        document.getElementById('resMeaning').innerText = `မြန်မာ: ${text}`;
+        q.words.forEach(w => {
+          const bubble = document.createElement('div');
+          bubble.className = 'word-bubble';
+          bubble.innerText = w;
+          bubble.onclick = () => {
+            if (!bubble.classList.contains('used')) {
+              bubble.classList.add('used');
+              userBuiltSentence.push(w);
+              speakText(w);
 
-        // Save into study list
-        let custom = JSON.parse(localStorage.getItem(getStorageKey())) || [];
-        custom.unshift({ word: translated, meaning: text, cat: "Google ရှာဖွေထားသည်" });
-        localStorage.setItem(getStorageKey(), JSON.stringify(custom));
-
-        renderVocabList();
-        document.getElementById('searchWordInput').value = '';
-      } catch (e) {
-        document.getElementById('resTarget').innerText = 'ရှာမတွေ့ပါ သို့မဟုတ် အင်တာနက် လိုအပ်ပါသည်။';
-      }
-    }
-
-    function switchTab(tab) {
-      if (tab === 'learn') {
-        document.getElementById('tabLearn').style.display = 'block';
-        document.getElementById('tabQuiz').style.display = 'none';
-        document.getElementById('navLearn').className = 'active';
-        document.getElementById('navQuiz').className = '';
-      } else {
-        document.getElementById('tabLearn').style.display = 'none';
-        document.getElementById('tabQuiz').style.display = 'block';
-        document.getElementById('navLearn').className = '';
-        document.getElementById('navQuiz').className = 'active';
-        startQuiz();
-      }
-    }
-
-    function startQuiz() {
-      quizList = getCombinedWords();
-      currentQuizIndex = 0;
-      loadNextQuiz();
-    }
-
-    function loadNextQuiz() {
-      if (quizList.length === 0) return;
-      const current = quizList[currentQuizIndex % quizList.length];
-      currentQuizWord = current.word;
-
-      document.getElementById('quizQuestion').innerText = current.word;
-      document.getElementById('btnNextQuiz').style.display = 'none';
-
-      let options = [current.meaning];
-      let others = quizList.filter(w => w.meaning !== current.meaning).map(w => w.meaning);
-      others.sort(() => 0.5 - Math.random());
-      options.push(...others.slice(0, 3));
-      options.sort(() => 0.5 - Math.random());
-
-      const container = document.getElementById('quizOptions');
-      container.innerHTML = '';
-      options.forEach(opt => {
-        const btn = document.createElement('div');
-        btn.className = 'quiz-option';
-        btn.innerText = opt;
-        btn.onclick = () => checkQuiz(btn, opt, current.meaning);
-        container.appendChild(btn);
-      });
-    }
-
-    function checkQuiz(element, selected, correct) {
-      document.querySelectorAll('.quiz-option').forEach(b => b.onclick = null);
-      if (selected === correct) {
-        element.classList.add('correct');
-      } else {
-        element.classList.add('wrong');
-        document.querySelectorAll('.quiz-option').forEach(b => {
-          if (b.innerText === correct) b.classList.add('correct');
+              const slotWord = document.createElement('div');
+              slotWord.className = 'word-bubble';
+              slotWord.innerText = w;
+              slotWord.onclick = () => {
+                slot.removeChild(slotWord);
+                bubble.classList.remove('used');
+                userBuiltSentence = userBuiltSentence.filter(item => item !== w);
+              };
+              slot.appendChild(slotWord);
+            }
+          };
+          pool.appendChild(bubble);
         });
       }
-      currentQuizIndex++;
-      document.getElementById('btnNextQuiz').style.display = 'block';
     }
 
-    renderVocabList();
+    function speakCurrent() {
+      const q = courseData[curLang].levels[curLevelIndex].questions[curQIndex];
+      if (q.audio) speakText(q.audio);
+    }
+
+    function checkAnswer() {
+      const q = courseData[curLang].levels[curLevelIndex].questions[curQIndex];
+      let isCorrect = false;
+
+      if (q.type === 'choice') {
+        if (!userSelectedChoice) return alert('အဖြေတစ်ခုကို အရင်ရွေးပါ!');
+        isCorrect = (userSelectedChoice === q.correct);
+      } else if (q.type === 'build') {
+        if (userBuiltSentence.length === 0) return alert('စကားလုံးများကို စီပေးပါ!');
+        isCorrect = JSON.stringify(userBuiltSentence) === JSON.stringify(q.correct);
+      }
+
+      const sheet = document.getElementById('feedbackSheet');
+      const title = document.getElementById('feedbackTitle');
+      const detail = document.getElementById('feedbackDetail');
+
+      sheet.style.display = 'flex';
+
+      if (isCorrect) {
+        sheet.className = 'feedback-sheet correct';
+        title.innerText = '🎉 မှန်ကန်ပါတယ်!';
+        detail.innerText = '';
+        xp += 15;
+        localStorage.setItem('lingo_xp', xp);
+        document.getElementById('xpCount').innerText = xp;
+      } else {
+        sheet.className = 'feedback-sheet wrong';
+        title.innerText = '❌ မှားယွင်းနေပါသည်';
+        detail.innerText = `မှန်ကန်သောအဖြေ: ${Array.isArray(q.correct) ? q.correct.join(' ') : q.correct}`;
+      }
+    }
+
+    function nextQuestion() {
+      document.getElementById('feedbackSheet').style.display = 'none';
+      const totalQ = courseData[curLang].levels[curLevelIndex].questions.length;
+
+      if (curQIndex < totalQ - 1) {
+        curQIndex++;
+        loadQuestion();
+      } else {
+        alert('🏆 ဂုဏ်ယူပါတယ်! Level အောင်မြင်ပြီး နောက်တစ်ဆင့် သော့ဖွင့်လိုက်ပါပြီ (+30 XP)');
+        xp += 30;
+        localStorage.setItem('lingo_xp', xp);
+        document.getElementById('xpCount').innerText = xp;
+
+        if (unlockedLevels[curLang] === curLevelIndex && curLevelIndex < 3) {
+          unlockedLevels[curLang] = curLevelIndex + 1;
+          localStorage.setItem('lingo_unlock', JSON.stringify(unlockedLevels));
+        }
+
+        backToPath();
+      }
+    }
+
+    function backToPath() {
+      document.getElementById('gameScreen').style.display = 'none';
+      document.getElementById('bottomBar').style.display = 'none';
+      document.getElementById('pathScreen').style.display = 'flex';
+      updateTreeUI();
+    }
+
+    updateTreeUI();
   </script>
 </body>
 </html>
