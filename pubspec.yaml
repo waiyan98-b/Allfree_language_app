@@ -1,22 +1,695 @@
-name: free_language_app
-description: "A free and open source offline language learning app."
-publish_to: 'none'
-version: 1.0.0+1
+<!DOCTYPE html>
+<html lang="my">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <meta name="theme-color" content="#00897b">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <title>LingoMaster Universal - 8 Languages CEFR</title>
+  
+  <style>
+    :root {
+      --green: #58cc02;
+      --green-dark: #46a302;
+      --green-light: #d7ffb8;
+      --blue: #1cb0f6;
+      --blue-dark: #0f86be;
+      --purple: #a435f0;
+      --gold: #ffc800;
+      --gold-dark: #cc9a00;
+      --red: #ff4b4b;
+      --red-light: #ffdfe0;
+      --gray: #e5e5e5;
+      --text: #2f2f2f;
+      --bg: #f7f9fa;
+    }
+    * { 
+      box-sizing: border-box; 
+      -webkit-tap-highlight-color: transparent; 
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; 
+    }
+    body {
+      margin: 0;
+      background-color: var(--bg);
+      color: var(--text);
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+      height: 100dvh;
+      overflow: hidden;
+      align-items: center;
+    }
+    .app-wrapper {
+      width: 100%;
+      max-width: 600px;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      background: #ffffff;
+      box-shadow: 0 0 20px rgba(0,0,0,0.05);
+      position: relative;
+    }
+    /* Universal Header */
+    .top-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 16px;
+      background: white;
+      border-bottom: 2px solid var(--gray);
+      font-weight: bold;
+      font-size: 14px;
+      z-index: 10;
+    }
+    .lang-select {
+      border: 2px solid var(--blue);
+      border-radius: 12px;
+      padding: 6px 10px;
+      font-weight: bold;
+      font-size: 13px;
+      outline: none;
+      background: #f0f9ff;
+      color: #0277bd;
+      cursor: pointer;
+    }
+    .stats-row { display: flex; gap: 12px; align-items: center; }
+    main {
+      flex: 1;
+      overflow-y: auto;
+      padding: 16px;
+      padding-bottom: 85px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .summary-card {
+      width: 100%;
+      background: linear-gradient(135deg, #00897b, #004d40);
+      color: white;
+      border-radius: 16px;
+      padding: 14px 18px;
+      margin-bottom: 14px;
+      box-shadow: 0 4px 12px rgba(0,137,123,0.2);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .summary-stat-box { text-align: center; }
+    .summary-stat-num { font-size: 20px; font-weight: bold; }
+    .summary-stat-label { font-size: 11px; opacity: 0.9; }
 
-environment:
-  sdk: '>=3.0.0 <4.0.0'
+    .cefr-tabs {
+      display: flex;
+      overflow-x: auto;
+      width: 100%;
+      gap: 6px;
+      padding-bottom: 10px;
+      margin-bottom: 10px;
+      scrollbar-width: none;
+    }
+    .cefr-tabs::-webkit-scrollbar { display: none; }
+    .cefr-tab-btn {
+      flex: 0 0 auto;
+      padding: 6px 14px;
+      border-radius: 20px;
+      border: 1px solid #ccc;
+      background: white;
+      font-weight: bold;
+      font-size: 12px;
+      color: #666;
+      cursor: pointer;
+    }
+    .cefr-tab-btn.active { background: var(--blue); color: white; border-color: var(--blue-dark); }
+    .chapter-card {
+      width: 100%;
+      background: white;
+      border-radius: 14px;
+      padding: 14px 16px;
+      margin-bottom: 12px;
+      border: 2px solid var(--gray);
+      box-shadow: 0 3px 0 var(--gray);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+      transition: transform 0.1s, border-color 0.2s;
+    }
+    .chapter-card:hover { border-color: var(--blue); }
+    .chapter-card:active { transform: translateY(2px); box-shadow: 0 1px 0 var(--gray); }
+    .chapter-badge {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: bold;
+      padding: 2px 6px;
+      border-radius: 4px;
+      color: white;
+      margin-bottom: 4px;
+    }
+    .badge-a1 { background: var(--green); }
+    .badge-a2 { background: #00b0ff; }
+    .badge-b1 { background: #00c853; }
+    .badge-b2 { background: #ff9100; }
+    .badge-c1 { background: var(--purple); }
+    .badge-c2 { background: var(--gold-dark); }
+    
+    .game-container {
+      display: none;
+      width: 100%;
+      flex-direction: column;
+      height: 100%;
+    }
+    .progress-bar {
+      width: 100%;
+      height: 12px;
+      background: var(--gray);
+      border-radius: 8px;
+      overflow: hidden;
+      margin-bottom: 14px;
+    }
+    .progress-fill { height: 100%; width: 0%; background: var(--green); transition: width 0.3s; }
+    .speaker-btn {
+      background: var(--blue);
+      color: white;
+      border: none;
+      border-radius: 10px;
+      padding: 8px 14px;
+      font-size: 15px;
+      font-weight: bold;
+      box-shadow: 0 3px 0 var(--blue-dark);
+      cursor: pointer;
+      align-self: flex-start;
+      margin-bottom: 12px;
+    }
+    .prompt-box { font-size: 18px; font-weight: bold; margin-bottom: 16px; line-height: 1.4; }
+    .answer-slot {
+      min-height: 48px;
+      border-bottom: 2px solid var(--gray);
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      padding: 4px 0;
+      margin-bottom: 20px;
+    }
+    .word-pool { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; }
+    .word-bubble {
+      background: white;
+      border: 2px solid var(--gray);
+      box-shadow: 0 3px 0 var(--gray);
+      padding: 9px 13px;
+      border-radius: 10px;
+      font-weight: bold;
+      font-size: 14px;
+      cursor: pointer;
+      user-select: none;
+    }
+    .word-bubble.used { opacity: 0.2; pointer-events: none; }
+    .choice-btn {
+      width: 100%;
+      background: white;
+      border: 2px solid var(--gray);
+      box-shadow: 0 3px 0 var(--gray);
+      border-radius: 12px;
+      padding: 13px;
+      font-size: 15px;
+      font-weight: bold;
+      text-align: left;
+      margin-bottom: 10px;
+      cursor: pointer;
+      user-select: none;
+    }
+    .choice-btn.selected { border-color: var(--blue); background: #e1f5fe; }
+    .bottom-bar {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 12px 18px;
+      background: white;
+      border-top: 2px solid var(--gray);
+      z-index: 20;
+    }
+    .btn-action {
+      width: 100%;
+      padding: 14px;
+      border-radius: 12px;
+      font-size: 15px;
+      font-weight: bold;
+      border: none;
+      background: var(--green);
+      color: white;
+      box-shadow: 0 4px 0 var(--green-dark);
+      cursor: pointer;
+    }
+    .feedback-sheet {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 16px 20px;
+      display: none;
+      flex-direction: column;
+      gap: 8px;
+      z-index: 100;
+    }
+    .feedback-sheet.correct { background: var(--green-light); color: var(--green-dark); }
+    .feedback-sheet.wrong { background: var(--red-light); color: var(--red); }
+  </style>
+</head>
+<body>
 
-dependencies:
-  flutter:
-    sdk: flutter
-  flutter_tts: ^3.8.5
-  shared_preferences: ^2.2.2
-  cupertino_icons: ^1.0.6
+  <div class="app-wrapper">
+    <!-- Universal Top Navigation Bar -->
+    <div class="top-bar">
+      <select class="lang-select" id="langPicker" onchange="changeLanguage()">
+        <option value="en">🇬🇧 English</option>
+        <option value="th">🇹🇭 ไทย (Thai)</option>
+        <option value="de">🇩🇪 Deutsch (German)</option>
+        <option value="es">🇪🇸 Español (Spanish)</option>
+        <option value="fr">🇫🇷 Français (French)</option>
+        <option value="ko">🇰🇷 한국어 (Korean)</option>
+        <option value="ja">🇯🇵 日本語 (Japanese)</option>
+        <option value="it">🇮🇹 Italiano (Italian)</option>
+      </select>
+      <div class="stats-row">
+        <div style="color: #ff9600;">🔥 <span id="streakCount">1</span></div>
+        <div style="color: #1cb0f6;">⭐ <span id="xpCount">0</span> XP</div>
+        <div style="color: #ff4b4b;">❤️ ∞</div>
+      </div>
+    </div>
 
-dev_dependencies:
-  flutter_test:
-    sdk: flutter
-  flutter_lints: ^3.0.0
+    <main>
+      <!-- Curriculum View -->
+      <div id="curriculumView" style="width: 100%; display: flex; flex-direction: column; align-items: center;">
+        <div class="summary-card">
+          <div class="summary-stat-box">
+            <div class="summary-stat-num" id="totalChapterCount">0</div>
+            <div class="summary-stat-label">စုစုပေါင်း Chapter</div>
+          </div>
+          <div style="width: 1px; height: 35px; background: rgba(255,255,255,0.3);"></div>
+          <div class="summary-stat-box">
+            <div class="summary-stat-num" id="currentViewCount">0</div>
+            <div class="summary-stat-label">လက်ရှိ Level အရေအတွက်</div>
+          </div>
+          <div style="width: 1px; height: 35px; background: rgba(255,255,255,0.3);"></div>
+          <div class="summary-stat-box">
+            <div class="summary-stat-num">A1 → C2</div>
+            <div class="summary-stat-label">Native အဆင့်ထိ</div>
+          </div>
+        </div>
 
-flutter:
-  uses-material-design: true
+        <div class="cefr-tabs">
+          <button class="cefr-tab-btn active" onclick="filterLevel('ALL', this)" id="tabALL">အားလုံး</button>
+          <button class="cefr-tab-btn" onclick="filterLevel('A1', this)" id="tabA1">A1</button>
+          <button class="cefr-tab-btn" onclick="filterLevel('A2', this)" id="tabA2">A2</button>
+          <button class="cefr-tab-btn" onclick="filterLevel('B1', this)" id="tabB1">B1</button>
+          <button class="cefr-tab-btn" onclick="filterLevel('B2', this)" id="tabB2">B2</button>
+          <button class="cefr-tab-btn" onclick="filterLevel('C1', this)" id="tabC1">C1</button>
+          <button class="cefr-tab-btn" onclick="filterLevel('C2', this)" id="tabC2">C2</button>
+        </div>
+
+        <div id="chapterContainer" style="width: 100%;"></div>
+      </div>
+
+      <!-- Practice Screen -->
+      <div id="gameScreen" class="game-container">
+        <div class="progress-bar">
+          <div class="progress-fill" id="progressFill"></div>
+        </div>
+        <button class="speaker-btn" onclick="speakCurrent()">🔊 အသံနားထောင်မည်</button>
+        <div class="prompt-box" id="promptText">-</div>
+        
+        <div id="sentenceBuilderArea" style="display: none;">
+          <div class="answer-slot" id="answerSlot"></div>
+          <div class="word-pool" id="wordPool"></div>
+        </div>
+        <div id="multipleChoiceArea" style="display: none; width: 100%;"></div>
+      </div>
+    </main>
+
+    <div class="bottom-bar" id="bottomBar" style="display: none;">
+      <button class="btn-action" id="checkBtn" onclick="checkAnswer()">စစ်ဆေးမည် (CHECK)</button>
+    </div>
+
+    <div class="feedback-sheet" id="feedbackSheet">
+      <div style="font-size: 18px; font-weight: bold;" id="feedbackTitle">အဖြေမှန်ပါတယ်!</div>
+      <div id="feedbackDetail" style="font-size: 13px;"></div>
+      <button class="btn-action" onclick="nextQuestion()">ဆက်သွားမည် ➡</button>
+    </div>
+  </div>
+
+  <script>
+    const fullCurriculum = {
+      en: {
+        voice: 'en-US',
+        chapters: [
+          { level: 'A1', title: 'Chapter 1: နှုတ်ဆက်ခြင်းနှင့် မိတ်ဆက်ခြင်း', desc: 'Greetings & Introductions', q: [
+            { type: 'choice', prompt: "'မင်္ဂလာပါ' ၏ အင်္ဂလိပ်စာကို ရွေးပါ", audio: "Hello", choices: ["Hello", "Goodbye", "Thanks"], correct: "Hello" },
+            { type: 'build', prompt: "ဝါကျစီပါ: 'ကျွန်တော့်နာမည် ဂျွန်ပါ'", audio: "My name is John", words: ["is", "My", "name", "John"], correct: ["My", "name", "is", "John"] },
+            { type: 'choice', prompt: "'တွေ့ရတာ ဝမ်းသာပါတယ်' ကို ရွေးပါ", audio: "Nice to meet you", choices: ["Nice to meet you", "See you later", "I am fine"], correct: "Nice to meet you" }
+          ]},
+          { level: 'A1', title: 'Chapter 2: စားသောက်ဆိုင်နှင့် ဈေးဝယ်ခြင်း', desc: 'Food & Shopping', q: [
+            { type: 'choice', prompt: "'ဒါ ဘယ်လောက်ကျလဲ?' ကို ရွေးပါ", audio: "How much is this?", choices: ["How much is this?", "Where is it?", "What is this?"], correct: "How much is this?" },
+            { type: 'build', prompt: "ဝါကျစီပါ: 'ရေတစ်ခွက် ပေးပါ'", audio: "A glass of water please", words: ["glass", "A", "of", "water", "please"], correct: ["A", "glass", "of", "water", "please"] }
+          ]},
+          { level: 'A2', title: 'Chapter 1: လမ်းမေးခြင်းနှင့် ခရီးသွားခြင်း', desc: 'Directions & Places', q: [
+            { type: 'choice', prompt: "'Turn left' ၏ အဓိပ္ပာယ်ကို ရွေးပါ", audio: "Turn left", choices: ["ဘယ်ဘက်သို့ ကွေ့ပါ", "ညာဘက်သို့ ကွေ့ပါ", "တည့်တည့်သွားပါ"], correct: "ဘယ်ဘက်သို့ ကွေ့ပါ" },
+            { type: 'build', prompt: "ဝါကျစီပါ: 'ဘူတာရုံက ဘယ်မှာလဲ'", audio: "Where is the station?", words: ["is", "Where", "the", "station?"], correct: ["Where", "is", "the", "station?"] }
+          ]},
+          { level: 'B1', title: 'Chapter 1: ရုံးတွင်း ဆက်သွယ်ရေးနှင့် အစည်းအဝေး', desc: 'Workplace & Meeting', q: [
+            { type: 'choice', prompt: "'Deadline' ၏ အဓိပ္ပာယ်ကို ရွေးပါ", audio: "Deadline", choices: ["နောက်ဆုံးသတ်မှတ်ရက်", "လစာတိုးခြင်း", "အလုပ်ဆင်းချိန်"], correct: "နောက်ဆုံးသတ်မှတ်ရက်" },
+            { type: 'build', prompt: "ဝါကျစီပါ: 'မနက်ဖြန် အစည်းအဝေး ရှိသည်'", audio: "We have a meeting tomorrow", words: ["have", "We", "a", "meeting", "tomorrow"], correct: ["We", "have", "a", "meeting", "tomorrow"] }
+          ]},
+          { level: 'B2', title: 'Chapter 1: အလုပ်အင်တာဗျူးနှင့် ညှိနှိုင်းခြင်း', desc: 'Job Interview & Career', q: [
+            { type: 'choice', prompt: "'Strengths and weaknesses' ၏ အဓိပ္ပာယ်ကို ရွေးပါ", audio: "Strengths and weaknesses", choices: ["အားသာချက်နှင့် အားနည်းချက်များ", "လစာနှင့် ခွင့်ရက်", "အတွေ့အကြုံ"], correct: "အားသာချက်နှင့် အားနည်းချက်များ" }
+          ]},
+          { level: 'C1', title: 'Chapter 1: စီမံခန့်ခွဲမှုနှင့် မဟာဗျူဟာ', desc: 'Strategic Management', q: [
+            { type: 'choice', prompt: "'Feasibility study' ၏ အဓိပ္ပာယ်ကို ရွေးပါ", audio: "Feasibility study", choices: ["ဖြစ်မြောက်နိုင်စွမ်း ဆန်းစစ်ချက်", "ငွေစာရင်းရှင်းတမ်း", "ဈေးကွက်လေ့လာမှု"], correct: "ဖြစ်မြောက်နိုင်စွမ်း ဆန်းစစ်ချက်" }
+          ]},
+          { level: 'C2', title: 'Chapter 1: Native Idioms & Slang', desc: 'Idioms & Fluency', q: [
+            { type: 'choice', prompt: "'Piece of cake' ၏ သဘောကို ရွေးပါ", audio: "Piece of cake", choices: ["အရမ်းလွယ်ကူသော အရာ", "ကိတ်မုန့်တစ်တုံး", "အရသာရှိသောအရာ"], correct: "အရမ်းလွယ်ကူသော အရာ" },
+            { type: 'build', prompt: "ဝါကျစီပါ: 'Under the weather (နေမကောင်းဖြစ်သည်)'", audio: "I feel under the weather", words: ["under", "I", "weather", "feel", "the"], correct: ["I", "feel", "under", "the", "weather"] }
+          ]}
+        ]
+      },
+      th: {
+        voice: 'th-TH',
+        chapters: [
+          { level: 'A1', title: 'Chapter 1: နှုတ်ဆက်ခြင်းနှင့် မိတ်ဆက်ခြင်း', desc: 'Basic Greetings', q: [
+            { type: 'choice', prompt: "'မင်္ဂလာပါ' ၏ ထိုင်းစကားကို ရွေးပါ", audio: "สวัสดี", choices: ["สวัสดี (Sawasdee)", "ขอบคุณ (Khob khun)", "อร่อย"], correct: "สวัสดี (Sawasdee)" },
+            { type: 'build', prompt: "ဝါကျစီပါ: 'မင်္ဂလာပါခင်ဗျာ'", audio: "สวัสดีครับ", words: ["ครับ", "สวัสดี", "ขอบคุณ"], correct: ["สวัสดี", "ครับ"] }
+          ]},
+          { level: 'A1', title: 'Chapter 2: ဈေးဝယ်ခြင်းနှင့် စားသောက်ဆိုင်', desc: 'Shopping & Dining', q: [
+            { type: 'choice', prompt: "'ဒါ ဘယ်လောက်လဲ' ကို ရွေးပါ", audio: "อันนี้เท่าไหร่", choices: ["อันนี้เท่าไหร่", "ลดได้ไหม", "แพงมาก"], correct: "อันนี้เท่าไหร่" },
+            { type: 'build', prompt: "ဝါကျစီပါ: 'ဈေးလျှော့ပေးလို့ရမလား'", audio: "ลดหน่อยได้ไหมครับ", words: ["ลดหน่อย", "ได้ไหม", "ครับ"], correct: ["ลดหน่อย", "ได้ไหม", "ครับ"] }
+          ]},
+          { level: 'A2', title: 'Chapter 1: လမ်းမေးခြင်းနှင့် အိမ်သာ', desc: 'Directions & Restroom', q: [
+            { type: 'choice', prompt: "'အိမ်သာ ဘယ်မှာလဲ' ကို ရွေးပါ", audio: "ห้องน้ำอยู่ที่ไหน", choices: ["ห้องน้ำอยู่ที่ไหน", "ไปไหน", "ช่วยด้วย"], correct: "ห้องน้ำอยู่ที่ไหน" }
+          ]},
+          { level: 'B1', title: 'Chapter 1: လုပ်ငန်းခွင်နှင့် OT', desc: 'Workplace & Overtime', q: [
+            { type: 'choice', prompt: "'အစည်းအဝေး' ၏ ထိုင်းစကားကို ရွေးပါ", audio: "การประชุม", choices: ["การประชุม (Pra-chum)", "เงินเดือน", "ลาพักร้อน"], correct: "การประชุม (Pra-chum)" }
+          ]},
+          { level: 'B2', title: 'Chapter 1: စီးပွားရေး ဆက်သွယ်မှု', desc: 'Business Communication', q: [
+            { type: 'choice', prompt: "'လစာ' ၏ ထိုင်းစကားကို ရွေးပါ", audio: "เงินเดือน", choices: ["เงินเดือน (Ngoen-duean)", "เจ้านาย", "ใบเสร็จ"], correct: "เงินเดือน (Ngoen-duean)" }
+          ]},
+          { level: 'C1', title: 'Chapter 1: တရားဝင် စာချုပ်စာတမ်းများ', desc: 'Official Contracts', q: [
+            { type: 'choice', prompt: "'စာချုပ်' ၏ ထိုင်းစကားကို ရွေးပါ", audio: "สัญญา", choices: ["สัญญา (San-ya)", "เอกสาร", "รายงาน"], correct: "สัญญา (San-ya)" }
+          ]},
+          { level: 'C2', title: 'Chapter 1: Native Slang & Idioms', desc: 'Native Expressions', q: [
+            { type: 'choice', prompt: "'ใจเย็นๆ (Jai yen yen)' ၏ အဓိပ္ပာယ်ကို ရွေးပါ", audio: "ใจเย็นๆ", choices: ["စိတ်အေးအေးထားပါ", "ရေသောက်ပါ", "ဗိုက်ဆာတယ်"], correct: "စိတ်အေးအေးထားပါ" },
+            { type: 'build', prompt: "Native စကားစီပါ: 'สุดปัง (အရမ်းတော်တယ်/မိုက်တယ်)'", audio: "อันนี้สุดปังมาก", words: ["สุดปัง", "อันนี้", "มาก"], correct: ["อันนี้", "สุดปัง", "มาก"] }
+          ]}
+        ]
+      },
+      de: {
+        voice: 'de-DE',
+        chapters: [
+          { level: 'A1', title: 'Chapter 1: Begrüßung (နှုတ်ဆက်ခြင်း)', desc: 'Basic Greetings', q: [
+            { type: 'choice', prompt: "'မင်္ဂလာပါ' ၏ ဂျာမန်စကားကို ရွေးပါ", audio: "Guten Tag", choices: ["Guten Tag", "Danke", "Tschüss"], correct: "Guten Tag" },
+            { type: 'build', prompt: "ဝါကျစီပါ: 'ကျေးဇူး အများကြီးတင်ပါတယ်'", audio: "Vielen Dank", words: ["Dank", "Vielen", "Bitte"], correct: ["Vielen", "Dank"] }
+          ]},
+          { level: 'A1', title: 'Chapter 2: Einkaufen (ဈေးဝယ်ခြင်း)', desc: 'Shopping & Dining', q: [
+            { type: 'choice', prompt: "'Wie viel kostet das?' ၏ အဓိပ္ပာယ်ကို ရွေးပါ", audio: "Wie viel kostet das?", choices: ["ဒါ ဘယ်လောက်ကျလဲ?", "အိမ်သာဘယ်မှာလဲ?", "စားလို့ကောင်းတယ်"], correct: "ဒါ ဘယ်လောက်ကျလဲ?" }
+          ]},
+          { level: 'A2', title: 'Chapter 1: Wegbeschreibung (လမ်းမေးခြင်း)', desc: 'Directions & Places', q: [
+            { type: 'choice', prompt: "'Wo ist der Bahnhof?' ၏ အဓိပ္ပာယ်ကို ရွေးပါ", audio: "Wo ist der Bahnhof?", choices: ["ဘူတာရုံ ဘယ်မှာလဲ?", "ဟိုတယ် ဘယ်မှာလဲ?", "ကားမှတ်တိုင် ဘယ်မှာလဲ?"], correct: "ဘူတာရုံ ဘယ်မှာလဲ?" }
+          ]},
+          { level: 'B1', title: 'Chapter 1: Im Büro (ရုံးတွင်းသုံး)', desc: 'Office & Meeting', q: [
+            { type: 'choice', prompt: "'Die Besprechung' ၏ အဓိပ္ပာယ်ကို ရွေးပါ", audio: "Die Besprechung", choices: ["အစည်းအဝေး", "စာချုပ်", "လစာ"], correct: "အစည်းအဝေး" }
+          ]},
+          { level: 'C2', title: 'Chapter 1: Deutsche Redewendungen', desc: 'Native German Idioms', q: [
+            { type: 'choice', prompt: "'Ich verstehe nur Bahnhof' ၏ သဘောကို ရွေးပါ", audio: "Ich verstehe nur Bahnhof", choices: ["ဘာမှနားမလည်ပါ", "ဘူတာရုံသွားမည်", "ရထားစီးမည်"], correct: "ဘာမှနားမလည်ပါ" }
+          ]}
+        ]
+      },
+      es: {
+        voice: 'es-ES',
+        chapters: [
+          { level: 'A1', title: 'Chapter 1: Saludos (နှုတ်ဆက်ခြင်း)', desc: 'Basic Greetings', q: [
+            { type: 'choice', prompt: "'မင်္ဂလာပါ' ၏ စပိန်စကားကို ရွေးပါ", audio: "Hola", choices: ["Hola", "Gracias", "Adiós"], correct: "Hola" },
+            { type: 'build', prompt: "ဝါကျစီပါ: 'ကျေးဇူးအများကြီးတင်ပါတယ်'", audio: "Muchas gracias", words: ["gracias", "Muchas", "Por favor"], correct: ["Muchas", "gracias"] }
+          ]},
+          { level: 'A1', title: 'Chapter 2: En la tienda (ဈေးဝယ်ခြင်း)', desc: 'Shopping & Prices', q: [
+            { type: 'choice', prompt: "'¿Cuánto cuesta?' ၏ အဓိပ္ပာယ်ကို ရွေးပါ", audio: "¿Cuánto cuesta?", choices: ["ဘယ်လောက်ကျလဲ?", "ဘယ်သွားမလဲ?", "နေကောင်းလား?"], correct: "ဘယ်လောက်ကျလဲ?" }
+          ]},
+          { level: 'C2', title: 'Chapter 1: Modismos Nativos', desc: 'Native Spanish Idioms', q: [
+            { type: 'choice', prompt: "'Tomar el pelo' ၏ အဓိပ္ပာယ်ကို ရွေးပါ", audio: "Tomar el pelo", choices: ["စနောက်ကျီစယ်သည်", "ဆံပင်ညှပ်သည်", "ခေါင်းလျှော်သည်"], correct: "စနောက်ကျီစယ်သည်" }
+          ]}
+        ]
+      },
+      fr: {
+        voice: 'fr-FR',
+        chapters: [
+          { level: 'A1', title: 'Chapter 1: Salutations (နှုတ်ဆက်ခြင်း)', desc: 'Basic Greetings', q: [
+            { type: 'choice', prompt: "'မင်္ဂလာပါ' ၏ ပြင်သစ်စကားကို ရွေးပါ", audio: "Bonjour", choices: ["Bonjour", "Merci", "Au revoir"], correct: "Bonjour" },
+            { type: 'build', prompt: "ဝါကျစီပါ: 'ကျေးဇူးအထူးတင်ပါတယ်'", audio: "Merci beaucoup", words: ["beaucoup", "Merci", "Pardon"], correct: ["Merci", "beaucoup"] }
+          ]},
+          { level: 'C2', title: 'Chapter 1: Expressions Françaises', desc: 'Native French Idioms', q: [
+            { type: 'choice', prompt: "'Coup de foudre' ၏ အဓိပ္ပာယ်ကို ရွေးပါ", audio: "Coup de foudre", choices: ["ပထမဆုံးမြင်မြင်ချင်း အချစ်", "မိုးကြိုးပစ်ခြင်း", "မတော်တဆဖြစ်ခြင်း"], correct: "ပထမဆုံးမြင်မြင်ချင်း အချစ်" }
+          ]}
+        ]
+      },
+      ko: {
+        voice: 'ko-KR',
+        chapters: [
+          { level: 'A1', title: 'Chapter 1: 인사 (နှုတ်ဆက်ခြင်း)', desc: 'Basic Korean Greetings', q: [
+            { type: 'choice', prompt: "'မင်္ဂလာပါ' ၏ ကိုရီးယားစကားကို ရွေးပါ", audio: "안녕하세요", choices: ["안녕하세요 (Annyeong)", "감사합니다", "맛있어요"], correct: "안녕하세요 (Annyeong)" },
+            { type: 'build', prompt: "ဝါကျစီပါ: 'ကျေးဇူးတင်ပါတယ်'", audio: "감사합니다", words: ["합니다", "감사", "안녕"], correct: ["감사", "합니다"] }
+          ]},
+          { level: 'C2', title: 'Chapter 1: 한국어 관용구 (Native Slang)', desc: 'Native Korean Idioms', q: [
+            { type: 'choice', prompt: "'대박 (Daebak)' ၏ အဓိပ္ပာယ်ကို ရွေးပါ", audio: "대박", choices: ["အရမ်းမိုက်တယ် / အလန်းစား", "စိတ်မကောင်းပါ", "ဗိုက်ဆာတယ်"], correct: "အရမ်းမိုက်တယ် / အလန်းစား" }
+          ]}
+        ]
+      },
+      ja: {
+        voice: 'ja-JP',
+        chapters: [
+          { level: 'A1', title: 'Chapter 1: 挨拶 (နှုတ်ဆက်ခြင်း)', desc: 'Basic Japanese Greetings', q: [
+            { type: 'choice', prompt: "'မင်္ဂလာပါ' ၏ ဂျပန်စကားကို ရွေးပါ", audio: "こんにちは", choices: ["こんにちは (Konnichiwa)", "ありがとう", "さようなら"], correct: "こんにちは (Konnichiwa)" },
+            { type: 'build', prompt: "ဝါကျစီပါ: 'ကျေးဇူးအများကြီးတင်ပါတယ်'", audio: "ありがとうございます", words: ["ございます", "ありがとう", "すみません"], correct: ["ありがとう", "ございます"] }
+          ]},
+          { level: 'C2', title: 'Chapter 1: 日本の慣用句 (Native Slang)', desc: 'Native Japanese Idioms', q: [
+            { type: 'choice', prompt: "'猫の手も借りたい' ၏ သဘောကို ရွေးပါ", audio: "猫の手も借りたい", choices: ["အလွန်အမင်း အလုပ်များနေသည်", "ကြောင်မွေးချင်သည်", "ကြောင်ကို ကူညီသည်"], correct: "အလွန်အမင်း အလုပ်များနေသည်" }
+          ]}
+        ]
+      },
+      it: {
+        voice: 'it-IT',
+        chapters: [
+          { level: 'A1', title: 'Chapter 1: Saluti (နှုတ်ဆက်ခြင်း)', desc: 'Basic Italian Greetings', q: [
+            { type: 'choice', prompt: "'မင်္ဂလာပါ' ၏ အီတလီစကားကို ရွေးပါ", audio: "Ciao", choices: ["Ciao", "Grazie", "Prego"], correct: "Ciao" },
+            { type: 'build', prompt: "ဝါကျစီပါ: 'ကျေးဇူးအများကြီးတင်ပါတယ်'", audio: "Grazie mille", words: ["mille", "Grazie", "Per favore"], correct: ["Grazie", "mille"] }
+          ]},
+          { level: 'C2', title: 'Chapter 1: Modi di dire Italiani', desc: 'Native Italian Idioms', q: [
+            { type: 'choice', prompt: "'In bocca al lupo' ၏ သဘောကို ရွေးပါ", audio: "In扩大 al lupo", choices: ["ကံကောင်းပါစေ (Good luck)", "ဝံပုလွေလိုက်နေသည်", "သတိထားပါ"], correct: "ကံကောင်းပါစေ (Good luck)" }
+          ]}
+        ]
+      }
+    };
+
+    let curLang = 'en';
+    let curLevelFilter = 'ALL';
+    let xp = parseInt(localStorage.getItem('lingo_xp')) || 0;
+    let activeChapter = null;
+    let curQIndex = 0;
+    let userSelectedChoice = '';
+    let userBuiltSentence = [];
+
+    document.getElementById('xpCount').innerText = xp;
+
+    function updateTabCounts() {
+      const all = fullCurriculum[curLang].chapters;
+      document.getElementById('totalChapterCount').innerText = all.length;
+      document.getElementById('tabALL').innerText = `အားလုံး (${all.length})`;
+
+      ['A1', 'A2', 'B1', 'B2', 'C1', 'C2'].forEach(lvl => {
+        const count = all.filter(c => c.level === lvl).length;
+        const tab = document.getElementById(`tab${lvl}`);
+        if (tab) tab.innerText = `${lvl} (${count})`;
+      });
+    }
+
+    function renderChapters() {
+      updateTabCounts();
+      const container = document.getElementById('chapterContainer');
+      container.innerHTML = '';
+      const list = fullCurriculum[curLang].chapters;
+
+      const filtered = (curLevelFilter === 'ALL') ? list : list.filter(c => c.level === curLevelFilter);
+      document.getElementById('currentViewCount').innerText = `${filtered.length} ခု`;
+
+      filtered.forEach((ch, index) => {
+        container.innerHTML += `
+          <div class="chapter-card" onclick="startChapter(${index})">
+            <div>
+              <span class="chapter-badge badge-${ch.level.toLowerCase()}">${ch.level}</span>
+              <div style="font-weight: bold; font-size: 15px; color: var(--text);">${ch.title}</div>
+              <div style="font-size: 12px; color: #777; margin-top: 2px;">${ch.desc} (${ch.q.length} Questions)</div>
+            </div>
+            <div style="font-size: 20px; color: var(--blue);">➔</div>
+          </div>
+        `;
+      });
+    }
+
+    function filterLevel(lvl, btn) {
+      curLevelFilter = lvl;
+      document.querySelectorAll('.cefr-tab-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      renderChapters();
+    }
+
+    function changeLanguage() {
+      curLang = document.getElementById('langPicker').value;
+      curLevelFilter = 'ALL';
+      document.querySelectorAll('.cefr-tab-btn').forEach(b => b.classList.remove('active'));
+      document.getElementById('tabALL').classList.add('active');
+      renderChapters();
+    }
+
+    function speakText(text) {
+      if ('speechSynthesis' in window && text) {
+        window.speechSynthesis.cancel();
+        const utter = new SpeechSynthesisUtterance(text.replace(/\(.*\)/, '').trim());
+        utter.lang = fullCurriculum[curLang].voice;
+        window.speechSynthesis.speak(utter);
+      }
+    }
+
+    function startChapter(idx) {
+      const list = (curLevelFilter === 'ALL') ? fullCurriculum[curLang].chapters : fullCurriculum[curLang].chapters.filter(c => c.level === curLevelFilter);
+      activeChapter = list[idx];
+      curQIndex = 0;
+
+      document.getElementById('curriculumView').style.display = 'none';
+      document.getElementById('gameScreen').style.display = 'flex';
+      document.getElementById('bottomBar').style.display = 'block';
+
+      loadQuestion();
+    }
+
+    function loadQuestion() {
+      const q = activeChapter.q[curQIndex];
+      const totalQ = activeChapter.q.length;
+      document.getElementById('progressFill').style.width = `${(curQIndex / totalQ) * 100}%`;
+      document.getElementById('promptText').innerText = q.prompt;
+      userSelectedChoice = '';
+      userBuiltSentence = [];
+
+      if (q.audio) speakText(q.audio);
+
+      if (q.type === 'choice') {
+        document.getElementById('sentenceBuilderArea').style.display = 'none';
+        const choiceArea = document.getElementById('multipleChoiceArea');
+        choiceArea.style.display = 'block';
+        choiceArea.innerHTML = '';
+
+        q.choices.forEach(c => {
+          const btn = document.createElement('button');
+          btn.className = 'choice-btn';
+          btn.innerText = c;
+          btn.onclick = () => {
+            document.querySelectorAll('.choice-btn').forEach(b => b.classList.remove('selected'));
+            btn.classList.add('selected');
+            userSelectedChoice = c;
+            speakText(c);
+          };
+          choiceArea.appendChild(btn);
+        });
+      } else if (q.type === 'build') {
+        document.getElementById('multipleChoiceArea').style.display = 'none';
+        document.getElementById('sentenceBuilderArea').style.display = 'block';
+        
+        const slot = document.getElementById('answerSlot');
+        const pool = document.getElementById('wordPool');
+        slot.innerHTML = '';
+        pool.innerHTML = '';
+
+        q.words.forEach(w => {
+          const bubble = document.createElement('div');
+          bubble.className = 'word-bubble';
+          bubble.innerText = w;
+          bubble.onclick = () => {
+            if (!bubble.classList.contains('used')) {
+              bubble.classList.add('used');
+              userBuiltSentence.push(w);
+              speakText(w);
+
+              const slotWord = document.createElement('div');
+              slotWord.className = 'word-bubble';
+              slotWord.innerText = w;
+              slotWord.onclick = () => {
+                slot.removeChild(slotWord);
+                bubble.classList.remove('used');
+                userBuiltSentence = userBuiltSentence.filter(item => item !== w);
+              };
+              slot.appendChild(slotWord);
+            }
+          };
+          pool.appendChild(bubble);
+        });
+      }
+    }
+
+    function speakCurrent() {
+      const q = activeChapter.q[curQIndex];
+      if (q.audio) speakText(q.audio);
+    }
+
+    function checkAnswer() {
+      const q = activeChapter.q[curQIndex];
+      let isCorrect = false;
+
+      if (q.type === 'choice') {
+        if (!userSelectedChoice) return alert('အဖြေတစ်ခုကို အရင်ရွေးချယ်ပါ!');
+        isCorrect = (userSelectedChoice === q.correct);
+      } else if (q.type === 'build') {
+        if (userBuiltSentence.length === 0) return alert('စကားလုံးများကို စီပေးပါ!');
+        isCorrect = JSON.stringify(userBuiltSentence) === JSON.stringify(q.correct);
+      }
+
+      const sheet = document.getElementById('feedbackSheet');
+      const title = document.getElementById('feedbackTitle');
+      const detail = document.getElementById('feedbackDetail');
+
+      sheet.style.display = 'flex';
+
+      if (isCorrect) {
+        sheet.className = 'feedback-sheet correct';
+        title.innerText = '🎉 အဖြေမှန်ပါတယ်!';
+        detail.innerText = '';
+        xp += 15;
+        localStorage.setItem('lingo_xp', xp);
+        document.getElementById('xpCount').innerText = xp;
+      } else {
+        sheet.className = 'feedback-sheet wrong';
+        title.innerText = '❌ မှားသွားပါတယ် (ထပ်မံကြိုးစားပါ)';
+        detail.innerText = `မှန်ကန်သော အဖြေ: ${Array.isArray(q.correct) ? q.correct.join(' ') : q.correct}`;
+      }
+    }
+
+    function nextQuestion() {
+      document.getElementById('feedbackSheet').style.display = 'none';
+      if (curQIndex < activeChapter.q.length - 1) {
+        curQIndex++;
+        loadQuestion();
+      } else {
+        alert('🏆 ဂုဏ်ယူပါတယ်! ဤ Chapter ကို အောင်မြင်စွာ ပြီးဆုံးပါပြီ။ (+25 Bonus XP)');
+        xp += 25;
+        localStorage.setItem('lingo_xp', xp);
+        document.getElementById('xpCount').innerText = xp;
+        backToCurriculum();
+      }
+    }
+
+    function backToCurriculum() {
+      document.getElementById('gameScreen').style.display = 'none';
+      document.getElementById('bottomBar').style.display = 'none';
+      document.getElementById('curriculumView').style.display = 'flex';
+      renderChapters();
+    }
+
+    renderChapters();
+  </script>
+</body>
+</html>
