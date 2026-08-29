@@ -2,101 +2,297 @@
 <html lang="my">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>LingoMaster — 8 Languages A1–C2</title>
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+<title>LingoMaster — 8 Languages Complete Edition</title>
 <style>
-:root{--green:#58cc02;--blue:#1cb0f6;--red:#ff4b4b;--gold:#ffc800;--bg:#f7f9fa;--text:#333;--muted:#777}
-*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,"Segoe UI",sans-serif}
-.app{max-width:560px;margin:auto;min-height:100vh;background:#fff}
-header{position:sticky;top:0;z-index:10;display:flex;gap:8px;align-items:center;padding:10px 12px;background:#fff;border-bottom:2px solid #eee}
-select{flex:1;padding:10px;border:2px solid var(--blue);border-radius:12px;background:#eef9ff;font-weight:700}
-.stats{font-size:13px;white-space:nowrap}
-main{padding:16px 16px 90px}.card{padding:18px;margin-bottom:14px;border:2px solid #e5e5e5;border-radius:18px;box-shadow:0 3px 0 #ddd;background:#fff}
-.hero{color:#fff;border:0;background:linear-gradient(135deg,#1cb0f6,#087fb8)}.hero h1{font-size:30px;margin:0 0 6px}
-.btn,.back{width:100%;padding:14px;border:0;border-radius:13px;font-weight:800;cursor:pointer}.btn{background:var(--green);color:#fff}.back{background:#fff;border:2px solid #ddd}
-.levels{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.level{padding:12px 4px;border:2px solid #ddd;border-radius:12px;background:#fff;font-weight:800;cursor:pointer}.level.active{border-color:var(--green);background:#efffe7}
-.lesson{display:flex;justify-content:space-between;align-items:center;padding:14px;margin:8px 0;border:2px solid #ddd;border-radius:14px;cursor:pointer}.lesson:hover{border-color:var(--blue)}
-.muted{color:var(--muted);font-size:13px}.progress{height:12px;overflow:hidden;border-radius:20px;background:#eee}.fill{height:100%;background:var(--green);transition:.3s}
-.question{font-size:21px;line-height:1.4}.choice{width:100%;padding:13px;margin:6px 0;text-align:left;border:2px solid #ddd;border-radius:12px;background:#fff;cursor:pointer}.choice.selected{border-color:var(--blue);background:#eef9ff}
-.input{width:100%;padding:13px;margin:8px 0;border:2px solid #ddd;border-radius:12px;font-size:16px}.feedback{margin-top:12px;padding:12px;border-radius:12px;background:#f5f5f5}.hidden{display:none!important}
-.statgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}.stat{padding:15px;border:2px solid #ddd;border-radius:14px;text-align:center}.num{font-size:24px;font-weight:900}
-nav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:min(560px,100%);height:66px;display:flex;background:#fff;border-top:2px solid #eee;z-index:20}nav button{flex:1;border:0;background:#fff;font-weight:700}
+:root{--green:#58cc02;--green-dark:#46a302;--blue:#1cb0f6;--blue-dark:#0f86be;--red:#ff4b4b;--gold:#ffc800;--bg:#f7f9fa;--text:#333;--muted:#777;--gray:#e5e5e5}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{margin:0;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,"Segoe UI",sans-serif}
+.app{max-width:560px;margin:auto;min-height:100vh;background:#fff;position:relative}
+header{position:sticky;top:0;z-index:10;display:flex;gap:8px;align-items:center;padding:10px 14px;background:#fff;border-bottom:2px solid var(--gray)}
+select{flex:1;padding:8px 12px;border:2px solid var(--blue);border-radius:12px;background:#eef9ff;font-weight:700;outline:none}
+.stats{font-size:13px;white-space:nowrap;font-weight:700}
+main{padding:16px 16px 90px}
+.card{padding:18px;margin-bottom:14px;border:2px solid var(--gray);border-radius:18px;box-shadow:0 3px 0 #ddd;background:#fff}
+.hero{color:#fff;border:0;background:linear-gradient(135deg,#1cb0f6,#087fb8)}
+.hero h1{font-size:26px;margin:0 0 6px}
+.btn,.back{width:100%;padding:14px;border:0;border-radius:13px;font-weight:800;cursor:pointer}
+.btn{background:var(--green);color:#fff;box-shadow:0 4px 0 var(--green-dark)}
+.btn:active{transform:translateY(2px);box-shadow:0 2px 0 var(--green-dark)}
+.back{background:#fff;border:2px solid var(--gray);margin-bottom:10px}
+.levels{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.level{padding:12px 4px;border:2px solid var(--gray);border-radius:12px;background:#fff;font-weight:800;cursor:pointer;text-align:center}
+.level.active{border-color:var(--green);background:#efffe7;color:var(--green-dark)}
+.lesson{display:flex;justify-content:space-between;align-items:center;padding:14px;margin:8px 0;border:2px solid var(--gray);border-radius:14px;cursor:pointer}
+.lesson:hover{border-color:var(--blue)}
+.muted{color:var(--muted);font-size:13px}
+.progress{height:12px;overflow:hidden;border-radius:20px;background:var(--gray)}
+.fill{height:100%;background:var(--green);transition:.3s}
+.question{font-size:19px;line-height:1.4;margin:12px 0}
+.choice{width:100%;padding:13px;margin:6px 0;text-align:left;border:2px solid var(--gray);border-radius:12px;background:#fff;cursor:pointer;font-weight:600;font-size:15px}
+.choice.selected{border-color:var(--blue);background:#eef9ff}
+.input{width:100%;padding:13px;margin:8px 0;border:2px solid var(--gray);border-radius:12px;font-size:16px;outline:none}
+.slot{min-height:46px;border-bottom:2px solid var(--gray);display:flex;flex-wrap:wrap;gap:6px;padding:4px 0;margin-bottom:16px}
+.chips{display:flex;flex-wrap:wrap;gap:8px;justify-content:center}
+.chip{background:#fff;border:2px solid var(--gray);box-shadow:0 2px 0 var(--gray);padding:8px 12px;border-radius:10px;font-weight:700;cursor:pointer}
+.chip.used{opacity:0.2;pointer-events:none}
+.feedback{margin-top:12px;padding:14px;border-radius:12px;font-weight:700}
+.feedback.correct{background:#d7ffb8;color:var(--green-dark)}
+.feedback.wrong{background:#ffdfe0;color:var(--red)}
+.hidden{display:none!important}
+.statgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+.stat{padding:15px;border:2px solid var(--gray);border-radius:14px;text-align:center}
+.num{font-size:22px;font-weight:900}
+nav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:min(560px,100%);height:66px;display:flex;background:#fff;border-top:2px solid var(--gray);z-index:20}
+nav button{flex:1;border:0;background:#fff;font-weight:700;font-size:12px;color:var(--muted);cursor:pointer}
+nav button.active{color:var(--green-dark)}
 </style>
 </head>
 <body>
 <div class="app">
 <header>
-<select id="lang"></select>
-<div class="stats">🔥 <span id="streak">0</span>　⭐ <span id="xp">0</span>　♾️</div>
+<select id="lang" onchange="changeLang()"></select>
+<div class="stats">🔥 <span id="streak">0</span>　⭐ <span id="xp">0</span>　❤️ ∞</div>
 </header>
 
 <main>
 <section id="home">
 <div class="card hero">
-<h1>LingoMaster</h1>
-<p>8 Languages • A1 → C2</p>
-<p>♾️ Energy — Unlimited</p>
-<button class="btn" onclick="page('learn')">Start Learning →</button>
+<h1>LingoMaster Global</h1>
+<p>8 Languages • A1 → C2 Mastery</p>
+<button class="btn" onclick="page('learn')">Continue Learning →</button>
 </div>
 <div class="card">
-<h3>Today's Goal</h3>
+<div style="display:flex;justify-content:space-between;font-weight:700;margin-bottom:6px">
+<span>🎯 Daily Goal</span><span id="dailyText" class="muted">0 / 50 XP</span>
+</div>
 <div class="progress"><div id="daily" class="fill"></div></div>
-<p id="dailyText" class="muted">0 / 50 XP</p>
 </div>
 <div class="card">
-<h3>Current Course</h3>
-<h2 id="currentLevel">A1</h2>
-<p id="currentLang" class="muted"></p>
+<span class="muted" style="font-size:11px;text-transform:uppercase;font-weight:700">Current Course</span>
+<h2 id="currentLang" style="margin:4px 0 2px"></h2>
+<p id="currentLevel" class="muted" style="margin:0"></p>
 </div>
 </section>
 
 <section id="learn" class="hidden">
 <div class="card">
-<h2 id="langTitle"></h2>
+<h2 id="langTitle" style="margin-top:0"></h2>
 <div id="levels" class="levels"></div>
 </div>
 <div class="card">
-<h3 id="curriculumTitle"></h3>
+<h3 id="curriculumTitle" style="margin-top:0"></h3>
 <div id="lessons"></div>
 </div>
 </section>
 
 <section id="lesson" class="hidden">
 <div class="card">
-<button class="back" onclick="page('learn')">← Back</button>
+<button class="back" onclick="page('learn')">← Back to Lessons</button>
 <p id="meta" class="muted"></p>
-<div class="progress"><div id="lessonFill" class="fill"></div></div>
+<div class="progress" style="margin-bottom:14px"><div id="lessonFill" class="fill"></div></div>
+<button class="back" style="width:auto;padding:8px 14px;border-radius:10px;font-size:14px" onclick="speak()">🔊 Listen</button>
 <h2 id="question" class="question"></h2>
-<button class="back" onclick="speak()">🔊 Listen</button>
 <div id="answers"></div>
-<button class="btn" onclick="check()">CHECK</button>
+<button id="btnCheck" class="btn" style="margin-top:14px" onclick="check()">စစ်ဆေးမည် (CHECK)</button>
 <div id="feedback" class="feedback hidden"></div>
 </div>
 </section>
 
 <section id="progress" class="hidden">
 <div class="card">
-<h2>📊 Progress</h2>
+<h2 style="margin-top:0">📊 Progress Overview</h2>
 <div class="statgrid">
-<div class="stat"><div id="pxp" class="num">0</div><div class="muted">XP</div></div>
-<div class="stat"><div id="done" class="num">0</div><div class="muted">Lessons</div></div>
-<div class="stat"><div id="pstreak" class="num">0</div><div class="muted">Streak</div></div>
-<div class="stat"><div class="num">∞</div><div class="muted">Energy</div></div>
+<div class="stat"><div id="pxp" class="num" style="color:var(--blue)">0</div><div class="muted">Total XP</div></div>
+<div class="stat"><div id="done" class="num" style="color:var(--green)">0</div><div class="muted">Completed</div></div>
+<div class="stat"><div id="pstreak" class="num" style="color:#ff9600">0</div><div class="muted">Day Streak</div></div>
+<div class="stat"><div class="num" style="color:var(--red)">∞</div><div class="muted">Hearts</div></div>
 </div>
 </div>
-<div class="card"><h3>Level Progress</h3><div id="levelProgress"></div></div>
+<div class="card"><h3 style="margin-top:0">Level Mastery</h3><div id="levelProgress"></div></div>
 </section>
 </main>
 
 <nav>
-<button onclick="page('home')">🏠<br>Home</button>
-<button onclick="page('learn')">📚<br>Learn</button>
-<button onclick="page('progress')">📊<br>Progress</button>
+<button id="nav-home" class="active" onclick="page('home')">🏠<br>Home</button>
+<button id="nav-learn" onclick="page('learn')">📚<br>Learn</button>
+<button id="nav-progress" onclick="page('progress')">📊<br>Progress</button>
 </nav>
 </div>
 
 <script>
-const DB={"en": {"flag": "🇬🇧", "name": "English", "voice": "en-US", "levels": {"A1": [{"id": 1, "title": "Alphabet & Sounds", "questions": [{"type": "mc", "question": "What does \"Hello\" mean?", "options": ["မင်္ဂလာပါ", "ကျေးဇူးတင်ပါတယ်", "မသေချာပါ", "အခြားအဓိပ္ပာယ်"], "answer": "မင်္ဂလာပါ", "audio": "Hello"}, {"type": "mc", "question": "Choose the correct English word for \"ကျေးဇူးတင်ပါတယ်\".", "options": ["Thank you", "Hello", "Example", "None"], "answer": "Thank you", "audio": "Thank you"}, {"type": "fill", "question": "Write the English word for \"မင်္ဂလာပါ\".", "answer": "Hello", "audio": "Hello"}, {"type": "listen", "question": "Listen and choose the word you hear.", "options": ["Hello", "Thank you", "Example", "None"], "answer": "Hello", "audio": "Hello"}]}, {"id": 2, "title": "Greetings & Introductions", "questions": [{"type": "mc", "question": "What does \"Thank you\" mean?", "options": ["ကျေးဇူးတင်ပါတယ်", "ရေ", "မသေချာပါ", "အခြားအဓိပ္ပာယ်"], "answer": "ကျေးဇူးတင်ပါတယ်", "audio": "Thank you"}, {"type": "mc", "question": "Choose the correct English word for \"ရေ\".", "options": ["water", "Thank you", "Example", "None"], "answer": "water", "audio": "water"}, {"type": "fill", "question": "Write the English word for \"ကျေးဇူးတင်ပါတယ်\".", "answer": "Thank you", "audio": "Thank you"}, {"type": "listen", "question": "Listen and choose the word you hear.", "options": ["Thank you", "water", "Example", "None"], "answer": "Thank you", "audio": "Thank you"}]}, {"id": 3, "title": "Numbers", "questions": [{"type": "mc", "question": "What does \"water\" mean?", "options": ["ရေ", "အစားအစာ", "မသေချာပါ", "အခြားအဓိပ္ပာယ်"], "answer": "ရေ", "audio": "water"}, {"type": "mc", "question": "Choose the correct English word for \"အစားအစာ\".", "options": ["food", "water", "Example", "None"], "answer": "food", "audio": "food"}, {"type": "fill", "question": "Write the English word for \"ရေ\".", "answer": "water", "audio": "water"}, {"type": "listen", "question": "Listen and choose the word you hear.", "options": ["water", "food", "Example", "None"], "answer": "water", "audio": "water"}]}, {"id": 4, "title": "Family", "questions": [{"type": "mc", "question": "What does \"food\" mean?", "options": ["အစားအစာ", "ဒီနေ့", "မသေချာပါ", "အခြားအဓိပ္ပာယ်"], "answer": "အစားအစာ", "audio": "food"}, {"type": "mc", "question": "Choose the correct English word for \"ဒီနေ့\".", "options": ["today", "food", "Example", "None"], "answer": "today", "audio": "today"}, {"type": "fill", "question": "Write the English word for \"အစားအစာ\".", "answer": "food", "audio": "food"}, {"type": "listen", "question": "Listen and choose the word you hear.", "options": ["food", "today", "Example", "None"], "answer": "food", "audio": "food"}]}, {"id": 5, "title": "Daily Routine", "questions": [{"type": "mc", "question": "What does \"today\" mean?", "options": ["ဒီနေ့", "မနက်ဖြန်", "မသေချာပါ", "အခြားအဓိပ္ပာယ်"], "answer": "ဒီနေ့", "audio": "today"}, {"type": "mc", "question": "Choose the correct English word for \"မနက်ဖြန်\".", "options": ["tomorrow", "today", "Example", "None"], "answer": "tomorrow", "audio": "tomorrow"}, {"type": "fill", "question": "Write the English word for \"ဒီနေ့\".", "answer": "today", "audio": "today"}, {"type": "listen", "question": "Listen and choose the word you hear.", "options": ["today", "tomorrow", "Example", "None"], "answer": "today", "audio": "today"}]}, {"id": 6, "title": "Food & Drinks", "questions": [{"type": "mc", "question": "What does \"tomorrow\" mean?", "options": ["မနက်ဖြန်", "မိသားစု", "မသေချာပါ", "အခြားအဓိပ္ပာယ်"], "answer": "မနက်ဖြန်", "audio": "tomorrow"}, {"type": "mc", "question": "Choose the correct English word for \"မိသားစု\".", "options": ["family", "tomorrow", "Example", "None"], "answer": "family", "audio": "family"}, {"type": "fill", "question": "Write the English word for \"မနက်ဖြန်\".", "answer": "tomorrow", "audio": "tomorrow"}, {"type": "listen", "question": "Listen and choose the word you hear.", "options": ["tomorrow", "family", "Example", "None"], "answer": "tomorrow", "audio": "tomorrow"}]}, {"id": 7, "title": "Time & Dates", "questions": [{"type": "mc", "question": "What does \"family\" mean?", "options": ["မိသားစု", "အလုပ်", "မသေချာပါ", "အခြားအဓိပ္ပာယ်"], "answer": "မိသားစု", "audio": "family"}, {"type": "mc", "question": "Choose the correct English word for \"အလုပ်\".", "options": ["work", "family", "Example", "None"], "answer": "work", "audio": "work"}, {"type": "fill", "question": "Write the English word for \"မိသားစု\".", "answer": "family", "audio": "family"}, {"type": "listen", "question": "Listen and choose the word you hear.", "options": ["family", "work", "Example", "None"], "answer": "family", "audio": "family"}]}, {"id": 8, "title": "Home", "questions": [{"type": "mc", "question": "What does \"work\" mean?", "options": ["အလုပ်", "သူငယ်ချင်း", "မသေချာပါ", "အခြားအဓိပ္ပာယ်"], "answer": "အလုပ်", "audio": "work"}, {"type": "mc", "question": "Choose the correct English word for \"သူငယ်ချင်း\".", "options": ["friend", "work", "Example", "None"], "answer": "friend", "audio": "friend"}, {"type": "fill", "question": "Write the English word for \"အလုပ်\".", "answer": "work", "audio": "work"}, {"type": "listen", "question": "Listen and choose the word you hear.", "options": ["work", "friend", "Example", "None"], "answer": "work", "audio": "work"}]}, {"id": 9, "title": "Places & Directions", "questions": [{"type": "mc", "question": "What does \"friend\" mean?", "options": ["သူငယ်ချင်း", "ကျောင်း", "မသေချာပါ", "အခြားအဓိပ္ပာယ်"], "answer": "သူငယ်ချင်း", "audio": "friend"}, {"type": "mc", "question": "Choose the correct English word for \"ကျောင်း\".", "options": ["school", "friend", "Example", "None"], "answer": "school", "audio": "school"}, {"type": "fill", "question": "Write the English word for \"သူငယ်ချင်း\".", "answer": "friend", "audio": "friend"}, {"type": "listen", "question": "Listen and choose the word you hear.", "options": ["friend", "school", "Example", "None"], "answer": "friend", "audio": "friend"}]}, {"id": 10, "title": "Shopping", "questions": [{"type": "mc", "question": "What does \"school\" mean?", "options": ["ကျောင်း", "မင်္ဂလာပါ", "မသေချာပါ", "အခြားအဓိပ္ပာယ်"], "answer": "ကျောင်း", "audio": "school"}, {"type": "mc", "question": "Choose the correct English word for \"မင်္ဂလာပါ\".", "options": ["Hello", "school", "Example", "None"], "answer": "Hello", "audio": "Hello"}, {"type": "fill", "question": "Write the English word for \"ကျောင်း\".", "answer": "school", "audio": "school"}, {"type": "listen", "question": "Listen and choose the word you hear.", "options": ["school", "Hello", "Example", "None"], "answer": "school", "audio": "school"}]}, {"id": 11, "title": "Basic Grammar", "questions": [{"type": "mc", "question": "What does \"Hello\" mean?", "options": ["မင်္ဂလာပါ", "ကျေးဇူးတင်ပါတယ်", "မသေချာပါ", "အခြားအဓိပ္ပာယ်"], "answer": "မင်္ဂလာပါ", "audio": "Hello"}, {"type": "mc", "question": "Choose the correct English word for \"ကျေးဇူးတင်ပါတယ်\".", "options": ["Thank you", "Hello", "Example", "None"], "answer": "Thank you", "audio": "Thank you"}, {"type": "fill", "question": "Write the English word for \"မင်္ဂလာပါ\".", "answer": "Hello", "audio": "Hello"}, {"type": "listen", "question": "Listen and choose the word you hear.", "options": ["Hello", "Thank you", "Example", "None"], "answer": "Hello", "audio": "Hello"}]}, {"id": 12, "title": "A1 Review", "questions": [{"type": "mc", "question": "What does \"Thank you\" mean?", "options": ["ကျေးဇူးတင်ပါတယ်", "ရေ", "မသေချာပါ", "အခြားအဓိပ္ပာယ်"], "answer": "ကျေးဇူးတင်ပါတယ်", "audio": "Thank you"}, {"type": "mc", "question": "Choose the correct English word for \"ရေ\".", "options": ["water", "Thank you", "Example", "None"], "answer": "water", "audio": "water"}, {"type": "fill", "question": "Write the English word for \"ကျေးဇူးတင်ပါတယ်\".", "answer": "Thank you", "audio": "Thank you"}, {"type": "listen", "question": "Listen and choose the word you hear.", "options": ["Thank you", "water", "Example", "None"], "answer": "Thank you", "audio": "Thank you"}]}], "A2": [{"id": 1, "title": "Past Tense", "questions": [{"type": "mc", "question": "What does \"Hello\" mean?", "options": ["မင်္ဂလာပါ", "ကျေးဇူးတင်ပါတယ်", "မသေချာပါ", "အခြားအဓိပ္ပာယ်"], "answer": "မင်္ဂလာပါ", "audio": "Hello"}, {"type": "mc", "question": "Choose the correct English word for \"ကျေးဇူးတင်ပါတယ်\".", "options": ["Thank you", "Hello", "Example", "None"], "answer": "Thank you", "audio": "Thank you"}, {"type": "fill", "question": "Write the English word for \"မင်္ဂလာပါ\".", "answer": "Hello", "audio": "Hello"}, {"type": "listen", "question": "Listen and choose the word you hear.", "options": ["Hello", "Thank you", "Example", "None"], "answer": "Hello", "audio": "Hello"}]}, {"id": 2, "title": "Future Plans", "questions": [{"type": "mc", "question": "What does \"Thank you\" mean?", "options": ["ကျေးဇူးတင်ပါတယ်", "ရေ", "မသေချာပါ", "အခြားအဓိပ္ပာယ်"], "answer": "ကျေးဇူးတင်ပါတယ်", "audio": "Thank you"}, {"type": "mc", "question": "Choose the correct English word for \"ရေ\".", "options": ["water", "Thank you", "Example", "None"], "answer": "water", "audio": "water"}, {"type": "fill", "question": "Write the English word for \"ကျေးဇူးတင်ပါတယ်\".", "answer": "Thank you", "audio": "Thank you"}, {"type": "listen", "question": "Listen and choose the word you hear.", "options": ["Thank you", "water", "Example", "None"], "answer": "Thank you", "audio": "Thank you"}]}, {"id": 3, "title": "Travel", "questions": [{"type": "mc", "question": "What does \"water\" mean?", "options": ["ရေ", "အစားအစာ", "မသေချာပါ", "အခြားအဓိပ္ပာယ်"], "answer": "ရေ", "audio": "water"}, {"type": "mc", "question": "Choose the correct English word for \"အစားအစာ\".", "options": ["food", "water", "Example", "None"], "answer": "food", "audio": "food"}, {"type": "fill", "question": "Write the English word for \"ရေ\".", "answer": "water", "audio": "water"}, {"type": "listen", "question": "Listen and choose the word you hear.", "options": ["water", "food", "Example", "None"], "answer": "water", "audio": "water"}]}, {"id": 4, "title": "Health", "questions": [{"type": "mc", "question": "What does \"food\" mean?", "options": ["အစားအစာ", "ဒီနေ့", "မသေချာပါ", "အခြားအဓိပ္ပာယ်"], "answer": "အစားအစာ", "audio": "food"}, {"type": "mc", "question": "Choose the correct English word for \"ဒီနေ့\".", "options": ["today", "food", "Example", "None"], "answer": "today", "audio": "today"}, {"type": "fill", "question": "Write the English word for \"အစားအစာ\".", "answer": "food", "audio": "food"}, {"type": "listen", "question": "Listen and choose the word you hear.", "options": ["food", "today", "Example", "None"], "answer": "food", "audio": "food"}]}, {"id": 5, "title": "Work & Jobs", "questions": [{"type": "mc", "question": "What does \"today\" mean?", "options": ["ဒီနေ့", "မနက်ဖြန်", "မသေချာပါ", "အခြားအဓိပ္ပာယ်"], "answer": "ဒီနေ့", "audio": "today"}, {"type": "mc", "question": "Choose the correct English word for \"မနက်ဖြန်\".", "options": ["tomorrow", "today", "Example", "None"], "answer": "tomorrow", "audio": "tomorrow"}, {"type": "fill", "question": "Write the English word for \"ဒီနေ့\".", "answer": "today", "audio": "today"}, {"type": "listen", "question": "Listen and choose the word you hear.", "options": ["today", "tomorrow", "Example", "None"], "answer": "today", "audio": "today"}]}, {"id": 6, "title": "Weather", "questions": [{"type": "mc", "question": "What does \"tomorrow\" mean?", "options": ["မနက်ဖြန်", "မိသားစု", "မသေချာပါ", "အခြားအဓိပ္ပာယ်"], "answer": "မနက်ဖြန်", "audio": "tomorrow"}, {"type": "mc", "question": "Choose the correct English word for \"မိသားစု\".", "options": ["family", "tomorrow", "Example", "None"], "answer": "family", "audio": "family"}, {"type": "fill", "question": "Write the English word for \"မနက်ဖြန်\".", "answer": "tomorrow", "audio": "tomorrow"}, {"type": "listen", "question": "Listen and choose the word you hear.", "options": ["tomorrow", "family", "Example", "None"], "answer": "tomorrow", "audio": "tomorrow"}]}, {"id": 7, "title": "Transportation", "questions": [{"type": "mc", "question": "What does \"family\" mean?", "options": ["မိသားစု", "အလုပ်", "မသေချာပါ", "အခြားအဓိပ္ပာယ်"], "answer": "မိသားစု", "audio": "family"}, {"type": "mc", "question": "Choose the correct English word for \"အလုပ်\".", "options": ["work", "family", "Example", "None"], "answer": "work", "audio": "work"}, {"type": "fill", "question": "Write the English word for \"မိသားစု\".", "answer": "family", "audio": "family"}, {"type": "listen", "question": "Listen and choose the word you hear.", "options": ["family", "work", "Example", "None"], "answer": "family", "audio": "family"}]}, {"id": 8, "title": "Restaurants", "questions": [{"type": "mc", "question": "What does \"work\" mean?", "options": ["အလုပ်", "သူငယ်ချင်း", "မသေချာပါ", "အခြားအဓိပ္ပာယ်"], "answer": "အလုပ်", "audio": "work"}, {"type": "mc", "question": "Choose the correct English word for \"သူငယ်ချင်း\".", "options": ["friend", "work", "Example", "None"], "answer": "friend", "audio": "friend"}, {"type": "fill", "question": "Write the English word for \"အလုပ်\".", "answer": "work", "audio": "work"}, {"type": "listen", "question": "Listen and choose the word you hear.", "options": ["work", "friend", "Example", "None"], "answer": "work", "audio": "work"}]}, {"id": 9, "title": "Hobbies", "questions": [{"type": "mc", "question": "What does \"friend\" mean?", "options": ["သူငယ်ချင်း", "ကျောင်း", "မသေချာပါ", "အခြားအဓိပ္ပာယ်"], "answer": "သူငယ်ချင်း", "audio": "friend"}, {"type": "mc", "question": "Choose the correct English word for \"ကျောင်း\".", "options": ["school", "friend", "Example", "None"], "answer": "school", "audio": "school"}, {"type": "fill", "question": "Write the English word for \"သူငယ်ချင်း\".", "answer": "friend", "audio": "friend"}, {"type": "listen", "question": "Listen and choose the word you hear.", "options": ["friend", "school", "Example", "None"], "answer": "friend", "audio": "friend"}]}, {"id": 10, "title": "Everyday Problems", "questions": [{"type": "mc", "question": "What does \"school\" mean?", "options": ["ကျောင်း", "မင်္ဂလာပါ", "မသေချာပါ", "အခြားအဓိပ္ပာယ်"], "answer": "ကျောင်း", "audio": "school"}, {"type": "mc", "question": "Choose the correct English word for \"မင်္ဂလာပါ\".", "options": ["Hello", "school", "Example", "None"], "answer": "Hello", "audio": "Hello"}, {"type": "fill", "question": "Write the English word for \"ကျောင်း\".", "answer": "school", "audio": "school"}, {"type": "listen", "question": "Listen and choose the word you hear.", "options": ["school", "Hello", "Example", "None"], "answer": "school", "audio": "school"}]}, {"id": 11, "title": "Core Grammar", "questions": [{"type": "mc", "question": "What does \"Hello\" mean?", "options": ["မင်္ဂလာပါ", "ကျေးဇူးတင်ပါတယ်", "မသေချာပါ", "အခြားအဓိပ္ပာယ်"], "answer": "မင်္ဂလာပါ", "audio": "Hello"}, {"type": "mc", "question": "Choose the correct English word for \"ကျေးဇူးတင်ပါတယ်\".", "options": ["Thank you", "Hello", "Example", "None"], "answer": "Thank you", "audio": "Thank you"}, {"type": "fill", "question": "Write the English word for \"မင်္ဂလာပါ\".", "answer": "Hello", "audio": "Hello"}, {"type": "listen", "question": "Listen and choose the word you hear.", "options": ["Hello", "Thank you", "Example", "None"], "answer": "Hello", "audio": "Hello"}]}, {"id": 12, "title": "A2 Review", "questions": [{"type": "mc", "question": "What does \"Thank you\" mean?", "options": ["ကျေးဇူးတင်ပါတယ်", "ရေ", "မသေချာပါ", "အခြားအဓိပ္ပာယ်"], "answer": "ကျေးဇူးတင်ပါတယ်", "audio": "Thank you"}, {"type": "mc", "question": "Choose the correct English word for \"ရေ\".", "options": ["water", "Thank you", "Example", "None"], "answer": "water", "audio": "water"}, {"type": "fill", "question": "Write the English word for \"ကျေးဇူးတင်ပါတယ်\".", "answer": "Thank you", "audio": "Thank you"}, {"type": "listen", "question": "Listen and choose the word you hear.", "options": ["Thank you", "water", "Example", "None"], "answer": "Thank you", "audio": "Thank you"}]}], "B1": [{"id": 1, "title": "Life Experiences", "questions": [{"type": "mc", "question": "What does \"Hello\" mean?", "options": ["မင်္ဂလာပါ", "ကျေးဇူးတင်ပါတယ်", "မသေချာပါ", "အခြားအဓိပ္ပာယ်"], "answer": "မင်္ဂလာပါ", "audio": "Hello"}, {"type": "mc", "question": "Choose the correct English word for \"ကျေးဇူးတင်ပါတယ်\".", "options": ["Thank you", "Hello", "Example", "None"], "answer": "Thank you", "audio": "Thank you"}, {"type": "fill", "question": "Write the English word for \"မင်္ဂလာပါ\".", "answer": "Hello", "audio": "Hello"}, {"type": "listen", "question": "Listen and choose the word you hear.", "options": ["Hello", "Thank you", "Example", "None"], "answer": "Hello", "audio": "Hello"}]}, {"id": 2, "title": "Opinions", "questions": [{"type": "mc", "question": "What does \"Thank you\" mean?", "options": ["ကျေးဇူးတင်ပါတယ်", "ရေ", "မသေချာပါ", "အခြားအဓိပ္ပာယ်"], "answer": "ကျေးဇူးတင်ပါတယ်", "audio": "Thank you"}, {"type": "mc", "question": "Choose the correct English word for \"ရေ\".", "options": ["water", "Thank you", "Example", "None"], "answer": "water", "audio": "water"}, {"type": "fill", "question": "Write the English word for \"ကျေးဇူးတင်ပါတယ်\".", "answer": "Thank you", "audio": "Thank you"}, {"type": "listen", "question": "Listen and choose the word you hear.", "options": ["Thank you", "water", "Example", "None"], "answer": "Thank you", "audio": "Thank you"}]}, {"id": 3, "title": "Education", "questions": [{"type": "mc", "question": "What does \"water\" mean?", "options": ["ရေ", "အစားအစာ", "မသေချာပါ", "အခြားအဓိပ္ပာယ်"], "answer": "ရေ", "audio": "water"}, {"type": "mc", "question": "Choose the correct English word for \"အစားအစာ\".", "options": ["food", "water", "Example", "None"], "answer": "food", "audio": "food"}, {"type": "fill", "question": "Write the English word for \"ရေ\".", "answer": "water", "audio": "water"}, {"type": "listen", "question": "Listen and choose the word you hear.", "options": ["water", "food", "Example", "None"], "answer": "water", "audio": "water"}]}, {"id": 4, "title": "Workplace", "questions": [{"type": "mc", "question": "What does \"food\" mean?", "options": ["အစားအစာ", "ဒီနေ့", "မသေချာပါ", "အခြားအဓိပ္ပာယ်"], "answer": "အစားအစာ", "audio": "food"}, {"type": "mc", "question": "Choose the correct English word for \"ဒီနေ့\".", "options": ["today", "food", "Example", "None"], "answer": "today", "audio": "today"}, {"type": "fill", "question": "Write the English word for \"အစားအစာ\".", "answer": "food", "audio": "food"}, {"type": "listen", "question": "Listen and choose the word you hear.", "options": ["food", "today", "Example", "None"], "answer": "food", "audio": "food"}]}, {"id": 5, "title": "Relationships", "questions": [{"type": "mc", "question": "What does \"today\" mean?", "options": ["ဒီနေ့", "မနက်ဖြန်", "မသေချာပါ", "အခြားအဓိပ္ပာယ်"], "answer": "ဒီနေ့", "audio": "today"}, {"type": "mc", "question": "Choose the correct English word for \"မနက်ဖြန်\".", "options": ["tomorrow", "today", "Example", "None"], "answer": "tomorrow", "audio": "tomorrow"}, {"type": "fill", "question": "Write the English word for \"ဒီနေ့\".", "answer": "today", "audio": "today"}, {"type": "listen", "question": "Listen and choose the word you hear.", "options": ["today", "tomorrow", "Example", "None"], "answer": "today", "audio": "today"}]}, {"id": 6, "title": "News", "questions": [{"type": "mc", "question": "What does \"tomorrow\" mean?", "options": ["မနက်ဖြန်", "မိသားစု", "မသေချာပါ", "အခြားအဓိပ္ပာယ်"], "answer": "မနက်ဖြန်", "audio": "tomorrow"}, {"type": "mc", "question": "Choose the correct English word for \"မိသားစု\".", "options": ["family", "tomorrow", "Example", "None"], "answer": "family", "audio": "family"}, {"type": "fill", "question": "Write the English word for \"မနက်ဖြန်\".", "answer": "tomorrow", "audio": "tomorrow"}, {"type": "listen", "question": "Listen and choose the word you hear.", "options": ["tomorrow", "family", "Example", "None"], "answer": "tomorrow", "audio": "tomorrow"}]}, {"id": 7, "title": "Technology", "questions": [{"type": "mc", "question": "What does \"family\" mean?", "options": ["မိသားစု", "အလုပ်", "မသေချာပါ", "အခြားအဓိပ္ပာယ်"], "answer": "မိသားစု", "audio": "family"}, {"type": "mc", "question": "Choose the correct English word for \"အလုပ်\".", "options": ["work", "family", "Example", "None"], "answer": "work", "audio": "work"}, {"type": "fill", "question": "Write the English word for \"မိသားစု\".", "answer": "family", "audio": "family"}, {"type": "listen", "question": "Listen and choose the word you hear.", "options": ["family", "work", "Example", "None"], "answer": "family", "audio": "family"}]}, {"id": 8, "title": "Environment", "questions": [{"type": "mc", "question": "What does \"work\" mean?", "options": ["အလုပ်", "သူငယ်ချင်း", "မသေချာပါ", "အခြားအဓိပ္ပာယ်"], "answer": "အလုပ်", "audio": "work"}, {"type": "mc", "question": "Choose the correct English word for \"သူငယ်ချင်း\".", "options": ["friend", "work", "Example", "None"], "answer": "friend", "audio": "friend"}, {"type": "fill", "question": "Write the English word for \"အလုပ်\".", "answer": "work", "audio": "work"}, {"type": "listen", "question": "Listen and choose the word you hear.", "options": ["work", "friend", "Example", "None"], "answer": "work", "audio": "work"}]}, {"id": 9, "title": "Storytelling", "questions": [{"type": "mc", "question": "What does \"friend\" mean?", "options": ["သူငယ်ချင်း", "ကျောင်း", "မသေချာပါ", "အခြားအဓိပ္ပာယ်"], "answer": "သူငယ်ချင်း", "audio": "friend"}, {"type": "mc", "question": "Choose the correct English word for \"ကျောင်း\".", "options": ["school", "friend", "Example", "None"], "answer": "school", "audio": "school"}, {"type": "fill", "question": "Write the English word for \"သူငယ်ချင်း\".", "answer": "friend", "audio": "friend"}, {"type": "listen", "question": "Listen and choose the word you hear.", "options": ["friend", "school", "Example", "None"], "answer": "friend", "audio": "friend"}]}, {"id": 10, "title": "Plans & Goals", "questions": [{"type": "mc", "question": "What does \"school\" mean?", "options": ["ကျောင်း", "မင်္ဂလာပါ", "မသေချာပါ", "အခြားအဓိပ္ပာယ်"], "answer": "ကျောင်း", "audio": "school"}, {"type": "mc", "question": "Choose the correct English word for \"မင်္ဂလာပါ\".", "options": ["Hello", "school", "Example", "None"], "answer": "Hello", "audio": "Hello"}, {"type": "fill", "question": "Write the English word for \"ကျောင်း\".", "answer": "school", "audio": "school"}, {"type": "listen", "question": "Listen and choose the word you hear.", "options": ["school", "Hello", "Example", "None"], "answer": "school", "audio": "school"}]}, {"id": 11, "title": "B1 Grammar", "questions": [{"type": "mc", "question": "What does \"Hello\" mean?", "options": ["မင်္ဂလာပါ", "ကျေးဇူးတင်ပါတယ်", "မသေချာပါ", "အခြားအဓိပ္ပာယ်"], "answer": "မင်္ဂလာပါ", "audio": "Hello"}, {"type": "mc", "question": "Choose the correct English word for \"ကျေးဇူးတင်ပါတယ်\".", "options": ["Thank you", "Hello", "Example", "None"], "answer": "Thank you", "audio": "Thank you"}, {"type": "fill", "question": "Write the English word for \"မင်္ဂလာပါ\".", "answer": "Hello", "audio": "Hello"}, {"type": "listen", "question": "Listen and choose the word you hear.", "options": ["Hello", "Thank you", "Example", "None"], "answer": "Hello", "audio": "Hello"}]}, {"id": 12, "title": "B1 Review", "questions": [{"type": "mc", "question": "What does \"Thank you\" mean?", "options": ["ကျေးဇူးတင်ပါတယ်", "ရေ", "မသေချာပါ", "အခြားအဓိပ္ပာယ်"], "answer": "ကျေးဇူးတင်ပါတယ်", "audio": "Thank you"}, {"type": "mc", "question": "Choose the correct English word for \"ရေ\".", "options": ["water", "Thank you", "Example", "None"], "answer": "water", "audio": "water"}, {"type": "fill", "question": "Write the English word for \"ကျေးဇူးတင်ပါတယ်\".", "answer": "Thank you", "audio": "Thank you"}, {"type": "listen", "question": "Listen and choose the word you hear.", "options": ["Thank you", "water", "Example", "None"], "answer": "Thank you", "audio": "Thank you"}]}], "B2": [{"id": 1, "title": "Debate", "questions": [{"type": "mc", "question": "What does \"Hello\" mean?", "options": ["မင်္ဂလာပါ", "ကျေးဇူးတင်ပါတယ်", "မသေချာပါ", "အခြားအဓိပ္ပာယ်"], "answer": "မင်္ဂလာပါ", "audio": "Hello"}, {"type": "mc", "question": "Choose the correct English word for \"ကျေးဇူးတင်ပါတယ်\".", "options": ["Thank you", "Hello", "Example", "None"], "answer": "Thank you", "audio": "Thank you"}, {"type": "fill", "question": "Write the English word for \"မင်္ဂလာပါ\".", "answer": "Hello", "audio": "Hello"}, {"type": "listen", "question": "Listen and choose the word you hear.", "options": ["Hello", "Thank you", "Example", "None"], "answer": "Hello", "audio": "Hello"}]}, {"id": 2, "title": "Media", "questions": [{"type": "mc", "question": "What does \"Thank you\" mean?", "options": ["ကျေးဇူးတင်ပါတယ်", "ရေ", "မသေချာပါ", "အခြားအဓိပ္ပာယ်"], "answer": "ကျေးဇူးတင်ပါတယ်", "audio": "Thank you"}, {"type": "mc", "question": "Choose the correct English word for \"ရေ\".", "options": ["water", "Thank you", "Example", "None"], "answer": "water", "audio": "water"}, {"type": "fill", "question": "Write the English word for \"ကျေးဇူးတင်ပါတယ်\".", "answer": "Thank you", "audio": "Thank you"}, {"type": "listen", "question": "Listen and choose the word you hear.", "options": ["Thank you", "water", "Example", "None"], "answer": "Thank you", "audio": "Thank you"}]}, {"id": 3, "title": "Society", "questions": [{"type": "mc", "question": "What does \"water\" mean?", "options": ["ရေ", "အစားအစာ", "မသေချာပါ", "အခြားအဓိပ္ပာယ်"], "answer": "ရေ", "audio": "water"}, {"type": "mc", "question": "Choose the correct English word for \"အစားအစာ\".", "options": ["food", "water", "Example", "None"], "answer": "food", "audio": "food"}, {"type": "fill", "question": "Write the English word for \"ရေ\".", "answer": "water", "audio": "water"}, {"type": "listen", "question": "Listen and choose the word you hear.", "options": ["water", "food", "Example", "None"], "answer": "water", "audio": "water"}]}, {"id": 4, "title": "Business", "questions": [{"type": "mc", "question": "What does \"food\" mean?", "options": ["အစားအစာ", "ဒီနေ့", "မသေချာပါ", "အခြားအဓိပ္ပာယ်"], "answer": "အစားအစာ", "audio": "food"}, {"type": "mc", "question": "Choose the correct English word for \"ဒီနေ့\".", "options": ["today", "food", "Example", "None"], "answer": "today", "audio": "today"}, {"type": "fill", "question": "Write the English word for \"အစားအစာ\".", "answer": "food", "audio": "food"}, {"type": "listen", "question": "Listen and choose the word you hear.", "options": ["food", "today", "Example", "None"], "answer": "food", "audio": "food"}]}, {"id": 5, "title": "Science", "questions": [{"type": "mc", "question": "What does \"today\" mean?", "options": ["ဒီနေ့", "မနက်ဖြန်", "မသေချာပါ", "အခြားအဓိပ္ပာယ်"], "answer": "ဒီနေ့", "audio": "today"}, {"type": "mc", "question": "Choose the correct English word for \"မနက်ဖြန်\".", "options": ["tomorrow", "today", "Example", "None"], "answer": "tomorrow", "audio": "tomorrow"}, {"type": "fill", "question": "Write the English word for \"ဒီနေ့\".", "answer": "today", "audio": "today"}, {"type": "listen", "question": "Listen and choose the word you hear.", "options": ["today", "tomorrow", "Example", "None"], "answer": "today", "audio": "today"}]}, {"id": 6, "title": "Culture", "questions": [{"type": "mc", "question": "What does \"tomorrow\" mean?", "options": ["မနက်ဖြန်", "မိသားစု", "မသေချာပါ", "အခြားအဓိပ္ပာယ်"], "answer": "မနက်ဖြန်", "audio": "tomorrow"}, {"type": "mc", "question": "Choose the correct English word for \"မိသားစု\".", "options": ["family", "tomorrow", "Example", "None"], "answer": "family", "audio": "family"}, {"type": "fill", "question": "Write the English word for \"မနက်ဖြန်\".", "answer": "tomorrow", "audio": "tomorrow"}, {"type": "listen", "question": "Listen and choose the word you hear.", "options": ["tomorrow", "family", "Example", "None"], "answer": "tomorrow", "audio": "tomorrow"}]}, {"id": 7, "title": "Public Life", "questions": [{"type": "mc", "question": "What does \"family\" mean?", "options": ["မိသားစု", "အလုပ်", "မသေချာပါ", "အခြားအဓိပ္ပာယ်"], "answer": "မိသားစု", "audio": "family"}, {"type": "mc", "question": "Choose the correct English word for \"အလုပ်\".", "options": ["work", "family", "Example", "None"], "answer": "work", "audio": "work"}, {"type": "fill", "question": "Write the English word for \"မိသားစု\".", "answer": "family", "audio": "family"}, {"type": "listen", "question": "Listen and choose the word you hear.", "options": ["family", "work", "Example", "None"], "answer": "family", "audio": "family"}]}, {"id": 8, "title": "Argumentation", "questions": [{"type": "mc", "question": "What does \"work\" mean?", "options": ["အလုပ်", "သူငယ်ချင်း", "မသေချာပါ", "အခြားအဓိပ္ပာယ်"], "answer": "အလုပ်", "audio": "work"}, {"type": "mc", "question": "Choose the correct English word for \"သူငယ်ချင်း\".", "options": ["friend", "work", "Example", "None"], "answer": "friend", "audio": "friend"}, {"type": "fill", "question": "Write the English word for \"အလုပ်\".", "answer": "work", "audio": "work"}, {"type": "listen", "question": "Listen and choose the word you hear.", "options": ["work", "friend", "Example", "None"], "answer": "work", "audio": "work"}]}, {"id": 9, "title": "Formal Communication", "questions": [{"type": "mc", "question": "What does \"friend\" mean?", "options": ["သူငယ်ချင်း", "ကျောင်း", "မသေချာပါ", "အခြားအဓိပ္ပာယ်"], "answer": "သူငယ်ချင်း", "audio": "friend"}, {"type": "mc", "question": "Choose the correct English word for \"ကျောင်း\".", "options": ["school", "friend", "Example", "None"], "answer": "school", "audio": "school"}, {"type": "fill", "question": "Write the English word for \"သူငယ်ချင်း\".", "answer": "friend", "audio": "friend"}, {"type": "listen", "question": "Listen and choose the word you hear.", "options": ["friend", "school", "Example", "None"], "answer": "friend", "audio": "friend"}]}, {"id": 10, "title": "Advanced Listening", "questions": [{"type": "mc", "question": "What does \"school\" mean?", "options": ["ကျောင်း", "မင်္ဂလာပါ", "မသေချာပါ", "အခြားအဓိပ္ပာယ်"], "answer": "ကျောင်း", "audio": "school"}, {"type": "mc", "question": "Choose the correct English word for \"မင်္ဂလာပါ\".", "options": ["Hello", "school", "Example", "None"], "answer": "Hello", "audio": "Hello"}, {"type": "fill", "question": "Write the English word for \"ကျောင်း\".", "answer": "school", "audio": "school"}, {"type": "listen", "question": "Listen and choose the word you hear.", "options": ["school", "Hello", "Example", "None"], "answer": "school", "audio": "school"}]}, {"id": 11, "title": "B2 Grammar", "questions": [{"type": "mc", "question": "What does \"Hello\" mean?", "options": ["မင်္ဂလာပါ", "ကျေးဇူးတင်ပါတယ်", "မသေချာပါ", "အခြားအဓိပ္ပာယ်"], "answer": "မင်္ဂလာပါ", "audio": "Hello"}, {"type": "mc", "question": "Choose the correct English word for \"ကျေးဇူးတင်ပါတယ်\".", "options": ["Thank you", "Hello", "Example", "None"], "answer": "Thank you", "audio": "Thank you"}, {"type": "fill", "question": "Write the English word for \"မင်္ဂလာပါ\".", "answer": "Hello", "audio": "Hello"}, {"type": "listen", "question": "Listen and choose the word you hear.", "options": ["Hello", "Thank you", "Example", "None"], "answer": "Hello", "audio": "Hello"}]}, {"id": 12, "title": "B2 Review", "questions": [{"type": "mc", "question": "What does \"Thank you\" mean?", "options": ["ကျေးဇူးတင်ပါတယ်", "ရေ", "မသေချာပါ", "အခြားအဓိပ္ပာယ်"], "answer": "ကျေးဇူးတင်ပါတယ်", "audio": "Thank you"}, {"type": "mc", "question": "Choose the correct English word for \"ရေ\".", "options": ["water", "Thank you", "Example", "None"], "answer": "water", "audio": "water"}, {"type": "fill", "question": "Write the English word for \"ကျေးဇူးတင်ပါတယ်\".", "answer": "Thank you", "audio": "Thank you"}, {"type": "listen", "question": "Listen and choose the word you hear.", "options": ["Thank you", "water", "Example", "None"], "answer": "Thank you", "audio": "Thank you"}]}], "C1": [{"id": 1, "title": "Abstract Ideas", "questions": [{"type": "mc", "question": "What does \"Hello\" mean?", "options": ["မင်္ဂလာပါ", "ကျေးဇူးတင်ပါတယ်", "မသေချာပါ", "အခြားအဓိပ္ပာယ်"], "answer": "မင်္ဂလာပါ", "audio": "Hello"}, {"type": "mc", "question": "Choose the correct English word for \"ကျေးဇူးတင်ပါတယ်\".", "options": ["Thank you", "Hello", "Example", "None"], "answer": "Thank you", "audio": "Thank you"}, {"type": "fill", "question": "Write the English word for \"မင်္ဂလာပါ\".", "answer": "Hello", "audio": "Hello"}, {"type": "listen", "question": "Listen and choose the word you hear.", "options": ["Hello", "Thank you", "Example", "None"], "answer": "Hello", "audio": "Hello"}]}, {"id": 2, "title": "Academic Vocabulary", "questions": [{"type": "mc", "question": "What does \"Thank you\" mean?", "options": ["ကျေးဇူးတင်ပါတယ်", "ရေ", "မသေချာပါ", "အခြားအဓိပ္ပာယ်"], "answer": "ကျေးဇူးတင်ပါတယ်", "audio": "Thank you"}, {"type": "mc", "question": "Choose the correct English word for \"ရေ\".", "options": ["water", "Thank you", "Example", "None"], "answer": "water", "audio": "water"}, {"type": "fill", "question": "Write the English word for \"ကျေးဇူးတင်ပါတယ်\".", "answer": "Thank you", "audio": "Thank you"}, {"type": "listen", "question": "Listen and choose the word you hear.", "options": ["Thank you", "water", "Example", "None"], "answer": "Thank you", "audio": "Thank you"}]}, {"id": 3, "title": "Professional Writing", "questions": [{"type": "mc", "question": "What does \"water\" mean?", "options": ["ရေ", "အစားအစာ", "မသေချာပါ", "အခြားအဓိပ္ပာယ်"], "answer": "ရေ", "audio": "water"}, {"type": "mc", "question": "Choose the correct English word for \"အစားအစာ\".", "options": ["food", "water", "Example", "None"], "answer": "food", "audio": "food"}, {"type": "fill", "question": "Write the English word for \"ရေ\".", "answer": "water", "audio": "water"}, {"type": "listen", "question": "Listen and choose the word you hear.", "options": ["water", "food", "Example", "None"], "answer": "water", "audio": "water"}]}, {"id": 4, "title": "Nuance", "questions": [{"type": "mc", "question": "What does \"food\" mean?", "options": ["အစားအစာ", "ဒီနေ့", "မသေချာပါ", "အခြားအဓိပ္ပာယ်"], "answer": "အစားအစာ", "audio": "food"}, {"type": "mc", "question": "Choose the correct English word for \"ဒီနေ့\".", "options": ["today", "food", "Example", "None"], "answer": "today", "audio": "today"}, {"type": "fill", "question": "Write the English word for \"အစားအစာ\".", "answer": "food", "audio": "food"}, {"type": "listen", "question": "Listen and choose the word you hear.", "options": ["food", "today", "Example", "None"], "answer": "food", "audio": "food"}]}, {"id": 5, "title": "Idioms", "questions": [{"type": "mc", "question": "What does \"today\" mean?", "options": ["ဒီနေ့", "မနက်ဖြန်", "မသေချာပါ", "အခြားအဓိပ္ပာယ်"], "answer": "ဒီနေ့", "audio": "today"}, {"type": "mc", "question": "Choose the correct English word for \"မနက်ဖြန်\".", "options": ["tomorrow", "today", "Example", "None"], "answer": "tomorrow", "audio": "tomorrow"}, {"type": "fill", "question": "Write the English word for \"ဒီနေ့\".", "answer": "today", "audio": "today"}, {"type": "listen", "question": "Listen and choose the word you hear.", "options": ["today", "tomorrow", "Example", "None"], "answer": "today", "audio": "today"}]}, {"id": 6, "title": "Rhetoric", "questions": [{"type": "mc", "question": "What does \"tomorrow\" mean?", "options": ["မနက်ဖြန်", "မိသားစု", "မသေချာပါ", "အခြားအဓိပ္ပာယ်"], "answer": "မနက်ဖြန်", "audio": "tomorrow"}, {"type": "mc", "question": "Choose the correct English word for \"မိသားစု\".", "options": ["family", "tomorrow", "Example", "None"], "answer": "family", "audio": "family"}, {"type": "fill", "question": "Write the English word for \"မနက်ဖြန်\".", "answer": "tomorrow", "audio": "tomorrow"}, {"type": "listen", "question": "Listen and choose the word you hear.", "options": ["tomorrow", "family", "Example", "None"], "answer": "tomorrow", "audio": "tomorrow"}]}, {"id": 7, "title": "Critical Reading", "questions": [{"type": "mc", "question": "What does \"family\" mean?", "options": ["မိသားစု", "အလုပ်", "မသေချာပါ", "အခြားအဓိပ္ပာယ်"], "answer": "မိသားစု", "audio": "family"}, {"type": "mc", "question": "Choose the correct English word for \"အလုပ်\".", "options": ["work", "family", "Example", "None"], "answer": "work", "audio": "work"}, {"type": "fill", "question": "Write the English word for \"မိသားစု\".", "answer": "family", "audio": "family"}, {"type": "listen", "question": "Listen and choose the word you hear.", "options": ["family", "work", "Example", "None"], "answer": "family", "audio": "family"}]}, {"id": 8, "title": "Complex Listening", "questions": [{"type": "mc", "question": "What does \"work\" mean?", "options": ["အလုပ်", "သူငယ်ချင်း", "မသေချာပါ", "အခြားအဓိပ္ပာယ်"], "answer": "အလုပ်", "audio": "work"}, {"type": "mc", "question": "Choose the correct English word for \"သူငယ်ချင်း\".", "options": ["friend", "work", "Example", "None"], "answer": "friend", "audio": "friend"}, {"type": "fill", "question": "Write the English word for \"အလုပ်\".", "answer": "work", "audio": "work"}, {"type": "listen", "question": "Listen and choose the word you hear.", "options": ["work", "friend", "Example", "None"], "answer": "work", "audio": "work"}]}, {"id": 9, "title": "Presentations", "questions": [{"type": "mc", "question": "What does \"friend\" mean?", "options": ["သူငယ်ချင်း", "ကျောင်း", "မသေချာပါ", "အခြားအဓိပ္ပာယ်"], "answer": "သူငယ်ချင်း", "audio": "friend"}, {"type": "mc", "question": "Choose the correct English word for \"ကျောင်း\".", "options": ["school", "friend", "Example", "None"], "answer": "school", "audio": "school"}, {"type": "fill", "question": "Write the English word for \"သူငယ်ချင်း\".", "answer": "friend", "audio": "friend"}, {"type": "listen", "question": "Listen and choose the word you hear.", "options": ["friend", "school", "Example", "None"], "answer": "friend", "audio": "friend"}]}, {"id": 10, "title": "Research & Evidence", "questions": [{"type": "mc", "question": "What does \"school\" mean?", "options": ["ကျောင်း", "မင်္ဂလာပါ", "မသေချာပါ", "အခြားအဓိပ္ပာယ်"], "answer": "ကျောင်း", "audio": "school"}, {"type": "mc", "question": "Choose the correct English word for \"မင်္ဂလာပါ\".", "options": ["Hello", "school", "Example", "None"], "answer": "Hello", "audio": "Hello"}, {"type": "fill", "question": "Write the English word for \"ကျောင်း\".", "answer": "school", "audio": "school"}, {"type": "listen", "question": "Listen and choose the word you hear.", "options": ["school", "Hello", "Example", "None"], "answer": "school", "audio": "school"}]}, {"id": 11, "title": "C1 Grammar", "questions": [{"type": "mc", "question": "What does \"Hello\" mean?", "options": ["မင်္ဂလာပါ", "ကျေးဇူးတင်ပါတယ်", "မသေချာပါ", "အခြားအဓိပ္ပာယ်"], "answer": "မင်္ဂလာပါ", "audio": "Hello"}, {"type": "mc", "question": "Choose the correct English word for \"ကျေးဇူးတင်ပါတယ်\".", "options": ["Thank you", "Hello", "Example", "None"], "answer": "Thank you", "audio": "Thank you"}, {"type": "fill", "question": "Write the English word for \"မင်္ဂလာပါ\".", "answer": "Hello", "audio": "Hello"}, {"type": "listen", "question": "Listen and choose the word you hear.", "options": ["Hello", "Thank you", "Example", "None"], "answer": "Hello", "audio": "Hello"}]}, {"id": 12, "title": "C1 Review", "questions": [{"type": "mc", "question": "What does \"Thank you\" mean?", "options": ["ကျေးဇူးတင်ပါတယ်", "ရေ", "မသေချာပါ", "အခြားအဓိပ္ပာယ်"], "answer": "ကျေးဇူးတင်ပါတယ်", "audio": "Thank you"}, {"type": "mc", "question": "Choose the correct English word for \"ရေ\".", "options": ["water", "Thank you", "Example", "None"], "answer": "water", "audio": "water"}, {"type": "fill", "question": "Write the English word for \"ကျေးဇူးတင်ပါတယ်\".", "answer": "Thank you", "audio": "Thank you"}, {"type": "listen", "question": "Listen and choose the word you hear.", "options": ["Thank you", "water", "Example", "None"], "answer": "Thank you", "audio": "Thank you"}]}], "C2": [{"id": 1, "title": "Language Mastery", "questions": [{"type": "mc", "question": "What does \"Hello\" mean?", "options": ["မင်္ဂလာပါ", "ကျေးဇူးတင်ပါတယ်", "မသေချာပါ", "အခြားအဓိပ္ပာယ်"], "answer": "မင်္ဂလာပါ", "audio": "Hello"}, {"type": "mc", "question": "Choose the correct English word for \"ကျေးဇူးတင်ပါတယ်\".", "options": ["Thank you", "Hello", "Example", "None"], "answer": "Thank you", "audio": "Thank you"}, {"type": "fill", "question": "Write the English word for \"မင်္ဂလာပါ\".", "answer": "Hello", "audio": "Hello"}, {"type": "listen", "question": "Listen and choose the word you hear.", "options": ["Hello", "Thank you", "Example", "None"], "answer": "Hello", "audio": "Hello"}]}, {"id": 2, "title": "Literary Language", "questions": [{"type": "mc", "question": "What does \"Thank you\" mean?", "options": ["ကျေးဇူးတင်ပါတယ်", "ရေ", "မသေချာပါ", "အခြားအဓိပ္ပာယ်"], "answer": "ကျေးဇူးတင်ပါတယ်", "audio": "Thank you"}, {"type": "mc", "question": "Choose the correct English word for \"ရေ\".", "options": ["water", "Thank you", "Example", "None"], "answer": "water", "audio": "water"}, {"type": "fill", "question": "Write the English word for \"ကျေးဇူးတင်ပါတယ်\".", "answer": "Thank you", "audio": "Thank you"}, {"type": "listen", "question": "Listen and choose the word you hear.", "options": ["Thank you", "water", "Example", "None"], "answer": "Thank you", "audio": "Thank you"}]}, {"id": 3, "title": "Advanced Idioms", "questions": [{"type": "mc", "question": "What does \"water\" mean?", "options": ["ရေ", "အစားအစာ", "မသေချာပါ", "အခြားအဓိပ္ပာယ်"], "answer": "ရေ", "audio": "water"}, {"type": "mc", "question": "Choose the correct English word for \"အစားအစာ\".", "options": ["food", "water", "Example", "None"], "answer": "food", "audio": "food"}, {"type": "fill", "question": "Write the English word for \"ရေ\".", "answer": "water", "audio": "water"}, {"type": "listen", "question": "Listen and choose the word you hear.", "options": ["water", "food", "Example", "None"], "answer": "water", "audio": "water"}]}, {"id": 4, "title": "Register", "questions": [{"type": "mc", "question": "What does \"food\" mean?", "options": ["အစားအစာ", "ဒီနေ့", "မသေချာပါ", "အခြားအဓိပ္ပာယ်"], "answer": "အစားအစာ", "audio": "food"}, {"type": "mc", "question": "Choose the correct English word for \"ဒီနေ့\".", "options": ["today", "food", "Example", "None"], "answer": "today", "audio": "today"}, {"type": "fill", "question": "Write the English word for \"အစားအစာ\".", "answer": "food", "audio": "food"}, {"type": "listen", "question": "Listen and choose the word you hear.", "options": ["food", "today", "Example", "None"], "answer": "food", "audio": "food"}]}, {"id": 5, "title": "Subtle Meaning", "questions": [{"type": "mc", "question": "What does \"today\" mean?", "options": ["ဒီနေ့", "မနက်ဖြန်", "မသေချာပါ", "အခြားအဓိပ္ပာယ်"], "answer": "ဒီနေ့", "audio": "today"}, {"type": "mc", "question": "Choose the correct English word for \"မနက်ဖြန်\".", "options": ["tomorrow", "today", "Example", "None"], "answer": "tomorrow", "audio": "tomorrow"}, {"type": "fill", "question": "Write the English word for \"ဒီနေ့\".", "answer": "today", "audio": "today"}, {"type": "listen", "question": "Listen and choose the word you hear.", "options": ["today", "tomorrow", "Example", "None"], "answer": "today", "audio": "today"}]}, {"id": 6, "title": "Persuasion", "questions": [{"type": "mc", "question": "What does \"tomorrow\" mean?", "options": ["မနက်ဖြန်", "မိသားစု", "မသေချာပါ", "အခြားအဓိပ္ပာယ်"], "answer": "မနက်ဖြန်", "audio": "tomorrow"}, {"type": "mc", "question": "Choose the correct English word for \"မိသားစု\".", "options": ["family", "tomorrow", "Example", "None"], "answer": "family", "audio": "family"}, {"type": "fill", "question": "Write the English word for \"မနက်ဖြန်\".", "answer": "tomorrow", "audio": "tomorrow"}, {"type": "listen", "question": "Listen and choose the word you hear.", "options": ["tomorrow", "family", "Example", "None"], "answer": "tomorrow", "audio": "tomorrow"}]}, {"id": 7, "title": "Critical Analysis", "questions": [{"type": "mc", "question": "What does \"family\" mean?", "options": ["မိသားစု", "အလုပ်", "မသေချာပါ", "အခြားအဓိပ္ပာယ်"], "answer": "မိသားစု", "audio": "family"}, {"type": "mc", "question": "Choose the correct English word for \"အလုပ်\".", "options": ["work", "family", "Example", "None"], "answer": "work", "audio": "work"}, {"type": "fill", "question": "Write the English word for \"မိသားစု\".", "answer": "family", "audio": "family"}, {"type": "listen", "question": "Listen and choose the word you hear.", "options": ["family", "work", "Example", "None"], "answer": "family", "audio": "family"}]}, {"id": 8, "title": "Complex Arguments", "questions": [{"type": "mc", "question": "What does \"work\" mean?", "options": ["အလုပ်", "သူငယ်ချင်း", "မသေချာပါ", "အခြားအဓိပ္ပာယ်"], "answer": "အလုပ်", "audio": "work"}, {"type": "mc", "question": "Choose the correct English word for \"သူငယ်ချင်း\".", "options": ["friend", "work", "Example", "None"], "answer": "friend", "audio": "friend"}, {"type": "fill", "question": "Write the English word for \"အလုပ်\".", "answer": "work", "audio": "work"}, {"type": "listen", "question": "Listen and choose the word you hear.", "options": ["work", "friend", "Example", "None"], "answer": "work", "audio": "work"}]}, {"id": 9, "title": "Professional Mastery", "questions": [{"type": "mc", "question": "What does \"friend\" mean?", "options": ["သူငယ်ချင်း", "ကျောင်း", "မသေချာပါ", "အခြားအဓိပ္ပာယ်"], "answer": "သူငယ်ချင်း", "audio": "friend"}, {"type": "mc", "question": "Choose the correct English word for \"ကျောင်း\".", "options": ["school", "friend", "Example", "None"], "answer": "school", "audio": "school"}, {"type": "fill", "question": "Write the English word for \"သူငယ်ချင်း\".", "answer": "friend", "audio": "friend"}, {"type": "listen", "question": "Listen and choose the word you hear.", "options": ["friend", "school", "Example", "None"], "answer": "friend", "audio": "friend"}]}, {"id": 10, "title": "Literature & Style", "questions": [{"type": "mc", "question": "What does \"school\" mean?", "options": ["ကျောင်း", "မင်္ဂလာပါ", "မသေချာပါ", "အခြားအဓိပ္ပာယ်"], "answer": "ကျောင်း", "audio": "school"}, {"type": "mc", "question": "Choose the correct English word for \"မင်္ဂလာပါ\".", "options": ["Hello", "school", "Example", "None"], "answer": "Hello", "audio": "Hello"}, {"type": "fill", "question": "Write the English word for \"ကျောင်း\".", "answer": "school", "audio": "school"}, {"type": "listen", "question": "Listen and choose the word you hear.", "options": ["school", "Hello", "Example", "None"], "answer": "school", "audio": "school"}]}, {"id": 11, "title": "C2 Grammar", "questions": [{"type": "mc", "question": "What does \"Hello\" mean?", "options": ["မင်္ဂလာပါ", "ကျေးဇူးတင်ပါတယ်", "မသေချာပါ", "အခြားအဓိပ္ပာယ်"], "answer": "မင်္ဂလာပါ", "audio": "Hello"}, {"type": "mc", "question": "Choose the correct English word for \"ကျေးဇူးတင်ပါတယ်\".", "options": ["Thank you", "Hello", "Example", "None"], "answer": "Thank you", "audio": "Thank you"}, {"type": "fill", "question": "Write the English word for \"မင်္ဂလာပါ\".", "answer": "Hello", "audio": "Hello"}, {"type": "listen", "question": "Listen and choose the word you hear.", "options": ["Hello", "Thank you", "Example", "None"], "answer": "Hello", "audio": "Hello"}]}, {"id": 12, "title": "C2 Review", "questions": [{"type": "mc", "question": "What does \"Thank you\" mean?", "options": ["ကျေးဇူးတင်ပါတယ်", "ရေ", "မသေချာပါ", "အခြားအဓိပ္ပာယ်"], "answer": "ကျေးဇူးတင်ပါတယ်", "audio": "Thank you"}, {"type": "mc", "question": "Choose the correct English word for \"ရေ\".", "options": ["water", "Thank you", "Example", "None"], "answer": "water", "audio": "water"}, {"type": "fill", "question": "Write the English word for \"ကျေးဇူးတင်ပါတယ်\".", "answer": "Thank you", "audio": "Thank you"}, {"type": "listen", "question": "Listen and choose the word you hear.", "options": ["Thank you", "water", "Example", "None"], "answer": "Thank you", "audio": "Thank you"}]}]}}};
+const DB = {
+  en: {
+    flag: "🇬🇧", name: "English", voice: "en-US",
+    levels: {
+      A1: [
+        { id: 1, title: "Greetings & Basics", questions: [
+          { type: "mc", question: "'Hello' ၏ မြန်မာအဓိပ္ပာယ်ကို ရွေးပါ", options: ["မင်္ဂလာပါ", "ကျေးဇူးတင်ပါတယ်", "နှုတ်ဆက်ပါတယ်"], answer: "မင်္ဂလာပါ", audio: "Hello" },
+          { type: "order", question: "ဝါကျစီပါ: 'တွေ့ရတာ ဝမ်းသာပါတယ်'", words: ["meet", "Nice", "to", "you"], answer: ["Nice", "to", "meet", "you"], audio: "Nice to meet you" },
+          { type: "listen", question: "ကြားရသည့် အသံကို ရွေးပါ", options: ["Good morning", "Goodbye", "Good evening"], answer: "Good morning", audio: "Good morning" }
+        ]},
+        { id: 2, title: "Food & Drinks", questions: [
+          { type: "mc", question: "'Water' ဆိုသည်မှာ အဘယ်နည်း?", options: ["ရေ", "ထမင်း", "လက်ဖက်ရည်"], answer: "ရေ", audio: "Water" },
+          { type: "fill", question: "ဖြည့်စွက်ပါ: I drink ___ (ရေ).", answer: "water", audio: "water" }
+        ]}
+      ],
+      A2: [
+        { id: 1, title: "Travel & Restroom", questions: [
+          { type: "mc", question: "'Turn left' ၏ အဓိပ္ပာယ်မှာ?", options: ["ဘယ်ဘက်သို့ ကွေ့ပါ", "ညာဘက်သို့ ကွေ့ပါ", "တည့်တည့်သွားပါ"], answer: "ဘယ်ဘက်သို့ ကွေ့ပါ", audio: "Turn left" },
+          { type: "order", question: "ဝါကျစီပါ: 'Where is the restroom?'", words: ["the", "Where", "restroom?", "is"], answer: ["Where", "is", "the", "restroom?"], audio: "Where is the restroom?" }
+        ]}
+      ],
+      B1: [
+        { id: 1, title: "Workplace & Schedule", questions: [
+          { type: "mc", question: "'Deadline' ၏ အဓိပ္ပာယ်ကို ရွေးပါ", options: ["နောက်ဆုံးသတ်မှတ်ရက်", "လစာတိုးခြင်း", "အလုပ်ချိန်"], answer: "နောက်ဆုံးသတ်မှတ်ရက်", audio: "Deadline" }
+        ]}
+      ],
+      B2: [
+        { id: 1, title: "Job Interviews", questions: [
+          { type: "mc", question: "'Strengths and weaknesses' ၏ အဓိပ္ပာယ်?", options: ["အားသာချက်နှင့် အားနည်းချက်များ", "လစာနှုန်းထား", "ခွင့်ရက်များ"], answer: "အားသာချက်နှင့် အားနည်းချက်များ", audio: "Strengths and weaknesses" }
+        ]}
+      ],
+      C1: [
+        { id: 1, title: "Strategic Planning", questions: [
+          { type: "mc", question: "'Feasibility study' ၏ အဓိပ္ပာယ်?", options: ["ဖြစ်မြောက်နိုင်စွမ်း ဆန်းစစ်ချက်", "ငွေစာရင်းရှင်းတမ်း", "ဈေးကွက်ရှာဖွေရေး"], answer: "ဖြစ်မြောက်နိုင်စွမ်း ဆန်းစစ်ချက်", audio: "Feasibility study" }
+        ]}
+      ],
+      C2: [
+        { id: 1, title: "Native Idioms & Fluency", questions: [
+          { type: "mc", question: "'Piece of cake' (Native Idiom) ၏ သဘောမှာ?", options: ["အရမ်းလွယ်ကူသော အရာ", "ကိတ်မုန့်တစ်တုံး", "အရသာရှိသောအရာ"], answer: "အရမ်းလွယ်ကူသော အရာ", audio: "Piece of cake" },
+          { type: "order", question: "ဝါကျစီပါ: 'Under the weather (နေမကောင်းပါ)'", words: ["under", "I", "weather", "feel", "the"], answer: ["I", "feel", "under", "the", "weather"], audio: "I feel under the weather" }
+        ]}
+      ]
+    }
+  },
+  th: {
+    flag: "🇹🇭", name: "Thai", voice: "th-TH",
+    levels: {
+      A1: [
+        { id: 1, title: "နှုတ်ဆက်ခြင်းနှင့် ကျေးဇူးတင်လွှာ", questions: [
+          { type: "mc", question: "'မင်္ဂလာပါ' ၏ ထိုင်းစကားကို ရွေးပါ", options: ["สวัสดี (Sawasdee)", "ขอบคุณ", "อร่อย"], answer: "สวัสดี (Sawasdee)", audio: "สวัสดี" },
+          { type: "order", question: "ဝါကျစီပါ: 'မင်္ဂလာပါခင်ဗျာ'", words: ["ครับ", "สวัสดี", "ขอบคุณ"], answer: ["สวัสดี", "ครับ"], audio: "สวัสดีครับ" }
+        ]}
+      ],
+      A2: [
+        { id: 1, title: "ဈေးဝယ်နှင့် လမ်းမေးခြင်း", questions: [
+          { type: "mc", question: "'ဒါ ဘယ်လောက်လဲ' ကို ရွေးပါ", options: ["อันนี้เท่าไหร่", "ลดได้ไหม", "แพงมาก"], answer: "อันนี้เท่าไหร่", audio: "อันนี้เท่าไหร่" }
+        ]}
+      ],
+      B1: [
+        { id: 1, title: "ရုံးတွင်းသုံး စကားပြော", questions: [
+          { type: "mc", question: "'အစည်းအဝေး' ၏ ထိုင်းစကားကို ရွေးပါ", options: ["การประชุม (Pra-chum)", "เงินเดือน", "ลาพักร้อน"], answer: "การประชุม (Pra-chum)", audio: "การประชุม" }
+        ]}
+      ],
+      C2: [
+        { id: 1, title: "Native Slang & Idioms", questions: [
+          { type: "mc", question: "'ใจเย็นๆ (Jai yen yen)' ၏ အဓိပ္ပာယ်?", options: ["စိတ်အေးအေးထားပါ", "ရေသောက်ပါ", "ဗိုက်ဆာတယ်"], answer: "စိတ်အေးအေးထားပါ", audio: "ใจเย็นๆ" }
+        ]}
+      ]
+    }
+  },
+  ja: {
+    flag: "🇯🇵", name: "Japanese", voice: "ja-JP",
+    levels: {
+      A1: [
+        { id: 1, title: "挨拶 (Greetings)", questions: [
+          { type: "mc", question: "'မင်္ဂလာပါ' ၏ ဂျပန်စကားကို ရွေးပါ", options: ["こんにちは (Konnichiwa)", "ありがとう", "さようなら"], answer: "こんにちは (Konnichiwa)", audio: "こんにちは" },
+          { type: "order", question: "ဝါကျစီပါ: 'ကျေးဇူးအများကြီးတင်ပါတယ်'", words: ["ございます", "ありがとう", "すみません"], answer: ["ありがとう", "ございます"], audio: "ありがとうございます" }
+        ]}
+      ],
+      A2: [
+        { id: 1, title: "買い物と旅行 (Shopping)", questions: [
+          { type: "mc", question: "'いくらですか' ၏ အဓိပ္ပာယ်မှာ?", options: ["ဘယ်လောက်ကျလဲ?", "အိမ်သာဘယ်မှာလဲ?", "စားကောင်းတယ်"], answer: "ဘယ်လောက်ကျလဲ?", audio: "いくらですか" }
+        ]}
+      ],
+      C2: [
+        { id: 1, title: "日本の慣用句 (Native Idioms)", questions: [
+          { type: "mc", question: "'猫の手も借りたい' ၏ သဘောမှာ?", options: ["အလွန်အမင်း အလုပ်များနေသည်", "ကြောင်မွေးချင်သည်", "ကြောင်ကို ကူညီသည်"], answer: "အလွန်အမင်း အလုပ်များနေသည်", audio: "猫の手も借りたい" }
+        ]}
+      ]
+    }
+  },
+  ko: {
+    flag: "🇰🇷", name: "Korean", voice: "ko-KR",
+    levels: {
+      A1: [
+        { id: 1, title: "인사 (Greetings)", questions: [
+          { type: "mc", question: "'မင်္ဂလာပါ' ၏ ကိုရီးယားစကားကို ရွေးပါ", options: ["안녕하세요 (Annyeong)", "감사합니다", "맛있어요"], answer: "안녕하세요 (Annyeong)", audio: "안녕하세요" },
+          { type: "order", question: "ဝါကျစီပါ: 'ကျေးဇူးတင်ပါတယ်'", words: ["합니다", "감사", "안녕"], answer: ["감사", "합니다"], audio: "감사합니다" }
+        ]}
+      ],
+      C2: [
+        { id: 1, title: "Native Slang (관용구)", questions: [
+          { type: "mc", question: "'대박 (Daebak)' ၏ အဓိပ္ပာယ်?", options: ["အရမ်းမိုက်တယ် / အလန်းစား", "စိတ်မကောင်းပါ", "ဗိုက်ဆာတယ်"], answer: "အရမ်းမိုက်တယ် / အလန်းစား", audio: "대박" }
+        ]}
+      ]
+    }
+  },
+  de: {
+    flag: "🇩🇪", name: "German", voice: "de-DE",
+    levels: {
+      A1: [
+        { id: 1, title: "Begrüßung (Greetings)", questions: [
+          { type: "mc", question: "'မင်္ဂလာပါ' ၏ ဂျာမန်စကားကို ရွေးပါ", options: ["Guten Tag", "Danke", "Tschüss"], answer: "Guten Tag", audio: "Guten Tag" },
+          { type: "order", question: "ဝါကျစီပါ: 'Vielen Dank'", words: ["Dank", "Vielen", "Bitte"], answer: ["Vielen", "Dank"], audio: "Vielen Dank" }
+        ]}
+      ],
+      C2: [
+        { id: 1, title: "Redewendungen (Idioms)", questions: [
+          { type: "mc", question: "'Ich verstehe nur Bahnhof' ၏ သဘောမှာ?", options: ["ဘာမှနားမလည်ပါ", "ဘူတာရုံသွားမည်", "ရထားစီးမည်"], answer: "ဘာမှနားမလည်ပါ", audio: "Ich verstehe nur Bahnhof" }
+        ]}
+      ]
+    }
+  },
+  es: {
+    flag: "🇪🇸", name: "Spanish", voice: "es-ES",
+    levels: {
+      A1: [
+        { id: 1, title: "Saludos (Greetings)", questions: [
+          { type: "mc", question: "'မင်္ဂလာပါ' ၏ စပိန်စကားကို ရွေးပါ", options: ["Hola", "Gracias", "Adiós"], answer: "Hola", audio: "Hola" },
+          { type: "order", question: "ဝါကျစီပါ: 'Muchas gracias'", words: ["gracias", "Muchas", "Por favor"], answer: ["Muchas", "gracias"], audio: "Muchas gracias" }
+        ]}
+      ],
+      C2: [
+        { id: 1, title: "Modismos (Idioms)", questions: [
+          { type: "mc", question: "'Tomar el pelo' ၏ အဓိပ္ပာယ်?", options: ["စနောက်ကျီစယ်သည်", "ဆံပင်ညှပ်သည်", "ခေါင်းလျှော်သည်"], answer: "စနောက်ကျီစယ်သည်", audio: "Tomar el pelo" }
+        ]}
+      ]
+    }
+  },
+  fr: {
+    flag: "🇫🇷", name: "French", voice: "fr-FR",
+    levels: {
+      A1: [
+        { id: 1, title: "Salutations (Greetings)", questions: [
+          { type: "mc", question: "'မင်္ဂလာပါ' ၏ ပြင်သစ်စကားကို ရွေးပါ", options: ["Bonjour", "Merci", "Au revoir"], answer: "Bonjour", audio: "Bonjour" },
+          { type: "order", question: "ဝါကျစီပါ: 'Merci beaucoup'", words: ["beaucoup", "Merci", "Pardon"], answer: ["Merci", "beaucoup"], audio: "Merci beaucoup" }
+        ]}
+      ],
+      C2: [
+        { id: 1, title: "Expressions (Idioms)", questions: [
+          { type: "mc", question: "'Coup de foudre' ၏ အဓိပ္ပာယ်?", options: ["ပထမဆုံးမြင်မြင်ချင်း အချစ်", "မိုးကြိုးပစ်ခြင်း", "မတော်တဆဖြစ်ခြင်း"], answer: "ပထမဆုံးမြင်မြင်ချင်း အချစ်", audio: "Coup de foudre" }
+        ]}
+      ]
+    }
+  },
+  it: {
+    flag: "🇮🇹", name: "Italian", voice: "it-IT",
+    levels: {
+      A1: [
+        { id: 1, title: "Saluti (Greetings)", questions: [
+          { type: "mc", question: "'မင်္ဂလာပါ' ၏ အီတလီစကားကို ရွေးပါ", options: ["Ciao", "Grazie", "Prego"], answer: "Ciao", audio: "Ciao" },
+          { type: "order", question: "ဝါကျစီပါ: 'Grazie mille'", words: ["mille", "Grazie", "Per favore"], answer: ["Grazie", "mille"], audio: "Grazie mille" }
+        ]}
+      ],
+      C2: [
+        { id: 1, title: "Modi di dire (Idioms)", questions: [
+          { type: "mc", question: "'In bocca al lupo' ၏ သဘောမှာ?", options: ["ကံကောင်းပါစေ (Good luck)", "ဝံပုလွေလိုက်နေသည်", "သတိထားပါ"], answer: "ကံကောင်းပါစေ (Good luck)", audio: "In bocca al lupo" }
+        ]}
+      ]
+    }
+  }
+};
 
 let curLang = localStorage.getItem("lm_lang") || "en";
 let curLevel = localStorage.getItem("lm_level") || "A1";
@@ -106,8 +302,9 @@ let dailyXP = parseInt(localStorage.getItem("lm_daily") || "0", 10);
 let completedLessons = JSON.parse(localStorage.getItem("lm_done") || "{}");
 
 let currentLesson = null;
-let currentQuestionIndex = 0;
+let currentQIdx = 0;
 let selectedAnswer = null;
+let userBuiltWords = [];
 
 function saveState() {
   localStorage.setItem("lm_lang", curLang);
@@ -126,13 +323,13 @@ function updateUI() {
   document.getElementById("pstreak").textContent = streak;
   document.getElementById("dailyText").textContent = `${dailyXP} / 50 XP`;
   document.getElementById("daily").style.width = `${Math.min(100, (dailyXP / 50) * 100)}%`;
-  
+
   const totalDone = Object.values(completedLessons).reduce((a, b) => a + (Array.isArray(b) ? b.length : 0), 0);
   document.getElementById("done").textContent = totalDone;
   
-  document.getElementById("currentLevel").textContent = curLevel;
   const langObj = DB[curLang] || DB["en"];
   document.getElementById("currentLang").textContent = `${langObj.flag} ${langObj.name}`;
+  document.getElementById("currentLevel").textContent = `Level ${curLevel}`;
 }
 
 function initLangSelect() {
@@ -145,16 +342,22 @@ function initLangSelect() {
     if (code === curLang) opt.selected = true;
     select.appendChild(opt);
   }
-  select.onchange = (e) => {
-    curLang = e.target.value;
-    saveState();
-    renderLearn();
-  };
+}
+
+function changeLang() {
+  curLang = document.getElementById("lang").value;
+  saveState();
+  renderLearn();
 }
 
 function page(id) {
   document.querySelectorAll("main section").forEach(s => s.classList.add("hidden"));
+  document.querySelectorAll("nav button").forEach(b => b.classList.remove("active"));
   document.getElementById(id).classList.remove("hidden");
+  
+  const navBtn = document.getElementById(`nav-${id}`);
+  if (navBtn) navBtn.classList.add("active");
+
   if (id === "learn") renderLearn();
   if (id === "progress") renderProgress();
   if (id === "home") updateUI();
@@ -162,7 +365,7 @@ function page(id) {
 
 function renderLearn() {
   const langObj = DB[curLang] || DB["en"];
-  document.getElementById("langTitle").textContent = `${langObj.flag} ${langObj.name} Course`;
+  document.getElementById("langTitle").textContent = `${langObj.flag} ${langObj.name} Curriculum`;
   
   const levelsContainer = document.getElementById("levels");
   levelsContainer.innerHTML = "";
@@ -180,7 +383,7 @@ function renderLearn() {
     levelsContainer.appendChild(btn);
   });
 
-  document.getElementById("curriculumTitle").textContent = `${curLevel} Lessons`;
+  document.getElementById("curriculumTitle").textContent = `Level ${curLevel} Chapters`;
   const lessonsContainer = document.getElementById("lessons");
   lessonsContainer.innerHTML = "";
   
@@ -189,7 +392,7 @@ function renderLearn() {
   const doneList = completedLessons[doneKey] || [];
 
   if (list.length === 0) {
-    lessonsContainer.innerHTML = "<p class='muted'>Lessons for this level are coming soon!</p>";
+    lessonsContainer.innerHTML = "<p class='muted' style='text-align:center;padding:20px 0;'>ဤ Level အတွက် သင်ခန်းစာများ မကြာမီ ထပ်မံထည့်သွင်းပါမည်။</p>";
     return;
   }
 
@@ -199,10 +402,10 @@ function renderLearn() {
     div.className = "lesson";
     div.innerHTML = `
       <div>
-        <strong>${isDone ? "✅" : "📖"} Lesson ${ls.id}: ${ls.title}</strong>
+        <strong>${isDone ? "✓ " : "● "}Chapter ${ls.id}: ${ls.title}</strong>
         <div class="muted">${ls.questions.length} Exercises</div>
       </div>
-      <div>➔</div>
+      <div style="font-weight:bold;color:var(--blue)">➔</div>
     `;
     div.onclick = () => startLesson(ls);
     lessonsContainer.appendChild(div);
@@ -211,18 +414,19 @@ function renderLearn() {
 
 function startLesson(ls) {
   currentLesson = ls;
-  currentQuestionIndex = 0;
+  currentQIdx = 0;
   page("lesson");
   renderQuestion();
 }
 
 function renderQuestion() {
   selectedAnswer = null;
-  const q = currentLesson.questions[currentQuestionIndex];
+  userBuiltWords = [];
+  const q = currentLesson.questions[currentQIdx];
   const total = currentLesson.questions.length;
   
-  document.getElementById("meta").textContent = `Lesson ${currentLesson.id} • Question ${currentQuestionIndex + 1}/${total}`;
-  document.getElementById("lessonFill").style.width = `${(currentQuestionIndex / total) * 100}%`;
+  document.getElementById("meta").textContent = `Chapter ${currentLesson.id} • Exercise ${currentQIdx + 1}/${total}`;
+  document.getElementById("lessonFill").style.width = `${(currentQIdx / total) * 100}%`;
   document.getElementById("question").textContent = q.question;
   
   const fb = document.getElementById("feedback");
@@ -248,14 +452,46 @@ function renderQuestion() {
   } else if (q.type === "fill") {
     const inp = document.createElement("input");
     inp.className = "input";
-    inp.placeholder = "Type your answer here...";
+    inp.placeholder = "အဖြေကို စာရိုက်ထည့်ပါ...";
     inp.oninput = (e) => { selectedAnswer = e.target.value.trim(); };
     ansContainer.appendChild(inp);
+  } else if (q.type === "order") {
+    const slot = document.createElement("div");
+    slot.className = "slot";
+    slot.id = "orderSlot";
+
+    const chips = document.createElement("div");
+    chips.className = "chips";
+
+    q.words.forEach(w => {
+      const chip = document.createElement("div");
+      chip.className = "chip";
+      chip.textContent = w;
+      chip.onclick = () => {
+        if (!chip.classList.contains("used")) {
+          chip.classList.add("used");
+          userBuiltWords.push(w);
+
+          const sChip = document.createElement("div");
+          sChip.className = "chip";
+          sChip.textContent = w;
+          sChip.onclick = () => {
+            slot.removeChild(sChip);
+            chip.classList.remove("used");
+            userBuiltWords = userBuiltWords.filter(item => item !== w);
+          };
+          slot.appendChild(sChip);
+        }
+      };
+      chips.appendChild(chip);
+    });
+    ansContainer.appendChild(slot);
+    ansContainer.appendChild(chips);
   }
 }
 
 function speak() {
-  const q = currentLesson.questions[currentQuestionIndex];
+  const q = currentLesson.questions[currentQIdx];
   if (!q.audio || !('speechSynthesis' in window)) return;
   window.speechSynthesis.cancel();
   const utter = new SpeechSynthesisUtterance(q.audio);
@@ -264,33 +500,38 @@ function speak() {
 }
 
 function check() {
-  if (!selectedAnswer) {
-    alert("Please select or type an answer first!");
-    return;
+  const q = currentLesson.questions[currentQIdx];
+  let isCorrect = false;
+
+  if (q.type === "order") {
+    if (userBuiltWords.length === 0) return alert("စကားလုံးများကို စီပေးပါ!");
+    isCorrect = JSON.stringify(userBuiltWords) === JSON.stringify(q.answer);
+  } else {
+    if (!selectedAnswer) return alert("အဖြေကို အရင်ရွေးချယ်ပါ သို့မဟုတ် စာရိုက်ထည့်ပါ!");
+    isCorrect = (selectedAnswer.toLowerCase() === q.answer.toLowerCase());
   }
-  const q = currentLesson.questions[currentQuestionIndex];
-  const isCorrect = (selectedAnswer.toLowerCase() === q.answer.toLowerCase());
+
   const fb = document.getElementById("feedback");
   fb.classList.remove("hidden");
 
   if (isCorrect) {
-    fb.style.color = "var(--green)";
-    fb.innerHTML = `<strong>✅ Correct!</strong><br><button class="btn" style="margin-top:8px" onclick="nextQ()">Next ➔</button>`;
+    fb.className = "feedback correct";
+    fb.innerHTML = `✅ မှန်ကန်ပါတယ်! (+10 XP)<br><button class="btn" style="margin-top:10px" onclick="nextQ()">ဆက်သွားမည် ➔</button>`;
     xp += 10;
     dailyXP += 10;
   } else {
-    fb.style.color = "var(--red)";
-    fb.innerHTML = `<strong>❌ Incorrect!</strong><br>Correct answer: <b>${q.answer}</b><br><button class="btn" style="margin-top:8px" onclick="nextQ()">Continue ➔</button>`;
+    fb.className = "feedback wrong";
+    fb.innerHTML = `❌ မှားယွင်းနေပါသည်။<br>မှန်ကန်သောအဖြေ: <b>${Array.isArray(q.answer) ? q.answer.join(" ") : q.answer}</b><br><button class="btn" style="margin-top:10px" onclick="nextQ()">ဆက်သွားမည် ➔</button>`;
   }
   saveState();
 }
 
 function nextQ() {
-  if (currentQuestionIndex < currentLesson.questions.length - 1) {
-    currentQuestionIndex++;
+  if (currentQIdx < currentLesson.questions.length - 1) {
+    currentQIdx++;
     renderQuestion();
   } else {
-    alert("🎉 Lesson Complete! +20 Bonus XP");
+    alert("🎉 Chapter ပြီးဆုံးပါပြီ! (+20 Bonus XP)");
     xp += 20;
     dailyXP += 20;
     const doneKey = `${curLang}_${curLevel}`;
@@ -320,8 +561,8 @@ function renderProgress() {
     const div = document.createElement("div");
     div.style.marginBottom = "12px";
     div.innerHTML = `
-      <div style="display:flex;justify-content:space-between;font-weight:700;font-size:14px;margin-bottom:4px">
-        <span>${lvl}</span>
+      <div style="display:flex;justify-content:space-between;font-weight:700;font-size:13px;margin-bottom:4px">
+        <span>Level ${lvl}</span>
         <span>${doneCount} / ${total} (${pct}%)</span>
       </div>
       <div class="progress"><div class="fill" style="width:${pct}%"></div></div>
