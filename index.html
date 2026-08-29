@@ -1,825 +1,1998 @@
 <!DOCTYPE html>
 <html lang="my">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-  <title>LingoMaster - 8 Languages Complete A1</title>
-  <style>
-    :root {
-      --green: #58cc02;
-      --green-dark: #46a302;
-      --green-light: #d7ffb8;
-      --blue: #1cb0f6;
-      --blue-dark: #0f86be;
-      --gold: #ffc800;
-      --red: #ff4b4b;
-      --red-light: #ffdfe0;
-      --gray: #e5e5e5;
-      --text: #3c3c3c;
-      --bg: #f7f9fa;
-    }
-    * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
-    body {
-      margin: 0;
-      background-color: var(--bg);
-      color: var(--text);
-      display: flex;
-      flex-direction: column;
-      height: 100vh;
-      height: 100dvh;
-      overflow: hidden;
-      align-items: center;
-    }
-    .app-container {
-      width: 100%;
-      max-width: 480px;
-      height: 100%;
-      display: flex;
-      flex-direction: column;
-      background: white;
-      position: relative;
-    }
-    .top-bar {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 10px 14px;
-      border-bottom: 2px solid var(--gray);
-      background: white;
-      font-weight: bold;
-      font-size: 14px;
-      z-index: 10;
-    }
-    .lang-select {
-      border: 2px solid var(--blue);
-      border-radius: 10px;
-      padding: 4px 8px;
-      font-weight: bold;
-      font-size: 13px;
-      outline: none;
-      background: #f0f9ff;
-      color: #0277bd;
-      cursor: pointer;
-    }
-    .stats-group { display: flex; gap: 10px; align-items: center; }
-    main {
-      flex: 1;
-      overflow-y: auto;
-      padding: 16px;
-      padding-bottom: 75px;
-    }
-    .screen { display: none; flex-direction: column; width: 100%; }
-    .screen.active { display: flex; }
-    .card {
-      background: white;
-      border: 2px solid var(--gray);
-      border-radius: 16px;
-      padding: 16px;
-      margin-bottom: 14px;
-      box-shadow: 0 3px 0 var(--gray);
-    }
-    .hero-card {
-      background: linear-gradient(135deg, var(--blue), var(--blue-dark));
-      color: white;
-      border: none;
-      box-shadow: 0 4px 12px rgba(28,176,246,0.3);
-    }
-    .btn-main {
-      width: 100%;
-      padding: 14px;
-      border-radius: 14px;
-      font-size: 15px;
-      font-weight: bold;
-      border: none;
-      background: var(--green);
-      color: white;
-      box-shadow: 0 4px 0 var(--green-dark);
-      cursor: pointer;
-      text-align: center;
-    }
-    .btn-main:active { transform: translateY(2px); box-shadow: 0 2px 0 var(--green-dark); }
-    .goal-track {
-      width: 100%;
-      height: 12px;
-      background: rgba(0,0,0,0.1);
-      border-radius: 10px;
-      overflow: hidden;
-      margin: 8px 0 4px 0;
-    }
-    .goal-fill { height: 100%; background: var(--gold); width: 0%; transition: width 0.3s; }
-    .chapter-item {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 14px;
-      border: 2px solid var(--gray);
-      border-radius: 14px;
-      margin-bottom: 10px;
-      background: white;
-      box-shadow: 0 3px 0 var(--gray);
-      cursor: pointer;
-    }
-    .chapter-item.locked { background: #fafafa; opacity: 0.6; cursor: not-allowed; box-shadow: none; }
-    .chapter-item.completed { border-color: var(--green); }
-    .bottom-nav {
-      position: absolute;
-      bottom: 0; left: 0; right: 0;
-      height: 60px;
-      background: white;
-      border-top: 2px solid var(--gray);
-      display: flex;
-      justify-content: space-around;
-      align-items: center;
-      z-index: 20;
-    }
-    .nav-btn {
-      flex: 1;
-      height: 100%;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      background: none;
-      border: none;
-      font-size: 11px;
-      font-weight: bold;
-      color: #888;
-      cursor: pointer;
-    }
-    .nav-btn.active { color: var(--green-dark); }
-    .nav-btn span { font-size: 18px; margin-bottom: 2px; }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LingoMaster — 8 Languages A1–C2</title>
 
-    /* Game Screen */
-    .game-header { display: flex; align-items: center; gap: 12px; width: 100%; margin-bottom: 16px; }
-    .btn-close { background: none; border: none; font-size: 20px; font-weight: bold; color: #888; cursor: pointer; }
-    .progress-wrap { flex: 1; height: 12px; background: var(--gray); border-radius: 8px; overflow: hidden; }
-    .progress-bar-fill { height: 100%; width: 0%; background: var(--green); transition: width 0.3s; }
-    .prompt-box { font-size: 19px; font-weight: bold; margin-bottom: 16px; line-height: 1.4; }
-    .speaker-btn {
-      background: var(--blue);
-      color: white;
-      border: none;
-      border-radius: 10px;
-      padding: 8px 14px;
-      font-size: 15px;
-      font-weight: bold;
-      box-shadow: 0 3px 0 var(--blue-dark);
-      cursor: pointer;
-      align-self: flex-start;
-      margin-bottom: 14px;
-    }
-    .choice-option {
-      width: 100%;
-      padding: 13px;
-      border: 2px solid var(--gray);
-      border-radius: 12px;
-      box-shadow: 0 3px 0 var(--gray);
-      font-size: 15px;
-      font-weight: bold;
-      margin-bottom: 10px;
-      cursor: pointer;
-      background: white;
-      text-align: left;
-    }
-    .choice-option.selected { border-color: var(--blue); background: #e1f5fe; }
-    .slot-container { min-height: 48px; border-bottom: 2px solid var(--gray); display: flex; flex-wrap: wrap; gap: 6px; padding: 4px 0; margin-bottom: 20px; }
-    .bubble-pool { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; }
-    .word-chip {
-      background: white;
-      border: 2px solid var(--gray);
-      box-shadow: 0 3px 0 var(--gray);
-      padding: 8px 12px;
-      border-radius: 10px;
-      font-weight: bold;
-      font-size: 14px;
-      cursor: pointer;
-    }
-    .word-chip.used { opacity: 0.2; pointer-events: none; }
-    .fill-input {
-      width: 100%;
-      padding: 12px;
-      border: 2px solid var(--blue);
-      border-radius: 12px;
-      font-size: 16px;
-      margin-bottom: 16px;
-      outline: none;
-    }
-    .feedback-sheet {
-      position: absolute;
-      bottom: 0; left: 0; right: 0;
-      padding: 16px 20px;
-      display: none;
-      flex-direction: column;
-      gap: 8px;
-      z-index: 100;
-    }
-    .feedback-sheet.correct { background: var(--green-light); color: var(--green-dark); }
-    .feedback-sheet.wrong { background: var(--red-light); color: var(--red); }
-  </style>
+<style>
+:root{
+  --primary:#58cc02;
+  --secondary:#1cb0f6;
+  --danger:#ff4b4b;
+  --gold:#ffc800;
+  --bg:#f7f9fa;
+  --text:#333;
+  --muted:#777;
+  --card:#fff;
+  --border:#e5e5e5;
+}
+
+*{
+  box-sizing:border-box;
+}
+
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--text);
+  font-family:
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
+}
+
+.app{
+  width:100%;
+  max-width:520px;
+  min-height:100vh;
+  margin:auto;
+  background:#fff;
+}
+
+header{
+  position:sticky;
+  top:0;
+  z-index:10;
+
+  display:flex;
+  align-items:center;
+  gap:8px;
+
+  padding:10px 12px;
+
+  background:#fff;
+  border-bottom:2px solid var(--border);
+}
+
+.language-select{
+  flex:1;
+  padding:10px;
+
+  border:2px solid var(--secondary);
+  border-radius:12px;
+
+  background:#eef9ff;
+  font-weight:700;
+}
+
+.stats{
+  font-size:13px;
+  white-space:nowrap;
+}
+
+main{
+  padding:16px 16px 90px;
+}
+
+.card{
+  margin-bottom:14px;
+  padding:18px;
+
+  background:var(--card);
+
+  border:2px solid var(--border);
+  border-radius:18px;
+
+  box-shadow:0 3px 0 #ddd;
+}
+
+.hero{
+  color:white;
+  border:none;
+
+  background:
+    linear-gradient(
+      135deg,
+      #1cb0f6,
+      #087fb8
+    );
+}
+
+.hero h1{
+  margin:0 0 8px;
+  font-size:30px;
+}
+
+.hero p{
+  opacity:.9;
+}
+
+.btn{
+  width:100%;
+  padding:14px;
+
+  border:none;
+  border-radius:13px;
+
+  background:var(--primary);
+  color:white;
+
+  font-size:16px;
+  font-weight:800;
+
+  cursor:pointer;
+}
+
+.btn:active{
+  transform:translateY(1px);
+}
+
+.secondary-btn{
+  width:100%;
+  padding:12px;
+
+  border:2px solid var(--border);
+  border-radius:12px;
+
+  background:white;
+  font-weight:700;
+  cursor:pointer;
+}
+
+.level-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:8px;
+}
+
+.level-btn{
+  padding:12px 5px;
+
+  border:2px solid var(--border);
+  border-radius:12px;
+
+  background:#fff;
+
+  font-weight:800;
+  cursor:pointer;
+}
+
+.level-btn.active{
+  border-color:var(--primary);
+  background:#efffe7;
+}
+
+.lesson{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+
+  padding:14px;
+
+  margin:8px 0;
+
+  border:2px solid var(--border);
+  border-radius:14px;
+
+  cursor:pointer;
+}
+
+.lesson:hover{
+  border-color:var(--secondary);
+}
+
+.lesson-title{
+  font-weight:800;
+}
+
+.lesson-info{
+  margin-top:4px;
+  color:var(--muted);
+  font-size:12px;
+}
+
+.question{
+  font-size:21px;
+  font-weight:800;
+  line-height:1.4;
+}
+
+.choice{
+  width:100%;
+
+  margin:6px 0;
+  padding:13px;
+
+  border:2px solid var(--border);
+  border-radius:12px;
+
+  background:white;
+
+  text-align:left;
+  font-size:15px;
+
+  cursor:pointer;
+}
+
+.choice.selected{
+  border-color:var(--secondary);
+  background:#eef9ff;
+}
+
+.correct{
+  border-color:var(--primary) !important;
+  background:#efffe7 !important;
+}
+
+.wrong{
+  border-color:var(--danger) !important;
+  background:#fff0f0 !important;
+}
+
+.answer-input{
+  width:100%;
+
+  margin:10px 0;
+  padding:13px;
+
+  border:2px solid var(--border);
+  border-radius:12px;
+
+  font-size:16px;
+}
+
+.feedback{
+  margin-top:12px;
+  padding:12px;
+
+  border-radius:12px;
+
+  background:#f5f5f5;
+}
+
+.progress{
+  height:12px;
+
+  overflow:hidden;
+
+  border-radius:20px;
+
+  background:#eee;
+}
+
+.progress-fill{
+  height:100%;
+
+  width:0;
+
+  background:var(--primary);
+
+  transition:.3s;
+}
+
+.muted{
+  color:var(--muted);
+  font-size:13px;
+}
+
+.hidden{
+  display:none !important;
+}
+
+.stat-grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:10px;
+}
+
+.stat-box{
+  padding:14px;
+
+  border:2px solid var(--border);
+  border-radius:14px;
+
+  text-align:center;
+}
+
+.stat-number{
+  font-size:24px;
+  font-weight:900;
+}
+
+nav{
+  position:fixed;
+  left:50%;
+  bottom:0;
+
+  transform:translateX(-50%);
+
+  width:min(520px,100%);
+  height:66px;
+
+  display:flex;
+
+  background:#fff;
+
+  border-top:2px solid var(--border);
+
+  z-index:20;
+}
+
+nav button{
+  flex:1;
+
+  border:none;
+
+  background:#fff;
+
+  font-weight:700;
+
+  cursor:pointer;
+}
+
+nav button.active{
+  color:var(--primary);
+}
+</style>
 </head>
+
 <body>
 
-  <div class="app-container">
-    <div class="top-bar">
-      <select class="lang-select" id="langSwitcher" onchange="switchLanguage()">
-        <option value="en">🇬🇧 English</option>
-        <option value="th">🇹🇭 ไทย (Thai)</option>
-        <option value="ja">🇯🇵 日本語 (Japanese)</option>
-        <option value="ko">🇰🇷 한국어 (Korean)</option>
-        <option value="de">🇩🇪 Deutsch (German)</option>
-        <option value="es">🇪🇸 Español (Spanish)</option>
-        <option value="fr">🇫🇷 Français (French)</option>
-        <option value="it">🇮🇹 Italiano (Italian)</option>
-      </select>
-      <div class="stats-group">
-        <div style="color: #ff9600;">🔥 <span id="streakDisplay">1</span></div>
-        <div style="color: #1cb0f6;">⭐ <span id="xpDisplay">0</span></div>
-        <div style="color: #ff4b4b;">❤️ <span id="heartDisplay">5</span></div>
-      </div>
-    </div>
+<div class="app">
 
-    <main>
-      <!-- TAB 1: 🏠 Home -->
-      <div id="screenHome" class="screen active">
-        <div class="card hero-card">
-          <div style="font-size: 12px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.9;">Continue Learning</div>
-          <div style="font-size: 20px; font-weight: bold; margin: 6px 0;" id="homeCurrentChapterTitle">A1 • Chapter 1</div>
-          <div style="font-size: 13px; opacity: 0.9; margin-bottom: 14px;" id="homeCurrentChapterDesc">Loading...</div>
-          <button class="btn-main" onclick="continueLearning()">CONTINUE →</button>
-        </div>
+<header>
 
-        <div class="card">
-          <div style="display: flex; justify-content: space-between; font-weight: bold; font-size: 14px;">
-            <span>🎯 Today's Goal</span>
-            <span id="goalText">0 / 50 XP</span>
-          </div>
-          <div class="goal-track">
-            <div class="goal-fill" id="goalFill"></div>
-          </div>
-        </div>
-      </div>
+<select id="languageSelect" class="language-select"></select>
 
-      <!-- TAB 2: 📚 Learn -->
-      <div id="screenLearn" class="screen">
-        <div style="font-size: 16px; font-weight: bold; margin-bottom: 12px;" id="learnTitle">Curriculum</div>
-        <div id="chapterListContainer"></div>
-      </div>
+<div class="stats">
+🔥 <span id="streak">0</span>
+⭐ <span id="xp">0</span>
+❤️ <span id="hearts">5</span>
+</div>
 
-      <!-- TAB 3: 📊 Progress -->
-      <div id="screenProgress" class="screen">
-        <div class="card">
-          <div style="font-size: 16px; font-weight: bold; margin-bottom: 8px;">📊 Overall Progress</div>
-          <div style="font-size: 13px; color: #666; margin-bottom: 12px;" id="progressLangTitle">A1 Completion Rate</div>
-          <div class="goal-track" style="height: 14px; background: var(--gray);">
-            <div class="goal-fill" id="overallProgressFill" style="background: var(--green);"></div>
-          </div>
-          <div style="text-align: right; font-size: 12px; font-weight: bold; margin-top: 4px;" id="overallPercent">0%</div>
-        </div>
-        <div class="card">
-          <div style="font-weight: bold; font-size: 14px; margin-bottom: 10px;">🏆 Achievements</div>
-          <div id="achievementsContainer"></div>
-        </div>
-      </div>
+</header>
 
-      <!-- TAB 4: 👤 Profile -->
-      <div id="screenProfile" class="screen">
-        <div class="card" style="text-align: center;">
-          <div style="font-size: 45px; margin-bottom: 8px;">👤</div>
-          <div style="font-size: 18px; font-weight: bold;">Language Learner</div>
-          <div style="font-size: 13px; color: var(--blue-dark); font-weight: bold; margin-top: 2px;" id="profileLevelText">Level 1 • Rookie</div>
-        </div>
-        <div class="card">
-          <div style="display: flex; justify-content: space-between; padding: 6px 0; border-bottom: 1px solid var(--gray);">
-            <span>⭐ Total XP</span>
-            <b id="profileTotalXP">0 XP</b>
-          </div>
-          <div style="display: flex; justify-content: space-between; padding: 6px 0; border-bottom: 1px solid var(--gray);">
-            <span>🔥 Streak</span>
-            <b id="profileStreak">1 Day</b>
-          </div>
-          <div style="display: flex; justify-content: space-between; padding: 6px 0;">
-            <span>❤️ Current Hearts</span>
-            <b id="profileHearts">5</b>
-          </div>
-        </div>
-        <button class="btn-main" style="background: var(--red); box-shadow: 0 4px 0 #cc3a3a;" onclick="resetAllData()">RESET PROGRESS</button>
-      </div>
+<main>
 
-      <!-- GAME SCREEN -->
-      <div id="screenGame" class="screen">
-        <div class="game-header">
-          <button class="btn-close" onclick="exitGame()">✕</button>
-          <div class="progress-wrap">
-            <div class="progress-bar-fill" id="gameProgressFill"></div>
-          </div>
-        </div>
+<!-- HOME -->
 
-        <button class="speaker-btn" id="btnAudio" onclick="playCurrentAudio()">🔊 Listen</button>
-        <div class="prompt-box" id="gamePrompt">-</div>
+<section id="homePage">
 
-        <div id="choiceArea" style="display:none; width: 100%;"></div>
-        <div id="wordOrderArea" style="display:none; width: 100%;">
-          <div class="slot-container" id="wordSlot"></div>
-          <div class="bubble-pool" id="wordPool"></div>
-        </div>
-        <div id="inputArea" style="display:none; width: 100%;">
-          <input type="text" class="fill-input" id="fillInput" placeholder="အဖြေကို စာရိုက်ထည့်ပါ..." autocomplete="off">
-        </div>
-      </div>
-    </main>
+<div class="card hero">
 
-    <!-- Bottom Action Check Bar -->
-    <div id="gameBottomBar" style="display: none; position: absolute; bottom: 0; left: 0; right: 0; padding: 12px 18px; background: white; border-top: 2px solid var(--gray); z-index: 50;">
-      <button class="btn-main" id="btnCheck" onclick="checkCurrentAnswer()">စစ်ဆေးမည် (CHECK)</button>
-    </div>
+<h1>LingoMaster</h1>
 
-    <!-- Feedback Banner -->
-    <div class="feedback-sheet" id="feedbackSheet">
-      <div style="font-size: 18px; font-weight: bold;" id="feedbackTitle">Correct!</div>
-      <div id="feedbackDetail" style="font-size: 13px;"></div>
-      <button class="btn-main" onclick="nextQuestionStep()">ဆက်သွားမည် ➡</button>
-    </div>
+<p>
+Learn 8 languages from A1 to C2.
+</p>
 
-    <!-- Bottom Navigation Bar -->
-    <div class="bottom-nav" id="bottomNav">
-      <button class="nav-btn active" onclick="switchNav('Home')"><span>🏠</span>Home</button>
-      <button class="nav-btn" onclick="switchNav('Learn')"><span>📚</span>Learn</button>
-      <button class="nav-btn" onclick="switchNav('Progress')"><span>📊</span>Progress</button>
-      <button class="nav-btn" onclick="switchNav('Profile')"><span>👤</span>Profile</button>
-    </div>
-  </div>
+<button
+class="btn"
+onclick="openPage('learnPage')"
+>
+Continue Learning →
+</button>
 
-  <script>
-    // Complete 8 Languages Database
-    const LANGUAGES_DB = {
-      // 1. English
-      en: {
-        name: "English",
-        voice: "en-US",
-        chapters: [
-          { id: 1, title: "Chapter 1: Greetings", desc: "Hello, Good morning, How are you?", questions: [
-            { type: "multiple-choice", prompt: "'Hello' ၏ မြန်မာအဓိပ္ပာယ်ကို ရွေးပါ", audio: "Hello", choices: ["မင်္ဂလာပါ", "ကျေးဇူးတင်ပါတယ်", "နှုတ်ဆက်ပါတယ်", "တောင်းပန်ပါတယ်"], correct: "မင်္ဂလာပါ" },
-            { type: "word-order", prompt: "ဝါကျစီပါ: 'တွေ့ရတာ ဝမ်းသာပါတယ်'", audio: "Nice to meet you", words: ["meet", "Nice", "to", "you"], correct: ["Nice", "to", "meet", "you"] },
-            { type: "listening", prompt: "ကြားရသည့် အသံကို ရွေးပါ", audio: "Good morning", choices: ["Good night", "Good morning", "Goodbye", "Good evening"], correct: "Good morning" },
-            { type: "fill-blank", prompt: "ဖြည့်စွက်ပါ: How ___ you? (are / is)", audio: "How are you?", correct: "are" }
-          ]},
-          { id: 2, title: "Chapter 2: Introducing Yourself", desc: "My name is..., I am from...", questions: [
-            { type: "word-order", prompt: "ဝါကျစီပါ: 'ကျွန်တော့်နာမည် ဂျွန်ပါ'", audio: "My name is John", words: ["is", "My", "name", "John"], correct: ["My", "name", "is", "John"] },
-            { type: "multiple-choice", prompt: "'Where are you from?' ၏ အဓိပ္ပာယ်ကို ရွေးပါ", audio: "Where are you from?", choices: ["ခင်ဗျား ဘယ်ကလာတာလဲ?", "ဘယ်သွားမလဲ?", "နေကောင်းလား?"], correct: "ခင်ဗျား ဘယ်ကလာတာလဲ?" }
-          ]},
-          { id: 3, title: "Chapter 3: Numbers (1-100)", desc: "One, Two, Twelve, Fifty...", questions: [
-            { type: "multiple-choice", prompt: "'Fifty' ဆိုသည်မှာ မည်သည့်နံပါတ်နည်း?", audio: "Fifty", choices: ["၅၀", "၁၅", "၅", "၅၀၀"], correct: "၅၀" },
-            { type: "listening", prompt: "ကြားရသည့် နံပါတ်ကို ရွေးပါ", audio: "Twelve", choices: ["12", "20", "2", "22"], correct: "12" }
-          ]},
-          { id: 4, title: "Chapter 4: Food & Dining", desc: "Water, Coffee, Rice, Delicious...", questions: [
-            { type: "multiple-choice", prompt: "'Delicious' ၏ အဓိပ္ပာယ်ကို ရွေးပါ", audio: "Delicious", choices: ["အရသာရှိသော", "ခါးသော", "ဈေးကြီးသော"], correct: "အရသာရှိသော" },
-            { type: "word-order", prompt: "ဝါကျစီပါ: 'I like coffee'", audio: "I like coffee", words: ["coffee", "like", "I"], correct: ["I", "like", "coffee"] }
-          ]}
-        ]
-      },
+</div>
 
-      // 2. Thai
-      th: {
-        name: "Thai",
-        voice: "th-TH",
-        chapters: [
-          { id: 1, title: "Chapter 1: နှုတ်ဆက်ခြင်း (Greetings)", desc: "สวัสดี, ขอบคุณ, สบายดีไหม", questions: [
-            { type: "multiple-choice", prompt: "'မင်္ဂလာပါ' ၏ ထိုင်းစကားကို ရွေးပါ", audio: "สวัสดี", choices: ["สวัสดี (Sawasdee)", "ขอบคุณ", "ขอโทษ", "อร่อย"], correct: "สวัสดี (Sawasdee)" },
-            { type: "word-order", prompt: "ဝါကျစီပါ: 'မင်္ဂလာပါခင်ဗျာ'", audio: "สวัสดีครับ", words: ["ครับ", "สวัสดี", "ขอบคุณ"], correct: ["สวัสดี", "ครับ"] },
-            { type: "listening", prompt: "ကြားရသည့် စကားလုံးကို ရွေးပါ", audio: "ขอบคุณมาก", choices: ["ขอบคุณมาก", "ไม่เป็นไร", "ขอโทษ", "สวัสดี"], correct: "ขอบคุณมาก" }
-          ]},
-          { id: 2, title: "Chapter 2: ကိုယ့်ကိုယ်ကို မိတ်ဆက်ခြင်း", desc: "ผมชื่อ..., มาจากประเทศ...", questions: [
-            { type: "word-order", prompt: "ဝါကျစီပါ: 'ကျွန်တော့်နာမည် မောင်မောင်ပါ'", audio: "ผมชื่อหม่องหม่อง", words: ["ชื่อ", "ผม", "หม่องหม่อง"], correct: ["ผม", "ชื่อ", "หม่องหม่อง"] },
-            { type: "multiple-choice", prompt: "'มาจากไหน' ၏ အဓိပ္ပာယ်ကို ရွေးပါ", audio: "มาจากไหน", choices: ["ဘယ်ကလာတာလဲ?", "ဘယ်သွားမလဲ?", "နေကောင်းလား?"], correct: "ဘယ်ကလာတာလဲ?" }
-          ]},
-          { id: 3, title: "Chapter 3: နံပါတ်များ (Numbers)", desc: "หนึ่ง, สอง, สิบ, ยี่สิบ...", questions: [
-            { type: "multiple-choice", prompt: "'ยี่สิบ (Yee-sib)' ဆိုသည်မှာ မည်သည့်နံပါတ်နည်း?", audio: "ยี่สิบ", choices: ["၂၀", "၁၂", "၂", "၁၀"], correct: "၂၀" }
-          ]},
-          { id: 4, title: "Chapter 4: အစားအသောက် (Food)", desc: "น้ำเปล่า, อร่อย, ไม่เผ็ด...", questions: [
-            { type: "multiple-choice", prompt: "'ไม่เผ็ด (Mai phet)' ၏ အဓိပ္ပာယ်ကို ရွေးပါ", audio: "ไม่เผ็ด", choices: ["အစပ်မထည့်ပါနဲ့", "အရမ်းစပ်တယ်", "အရသာရှိတယ်"], correct: "အစပ်မထည့်ပါနဲ့" }
-          ]}
-        ]
-      },
 
-      // 3. Japanese
-      ja: {
-        name: "Japanese",
-        voice: "ja-JP",
-        chapters: [
-          { id: 1, title: "Chapter 1: 挨拶 (Greetings)", desc: "こんにちは, ありがとう, おはよう", questions: [
-            { type: "multiple-choice", prompt: "'မင်္ဂလာပါ' ၏ ဂျပန်စကားကို ရွေးပါ", audio: "こんにちは", choices: ["こんにちは (Konnichiwa)", "ありがとう", "さようなら", "すみません"], correct: "こんにちは (Konnichiwa)" },
-            { type: "word-order", prompt: "ဝါကျစီပါ: 'ကျေးဇူးအများကြီးတင်ပါတယ်'", audio: "ありがとうございます", words: ["ございます", "ありがとう", "すみません"], correct: ["ありがとう", "ございます"] },
-            { type: "listening", prompt: "ကြားရသည့် စကားလုံးကို ရွေးပါ", audio: "おはようございます", choices: ["おはようございます", "こんばんは", "おやすみ", "さようなら"], correct: "おはようございます" }
-          ]},
-          { id: 2, title: "Chapter 2: 自己紹介 (Self Introduction)", desc: "私の名前は..., はじめまして", questions: [
-            { type: "word-order", prompt: "ဝါကျစီပါ: 'တွေ့ရတာ ဝမ်းသာပါတယ်'", audio: "はじめまして", words: ["して", "はじめま", "どうぞ"], correct: ["はじめま", "して"] },
-            { type: "multiple-choice", prompt: "'私の名前は (Watashi no namae wa)' ၏ အဓိပ္ပာယ်မှာ?", audio: "私の名前は", choices: ["ကျွန်တော့်နာမည်ကတော့", "ဘယ်ကလာတာလဲ", "နေကောင်းလား"], correct: "ကျွန်တော့်နာမည်ကတော့" }
-          ]}
-        ]
-      },
+<div class="card">
 
-      // 4. Korean
-      ko: {
-        name: "Korean",
-        voice: "ko-KR",
-        chapters: [
-          { id: 1, title: "Chapter 1: 인사 (Greetings)", desc: "안녕하세요, 감사합니다, 반가워요", questions: [
-            { type: "multiple-choice", prompt: "'မင်္ဂလာပါ' ၏ ကိုရီးယားစကားကို ရွေးပါ", audio: "안녕하세요", choices: ["안녕하세요 (Annyeonghaseyo)", "감사합니다", "죄송합니다", "잘가요"], correct: "안녕하세요 (Annyeonghaseyo)" },
-            { type: "word-order", prompt: "ဝါကျစီပါ: 'ကျေးဇူးတင်ပါတယ်'", audio: "감사합니다", words: ["합니다", "감사", "안녕"], correct: ["감사", "합니다"] },
-            { type: "listening", prompt: "ကြားရသည့် စကားလုံးကို ရွေးပါ", audio: "반갑습니다", choices: ["반갑습니다", "잘자요", "맛있어요", "안녕"], correct: "반갑습니다" }
-          ]},
-          { id: 2, title: "Chapter 2: 자기소개 (Self Introduction)", desc: "제 이름은..., 저는 학생입니다", questions: [
-            { type: "multiple-choice", prompt: "'제 이름은 (Je ireum-eun)' ၏ အဓိပ္ပာယ်ကို ရွေးပါ", audio: "제 이름은", choices: ["ကျွန်တော့်နာမည်က", "ကျွန်တော့်အိမ်က", "ကျောင်းသားပါ"], correct: "ကျွန်တော့်နာမည်က" }
-          ]}
-        ]
-      },
+<h3>Today's Goal</h3>
 
-      // 5. German
-      de: {
-        name: "German",
-        voice: "de-DE",
-        chapters: [
-          { id: 1, title: "Chapter 1: Begrüßung (Greetings)", desc: "Guten Tag, Danke, Hallo", questions: [
-            { type: "multiple-choice", prompt: "'မင်္ဂလာပါ' ၏ ဂျာမန်စကားကို ရွေးပါ", audio: "Guten Tag", choices: ["Guten Tag", "Danke", "Tschüss", "Bitte"], correct: "Guten Tag" },
-            { type: "word-order", prompt: "ဝါကျစီပါ: 'ကျေးဇူး အများကြီးတင်ပါတယ်'", audio: "Vielen Dank", words: ["Dank", "Vielen", "Bitte"], correct: ["Vielen", "Dank"] }
-          ]},
-          { id: 2, title: "Chapter 2: Einkaufen (Shopping)", desc: "Wie viel kostet das?, Wasser", questions: [
-            { type: "multiple-choice", prompt: "'Wie viel kostet das?' ၏ အဓိပ္ပာယ်ကို ရွေးပါ", audio: "Wie viel kostet das?", choices: ["ဒါ ဘယ်လောက်ကျလဲ?", "အိမ်သာဘယ်မှာလဲ?", "စားလို့ကောင်းတယ်"], correct: "ဒါ ဘယ်လောက်ကျလဲ?" }
-          ]}
-        ]
-      },
+<div class="progress">
+<div
+id="dailyProgress"
+class="progress-fill"
+></div>
+</div>
 
-      // 6. Spanish
-      es: {
-        name: "Spanish",
-        voice: "es-ES",
-        chapters: [
-          { id: 1, title: "Chapter 1: Saludos (Greetings)", desc: "Hola, Gracias, Buenos días", questions: [
-            { type: "multiple-choice", prompt: "'မင်္ဂလာပါ' ၏ စပိန်စကားကို ရွေးပါ", audio: "Hola", choices: ["Hola", "Gracias", "Adiós", "Por favor"], correct: "Hola" },
-            { type: "word-order", prompt: "ဝါကျစီပါ: 'ကျေးဇူးအများကြီးတင်ပါတယ်'", audio: "Muchas gracias", words: ["gracias", "Muchas", "Por favor"], correct: ["Muchas", "gracias"] }
-          ]},
-          { id: 2, title: "Chapter 2: En la tienda (Shopping)", desc: "¿Cuánto cuesta?, La cuenta", questions: [
-            { type: "multiple-choice", prompt: "'¿Cuánto cuesta?' ၏ အဓိပ္ပာယ်ကို ရွေးပါ", audio: "¿Cuánto cuesta?", choices: ["ဘယ်လောက်ကျလဲ?", "ဘယ်သွားမလဲ?", "နေကောင်းလား?"], correct: "ဘယ်လောက်ကျလဲ?" }
-          ]}
-        ]
-      },
+<p
+id="dailyText"
+class="muted"
+>
+0 / 50 XP
+</p>
 
-      // 7. French
-      fr: {
-        name: "French",
-        voice: "fr-FR",
-        chapters: [
-          { id: 1, title: "Chapter 1: Salutations (Greetings)", desc: "Bonjour, Merci, Au revoir", questions: [
-            { type: "multiple-choice", prompt: "'မင်္ဂလာပါ' ၏ ပြင်သစ်စကားကို ရွေးပါ", audio: "Bonjour", choices: ["Bonjour", "Merci", "Au revoir", "Pardon"], correct: "Bonjour" },
-            { type: "word-order", prompt: "ဝါကျစီပါ: 'ကျေးဇူးအထူးတင်ပါတယ်'", audio: "Merci beaucoup", words: ["beaucoup", "Merci", "Pardon"], correct: ["Merci", "beaucoup"] }
-          ]},
-          { id: 2, title: "Chapter 2: Au restaurant (Dining)", desc: "C'est combien?, L'addition", questions: [
-            { type: "multiple-choice", prompt: "'C\\'est combien?' ၏ အဓိပ္ပာယ်ကို ရွေးပါ", audio: "C'est combien?", choices: ["ဒါ ဘယ်လောက်လဲ?", "အိမ်သာဘယ်မှာလဲ?", "စားကောင်းတယ်"], correct: "ဒါ ဘယ်လောက်လဲ?" }
-          ]}
-        ]
-      },
+</div>
 
-      // 8. Italian
-      it: {
-        name: "Italian",
-        voice: "it-IT",
-        chapters: [
-          { id: 1, title: "Chapter 1: Saluti (Greetings)", desc: "Ciao, Grazie, Buongiorno", questions: [
-            { type: "multiple-choice", prompt: "'မင်္ဂလာပါ' ၏ အီတလီစကားကို ရွေးပါ", audio: "Ciao", choices: ["Ciao", "Grazie", "Prego", "Arrivederci"], correct: "Ciao" },
-            { type: "word-order", prompt: "ဝါကျစီပါ: 'ကျေးဇူးအများကြီးတင်ပါတယ်'", audio: "Grazie mille", words: ["mille", "Grazie", "Per favore"], correct: ["Grazie", "mille"] }
-          ]},
-          { id: 2, title: "Chapter 2: Al Ristorante (Dining)", desc: "Quanto costa?, Il conto", questions: [
-            { type: "multiple-choice", prompt: "'Quanto costa?' ၏ အဓိပ္ပာယ်ကို ရွေးပါ", audio: "Quanto costa?", choices: ["ဘယ်လောက်ကျလဲ?", "ဘယ်သွားမလဲ?", "အိမ်သာဘယ်မှာလဲ?"], correct: "ဘယ်လောက်ကျလဲ?" }
-          ]}
-        ]
-      }
-    };
 
-    let curLang = localStorage.getItem('lm_cur_lang') || 'en';
-    let unlockMap = JSON.parse(localStorage.getItem('lm_unlock_map')) || { en: 1, th: 1, ja: 1, ko: 1, de: 1, es: 1, fr: 1, it: 1 };
-    
-    let state = {
-      xp: parseInt(localStorage.getItem('lm_xp')) || 0,
-      hearts: parseInt(localStorage.getItem('lm_hearts')) !== null && !isNaN(parseInt(localStorage.getItem('lm_hearts'))) ? parseInt(localStorage.getItem('lm_hearts')) : 5,
-      streak: parseInt(localStorage.getItem('lm_streak')) || 1,
-      dailyXP: parseInt(localStorage.getItem('lm_daily_xp')) || 0
-    };
+<div class="card">
 
-    let activeChapter = null;
-    let curQIdx = 0;
-    let userChoice = '';
-    let userBuiltWords = [];
+<h3>Current Level</h3>
 
-    function saveState() {
-      localStorage.setItem('lm_cur_lang', curLang);
-      localStorage.setItem('lm_xp', state.xp);
-      localStorage.setItem('lm_hearts', state.hearts);
-      localStorage.setItem('lm_streak', state.streak);
-      localStorage.setItem('lm_unlock_map', JSON.stringify(unlockMap));
-      localStorage.setItem('lm_daily_xp', state.dailyXP);
-      updateStatsUI();
-    }
+<h2 id="homeLevel">
+A1
+</h2>
 
-    function switchLanguage() {
-      curLang = document.getElementById('langSwitcher').value;
-      saveState();
-      renderChaptersTree();
-      updateStatsUI();
-    }
+<p
+id="homeLanguage"
+class="muted"
+>
+English
+</p>
 
-    function updateStatsUI() {
-      document.getElementById('langSwitcher').value = curLang;
-      document.getElementById('xpDisplay').innerText = state.xp;
-      document.getElementById('heartDisplay').innerText = state.hearts;
-      document.getElementById('streakDisplay').innerText = state.streak;
+</div>
 
-      document.getElementById('goalText').innerText = `${state.dailyXP} / 50 XP`;
-      document.getElementById('goalFill').style.width = `${Math.min(100, (state.dailyXP / 50) * 100)}%`;
-      
-      const unlockedCh = unlockMap[curLang] || 1;
-      const db = (LANGUAGES_DB[curLang] && LANGUAGES_DB[curLang].chapters) || LANGUAGES_DB.en.chapters;
-      const nextCh = db.find(c => c.id === unlockedCh) || db[db.length - 1];
-      document.getElementById('homeCurrentChapterTitle').innerText = `${LANGUAGES_DB[curLang].name} A1 • ${nextCh.title.split(':')[0]}`;
-      document.getElementById('homeCurrentChapterDesc').innerText = nextCh.desc;
+</section>
 
-      const percent = Math.round(((unlockedCh - 1) / db.length) * 100);
-      document.getElementById('overallProgressFill').style.width = `${percent}%`;
-      document.getElementById('overallPercent').innerText = `${percent}% Completed`;
-      document.getElementById('progressLangTitle').innerText = `${LANGUAGES_DB[curLang].name} A1 Completion Rate`;
 
-      document.getElementById('profileTotalXP').innerText = `${state.xp} XP`;
-      document.getElementById('profileStreak').innerText = `${state.streak} Day${state.streak > 1 ? 's' : ''}`;
-      document.getElementById('profileHearts').innerText = state.hearts;
-      
-      let lvl = "Level 1 • Rookie (0-99 XP)";
-      if (state.xp >= 1000) lvl = "Level 5 • Master (1,000+ XP)";
-      else if (state.xp >= 500) lvl = "Level 4 • Expert (500+ XP)";
-      else if (state.xp >= 250) lvl = "Level 3 • Intermediate (250+ XP)";
-      else if (state.xp >= 100) lvl = "Level 2 • Explorer (100+ XP)";
-      document.getElementById('profileLevelText').innerText = lvl;
-    }
+<!-- LEARN -->
 
-    function renderChaptersTree() {
-      const container = document.getElementById('chapterListContainer');
-      container.innerHTML = '';
-      const unlockedCh = unlockMap[curLang] || 1;
-      const db = (LANGUAGES_DB[curLang] && LANGUAGES_DB[curLang].chapters) || LANGUAGES_DB.en.chapters;
+<section
+id="learnPage"
+class="hidden"
+>
 
-      document.getElementById('learnTitle').innerText = `${LANGUAGES_DB[curLang].name} A1 Curriculum (${db.length} Chapters)`;
+<div class="card">
 
-      db.forEach(ch => {
-        const isUnlocked = ch.id <= unlockedCh;
-        const isCompleted = ch.id < unlockedCh;
-        
-        const item = document.createElement('div');
-        item.className = `chapter-item ${!isUnlocked ? 'locked' : ''} ${isCompleted ? 'completed' : ''}`;
-        item.innerHTML = `
-          <div>
-            <div style="font-weight:bold; font-size:15px; color:${isCompleted ? 'var(--green-dark)' : 'var(--text)'};">
-              ${isCompleted ? '✓ ' : (!isUnlocked ? '🔒 ' : '● ')}${ch.title}
-            </div>
-            <div style="font-size:12px; color:#777; margin-top:2px;">${ch.desc} (${ch.questions.length} Questions)</div>
-          </div>
-          <div style="font-size:18px; color:var(--blue); font-weight:bold;">${isUnlocked ? '➔' : ''}</div>
-        `;
-        if (isUnlocked) {
-          item.onclick = () => startChapterLesson(ch);
-        }
-        container.appendChild(item);
-      });
-    }
+<h2 id="languageTitle">
+🇬🇧 English
+</h2>
 
-    function renderAchievements() {
-      const unlockedCh = unlockMap[curLang] || 1;
-      const achievements = [
-        { title: "🏆 First Lesson", desc: "Complete your first lesson", done: unlockedCh > 1 },
-        { title: "🔥 Streak Starter", desc: "Reach a 1-day study streak", done: state.streak >= 1 },
-        { title: "⭐ XP Hunter", desc: "Earn 100+ total XP", done: state.xp >= 100 },
-        { title: "👑 Master", desc: "Complete chapters", done: unlockedCh > 2 }
-      ];
+<div
+id="levelGrid"
+class="level-grid"
+>
+</div>
 
-      const container = document.getElementById('achievementsContainer');
-      container.innerHTML = '';
-      achievements.forEach(a => {
-        container.innerHTML += `
-          <div style="display:flex; align-items:center; gap:10px; margin-bottom:10px; opacity:${a.done ? '1' : '0.4'};">
-            <div style="font-size:22px;">${a.done ? '🎖️' : '🔒'}</div>
-            <div>
-              <div style="font-weight:bold; font-size:13px;">${a.title}</div>
-              <div style="font-size:11px; color:#666;">${a.desc}</div>
-            </div>
-          </div>
-        `;
-      });
-    }
+</div>
 
-    function switchNav(tab) {
-      document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
-      document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
-      
-      document.getElementById(`screen${tab}`).classList.add('active');
-      event.currentTarget.classList.add('active');
 
-      if (tab === 'Learn') renderChaptersTree();
-      if (tab === 'Progress') renderAchievements();
-      updateStatsUI();
-    }
+<div class="card">
 
-    function continueLearning() {
-      const unlockedCh = unlockMap[curLang] || 1;
-      const db = (LANGUAGES_DB[curLang] && LANGUAGES_DB[curLang].chapters) || LANGUAGES_DB.en.chapters;
-      const ch = db.find(c => c.id === unlockedCh) || db[0];
-      startChapterLesson(ch);
-    }
+<h3 id="curriculumTitle">
+A1 Curriculum
+</h3>
 
-    function playAudio(text) {
-      if ('speechSynthesis' in window && text) {
-        window.speechSynthesis.cancel();
-        const utter = new SpeechSynthesisUtterance(text.replace(/\(.*\)/, '').trim());
-        utter.lang = LANGUAGES_DB[curLang].voice;
-        window.speechSynthesis.speak(utter);
-      }
-    }
+<div id="lessonList">
+</div>
 
-    function playCurrentAudio() {
-      const q = activeChapter.questions[curQIdx];
-      if (q.audio) playAudio(q.audio);
-    }
+</div>
 
-    function startChapterLesson(chapter) {
-      if (state.hearts <= 0) {
-        alert('❤️ အသက် ကုန်နေပါသည်! ပရိုဖိုင်တွင် ပြန်လည်စတင်ပါ သို့မဟုတ် ခဏစောင့်ပါ။');
-        return;
-      }
-      activeChapter = chapter;
-      curQIdx = 0;
+</section>
 
-      document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
-      document.getElementById('screenGame').classList.add('active');
-      document.getElementById('bottomNav').style.display = 'none';
-      document.getElementById('gameBottomBar').style.display = 'block';
 
-      loadGameQuestion();
-    }
+<!-- LESSON -->
 
-    function loadGameQuestion() {
-      const q = activeChapter.questions[curQIdx];
-      const total = activeChapter.questions.length;
-      document.getElementById('gameProgressFill').style.width = `${(curQIdx / total) * 100}%`;
-      document.getElementById('gamePrompt').innerText = q.prompt;
+<section
+id="lessonPage"
+class="hidden"
+>
 
-      userChoice = '';
-      userBuiltWords = [];
+<div class="card">
 
-      document.getElementById('choiceArea').style.display = 'none';
-      document.getElementById('wordOrderArea').style.display = 'none';
-      document.getElementById('inputArea').style.display = 'none';
+<button
+class="secondary-btn"
+onclick="openPage('learnPage')"
+>
+← Back
+</button>
 
-      if (q.audio) playAudio(q.audio);
+<p
+id="lessonMeta"
+class="muted"
+>
+A1 • Chapter 1
+</p>
 
-      if (q.type === 'multiple-choice' || q.type === 'listening') {
-        const area = document.getElementById('choiceArea');
-        area.style.display = 'block';
-        area.innerHTML = '';
-        q.choices.forEach(c => {
-          const btn = document.createElement('button');
-          btn.className = 'choice-option';
-          btn.innerText = c;
-          btn.onclick = () => {
-            document.querySelectorAll('.choice-option').forEach(b => b.classList.remove('selected'));
-            btn.classList.add('selected');
-            userChoice = c;
-            playAudio(c);
-          };
-          area.appendChild(btn);
-        });
-      } else if (q.type === 'word-order') {
-        document.getElementById('wordOrderArea').style.display = 'block';
-        const slot = document.getElementById('wordSlot');
-        const pool = document.getElementById('wordPool');
-        slot.innerHTML = '';
-        pool.innerHTML = '';
+<div class="progress">
+<div
+id="lessonProgress"
+class="progress-fill"
+></div>
+</div>
 
-        q.words.forEach(w => {
-          const chip = document.createElement('div');
-          chip.className = 'word-chip';
-          chip.innerText = w;
-          chip.onclick = () => {
-            if (!chip.classList.contains('used')) {
-              chip.classList.add('used');
-              userBuiltWords.push(w);
-              playAudio(w);
+<h2
+id="questionText"
+class="question"
+>
+Question
+</h2>
 
-              const sChip = document.createElement('div');
-              sChip.className = 'word-chip';
-              sChip.innerText = w;
-              sChip.onclick = () => {
-                slot.removeChild(sChip);
-                chip.classList.remove('used');
-                userBuiltWords = userBuiltWords.filter(item => item !== w);
-              };
-              slot.appendChild(sChip);
-            }
-          };
-          pool.appendChild(chip);
-        });
-      } else if (q.type === 'fill-blank') {
-        document.getElementById('inputArea').style.display = 'block';
-        const input = document.getElementById('fillInput');
-        input.value = '';
-        input.focus();
-      }
-    }
+<button
+id="listenButton"
+class="secondary-btn"
+onclick="speakQuestion()"
+>
+🔊 Listen
+</button>
 
-    function checkCurrentAnswer() {
-      const q = activeChapter.questions[curQIdx];
-      let isCorrect = false;
+<div id="answerArea"></div>
 
-      if (q.type === 'multiple-choice' || q.type === 'listening') {
-        if (!userChoice) return alert('အဖြေတစ်ခုကို အရင်ရွေးချယ်ပါ!');
-        isCorrect = (userChoice === q.correct);
-      } else if (q.type === 'word-order') {
-        if (userBuiltWords.length === 0) return alert('စကားလုံးများကို စီပေးပါ!');
-        isCorrect = JSON.stringify(userBuiltWords) === JSON.stringify(q.correct);
-      } else if (q.type === 'fill-blank') {
-        const val = document.getElementById('fillInput').value.trim();
-        if (!val) return alert('အဖြေကို စာရိုက်ထည့်ပါ!');
-        isCorrect = (val.toLowerCase() === q.correct.toLowerCase());
-      }
+<button
+class="btn"
+onclick="submitAnswer()"
+>
+CHECK
+</button>
 
-      const sheet = document.getElementById('feedbackSheet');
-      sheet.style.display = 'flex';
+<div
+id="feedback"
+class="feedback hidden"
+>
+</div>
 
-      if (isCorrect) {
-        sheet.className = 'feedback-sheet correct';
-        document.getElementById('feedbackTitle').innerText = '🎉 Correct! အဖြေမှန်ပါတယ် (+10 XP)';
-        document.getElementById('feedbackDetail').innerText = '';
-        state.xp += 10;
-        state.dailyXP += 10;
-      } else {
-        sheet.className = 'feedback-sheet wrong';
-        document.getElementById('feedbackTitle').innerText = '❌ Incorrect!';
-        document.getElementById('feedbackDetail').innerText = `Correct Answer: ${Array.isArray(q.correct) ? q.correct.join(' ') : q.correct}`;
-        state.hearts = Math.max(0, state.hearts - 1);
-      }
-      saveState();
-    }
+</div>
 
-    function nextQuestionStep() {
-      document.getElementById('feedbackSheet').style.display = 'none';
+</section>
 
-      if (state.hearts <= 0) {
-        alert('❤️ Hearts are empty! အသက်ကုန်သွားပါပြီ။');
-        exitGame();
-        return;
-      }
 
-      if (curQIdx < activeChapter.questions.length - 1) {
-        curQIdx++;
-        loadGameQuestion();
-      } else {
-        alert(`🏆 Chapter Complete! သင်ခန်းစာ အောင်မြင်စွာ ပြီးဆုံးပါပြီ။ (+50 Bonus XP)`);
-        state.xp += 50;
-        state.dailyXP += 50;
-        
-        const totalCh = LANGUAGES_DB[curLang].chapters.length;
-        if (unlockMap[curLang] === activeChapter.id && unlockMap[curLang] < totalCh) {
-          unlockMap[curLang]++;
-        }
-        saveState();
-        exitGame();
-      }
-    }
+<!-- PROGRESS -->
 
-    function exitGame() {
-      document.getElementById('feedbackSheet').style.display = 'none';
-      document.getElementById('screenGame').classList.remove('active');
-      document.getElementById('gameBottomBar').style.display = 'none';
-      document.getElementById('bottomNav').style.display = 'flex';
-      
-      document.getElementById('screenLearn').classList.add('active');
-      document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
-      document.querySelectorAll('.nav-btn')[1].classList.add('active');
+<section
+id="progressPage"
+class="hidden"
+>
 
-      renderChaptersTree();
-      updateStatsUI();
-    }
+<div class="card">
 
-    function resetAllData() {
-      if (confirm('သင်လေ့လာထားသော မှတ်တမ်းများအားလုံးကို ဖျက်ပြီး အစကနေ ပြန်စတင်မည်လား?')) {
-        localStorage.clear();
-        unlockMap = { en: 1, th: 1, ja: 1, ko: 1, de: 1, es: 1, fr: 1, it: 1 };
-        state = { xp: 0, hearts: 5, streak: 1, dailyXP: 0 };
-        saveState();
-        switchNav('Home');
-      }
-    }
+<h2>📊 My Progress</h2>
 
-    window.onload = () => {
-      saveState();
-      renderChaptersTree();
-      renderAchievements();
-    };
-  </script>
-</body>
-</html>
+<div class="stat-grid">
+
+<div class="stat-box">
+
+<div
+id="totalXP"
+class="stat-number"
+>
+0
+</div>
+
+<div class="muted">
+XP
+</div>
+
+</div>
+
+
+<div class="stat-box">
+
+<div
+id="totalCompleted"
+class="stat-number"
+>
+0
+</div>
+
+<div class="muted">
+Lessons
+</div>
+
+</div>
+
+
+<div class="stat-box">
+
+<div
+id="progressStreak"
+class="stat-number"
+>
+0
+</div>
+
+<div class="muted">
+Day Streak
+</div>
+
+</div>
+
+
+<div class="stat-box">
+
+<div
+id="progressHearts"
+class="stat-number"
+>
+5
+</div>
+
+<div class="muted">
+Hearts
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+
+<div class="card">
+
+<h3>Level Progress</h3>
+
+<div
+id="levelProgressList"
+>
+</div>
+
+</div>
+
+</section>
+
+</main>
+
+
+<nav>
+
+<button
+onclick="openPage('homePage')"
+>
+🏠<br>
+Home
+</button>
+
+<button
+onclick="openPage('learnPage')"
+>
+📚<br>
+Learn
+</button>
+
+<button
+onclick="openPage('progressPage')"
+>
+📊<br>
+Progress
+</button>
+
+</nav>
+
+</div>
+
+
+<script>
+
+/*
+========================================================
+LINGOMASTER
+8 LANGUAGES × A1–C2
+========================================================
+
+Languages:
+
+English
+Thai
+Japanese
+Korean
+German
+Spanish
+French
+Italian
+
+Levels:
+
+A1
+A2
+B1
+B2
+C1
+C2
+
+IMPORTANT:
+
+ဒီအောက်က LESSON_DB ထဲမှာ
+မင်းရဲ့ lesson content တွေကို ဖြည့်နိုင်တယ်။
+
+Question types:
+
+mc
+fill
+translate
+listen
+order
+========================================================
+*/
+
+
+const LANGUAGES = {
+
+en:{
+flag:"🇬🇧",
+name:"English",
+voice:"en-US"
+},
+
+th:{
+flag:"🇹🇭",
+name:"Thai",
+voice:"th-TH"
+},
+
+ja:{
+flag:"🇯🇵",
+name:"Japanese",
+voice:"ja-JP"
+},
+
+ko:{
+flag:"🇰🇷",
+name:"Korean",
+voice:"ko-KR"
+},
+
+de:{
+flag:"🇩🇪",
+name:"German",
+voice:"de-DE"
+},
+
+es:{
+flag:"🇪🇸",
+name:"Spanish",
+voice:"es-ES"
+},
+
+fr:{
+flag:"🇫🇷",
+name:"French",
+voice:"fr-FR"
+},
+
+it:{
+flag:"🇮🇹",
+name:"Italian",
+voice:"it-IT"
+}
+
+};
+
+
+/*
+========================================================
+CURRICULUM
+========================================================
+*/
+
+const CURRICULUM = {
+
+A1:[
+"Alphabet & Sounds",
+"Greetings & Introductions",
+"Numbers",
+"Family",
+"Daily Routine",
+"Food & Drinks",
+"Time & Dates",
+"Home",
+"Places & Directions",
+"Shopping",
+"Basic Grammar",
+"A1 Final Review"
+],
+
+A2:[
+"Past Tense",
+"Future Plans",
+"Travel",
+"Health",
+"Work & Jobs",
+"Weather",
+"Transportation",
+"Restaurants",
+"Hobbies",
+"Everyday Problems",
+"Core Grammar",
+"A2 Final Review"
+],
+
+B1:[
+"Life Experiences",
+"Opinions",
+"Education",
+"Workplace",
+"Relationships",
+"News",
+"Technology",
+"Environment",
+"Storytelling",
+"Plans & Goals",
+"B1 Grammar",
+"B1 Final Review"
+],
+
+B2:[
+"Debate",
+"Media",
+"Society",
+"Business",
+"Science",
+"Culture",
+"Public Life",
+"Argumentation",
+"Formal Communication",
+"Advanced Listening",
+"B2 Grammar",
+"B2 Final Review"
+],
+
+C1:[
+"Abstract Ideas",
+"Academic Vocabulary",
+"Professional Writing",
+"Nuance",
+"Idioms",
+"Rhetoric",
+"Critical Reading",
+"Complex Listening",
+"Presentations",
+"Research & Evidence",
+"C1 Grammar",
+"C1 Final Review"
+],
+
+C2:[
+"Language Mastery",
+"Literary Language",
+"Advanced Idioms",
+"Register",
+"Subtle Meaning",
+"Persuasion",
+"Critical Analysis",
+"Complex Arguments",
+"Professional Mastery",
+"Literature & Style",
+"C2 Grammar",
+"C2 Final Review"
+]
+
+};
+
+
+/*
+========================================================
+LESSON DATABASE
+
+ဒီနေရာမှာ မင်း content ဖြည့်။
+
+Format:
+
+LESSON_DB.en.A1[1] = {
+
+title:"Greetings",
+
+questions:[
+
+{
+type:"mc",
+
+question:"What does Hello mean?",
+
+options:[
+"မင်္ဂလာပါ",
+"ကျေးဇူးတင်ပါတယ်",
+"နှုတ်ဆက်ပါတယ်",
+"တောင်းပန်ပါတယ်"
+],
+
+answer:"မင်္ဂလာပါ",
+
+audio:"Hello"
+},
+
+{
+type:"fill",
+
+question:"English word for မင်္ဂလာပါ?",
+
+answer:"Hello",
+
+audio:"Hello"
+}
+
+]
+
+}
+
+========================================================
+*/
+
+
+const LESSON_DB = {
+
+
+/* =====================================================
+ENGLISH
+===================================================== */
+
+en:{
+
+A1:{
+
+1:{
+title:"Greetings & Introductions",
+
+questions:[
+
+{
+type:"mc",
+
+question:'What does "Hello" mean?',
+
+options:[
+"မင်္ဂလာပါ",
+"ကျေးဇူးတင်ပါတယ်",
+"တောင်းပန်ပါတယ်",
+"သွားတော့မယ်"
+],
+
+answer:"မင်္ဂလာပါ",
+
+audio:"Hello"
+},
+
+{
+type:"fill",
+
+question:"Write the English word for မင်္ဂလာပါ.",
+
+answer:"Hello",
+
+audio:"Hello"
+},
+
+{
+type:"translate",
+
+question:"Translate: Thank you",
+
+answer:"ကျေးဇူးတင်ပါတယ်",
+
+audio:"Thank you"
+},
+
+{
+type:"listen",
+
+question:"Listen and choose what you hear.",
+
+options:[
+"Hello",
+"Goodbye",
+"Thank you",
+"Sorry"
+],
+
+answer:"Hello",
+
+audio:"Hello"
+}
+
+]
+
+},
+
+2:{
+title:"Introducing Yourself",
+
+questions:[
+
+{
+type:"mc",
+
+question:'What does "My name is..." mean?',
+
+options:[
+"ကျွန်တော့်နာမည်က...",
+"ကျွန်တော်ဘယ်သွားမလဲ",
+"ကျွန်တော်စားချင်တယ်",
+"ကျွန်တော်အိပ်နေတယ်"
+],
+
+answer:"ကျွန်တော့်နာမည်က...",
+
+audio:"My name is"
+},
+
+{
+type:"fill",
+
+question:"Complete: My name ___ John.",
+
+answer:"is",
+
+audio:"My name is John"
+}
+
+]
+
+}
+
+},
+
+
+A2:{},
+
+B1:{},
+
+B2:{},
+
+C1:{},
+
+C2:{}
+
+},
+
+
+/* =====================================================
+THAI
+===================================================== */
+
+th:{
+
+A1:{
+
+1:{
+title:"Greetings",
+
+questions:[
+
+{
+type:"mc",
+
+question:'What does "สวัสดี" mean?',
+
+options:[
+"မင်္ဂလာပါ",
+"ကျေးဇူးတင်ပါတယ်",
+"တောင်းပန်ပါတယ်",
+"စားချင်တယ်"
+],
+
+answer:"မင်္ဂလာပါ",
+
+audio:"สวัสดี"
+},
+
+{
+type:"translate",
+
+question:"Translate: ขอบคุณ",
+
+answer:"ကျေးဇူးတင်ပါတယ်",
+
+audio:"ขอบคุณ"
+}
+
+]
+
+}
+
+},
+
+A2:{},
+B1:{},
+B2:{},
+C1:{},
+C2:{}
+
+},
+
+
+/* =====================================================
+JAPANESE
+===================================================== */
+
+ja:{
+
+A1:{
+
+1:{
+title:"Greetings",
+
+questions:[
+
+{
+type:"mc",
+
+question:'What does "こんにちは" mean?',
+
+options:[
+"မင်္ဂလာပါ",
+"ကျေးဇူးတင်ပါတယ်",
+"နှုတ်ဆက်ပါတယ်",
+"ရေ"
+],
+
+answer:"မင်္ဂလာပါ",
+
+audio:"こんにちは"
+},
+
+{
+type:"translate",
+
+question:"Translate: ありがとう",
+
+answer:"ကျေးဇူးတင်ပါတယ်",
+
+audio:"ありがとう"
+}
+
+]
+
+}
+
+},
+
+A2:{},
+B1:{},
+B2:{},
+C1:{},
+C2:{}
+
+},
+
+
+/* =====================================================
+KOREAN
+===================================================== */
+
+ko:{
+
+A1:{
+
+1:{
+title:"Greetings",
+
+questions:[
+
+{
+type:"mc",
+
+question:'What does "안녕하세요" mean?',
+
+options:[
+"မင်္ဂလာပါ",
+"ကျေးဇူးတင်ပါတယ်",
+"မင်္ဂလာညချမ်းပါ",
+"ရေ"
+],
+
+answer:"မင်္ဂလာပါ",
+
+audio:"안녕하세요"
+},
+
+{
+type:"translate",
+
+question:"Translate: 감사합니다",
+
+answer:"ကျေးဇူးတင်ပါတယ်",
+
+audio:"감사합니다"
+}
+
+]
+
+}
+
+},
+
+A2:{},
+B1:{},
+B2:{},
+C1:{},
+C2:{}
+
+},
+
+
+/* =====================================================
+GERMAN
+===================================================== */
+
+de:{
+
+A1:{
+
+1:{
+title:"Greetings",
+
+questions:[
+
+{
+type:"mc",
+
+question:'What does "Hallo" mean?',
+
+options:[
+"မင်္ဂလာပါ",
+"ကျေးဇူးတင်ပါတယ်",
+"နှုတ်ဆက်ပါတယ်",
+"တောင်းပန်ပါတယ်"
+],
+
+answer:"မင်္ဂလာပါ",
+
+audio:"Hallo"
+},
+
+{
+type:"translate",
+
+question:"Translate: Danke",
+
+answer:"ကျေးဇူးတင်ပါတယ်",
+
+audio:"Danke"
+}
+
+]
+
+}
+
+},
+
+A2:{},
+B1:{},
+B2:{},
+C1:{},
+C2:{}
+
+},
+
+
+/* =====================================================
+SPANISH
+===================================================== */
+
+es:{
+
+A1:{
+
+1:{
+title:"Greetings",
+
+questions:[
+
+{
+type:"mc",
+
+question:'What does "Hola" mean?',
+
+options:[
+"မင်္ဂလာပါ",
+"ကျေးဇူးတင်ပါတယ်",
+"နှုတ်ဆက်ပါတယ်",
+"ရေ"
+],
+
+answer:"မင်္ဂလာပါ",
+
+audio:"Hola"
+},
+
+{
+type:"translate",
+
+question:"Translate: Gracias",
+
+answer:"ကျေးဇူးတင်ပါတယ်",
+
+audio:"Gracias"
+}
+
+]
+
+}
+
+},
+
+A2:{},
+B1:{},
+B2:{},
+C1:{},
+C2:{}
+
+},
+
+
+/* =====================================================
+FRENCH
+===================================================== */
+
+fr:{
+
+A1:{
+
+1:{
+title:"Greetings",
+
+questions:[
+
+{
+type:"mc",
+
+question:'What does "Bonjour" mean?',
+
+options:[
+"မင်္ဂလာပါ",
+"ကျေးဇူးတင်ပါတယ်",
+"တောင်းပန်ပါတယ်",
+"ရေ"
+],
+
+answer:"မင်္ဂလာပါ",
+
+audio:"Bonjour"
+},
+
+{
+type:"translate",
+
+question:"Translate: Merci",
+
+answer:"ကျေးဇူးတင်ပါတယ်",
+
+audio:"Merci"
+}
+
+]
+
+}
+
+},
+
+A2:{},
+B1:{},
+B2:{},
+C1:{},
+C2:{}
+
+},
+
+
+/* =====================================================
+ITALIAN
+===================================================== */
+
+it:{
+
+A1:{
+
+1:{
+title:"Greetings",
+
+questions:[
+
+{
+type:"mc",
+
+question:'What does "Ciao" mean?',
+
+options:[
+"မင်္ဂလာပါ",
+"ကျေးဇူးတင်ပါတယ်",
+"ရေ",
+"အစားအစာ"
+],
+
+answer:"မင်္ဂလာပါ",
+
+audio:"Ciao"
+},
+
+{
+type:"translate",
+
+question:"Translate: Grazie",
+
+answer:"ကျေးဇူးတင်ပါတယ်",
+
+audio:"Grazie"
+}
+
+]
+
+}
+
+},
+
+A2:{},
+B1:{},
+B2:{},
+C1:{},
+C2:{}
+
+}
+
+};
+
+
+/*
+========================================================
+APP STATE
+========================================================
+*/
+
+let state = JSON.parse(
+localStorage.getItem("lingomaster_state")
+) || {
+
+language:"en",
+
+level:"A1",
+
+xp:0,
+
+hearts:5,
+
+streak:0,
+
+lastStudyDate:null,
+
+completed:{}
+
+};
+
+
+let currentLesson = null;
+
+let currentQuestionIndex = 0;
+
+let selectedAnswer = null;
+
+
+/*
+========================================================
+SAVE
+========================================================
+*/
+
+function saveState(){
+
+localStorage.setItem(
+"lingomaster_state",
+JSON.stringify(state)
+);
+
+}
+
+
+/*
+========================================================
+LANGUAGE SELECT
+========================================================
+*/
+
+function setupLanguageSelect(){
+
+const select =
+document.getElementById(
+"languageSelect"
+);
+
+select.innerHTML =
+Object.entries(LANGUAGES)
+.map(([code,data])=>{
+
+return `
+<option value="${code}">
+${data.flag} ${data.name}
+</option>
+`;
+
+})
+.join("");
+
+select.value =
+state.language;
+
+select.onchange = function(){
+
+state.language =
+this.value;
+
+state.level =
+"A1";
+
+saveState();
+
+renderLearn();
+
+renderHome();
+
+};
+
+}
+
+
+/*
+========================================================
+PAGE
+========================================================
+*/
+
+function openPage(id){
+
+const pages = [
+
+"homePage",
+"learnPage",
+"lessonPage",
+"progressPage"
+
+];
+
+pages.forEach(page=>{
+
+document
+.getElementById(page)
+.classList.add("hidden");
+
+});
+
+document
+.getElementById(id)
+.classList.remove("hidden");
+
+if(id==="homePage"){
+
+renderHome();
+
+}
+
+if(id==="learnPage"){
+
+renderLearn();
+
+}
+
+if(id==="progressPage"){
+
+renderProgress();
+
+}
+
+}
+
+
+/*
+========================================================
+HOME
+========================================================
+*/
+
+function renderHome(){
+
+const lang =
+LANGUAGES[state.language];
+
+document
+.getElementById("homeLanguage")
+.textContent =
+lang.name;
+
+document
+.getElementById("homeLevel")
+.textContent =
+state.level;
+
+document
+.getElementById("xp")
+.textContent =
+state.xp;
+
+document
+.getElementById("hearts")
+.textContent =
+state.hearts;
+
+document
+.getElementById("streak")
+.textContent =
+state.streak;
+
+const daily =
+state.xp % 50;
+
+document
+.getElementById("dailyProgress")
+.style.width =
+(daily * 2)+"%";
+
+document
+.getElementById("dailyText")
+.textContent =
+`${daily} / 50 XP`;
+
+}
+
+
+/*
+========================================================
+LEVEL BUTTONS
+========================================================
+*/
+
+function renderLevels(){
+
+const grid =
+document.getElementById(
+"levelGrid"
+);
+
+grid.innerHTML =
+Object.keys(CURRICULUM)
+.map(level=>{
+
+return `
+<button
+class="level-btn
+${level===state.level?"active":""}"
+onclick="selectLevel('${level}')"
+>
+${level}
+</button>
+`;
+
+})
+.join("");
+
+}
+
+
+function selectLevel(level){
+
+state.level =
+level;
+
+saveState();
+
+renderLearn();
+
+}
+
+
+/*
+========================================================
+LESSON LIST
+========================================================
+*/
+
+function renderLearn(){
+
+const lang =
+LANGUAGES[state.language];
+
+document
+.getElementById("languageTitle")
+.textContent =
+`${lang.flag} ${lang.name}`;
+
+document
+.getElementById("curriculumTitle")
+.textContent =
+`${state.level} Curriculum`;
+
+renderLevels();
+
+
+const list =
+document.getElementById(
+"lessonList"
+);
+
+const chapters =
+CURRICULUM[state.level];
+
+
+list.innerHTML =
+chapters
+.map((title,index)=>{
+
+const chapter =
+index+1;
+
+const key =
+getLessonKey(
+state.language,
+state.level,
+chapter
+);
+
+const custom =
+getLessonData(
+state.language,
+state.level,
+chapter
+);
+
+const done =
+state.completed[key];
+
+return `
+
+<div
+class="lesson"
+onclick="startLesson(${chapter})"
+>
+
+<div>
+
+<div class="lesson-title">
+
+${done?"🏆":"📘"}
+
+Chapter ${chapter}
+
+</div>
+
+<div class="lesson-info">
+
+${custom?.title || title}
+
+<br>
+
+${custom?.questions?.length || 0}
+questions
+
+</div>
+
+</div>
+
+<div>
+${done?"✓":"→"}
+</div>
+
+</div>
+
+`;
+
+})
+.join("");
+
+}
+
+
+/*
+========================================================
+GET LESSON
+========================================================
+*/
+
+function getLessonData(
+language,
+level,
+chapter
+){
+
+const data =
+LESSON_DB?.[language]?.[level]?.[chapter];
+
+return data || {
+
+title:
+CURRICULUM[level][chapter-1],
+
+questions:[]
+
+};
+
+}
+
+
+/*
+========================================================
+LESSON KEY
+========================================================
+*/
+
+function getLessonKey(
+language,
+level,
+chapter
+){
+
+return `${language}_${level}_${chapter}`;
+
+}
+
+
+/*
+========================================================
+START LESSON
+========================================================
+*/
+
+function startLesson(chapter){
+
+const lesson =
+getLessonData(
+state.language,
+state.level,
+chapter
+);
+
+if(
+!lesson.questions ||
+lesson.questions.length===0
+){
+
+alert(
+"ဒီ Chapter အတွက် lesson content မဖြည့်ရသေးပါ။"
+);
+
+return;
+
+}
+
+currentLesson = {
+
+chapter:chapter,
+
+title:lesson.title,
+
+questions:lesson.questions
+
+};
+
+currentQuestionIndex = 0;
+
+selectedAnswer = null;
+
+openPage("lessonPage");
+
+renderQuestion();
+
+}
+
+
+/*
+========================================================
+RENDER QUESTION
+========================================================
+*/
+
+function renderQuestion(){
+
+const q =
+currentLesson.questions[
+currentQuestionIndex
+];
+
+const total =
+currentLesson.questions.length;
+
+document
+.getElementById("lessonMeta")
+.textContent =
+`${state.level} • ${currentLesson.title} • ${currentQuestionIndex+1}/${total}`;
+
+document
+.getElementById("lessonProgress")
+.style.width =
+(
+((currentQuestionIndex+1)/total)*100
+)+"%";
+
+document
+.getElementById("questionText")
+.textContent =
+q.question;
+
+document
+.getElementById("feedback")
+.classList.add("hidden");
+
+selectedAnswer = null;
+
+const area =
+document.getElementById(
+"answerArea"
+);
+
+area.innerHTML = "";
+
+
+/*
+MULTIPLE CHOICE
+*/
+
+if(
+q.type==="mc" ||
+q.type==="listen"
+){
+
+area.innerHTML =
+q.options
+.map(option=>{
+
+return `
+
+<button
+class="choice"
+onclick="selectChoice(this)"
+data-answer="${escapeHTML(option)}"
+>
+${option}
+</button>
+
+`;
+
+})
+.join("");
+
+}
+
+
+/*
+FILL / TRANSLATE
+*/
+
+if(
+q.type==="fill" ||
+q.type==="translate"
+){
+
+area.innerHTML = `
+
+<input
+id="textAnswer"
+class="answer-input"
+placeholder="အဖြေကို ရိုက်ထည့်ပါ"
+/>
+
+`;
+
+}
+
+
+/*
+ORDER
+*/
+
+if(q.type==="order"){
+
+area.innerHTML = `
+
+<p class="muted">
+Words ကိုမှန်ကန်တဲ့အစီအစဉ်နဲ့ရေးပါ။
+</p>
+
+<input
+id="textAnswer"
+class="answer-input"
+placeholder="အဖြေ"
+/>
+
+`;
+
+}
+
+}
+
+
+/*
+========================================================
+SELECT CHOICE
+========================================================
+*/
+
+function selectChoice(button){
+
+document
+.querySelectorAll(".choice")
+.forEach(btn=>{
+btn.classList.remove("selected");
+});
+
+button.classList.add("selected");
+
+selectedAnswer =
+button.dataset.answer;
+
+}
+
+
+/*
+========================================================
+CHECK ANSWER
+========================================================
