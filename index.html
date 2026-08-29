@@ -2,8 +2,8 @@
 <html lang="my">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>LingoMaster Pro - 8 Languages Mega Practice</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>LingoMaster Universal</title>
   <style>
     :root {
       --green: #58cc02;
@@ -29,6 +29,16 @@
       flex-direction: column;
       height: 100vh;
       overflow: hidden;
+      align-items: center;
+    }
+    .app-wrapper {
+      width: 100%;
+      max-width: 550px;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      background: #ffffff;
+      position: relative;
     }
     .top-bar {
       display: flex;
@@ -55,14 +65,13 @@
       flex: 1;
       overflow-y: auto;
       padding: 14px;
-      padding-bottom: 75px;
+      padding-bottom: 80px;
       display: flex;
       flex-direction: column;
       align-items: center;
     }
     .summary-card {
       width: 100%;
-      max-width: 480px;
       background: linear-gradient(135deg, #00897b, #004d40);
       color: white;
       border-radius: 14px;
@@ -81,7 +90,6 @@
       display: flex;
       overflow-x: auto;
       width: 100%;
-      max-width: 480px;
       gap: 6px;
       padding-bottom: 10px;
       margin-bottom: 8px;
@@ -100,7 +108,6 @@
     .cefr-tab-btn.active { background: var(--blue); color: white; border-color: var(--blue-dark); }
     .chapter-card {
       width: 100%;
-      max-width: 480px;
       background: white;
       border-radius: 14px;
       padding: 14px 16px;
@@ -132,7 +139,6 @@
     .game-container {
       display: none;
       width: 100%;
-      max-width: 460px;
       flex-direction: column;
       height: 100%;
     }
@@ -195,7 +201,7 @@
     }
     .choice-btn.selected { border-color: var(--blue); background: #e1f5fe; }
     .bottom-bar {
-      position: fixed;
+      position: absolute;
       bottom: 0;
       left: 0;
       right: 0;
@@ -216,7 +222,7 @@
       cursor: pointer;
     }
     .feedback-sheet {
-      position: fixed;
+      position: absolute;
       bottom: 0;
       left: 0;
       right: 0;
@@ -232,348 +238,213 @@
 </head>
 <body>
 
-  <div class="top-bar">
-    <select class="lang-select" id="langPicker" onchange="changeLanguage()">
-      <option value="en">🇬🇧 English</option>
-      <option value="th">🇹🇭 ไทย (Thai)</option>
-      <option value="de">🇩🇪 Deutsch (German)</option>
-      <option value="es">🇪🇸 Español (Spanish)</option>
-      <option value="fr">🇫🇷 Français (French)</option>
-      <option value="ko">🇰🇷 한국어 (Korean)</option>
-      <option value="ja">🇯🇵 日本語 (Japanese)</option>
-      <option value="it">🇮🇹 Italiano (Italian)</option>
-    </select>
-    <div class="stats-row">
-      <div style="color: #ff9600;">🔥 <span id="streakCount">1</span></div>
-      <div style="color: #1cb0f6;">⭐ <span id="xpCount">0</span> XP</div>
-      <div style="color: #ff4b4b;">❤️ ∞</div>
-    </div>
-  </div>
-
-  <main>
-    <div id="curriculumView" style="width: 100%; display: flex; flex-direction: column; align-items: center;">
-      <div class="summary-card">
-        <div class="summary-stat-box">
-          <div class="summary-stat-num" id="totalChapterCount">0</div>
-          <div class="summary-stat-label">စုစုပေါင်း Chapter</div>
-        </div>
-        <div style="width: 1px; height: 35px; background: rgba(255,255,255,0.3);"></div>
-        <div class="summary-stat-box">
-          <div class="summary-stat-num" id="currentViewCount">0</div>
-          <div class="summary-stat-label">လက်ရှိ Level အရေအတွက်</div>
-        </div>
-        <div style="width: 1px; height: 35px; background: rgba(255,255,255,0.3);"></div>
-        <div class="summary-stat-box">
-          <div class="summary-stat-num">A1 → C2</div>
-          <div class="summary-stat-label">Native အဆင့်ထိ</div>
-        </div>
+  <div class="app-wrapper">
+    <div class="top-bar">
+      <select class="lang-select" id="langPicker" onchange="changeLanguage()">
+        <option value="en">🇬🇧 English</option>
+        <option value="th">🇹🇭 ไทย (Thai)</option>
+        <option value="de">🇩🇪 Deutsch (German)</option>
+        <option value="es">🇪🇸 Español (Spanish)</option>
+        <option value="fr">🇫🇷 Français (French)</option>
+        <option value="ko">🇰🇷 한국어 (Korean)</option>
+        <option value="ja">🇯🇵 日本語 (Japanese)</option>
+        <option value="it">🇮🇹 Italiano (Italian)</option>
+      </select>
+      <div class="stats-row">
+        <div style="color: #ff9600;">🔥 <span id="streakCount">1</span></div>
+        <div style="color: #1cb0f6;">⭐ <span id="xpCount">0</span> XP</div>
+        <div style="color: #ff4b4b;">❤️ ∞</div>
       </div>
-
-      <div class="cefr-tabs">
-        <button class="cefr-tab-btn active" onclick="filterLevel('ALL', this)" id="tabALL">အားလုံး</button>
-        <button class="cefr-tab-btn" onclick="filterLevel('A1', this)" id="tabA1">A1</button>
-        <button class="cefr-tab-btn" onclick="filterLevel('A2', this)" id="tabA2">A2</button>
-        <button class="cefr-tab-btn" onclick="filterLevel('B1', this)" id="tabB1">B1</button>
-        <button class="cefr-tab-btn" onclick="filterLevel('B2', this)" id="tabB2">B2</button>
-        <button class="cefr-tab-btn" onclick="filterLevel('C1', this)" id="tabC1">C1</button>
-        <button class="cefr-tab-btn" onclick="filterLevel('C2', this)" id="tabC2">C2</button>
-      </div>
-
-      <div id="chapterContainer" style="width: 100%; max-width: 480px;"></div>
     </div>
 
-    <div id="gameScreen" class="game-container">
-      <div class="progress-bar">
-        <div class="progress-fill" id="progressFill"></div>
+    <main>
+      <div id="curriculumView" style="width: 100%; display: flex; flex-direction: column; align-items: center;">
+        <div class="summary-card">
+          <div class="summary-stat-box">
+            <div class="summary-stat-num" id="totalChapterCount">0</div>
+            <div class="summary-stat-label">စုစုပေါင်း Chapter</div>
+          </div>
+          <div style="width: 1px; height: 35px; background: rgba(255,255,255,0.3);"></div>
+          <div class="summary-stat-box">
+            <div class="summary-stat-num" id="currentViewCount">0</div>
+            <div class="summary-stat-label">လက်ရှိ Level အရေအတွက်</div>
+          </div>
+          <div style="width: 1px; height: 35px; background: rgba(255,255,255,0.3);"></div>
+          <div class="summary-stat-box">
+            <div class="summary-stat-num">A1 → C2</div>
+            <div class="summary-stat-label">Native အဆင့်ထိ</div>
+          </div>
+        </div>
+
+        <div class="cefr-tabs">
+          <button class="cefr-tab-btn active" onclick="filterLevel('ALL', this)" id="tabALL">အားလုံး</button>
+          <button class="cefr-tab-btn" onclick="filterLevel('A1', this)" id="tabA1">A1</button>
+          <button class="cefr-tab-btn" onclick="filterLevel('A2', this)" id="tabA2">A2</button>
+          <button class="cefr-tab-btn" onclick="filterLevel('B1', this)" id="tabB1">B1</button>
+          <button class="cefr-tab-btn" onclick="filterLevel('B2', this)" id="tabB2">B2</button>
+          <button class="cefr-tab-btn" onclick="filterLevel('C1', this)" id="tabC1">C1</button>
+          <button class="cefr-tab-btn" onclick="filterLevel('C2', this)" id="tabC2">C2</button>
+        </div>
+
+        <div id="chapterContainer" style="width: 100%;"></div>
       </div>
-      <button class="speaker-btn" onclick="speakCurrent()">🔊 အသံနားထောင်မည်</button>
-      <div class="prompt-box" id="promptText">-</div>
-      
-      <div id="sentenceBuilderArea" style="display: none;">
-        <div class="answer-slot" id="answerSlot"></div>
-        <div class="word-pool" id="wordPool"></div>
+
+      <div id="gameScreen" class="game-container">
+        <div class="progress-bar">
+          <div class="progress-fill" id="progressFill"></div>
+        </div>
+        <button class="speaker-btn" onclick="speakCurrent()">🔊 အသံနားထောင်မည်</button>
+        <div class="prompt-box" id="promptText">-</div>
+        
+        <div id="sentenceBuilderArea" style="display: none;">
+          <div class="answer-slot" id="answerSlot"></div>
+          <div class="word-pool" id="wordPool"></div>
+        </div>
+        <div id="multipleChoiceArea" style="display: none; width: 100%;"></div>
       </div>
-      <div id="multipleChoiceArea" style="display: none; width: 100%;"></div>
+    </main>
+
+    <div class="bottom-bar" id="bottomBar" style="display: none;">
+      <button class="btn-action" id="checkBtn" onclick="checkAnswer()">စစ်ဆေးမည် (CHECK)</button>
     </div>
-  </main>
 
-  <div class="bottom-bar" id="bottomBar" style="display: none;">
-    <button class="btn-action" id="checkBtn" onclick="checkAnswer()">စစ်ဆေးမည် (CHECK)</button>
-  </div>
-
-  <div class="feedback-sheet" id="feedbackSheet">
-    <div style="font-size: 18px; font-weight: bold;" id="feedbackTitle">အဖြေမှန်ပါတယ်!</div>
-    <div id="feedbackDetail" style="font-size: 13px;"></div>
-    <button class="btn-action" onclick="nextQuestion()">ဆက်သွားမည် ➡</button>
+    <div class="feedback-sheet" id="feedbackSheet">
+      <div style="font-size: 18px; font-weight: bold;" id="feedbackTitle">အဖြေမှန်ပါတယ်!</div>
+      <div id="feedbackDetail" style="font-size: 13px;"></div>
+      <button class="btn-action" onclick="nextQuestion()">ဆက်သွားမည် ➡</button>
+    </div>
   </div>
 
   <script>
     const fullCurriculum = {
-      // 1. English (🇬🇧)
       en: {
         voice: 'en-US',
         chapters: [
           { level: 'A1', title: 'Chapter 1: နှုတ်ဆက်ခြင်းနှင့် မိတ်ဆက်ခြင်း', desc: 'Greetings & Introductions', q: [
             { type: 'choice', prompt: "'မင်္ဂလာပါ' ၏ အင်္ဂလိပ်စာကို ရွေးပါ", audio: "Hello", choices: ["Hello", "Goodbye", "Thanks"], correct: "Hello" },
-            { type: 'build', prompt: "ဝါကျစီပါ: 'ကျွန်တော့်နာမည် ဂျွန်ပါ'", audio: "My name is John", words: ["is", "My", "name", "John"], correct: ["My", "name", "is", "John"] },
-            { type: 'choice', prompt: "'တွေ့ရတာ ဝမ်းသာပါတယ်' ကို ရွေးပါ", audio: "Nice to meet you", choices: ["Nice to meet you", "See you later", "I am fine"], correct: "Nice to meet you" },
-            { type: 'build', prompt: "ဝါကျစီပါ: 'မင်္ဂလာနံနက်ခင်းပါ'", audio: "Good morning to you", words: ["morning", "Good", "to", "you"], correct: ["Good", "morning", "to", "you"] }
+            { type: 'build', prompt: "ဝါကျစီပါ: 'ကျွန်တော့်နာမည် ဂျွန်ပါ'", audio: "My name is John", words: ["is", "My", "name", "John"], correct: ["My", "name", "is", "John"] }
           ]},
           { level: 'A1', title: 'Chapter 2: စားသောက်ဆိုင်နှင့် ဈေးဝယ်ခြင်း', desc: 'Food & Shopping', q: [
             { type: 'choice', prompt: "'ဒါ ဘယ်လောက်ကျလဲ?' ကို ရွေးပါ", audio: "How much is this?", choices: ["How much is this?", "Where is it?", "What is this?"], correct: "How much is this?" },
-            { type: 'build', prompt: "ဝါကျစီပါ: 'ရေတစ်ခွက် ပေးပါ'", audio: "A glass of water please", words: ["glass", "A", "of", "water", "please"], correct: ["A", "glass", "of", "water", "please"] },
-            { type: 'choice', prompt: "'အရမ်း အရသာရှိတယ်' ကို ရွေးပါ", audio: "It is very delicious", choices: ["It is very delicious", "It is expensive", "I am hungry"], correct: "It is very delicious" }
+            { type: 'build', prompt: "ဝါကျစီပါ: 'ရေတစ်ခွက် ပေးပါ'", audio: "A glass of water please", words: ["glass", "A", "of", "water", "please"], correct: ["A", "glass", "of", "water", "please"] }
           ]},
           { level: 'A2', title: 'Chapter 1: လမ်းမေးခြင်းနှင့် ခရီးသွားခြင်း', desc: 'Directions & Places', q: [
-            { type: 'choice', prompt: "'Turn left' ၏ အဓိပ္ပာယ်ကို ရွေးပါ", audio: "Turn left", choices: ["ဘယ်ဘက်သို့ ကွေ့ပါ", "ညာဘက်သို့ ကွေ့ပါ", "တည့်တည့်သွားပါ"], correct: "ဘယ်ဘက်သို့ ကွေ့ပါ" },
-            { type: 'build', prompt: "ဝါကျစီပါ: 'ဘူတာရုံက ဘယ်မှာလဲ'", audio: "Where is the station?", words: ["is", "Where", "the", "station?"], correct: ["Where", "is", "the", "station?"] }
+            { type: 'choice', prompt: "'Turn left' ၏ အဓိပ္ပာယ်ကို ရွေးပါ", audio: "Turn left", choices: ["ဘယ်ဘက်သို့ ကွေ့ပါ", "ညာဘက်သို့ ကွေ့ပါ", "တည့်တည့်သွားပါ"], correct: "ဘယ်ဘက်သို့ ကွေ့ပါ" }
           ]},
-          { level: 'B1', title: 'Chapter 1: ရုံးတွင်း ဆက်သွယ်ရေးနှင့် အစည်းအဝေး', desc: 'Workplace & Meeting', q: [
-            { type: 'choice', prompt: "'Deadline' ၏ အဓိပ္ပာယ်ကို ရွေးပါ", audio: "Deadline", choices: ["နောက်ဆုံးသတ်မှတ်ရက်", "လစာတိုးခြင်း", "အလုပ်ဆင်းချိန်"], correct: "နောက်ဆုံးသတ်မှတ်ရက်" },
-            { type: 'build', prompt: "ဝါကျစီပါ: 'မနက်ဖြန် အစည်းအဝေး ရှိသည်'", audio: "We have a meeting tomorrow", words: ["have", "We", "a", "meeting", "tomorrow"], correct: ["We", "have", "a", "meeting", "tomorrow"] }
+          { level: 'B1', title: 'Chapter 1: ရုံးတွင်း ဆက်သွယ်ရေး', desc: 'Workplace Communication', q: [
+            { type: 'choice', prompt: "'Deadline' ၏ အဓိပ္ပာယ်ကို ရွေးပါ", audio: "Deadline", choices: ["နောက်ဆုံးသတ်မှတ်ရက်", "လစာတိုးခြင်း", "အလုပ်ဆင်းချိန်"], correct: "နောက်ဆုံးသတ်မှတ်ရက်" }
           ]},
-          { level: 'B2', title: 'Chapter 1: အလုပ်အင်တာဗျူးနှင့် ညှိနှိုင်းခြင်း', desc: 'Job Interview & Career', q: [
+          { level: 'B2', title: 'Chapter 1: အလုပ်အင်တာဗျူး', desc: 'Job Interview', q: [
             { type: 'choice', prompt: "'Strengths and weaknesses' ၏ အဓိပ္ပာယ်ကို ရွေးပါ", audio: "Strengths and weaknesses", choices: ["အားသာချက်နှင့် အားနည်းချက်များ", "လစာနှင့် ခွင့်ရက်", "အတွေ့အကြုံ"], correct: "အားသာချက်နှင့် အားနည်းချက်များ" }
           ]},
-          { level: 'C1', title: 'Chapter 1: စီမံခန့်ခွဲမှုနှင့် မဟာဗျူဟာ', desc: 'Strategic Management', q: [
+          { level: 'C1', title: 'Chapter 1: မဟာဗျူဟာ စီမံခန့်ခွဲမှု', desc: 'Strategic Management', q: [
             { type: 'choice', prompt: "'Feasibility study' ၏ အဓိပ္ပာယ်ကို ရွေးပါ", audio: "Feasibility study", choices: ["ဖြစ်မြောက်နိုင်စွမ်း ဆန်းစစ်ချက်", "ငွေစာရင်းရှင်းတမ်း", "ဈေးကွက်လေ့လာမှု"], correct: "ဖြစ်မြောက်နိုင်စွမ်း ဆန်းစစ်ချက်" }
           ]},
           { level: 'C2', title: 'Chapter 1: Native Idioms & Slang', desc: 'Idioms & Fluency', q: [
             { type: 'choice', prompt: "'Piece of cake' ၏ သဘောကို ရွေးပါ", audio: "Piece of cake", choices: ["အရမ်းလွယ်ကူသော အရာ", "ကိတ်မုန့်တစ်တုံး", "အရသာရှိသောအရာ"], correct: "အရမ်းလွယ်ကူသော အရာ" },
-            { type: 'build', prompt: "ဝါကျစီပါ: 'Under the weather (နေမကောင်းဖြစ်သည်)'", audio: "I feel under the weather", words: ["under", "I", "weather", "feel", "the"], correct: ["I", "feel", "under", "the", "weather"] }
+            { type: 'build', prompt: "ဝါကျစီပါ: 'Under the weather'", audio: "I feel under the weather", words: ["under", "I", "weather", "feel", "the"], correct: ["I", "feel", "under", "the", "weather"] }
           ]}
         ]
       },
-
-      // 2. Thai (🇹🇭)
       th: {
         voice: 'th-TH',
         chapters: [
           { level: 'A1', title: 'Chapter 1: နှုတ်ဆက်ခြင်းနှင့် မိတ်ဆက်ခြင်း', desc: 'Basic Greetings', q: [
             { type: 'choice', prompt: "'မင်္ဂလာပါ' ၏ ထိုင်းစကားကို ရွေးပါ", audio: "สวัสดี", choices: ["สวัสดี (Sawasdee)", "ขอบคุณ (Khob khun)", "อร่อย"], correct: "สวัสดี (Sawasdee)" },
-            { type: 'build', prompt: "ဝါကျစီပါ: 'မင်္ဂလာပါခင်ဗျာ'", audio: "สวัสดีครับ", words: ["ครับ", "สวัสดี", "ขอบคุณ"], correct: ["สวัสดี", "ครับ"] },
-            { type: 'choice', prompt: "'ကျေးဇူးတင်ပါတယ်' ၏ ထိုင်းစကားကို ရွေးပါ", audio: "ขอบคุณมาก", choices: ["ขอบคุณมาก", "ไม่เป็นไร", "ขอโทษ"], correct: "ขอบคุณมาก" },
-            { type: 'build', prompt: "ဝါကျစီပါ: 'နေကောင်းလားခင်ဗျာ'", audio: "สบายดีไหมครับ", words: ["สบายดี", "ไหม", "ครับ"], correct: ["สบายดี", "ไหม", "ครับ"] }
+            { type: 'build', prompt: "ဝါကျစီပါ: 'မင်္ဂလာပါခင်ဗျာ'", audio: "สวัสดีครับ", words: ["ครับ", "สวัสดี", "ขอบคุณ"], correct: ["สวัสดี", "ครับ"] }
           ]},
           { level: 'A1', title: 'Chapter 2: ဈေးဝယ်ခြင်းနှင့် စားသောက်ဆိုင်', desc: 'Shopping & Dining', q: [
-            { type: 'choice', prompt: "'ဒါ ဘယ်လောက်လဲ' ကို ရွေးပါ", audio: "อันนี้เท่าไหร่", choices: ["อันนี้เท่าไหร่", "ลดได้ไหม", "แพงมาก"], correct: "อันนี้เท่าไหร่" },
-            { type: 'build', prompt: "ဝါကျစီပါ: 'ဈေးလျှော့ပေးလို့ရမလား'", audio: "ลดหน่อยได้ไหมครับ", words: ["ลดหน่อย", "ได้ไหม", "ครับ"], correct: ["ลดหน่อย", "ได้ไหม", "ครับ"] }
+            { type: 'choice', prompt: "'ဒါ ဘယ်လောက်လဲ' ကို ရွေးပါ", audio: "อันนี้เท่าไหร่", choices: ["อันนี้เท่าไหร่", "ลดได้ไหม", "แพงมาก"], correct: "อันนี้เท่าไหร่" }
           ]},
-          { level: 'A2', title: 'Chapter 1: လမ်းမေးခြင်းနှင့် အိမ်သာ', desc: 'Directions & Restroom', q: [
-            { type: 'choice', prompt: "'အိမ်သာ ဘယ်မှာလဲ' ကို ရွေးပါ", audio: "ห้องน้ำอยู่ที่ไหน", choices: ["ห้องน้ำอยู่ที่ไหน", "ไปไหน", "ช่วยด้วย"], correct: "ห้องน้ำอยู่ที่ไหน" },
-            { type: 'build', prompt: "ဝါကျစီပါ: 'ဘယ်ဘက်သို့ ကွေ့ပါ'", audio: "เลี้ยวซ้ายครับ", words: ["เลี้ยวซ้าย", "ครับ", "ตรงไป"], correct: ["เลี้ยวซ้าย", "ครับ"] }
+          { level: 'A2', title: 'Chapter 1: လမ်းမေးခြင်း', desc: 'Directions', q: [
+            { type: 'choice', prompt: "'အိမ်သာ ဘယ်မှာလဲ' ကို ရွေးပါ", audio: "ห้องน้ำอยู่ที่ไหน", choices: ["ห้องน้ำอยู่ที่ไหน", "ไปไหน", "ช่วยด้วย"], correct: "ห้องน้ำอยู่ที่ไหน" }
           ]},
-          { level: 'B1', title: 'Chapter 1: လုပ်ငန်းခွင်နှင့် OT', desc: 'Workplace & Overtime', q: [
-            { type: 'choice', prompt: "'အစည်းအဝေး' ၏ ထိုင်းစကားကို ရွေးပါ", audio: "การประชุม", choices: ["การประชุม (Pra-chum)", "เงินเดือน", "ลาพักร้อน"], correct: "การประชุม (Pra-chum)" },
-            { type: 'build', prompt: "ဝါကျစီပါ: 'ဒီနေ့ အချိန်ပို(OT) ဆင်းမည်'", audio: "วันนี้ทำโอที", words: ["ทำโอที", "วันนี้", "ครับ"], correct: ["วันนี้", "ทำโอที"] }
-          ]},
-          { level: 'B2', title: 'Chapter 1: စီးပွားရေး ဆက်သွယ်မှု', desc: 'Business Communication', q: [
-            { type: 'choice', prompt: "'လစာ' ၏ ထိုင်းစကားကို ရွေးပါ", audio: "เงินเดือน", choices: ["เงินเดือน (Ngoen-duean)", "เจ้านาย", "ใบเสร็จ"], correct: "เงินเดือน (Ngoen-duean)" }
-          ]},
-          { level: 'C1', title: 'Chapter 1: တရားဝင် စာချုပ်စာတမ်းများ', desc: 'Official Contracts', q: [
-            { type: 'choice', prompt: "'စာချုပ်' ၏ ထိုင်းစကားကို ရွေးပါ", audio: "สัญญา", choices: ["สัญญา (San-ya)", "เอกสาร", "รายงาน"], correct: "สัญญา (San-ya)" }
+          { level: 'B1', title: 'Chapter 1: လုပ်ငန်းခွင်သုံး', desc: 'Workplace', q: [
+            { type: 'choice', prompt: "'အစည်းအဝေး' ၏ ထိုင်းစကားကို ရွေးပါ", audio: "การประชุม", choices: ["การประชุม (Pra-chum)", "เงินเดือน", "ลาพักร้อน"], correct: "การประชุม (Pra-chum)" }
           ]},
           { level: 'C2', title: 'Chapter 1: Native Slang & Idioms', desc: 'Native Expressions', q: [
-            { type: 'choice', prompt: "'ใจเย็นๆ (Jai yen yen)' ၏ အဓိပ္ပာယ်ကို ရွေးပါ", audio: "ใจเย็นๆ", choices: ["စိတ်အေးအေးထားပါ", "ရေသောက်ပါ", "ဗိုက်ဆာတယ်"], correct: "စိတ်အေးအေးထားပါ" },
-            { type: 'build', prompt: "Native စကားစီပါ: 'สุดปัง (အရမ်းတော်တယ်/မိုက်တယ်)'", audio: "อันนี้สุดปังมาก", words: ["สุดปัง", "อันนี้", "มาก"], correct: ["อันนี้", "สุดปัง", "มาก"] }
+            { type: 'choice', prompt: "'ใจเย็นๆ (Jai yen yen)' ၏ အဓိပ္ပာယ်ကို ရွေးပါ", audio: "ใจเย็นๆ", choices: ["စိတ်အေးအေးထားပါ", "ရေသောက်ပါ", "ဗိုက်ဆာတယ်"], correct: "စိတ်အေးအေးထားပါ" }
           ]}
         ]
       },
-
-      // 3. German (🇩🇪)
       de: {
         voice: 'de-DE',
         chapters: [
           { level: 'A1', title: 'Chapter 1: Begrüßung (နှုတ်ဆက်ခြင်း)', desc: 'Basic Greetings', q: [
             { type: 'choice', prompt: "'မင်္ဂလာပါ' ၏ ဂျာမန်စကားကို ရွေးပါ", audio: "Guten Tag", choices: ["Guten Tag", "Danke", "Tschüss"], correct: "Guten Tag" },
-            { type: 'build', prompt: "ဝါကျစီပါ: 'ကျေးဇူး အများကြီးတင်ပါတယ်'", audio: "Vielen Dank", words: ["Dank", "Vielen", "Bitte"], correct: ["Vielen", "Dank"] },
-            { type: 'choice', prompt: "'မင်္ဂလာနံနက်ခင်းပါ' ကို ရွေးပါ", audio: "Guten Morgen", choices: ["Guten Morgen", "Gute Nacht", "Hallo"], correct: "Guten Morgen" }
+            { type: 'build', prompt: "ဝါကျစီပါ: 'ကျေးဇူး အများကြီးတင်ပါတယ်'", audio: "Vielen Dank", words: ["Dank", "Vielen", "Bitte"], correct: ["Vielen", "Dank"] }
           ]},
-          { level: 'A1', title: 'Chapter 2: Einkaufen (ဈေးဝယ်ခြင်း)', desc: 'Shopping & Dining', q: [
-            { type: 'choice', prompt: "'Wie viel kostet das?' ၏ အဓိပ္ပာယ်ကို ရွေးပါ", audio: "Wie viel kostet das?", choices: ["ဒါ ဘယ်လောက်ကျလဲ?", "အိမ်သာဘယ်မှာလဲ?", "စားလို့ကောင်းတယ်"], correct: "ဒါ ဘယ်လောက်ကျလဲ?" },
-            { type: 'build', prompt: "ဝါကျစီပါ: 'ဘေလ်ရှင်းပေးပါ'", audio: "Die Rechnung bitte", words: ["Rechnung", "Die", "bitte"], correct: ["Die", "Rechnung", "bitte"] }
+          { level: 'A2', title: 'Chapter 1: Einkaufen (ဈေးဝယ်ခြင်း)', desc: 'Shopping', q: [
+            { type: 'choice', prompt: "'Wie viel kostet das?' ၏ အဓိပ္ပာယ်ကို ရွေးပါ", audio: "Wie viel kostet das?", choices: ["ဒါ ဘယ်လောက်ကျလဲ?", "အိမ်သာဘယ်မှာလဲ?", "စားလို့ကောင်းတယ်"], correct: "ဒါ ဘယ်လောက်ကျလဲ?" }
           ]},
-          { level: 'A2', title: 'Chapter 1: Wegbeschreibung (လမ်းမေးခြင်း)', desc: 'Directions & Places', q: [
-            { type: 'choice', prompt: "'Wo ist der Bahnhof?' ၏ အဓိပ္ပာယ်ကို ရွေးပါ", audio: "Wo ist der Bahnhof?", choices: ["ဘူတာရုံ ဘယ်မှာလဲ?", "ဟိုတယ် ဘယ်မှာလဲ?", "ကားမှတ်တိုင် ဘယ်မှာလဲ?"], correct: "ဘူတာရုံ ဘယ်မှာလဲ?" }
-          ]},
-          { level: 'B1', title: 'Chapter 1: Im Büro (ရုံးတွင်းသုံး)', desc: 'Office & Meeting', q: [
-            { type: 'choice', prompt: "'Die Besprechung' ၏ အဓိပ္ပာယ်ကို ရွေးပါ", audio: "Die Besprechung", choices: ["အစည်းအဝေး", "စာချုပ်", "လစာ"], correct: "အစည်းအဝေး" },
-            { type: 'build', prompt: "ဝါကျစီပါ: 'အချိန်ပိုဆင်းခြင်း (OT)'", audio: "Ich mache Überstunden", words: ["mache", "Ich", "Überstunden"], correct: ["Ich", "mache", "Überstunden"] }
-          ]},
-          { level: 'B2', title: 'Chapter 1: Bewerbungsgespräch', desc: 'Job Interview', q: [
-            { type: 'choice', prompt: "'Berufserfahrung' ၏ အဓိပ္ပာယ်ကို ရွေးပါ", audio: "Berufserfahrung", choices: ["အလုပ်အတွေ့အကြုံ", "ပညာအရည်အချင်း", "လစာ"], correct: "အလုပ်အတွေ့အကြုံ" }
-          ]},
-          { level: 'C1', title: 'Chapter 1: Verhandlung & Verträge', desc: 'Negotiation', q: [
-            { type: 'choice', prompt: "'Der Arbeitsvertrag' ၏ အဓိပ္ပာယ်ကို ရွေးပါ", audio: "Der Arbeitsvertrag", choices: ["အလုပ်ခန့်ထားမှု စာချုပ်", "အစီရင်ခံစာ", "ငွေတောင်းခံလွှာ"], correct: "အလုပ်ခန့်ထားမှု စာချုပ်" }
+          { level: 'B1', title: 'Chapter 1: Im Büro (ရုံးတွင်းသုံး)', desc: 'Office', q: [
+            { type: 'choice', prompt: "'Die Besprechung' ၏ အဓိပ္ပာယ်ကို ရွေးပါ", audio: "Die Besprechung", choices: ["အစည်းအဝေး", "စာချုပ်", "လစာ"], correct: "အစည်းအဝေး" }
           ]},
           { level: 'C2', title: 'Chapter 1: Deutsche Redewendungen', desc: 'Native German Idioms', q: [
-            { type: 'choice', prompt: "'Ich verstehe nur Bahnhof' ၏ သဘောကို ရွေးပါ", audio: "Ich verstehe nur Bahnhof", choices: ["ဘာမှနားမလည်ပါ", "ဘူတာရုံသွားမည်", "ရထားစီးမည်"], correct: "ဘာမှနားမလည်ပါ" },
-            { type: 'build', prompt: "ဝါကျစီပါ: 'Daumen drücken (ကံကောင်းပါစေဟု ဆုတောင်းပေးသည်)'", audio: "Ich drücke die Daumen", words: ["drücke", "Ich", "die", "Daumen"], correct: ["Ich", "drücke", "die", "Daumen"] }
+            { type: 'choice', prompt: "'Ich verstehe nur Bahnhof' ၏ သဘောကို ရွေးပါ", audio: "Ich verstehe nur Bahnhof", choices: ["ဘာမှနားမလည်ပါ", "ဘူတာရုံသွားမည်", "ရထားစီးမည်"], correct: "ဘာမှနားမလည်ပါ" }
           ]}
         ]
       },
-
-      // 4. Spanish (🇪🇸)
       es: {
         voice: 'es-ES',
         chapters: [
           { level: 'A1', title: 'Chapter 1: Saludos (နှုတ်ဆက်ခြင်း)', desc: 'Basic Greetings', q: [
             { type: 'choice', prompt: "'မင်္ဂလာပါ' ၏ စပိန်စကားကို ရွေးပါ", audio: "Hola", choices: ["Hola", "Gracias", "Adiós"], correct: "Hola" },
-            { type: 'build', prompt: "ဝါကျစီပါ: 'ကျေးဇူးအများကြီးတင်ပါတယ်'", audio: "Muchas gracias", words: ["gracias", "Muchas", "Por favor"], correct: ["Muchas", "gracias"] },
-            { type: 'choice', prompt: "'¿Cómo estás?' ၏ အဓိပ္ပာယ်ကို ရွေးပါ", audio: "¿Cómo estás?", choices: ["နေကောင်းလား?", "နာမည်ဘယ်လိုခေါ်လဲ?", "ဘယ်သွားမလဲ?"], correct: "နေကောင်းလား?" }
+            { type: 'build', prompt: "ဝါကျစီပါ: 'ကျေးဇူးအများကြီးတင်ပါတယ်'", audio: "Muchas gracias", words: ["gracias", "Muchas", "Por favor"], correct: ["Muchas", "gracias"] }
           ]},
-          { level: 'A1', title: 'Chapter 2: En la tienda (ဈေးဝယ်ခြင်း)', desc: 'Shopping & Prices', q: [
-            { type: 'choice', prompt: "'¿Cuánto cuesta?' ၏ အဓိပ္ပာယ်ကို ရွေးပါ", audio: "¿Cuánto cuesta?", choices: ["ဘယ်လောက်ကျလဲ?", "ဘယ်သွားမလဲ?", "နေကောင်းလား?"], correct: "ဘယ်လောက်ကျလဲ?" },
-            { type: 'build', prompt: "ဝါကျစီပါ: 'ဘေလ်ရှင်းပေးပါ'", audio: "La cuenta por favor", words: ["cuenta", "La", "por", "favor"], correct: ["La", "cuenta", "por", "favor"] }
-          ]},
-          { level: 'A2', title: 'Chapter 1: Direcciones (လမ်းမေးခြင်း)', desc: 'Directions', q: [
-            { type: 'choice', prompt: "'¿Dónde está el baño?' ၏ အဓိပ္ပာယ်ကို ရွေးပါ", audio: "¿Dónde está el baño?", choices: ["အိမ်သာဘယ်မှာလဲ?", "ဟိုတယ်ဘယ်မှာလဲ?", "စားသောက်ဆိုင်ဘယ်မှာလဲ?"], correct: "အိမ်သာဘယ်မှာလဲ?" }
-          ]},
-          { level: 'B1', title: 'Chapter 1: Trabajo y Oficina', desc: 'Workplace', q: [
-            { type: 'choice', prompt: "'La reunión' ၏ အဓိပ္ပာယ်ကို ရွေးပါ", audio: "La reunión", choices: ["အစည်းအဝေး", "အစီရင်ခံစာ", "စာချုပ်"], correct: "အစည်းအဝေး" },
-            { type: 'build', prompt: "ဝါကျစီပါ: 'အီးမေးလ် ပို့ပေးပါမည်'", audio: "Enviaré un correo", words: ["correo", "Enviaré", "un"], correct: ["Enviaré", "un", "correo"] }
-          ]},
-          { level: 'B2', title: 'Chapter 1: Entrevista de trabajo', desc: 'Job Interview', q: [
-            { type: 'choice', prompt: "'El salario' ၏ အဓိပ္ပာယ်ကို ရွေးပါ", audio: "El salario", choices: ["လစာ", "အလုပ်ချိန်", "အတွေ့အကြုံ"], correct: "လစာ" }
-          ]},
-          { level: 'C1', title: 'Chapter 1: Negociación Estratégica', desc: 'Negotiation', q: [
-            { type: 'choice', prompt: "'El contrato' ၏ အဓိပ္ပာယ်ကို ရွေးပါ", audio: "El contrato", choices: ["စာချုပ်", "ပြေစာ", "ဘောက်ချာ"], correct: "စာချုပ်" }
+          { level: 'A2', title: 'Chapter 1: En la tienda (ဈေးဝယ်ခြင်း)', desc: 'Shopping', q: [
+            { type: 'choice', prompt: "'¿Cuánto cuesta?' ၏ အဓိပ္ပာယ်ကို ရွေးပါ", audio: "¿Cuánto cuesta?", choices: ["ဘယ်လောက်ကျလဲ?", "ဘယ်သွားမလဲ?", "နေကောင်းလား?"], correct: "ဘယ်လောက်ကျလဲ?" }
           ]},
           { level: 'C2', title: 'Chapter 1: Modismos Nativos', desc: 'Native Spanish Idioms', q: [
-            { type: 'choice', prompt: "'Tomar el pelo' ၏ အဓိပ္ပာယ်ကို ရွေးပါ", audio: "Tomar el pelo", choices: ["စနောက်ကျီစယ်သည်", "ဆံပင်ညှပ်သည်", "ခေါင်းလျှော်သည်"], correct: "စနောက်ကျီစယ်သည်" },
-            { type: 'build', prompt: "ဝါကျစီပါ: 'Costar un ojo de la cara (ဈေးအလွန်ကြီးသည်)'", audio: "Cuesta un ojo", words: ["ojo", "Cuesta", "un"], correct: ["Cuesta", "un", "ojo"] }
+            { type: 'choice', prompt: "'Tomar el pelo' ၏ အဓိပ္ပာယ်ကို ရွေးပါ", audio: "Tomar el pelo", choices: ["စနောက်ကျီစယ်သည်", "ဆံပင်ညှပ်သည်", "ခေါင်းလျှော်သည်"], correct: "စနောက်ကျီစယ်သည်" }
           ]}
         ]
       },
-
-      // 5. French (🇫🇷)
       fr: {
         voice: 'fr-FR',
         chapters: [
           { level: 'A1', title: 'Chapter 1: Salutations (နှုတ်ဆက်ခြင်း)', desc: 'Basic Greetings', q: [
             { type: 'choice', prompt: "'မင်္ဂလာပါ' ၏ ပြင်သစ်စကားကို ရွေးပါ", audio: "Bonjour", choices: ["Bonjour", "Merci", "Au revoir"], correct: "Bonjour" },
-            { type: 'build', prompt: "ဝါကျစီပါ: 'ကျေးဇူးအထူးတင်ပါတယ်'", audio: "Merci beaucoup", words: ["beaucoup", "Merci", "Pardon"], correct: ["Merci", "beaucoup"] },
-            { type: 'choice', prompt: "'Comment allez-vous?' ၏ အဓိပ္ပာယ်ကို ရွေးပါ", audio: "Comment allez-vous?", choices: ["နေကောင်းလား?", "ဘယ်သွားမလို့လဲ?", "ဘာလုပ်နေလဲ?"], correct: "နေကောင်းလား?" }
-          ]},
-          { level: 'A1', title: 'Chapter 2: Au restaurant (စားသောက်ဆိုင်)', desc: 'Dining & Food', q: [
-            { type: 'choice', prompt: "'C\\'est combien?' ၏ အဓိပ္ပာယ်ကို ရွေးပါ", audio: "C'est combien?", choices: ["ဒါ ဘယ်လောက်လဲ?", "အိမ်သာဘယ်မှာလဲ?", "စားကောင်းတယ်"], correct: "ဒါ ဘယ်လောက်လဲ?" },
-            { type: 'build', prompt: "ဝါကျစီပါ: 'ဘေလ်ရှင်းပေးပါ'", audio: "L'addition s'il vous plaît", words: ["L'addition", "s'il", "vous", "plaît"], correct: ["L'addition", "s'il", "vous", "plaît"] }
-          ]},
-          { level: 'A2', title: 'Chapter 1: Demander le chemin (လမ်းမေးခြင်း)', desc: 'Directions', q: [
-            { type: 'choice', prompt: "'Où sont les toilettes?' ၏ အဓိပ္ပာယ်ကို ရွေးပါ", audio: "Où sont les toilettes?", choices: ["အိမ်သာ ဘယ်မှာလဲ?", "ဘူတာ ဘယ်မှာလဲ?", "ဟိုတယ် ဘယ်မှာလဲ?"], correct: "အိမ်သာ ဘယ်မှာလဲ?" }
-          ]},
-          { level: 'B1', title: 'Chapter 1: Au travail (လုပ်ငန်းခွင်)', desc: 'Workplace', q: [
-            { type: 'choice', prompt: "'La réunion' ၏ အဓိပ္ပာယ်ကို ရွေးပါ", audio: "La réunion", choices: ["အစည်းအဝေး", "စာရွက်စာတမ်း", "လစာ"], correct: "အစည်းအဝေး" },
-            { type: 'build', prompt: "ဝါကျစီပါ: 'အချိန်ပိုဆင်းခြင်း (OT)'", audio: "Heures supplémentaires", words: ["supplémentaires", "Heures"], correct: ["Heures", "supplémentaires"] }
-          ]},
-          { level: 'B2', title: 'Chapter 1: Entretien d\\'embauche', desc: 'Job Interview', q: [
-            { type: 'choice', prompt: "'Le salaire' ၏ အဓိပ္ပာယ်ကို ရွေးပါ", audio: "Le salaire", choices: ["လစာ", "အလုပ်ချိန်", "အတွေ့အကြုံ"], correct: "လစာ" }
-          ]},
-          { level: 'C1', title: 'Chapter 1: Gestion & Stratégie', desc: 'Strategy', q: [
-            { type: 'choice', prompt: "'Le contrat de travail' ၏ အဓိပ္ပာယ်ကို ရွေးပါ", audio: "Le contrat de travail", choices: ["အလုပ်ခန့်ထားမှု စာချုပ်", "အစီရင်ခံစာ", "ငွေတောင်းခံလွှာ"], correct: "အလုပ်ခန့်ထားမှု စာချုပ်" }
+            { type: 'build', prompt: "ဝါကျစီပါ: 'ကျေးဇူးအထူးတင်ပါတယ်'", audio: "Merci beaucoup", words: ["beaucoup", "Merci", "Pardon"], correct: ["Merci", "beaucoup"] }
           ]},
           { level: 'C2', title: 'Chapter 1: Expressions Françaises', desc: 'Native French Idioms', q: [
-            { type: 'choice', prompt: "'Coup de foudre' ၏ အဓိပ္ပာယ်ကို ရွေးပါ", audio: "Coup de foudre", choices: ["ပထမဆုံးမြင်မြင်ချင်း အချစ်", "မိုးကြိုးပစ်ခြင်း", "မတော်တဆဖြစ်ခြင်း"], correct: "ပထမဆုံးမြင်မြင်ချင်း အချစ်" },
-            { type: 'build', prompt: "ဝါကျစီပါ: 'Poser un lapin (ချိန်းပြီး မလာဘဲ လေထိုးသည်)'", audio: "Poser un lapin", words: ["lapin", "Poser", "un"], correct: ["Poser", "un", "lapin"] }
+            { type: 'choice', prompt: "'Coup de foudre' ၏ အဓိပ္ပာယ်ကို ရွေးပါ", audio: "Coup de foudre", choices: ["ပထမဆုံးမြင်မြင်ချင်း အချစ်", "မိုးကြိုးပစ်ခြင်း", "မတော်တဆဖြစ်ခြင်း"], correct: "ပထမဆုံးမြင်မြင်ချင်း အချစ်" }
           ]}
         ]
       },
-
-      // 6. Korean (🇰🇷)
       ko: {
         voice: 'ko-KR',
         chapters: [
           { level: 'A1', title: 'Chapter 1: 인사 (နှုတ်ဆက်ခြင်း)', desc: 'Basic Korean Greetings', q: [
             { type: 'choice', prompt: "'မင်္ဂလာပါ' ၏ ကိုရီးယားစကားကို ရွေးပါ", audio: "안녕하세요", choices: ["안녕하세요 (Annyeong)", "감사합니다", "맛있어요"], correct: "안녕하세요 (Annyeong)" },
-            { type: 'build', prompt: "ဝါကျစီပါ: 'ကျေးဇူးတင်ပါတယ်'", audio: "감사합니다", words: ["합니다", "감사", "안녕"], correct: ["감사", "합니다"] },
-            { type: 'choice', prompt: "'တွေ့ရတာ ဝမ်းသာပါတယ်' ကို ရွေးပါ", audio: "반갑습니다", choices: ["반갑습니다", "잘가요", "죄송합니다"], correct: "반갑습니다" }
-          ]},
-          { level: 'A1', title: 'Chapter 2: 식당과 쇼핑 (စားသောက်/ဈေးဝယ်)', desc: 'Shopping & Dining', q: [
-            { type: 'choice', prompt: "'얼마예요?' ၏ အဓိပ္ပာယ်ကို ရွေးပါ", audio: "얼마예요?", choices: ["ဘယ်လောက်လဲ?", "ဘယ်မှာလဲ?", "ဘာလဲ?"], correct: "ဘယ်လောက်လဲ?" },
-            { type: 'build', prompt: "ဝါကျစီပါ: 'ရေလေး ပေးပါ'", audio: "물 주세요", words: ["주세요", "물", "밥"], correct: ["물", "주세요"] }
-          ]},
-          { level: 'A2', title: 'Chapter 1: 길 찾기 (လမ်းမေးခြင်း)', desc: 'Directions', q: [
-            { type: 'choice', prompt: "'화장실 어디예요?' ၏ အဓိပ္ပာယ်ကို ရွေးပါ", audio: "화장실 어디예요?", choices: ["အိမ်သာ ဘယ်မှာလဲ?", "ဘူတာ ဘယ်မှာလဲ?", "ဟိုတယ် ဘယ်မှာလဲ?"], correct: "အိမ်သာ ဘယ်မှာလဲ?" }
-          ]},
-          { level: 'B1', title: 'Chapter 1: 회사 생활 (ရုံးတွင်းသုံး)', desc: 'Workplace Communication', q: [
-            { type: 'choice', prompt: "'회의 (Hwe-ui)' ၏ အဓိပ္ပာယ်ကို ရွေးပါ", audio: "회의", choices: ["အစည်းအဝေး", "အချိန်ပိုဆင်းခြင်း", "လစာ"], correct: "အစည်းအဝေး" },
-            { type: 'build', prompt: "ဝါကျစီပါ: 'ဒီနေ့ အချိန်ပို(OT) ဆင်းသည်'", audio: "오늘 야근해요", words: ["야근해요", "오늘", "내일"], correct: ["오늘", "야근해요"] }
-          ]},
-          { level: 'B2', title: 'Chapter 1: 면접과 커리어 (အင်တာဗျူး)', desc: 'Job Interview', q: [
-            { type: 'choice', prompt: "'월급 (Wol-geup)' ၏ အဓိပ္ပာယ်ကို ရွေးပါ", audio: "월급", choices: ["လစာ", "အလုပ်ချိန်", "အတွေ့အကြုံ"], correct: "လစာ" }
-          ]},
-          { level: 'C1', title: 'Chapter 1: 계약과 비즈니스 (စာချုပ်)', desc: 'Business Contracts', q: [
-            { type: 'choice', prompt: "'계약서 (Gye-yak-seo)' ၏ အဓိပ္ပာယ်ကို ရွေးပါ", audio: "계약서", choices: ["စာချုပ်စာတမ်း", "အစီရင်ခံစာ", "ငွေတောင်းခံလွှာ"], correct: "စာချုပ်စာတမ်း" }
+            { type: 'build', prompt: "ဝါကျစီပါ: 'ကျေးဇူးတင်ပါတယ်'", audio: "감사합니다", words: ["합니다", "감사", "안녕"], correct: ["감사", "합니다"] }
           ]},
           { level: 'C2', title: 'Chapter 1: 한국어 관용구 (Native Slang)', desc: 'Native Korean Idioms', q: [
-            { type: 'choice', prompt: "'대박 (Daebak)' ၏ အဓိပ္ပာယ်ကို ရွေးပါ", audio: "대박", choices: ["အရမ်းမိုက်တယ် / အလန်းစား", "စိတ်မကောင်းပါ", "ဗိုက်ဆာတယ်"], correct: "အရမ်းမိုက်တယ် / အလန်းစား" },
-            { type: 'build', prompt: "ဝါကျစီပါ: '눈이 높다 (အဆင့်အတန်း/အကြိုက် ကြီးလွန်းသည်)'", audio: "눈이 높아요", words: ["높아요", "눈이", "귀가"], correct: ["눈이", "높아요"] }
+            { type: 'choice', prompt: "'대박 (Daebak)' ၏ အဓိပ္ပာယ်ကို ရွေးပါ", audio: "대박", choices: ["အရမ်းမိုက်တယ် / အလန်းစား", "စိတ်မကောင်းပါ", "ဗိုက်ဆာတယ်"], correct: "အရမ်းမိုက်တယ် / အလန်းစား" }
           ]}
         ]
       },
-
-      // 7. Japanese (🇯🇵)
       ja: {
         voice: 'ja-JP',
         chapters: [
           { level: 'A1', title: 'Chapter 1: 挨拶 (နှုတ်ဆက်ခြင်း)', desc: 'Basic Japanese Greetings', q: [
             { type: 'choice', prompt: "'မင်္ဂလာပါ' ၏ ဂျပန်စကားကို ရွေးပါ", audio: "こんにちは", choices: ["こんにちは (Konnichiwa)", "ありがとう", "さようなら"], correct: "こんにちは (Konnichiwa)" },
-            { type: 'build', prompt: "ဝါကျစီပါ: 'ကျေးဇူးအများကြီးတင်ပါတယ်'", audio: "ありがとうございます", words: ["ございます", "ありがとう", "すみません"], correct: ["ありがとう", "ございます"] },
-            { type: 'choice', prompt: "'မင်္ဂလာနံနက်ခင်းပါ' ကို ရွေးပါ", audio: "おはようございます", choices: ["おはようございます", "こんばんは", "いただきます"], correct: "おはようございます" }
-          ]},
-          { level: 'A1', title: 'Chapter 2: 買い物とレストラン (ဈေးဝယ်/စားသောက်)', desc: 'Shopping & Dining', q: [
-            { type: 'choice', prompt: "'いくらですか' ၏ အဓိပ္ပာယ်ကို ရွေးပါ", audio: "いくらですか", choices: ["ဘယ်လောက်ကျလဲ?", "အိမ်သာဘယ်မှာလဲ?", "စားကောင်းတယ်"], correct: "ဘယ်လောက်ကျလဲ?" },
-            { type: 'build', prompt: "ဝါကျစီပါ: 'ဘေလ်ရှင်းပေးပါ'", audio: "お会計をお願いします", words: ["お願いします", "お会計を", "水を"], correct: ["お会計を", "お願いします"] }
-          ]},
-          { level: 'A2', title: 'Chapter 1: 道案内 (လမ်းမေးခြင်း)', desc: 'Directions', q: [
-            { type: 'choice', prompt: "'トイレはどこですか' ၏ အဓိပ္ပာယ်ကို ရွေးပါ", audio: "トイレはどこですか", choices: ["အိမ်သာ ဘယ်မှာလဲ?", "ဘူတာ ဘယ်မှာလဲ?", "ဟိုတယ် ဘယ်မှာလဲ?"], correct: "အိမ်သာ ဘယ်မှာလဲ?" }
-          ]},
-          { level: 'B1', title: 'Chapter 1: ビジネス日本語 (ရုံးသုံး)', desc: 'Business Japanese', q: [
-            { type: 'choice', prompt: "'会議 (Kaigi)' ၏ အဓိပ္ပာယ်ကို ရွေးပါ", audio: "会議", choices: ["အစည်းအဝေး", "စာရွက်စာတမ်း", "လစာ"], correct: "အစည်းအဝေး" },
-            { type: 'build', prompt: "ဝါကျစီပါ: 'အချိန်ပိုလုပ်ခြင်း (OT)'", audio: "残業をします", words: ["します", "残業を", "仕事を"], correct: ["残業を", "します"] }
-          ]},
-          { level: 'B2', title: 'Chapter 1: 面接とキャリア (အင်တာဗျူး)', desc: 'Job Interview', q: [
-            { type: 'choice', prompt: "'給料 (Kyuuryou)' ၏ အဓိပ္ပာယ်ကို ရွေးပါ", audio: "給料", choices: ["လစာ", "အလုပ်ချိန်", "အတွေ့အကြုံ"], correct: "လစာ" }
-          ]},
-          { level: 'C1', title: 'Chapter 1: 契約と交渉 (စာချုပ်)', desc: 'Contracts & Negotiation', q: [
-            { type: 'choice', prompt: "'契約書 (Keiyakusho)' ၏ အဓိပ္ပာယ်ကို ရွေးပါ", audio: "契約書", choices: ["စာချုပ်စာတမ်း", "အစီရင်ခံစာ", "ငွေတောင်းခံလွှာ"], correct: "စာချုပ်စာတမ်း" }
+            { type: 'build', prompt: "ဝါကျစီပါ: 'ကျေးဇူးအများကြီးတင်ပါတယ်'", audio: "ありがとうございます", words: ["ございます", "ありがとう", "すみません"], correct: ["ありがとう", "ございます"] }
           ]},
           { level: 'C2', title: 'Chapter 1: 日本の慣用句 (Native Slang)', desc: 'Native Japanese Idioms', q: [
-            { type: 'choice', prompt: "'猫の手も借りたい' ၏ သဘောကို ရွေးပါ", audio: "猫の手も借りたい", choices: ["အလွန်အမင်း အလုပ်များနေသည်", "ကြောင်မွေးချင်သည်", "ကြောင်ကို ကူညီသည်"], correct: "အလွန်အမင်း အလုပ်များနေသည်" },
-            { type: 'build', prompt: "ဝါကျစီပါ: '油を売る (အလုပ်မလုပ်ဘဲ အချိန်ဖြုန်းသည်)'", audio: "油を売る", words: ["売る", "油を", "買う"], correct: ["油を", "売る"] }
+            { type: 'choice', prompt: "'猫の手も借りたい' ၏ သဘောကို ရွေးပါ", audio: "猫の手も借りたい", choices: ["အလွန်အမင်း အလုပ်များနေသည်", "ကြောင်မွေးချင်သည်", "ကြောင်ကို ကူညီသည်"], correct: "အလွန်အမင်း အလုပ်များနေသည်" }
           ]}
         ]
       },
-
-      // 8. Italian (🇮🇹)
       it: {
         voice: 'it-IT',
         chapters: [
           { level: 'A1', title: 'Chapter 1: Saluti (နှုတ်ဆက်ခြင်း)', desc: 'Basic Italian Greetings', q: [
             { type: 'choice', prompt: "'မင်္ဂလာပါ' ၏ အီတလီစကားကို ရွေးပါ", audio: "Ciao", choices: ["Ciao", "Grazie", "Prego"], correct: "Ciao" },
-            { type: 'build', prompt: "ဝါကျစီပါ: 'ကျေးဇူးအများကြီးတင်ပါတယ်'", audio: "Grazie mille", words: ["mille", "Grazie", "Per favore"], correct: ["Grazie", "mille"] },
-            { type: 'choice', prompt: "'Come stai?' ၏ အဓိပ္ပာယ်ကို ရွေးပါ", audio: "Come stai?", choices: ["နေကောင်းလား?", "ဘယ်သွားမလို့လဲ?", "နာမည်ဘယ်လိုခေါ်လဲ?"], correct: "နေကောင်းလား?" }
-          ]},
-          { level: 'A1', title: 'Chapter 2: Al Ristorante (စားသောက်ဆိုင်)', desc: 'Dining & Food', q: [
-            { type: 'choice', prompt: "'Quanto costa?' ၏ အဓိပ္ပာယ်ကို ရွေးပါ", audio: "Quanto costa?", choices: ["ဘယ်လောက်ကျလဲ?", "ဘယ်သွားမလဲ?", "အိမ်သာဘယ်မှာလဲ?"], correct: "ဘယ်လောက်ကျလဲ?" },
-            { type: 'build', prompt: "ဝါကျစီပါ: 'ဘေလ်ရှင်းပေးပါ'", audio: "Il conto per favore", words: ["conto", "Il", "per", "favore"], correct: ["Il", "conto", "per", "favore"] }
-          ]},
-          { level: 'A2', title: 'Chapter 1: Chiedere la strada (လမ်းမေးခြင်း)', desc: 'Directions', q: [
-            { type: 'choice', prompt: "'Dov\\'è il bagno?' ၏ အဓိပ္ပာယ်ကို ရွေးပါ", audio: "Dov'è il bagno?", choices: ["အိမ်သာ ဘယ်မှာလဲ?", "ဘူတာ ဘယ်မှာလဲ?", "ဟိုတယ် ဘယ်မှာလဲ?"], correct: "အိမ်သာ ဘယ်မှာလဲ?" }
-          ]},
-          { level: 'B1', title: 'Chapter 1: Lavoro e Ufficio (လုပ်ငန်းခွင်)', desc: 'Workplace', q: [
-            { type: 'choice', prompt: "'La riunione' ၏ အဓိပ္ပာယ်ကို ရွေးပါ", audio: "La riunione", choices: ["အစည်းအဝေး", "စာချုပ်", "လစာ"], correct: "အစည်းအဝေး" },
-            { type: 'build', prompt: "ဝါကျစီပါ: 'အချိန်ပိုဆင်းခြင်း (OT)'", audio: "Fare gli straordinari", words: ["straordinari", "Fare", "gli"], correct: ["Fare", "gli", "straordinari"] }
-          ]},
-          { level: 'B2', title: 'Chapter 1: Colloquio di lavoro', desc: 'Job Interview', q: [
-            { type: 'choice', prompt: "'Lo stipendio' ၏ အဓိပ္ပာယ်ကို ရွေးပါ", audio: "Lo stipendio", choices: ["လစာ", "အလုပ်ချိန်", "အတွေ့အကြုံ"], correct: "လစာ" }
-          ]},
-          { level: 'C1', title: 'Chapter 1: Negoziazione e Contratti', desc: 'Contracts', q: [
-            { type: 'choice', prompt: "'Il contratto di lavoro' ၏ အဓိပ္ပာယ်ကို ရွေးပါ", audio: "Il contratto di lavoro", choices: ["အလုပ်ခန့်ထားမှု စာချုပ်", "အစီရင်ခံစာ", "ငွေတောင်းခံလွှာ"], correct: "အလုပ်ခန့်ထားမှု စာချုပ်" }
+            { type: 'build', prompt: "ဝါကျစီပါ: 'ကျေးဇူးအများကြီးတင်ပါတယ်'", audio: "Grazie mille", words: ["mille", "Grazie", "Per favore"], correct: ["Grazie", "mille"] }
           ]},
           { level: 'C2', title: 'Chapter 1: Modi di dire Italiani', desc: 'Native Italian Idioms', q: [
-            { type: 'choice', prompt: "'In bocca al lupo' ၏ သဘောကို ရွေးပါ", audio: "In bocca al lupo", choices: ["ကံကောင်းပါစေ (Good luck)", "ဝံပုလွေလိုက်နေသည်", "သတိထားပါ"], correct: "ကံကောင်းပါစေ (Good luck)" },
-            { type: 'build', prompt: "ဝါကျစီပါ: 'Cheaters/Fake: Far vedere i sorci verdi'", audio: "Far vedere i sorci verdi", words: ["vedere", "Far", "i", "sorci", "verdi"], correct: ["Far", "vedere", "i", "sorci", "verdi"] }
+            { type: 'choice', prompt: "'In bocca al lupo' ၏ သဘောကို ရွေးပါ", audio: "In bocca al lupo", choices: ["ကံကောင်းပါစေ (Good luck)", "ဝံပုလွေလိုက်နေသည်", "သတိထားပါ"], correct: "ကံကောင်းပါစေ (Good luck)" }
           ]}
         ]
       }
@@ -590,7 +461,7 @@
     document.getElementById('xpCount').innerText = xp;
 
     function updateTabCounts() {
-      const all = fullCurriculum[curLang].chapters;
+      const all = fullCurriculum[curLang] ? fullCurriculum[curLang].chapters : [];
       document.getElementById('totalChapterCount').innerText = all.length;
       document.getElementById('tabALL').innerText = `အားလုံး (${all.length})`;
 
@@ -605,10 +476,15 @@
       updateTabCounts();
       const container = document.getElementById('chapterContainer');
       container.innerHTML = '';
-      const list = fullCurriculum[curLang].chapters;
+      const list = fullCurriculum[curLang] ? fullCurriculum[curLang].chapters : [];
 
       const filtered = (curLevelFilter === 'ALL') ? list : list.filter(c => c.level === curLevelFilter);
       document.getElementById('currentViewCount').innerText = `${filtered.length} ခု`;
+
+      if (filtered.length === 0) {
+        container.innerHTML = '<div style="text-align:center; padding:30px; color:#888;">ဤ Level အတွက် သင်ခန်းစာများ မကြာမီ လာပါမည်။</div>';
+        return;
+      }
 
       filtered.forEach((ch, index) => {
         container.innerHTML += `
@@ -655,7 +531,7 @@
 
       document.getElementById('curriculumView').style.display = 'none';
       document.getElementById('gameScreen').style.display = 'flex';
-      document.getElementById('bottomBar').style.display = 'flex';
+      document.getElementById('bottomBar').style.display = 'block';
 
       loadQuestion();
     }
@@ -781,7 +657,10 @@
       renderChapters();
     }
 
-    renderChapters();
+    // Initialize UI on load
+    window.onload = () => {
+      renderChapters();
+    };
   </script>
 </body>
 </html>
