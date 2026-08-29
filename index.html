@@ -3,15 +3,17 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>All-in-One Multi-Category Language App</title>
+  <title>Global Free Language Hub</title>
   <style>
     :root {
       --primary: #00897b;
-      --primary-dark: #00695c;
-      --bg: #f4f6f8;
-      --card-bg: #ffffff;
-      --text: #222222;
+      --primary-dark: #004d40;
+      --accent: #ff6f00;
+      --bg: #f4f7f6;
+      --card: #ffffff;
+      --text: #212121;
     }
+    * { box-sizing: border-box; }
     body {
       margin: 0;
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
@@ -24,131 +26,86 @@
     header {
       background-color: var(--primary);
       color: white;
-      padding: 12px 16px;
+      padding: 14px 16px;
       text-align: center;
       font-size: 18px;
       font-weight: bold;
     }
-    .lang-bar {
+    .lang-selector-bar {
       display: flex;
-      overflow-x: auto;
-      background: #ffffff;
-      padding: 8px;
-      gap: 8px;
-      border-bottom: 1px solid #ddd;
-    }
-    .lang-btn {
-      flex: 0 0 auto;
-      padding: 6px 14px;
-      border-radius: 20px;
-      border: 1px solid #00897b;
       background: white;
-      color: #00897b;
-      font-size: 13px;
-      font-weight: bold;
-      cursor: pointer;
-    }
-    .lang-btn.active {
-      background: #00897b;
-      color: white;
-    }
-    .category-bar {
-      display: flex;
-      overflow-x: auto;
-      background: #fafafa;
-      padding: 8px 12px;
-      gap: 8px;
+      padding: 10px 16px;
+      gap: 10px;
+      align-items: center;
       border-bottom: 1px solid #e0e0e0;
     }
-    .cat-btn {
-      flex: 0 0 auto;
-      padding: 5px 12px;
-      border-radius: 6px;
-      border: 1px solid #ccc;
-      background: white;
-      color: #555;
-      font-size: 12px;
-      cursor: pointer;
-    }
-    .cat-btn.active {
-      background: #37474f;
-      color: white;
-      border-color: #37474f;
-    }
-    .search-box {
-      padding: 8px 16px;
-      background: #ffffff;
-      border-bottom: 1px solid #eee;
-    }
-    .search-input {
-      width: 100%;
+    .lang-selector-bar select {
+      flex: 1;
       padding: 8px 12px;
       border-radius: 8px;
-      border: 1px solid #ccc;
-      box-sizing: border-box;
-      font-size: 13px;
+      border: 1px solid var(--primary);
+      font-size: 14px;
+      outline: none;
+      background: #fdfdfd;
+      font-weight: bold;
+      color: var(--primary-dark);
     }
     main {
       flex: 1;
       overflow-y: auto;
       padding: 16px;
-      padding-bottom: 80px;
+      padding-bottom: 75px;
     }
     .card {
-      background: var(--card-bg);
+      background: var(--card);
       border-radius: 12px;
-      padding: 14px;
-      margin-bottom: 12px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+      padding: 16px;
+      margin-bottom: 14px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
     }
-    .word-row {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
+    .input-box {
+      width: 100%;
+      height: 70px;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 15px;
+      resize: none;
+      outline: none;
     }
-    .word-text {
-      font-size: 18px;
+    .btn-main {
+      width: 100%;
+      padding: 12px;
+      background: var(--primary);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 15px;
       font-weight: bold;
-      color: var(--primary-dark);
+      margin-top: 8px;
+      cursor: pointer;
     }
-    .phonetic {
-      font-size: 13px;
-      color: #666;
-      margin-top: 2px;
+    .btn-speak {
+      background: #e0f2f1;
+      border: none;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      font-size: 18px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
     .badge {
       display: inline-block;
       font-size: 11px;
       background: #e0f2f1;
       color: #00796b;
-      padding: 2px 8px;
+      padding: 3px 8px;
       border-radius: 4px;
-      margin-top: 4px;
-    }
-    .meaning {
-      margin-top: 8px;
-      font-size: 14px;
-      font-weight: 500;
-    }
-    .example {
-      margin-top: 4px;
-      font-size: 12px;
-      color: #555;
-      background: #f9f9f9;
-      padding: 6px;
-      border-radius: 6px;
-    }
-    .btn-speak {
-      background: #e0f2f1;
-      border: none;
-      border-radius: 50%;
-      width: 38px;
-      height: 38px;
-      font-size: 18px;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      margin-bottom: 6px;
+      font-weight: bold;
     }
     .nav {
       position: fixed;
@@ -172,15 +129,21 @@
       color: var(--primary);
       border-top: 3px solid var(--primary);
     }
+    .quiz-card {
+      background: white;
+      border-radius: 12px;
+      padding: 20px;
+      text-align: center;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    }
     .quiz-option {
       width: 100%;
       padding: 14px;
-      margin-bottom: 10px;
+      margin: 8px 0;
       border-radius: 8px;
-      border: 2px solid #ddd;
+      border: 2px solid #e0e0e0;
       background: white;
       font-size: 15px;
-      text-align: center;
       cursor: pointer;
     }
     .quiz-option.correct { background: #c8e6c9; border-color: #4caf50; }
@@ -189,312 +152,258 @@
 </head>
 <body>
 
-  <header id="headerTitle">အထူးပြု ဘာသာစကား လေ့လာရေး</header>
+  <header id="appTitle">Global Free Language Hub</header>
 
-  <!-- Language Switcher Bar -->
-  <div class="lang-bar">
-    <button class="lang-btn active" onclick="selectLang('en', this)">🇬🇧 English</button>
-    <button class="lang-btn" onclick="selectLang('th', this)">🇹🇭 ไทย (Thai)</button>
-    <button class="lang-btn" onclick="selectLang('ja', this)">🇯🇵 日本語 (Japanese)</button>
-    <button class="lang-btn" onclick="selectLang('de', this)">🇩🇪 Deutsch (German)</button>
-    <button class="lang-btn" onclick="selectLang('fr', this)">🇫🇷 Français (French)</button>
+  <!-- Global Language Selector -->
+  <div class="lang-selector-bar">
+    <span style="font-size: 13px; font-weight: bold; color: #555;">လေ့လာမည့် ဘာသာ:</span>
+    <select id="targetLangSelect" onchange="onLanguageChange()">
+      <option value="en" data-voice="en-US">🇬🇧 English (အင်္ဂလိပ်)</option>
+      <option value="th" data-voice="th-TH">🇹🇭 ไทย (ထိုင်း)</option>
+      <option value="ja" data-voice="ja-JP">🇯🇵 日本語 (ဂျပန်)</option>
+      <option value="ko" data-voice="ko-KR">🇰🇷 한국어 (ကိုရီးယား)</option>
+      <option value="zh-CN" data-voice="zh-CN">🇨🇳 中文 (တရုတ်)</option>
+      <option value="de" data-voice="de-DE">🇩🇪 Deutsch (ဂျာမန်)</option>
+      <option value="fr" data-voice="fr-FR">🇫🇷 Français (ပြင်သစ်)</option>
+      <option value="es" data-voice="es-ES">🇪🇸 Español (စပိန်)</option>
+      <option value="ru" data-voice="ru-RU">🇷🇺 Русский (ရုရှား)</option>
+      <option value="ar" data-voice="ar-SA">🇸🇦 العربية (အာရဗီ)</option>
+    </select>
   </div>
 
-  <!-- Category Selector Bar -->
-  <div class="category-bar">
-    <button class="cat-btn active" onclick="selectCategory('all', this)">အားလုံး</button>
-    <button class="cat-btn" onclick="selectCategory('daily', this)">☕ နေ့စဉ်သုံး</button>
-    <button class="cat-btn" onclick="selectCategory('office', this)">💼 ရုံးသုံး</button>
-    <button class="cat-btn" onclick="selectCategory('shop', this)">🛒 ဈေးသုံး/ခရီးသွား</button>
-    <button class="cat-btn" onclick="selectCategory('work', this)">🛠️ လုပ်ငန်းခွင်သုံး</button>
-    <button class="cat-btn" onclick="selectCategory('school', this)">🎓 ကျောင်းသုံး</button>
-  </div>
+  <!-- TAB 1: စကားလုံးများ လေ့လာရန် -->
+  <main id="tabLearn">
+    <!-- Google AI Instant Dictionary Search -->
+    <div class="card">
+      <div style="font-weight: bold; margin-bottom: 6px; font-size: 14px; color: var(--primary);">🔍 Google ဖြင့် စကားလုံး/ဝါကျ အသစ်လေ့လာရန်</div>
+      <textarea id="searchWordInput" class="input-box" placeholder="မြန်မာလို (သို့) လေ့လာလိုသည့် ဘာသာစကားဖြင့် ရိုက်ထည့်ပါ..."></textarea>
+      <button class="btn-main" onclick="searchGoogleWord()">ရှာဖွေပြီး လေ့လာမှုစာရင်းထဲ ထည့်မည်</button>
+      <div id="searchResult" style="display:none; margin-top:12px; padding:10px; background:#e8f5e9; border-radius:8px;">
+        <div style="display:flex; justify-content:space-between; align-items:center;">
+          <div>
+            <div id="resTarget" style="font-size:18px; font-weight:bold; color:var(--primary-dark);">-</div>
+            <div id="resMeaning" style="font-size:14px; color:#333; margin-top:3px;">-</div>
+          </div>
+          <button class="btn-speak" onclick="speakText(currentSearchResult, currentVoice)">🔊</button>
+        </div>
+      </div>
+    </div>
 
-  <div class="search-box" id="searchArea">
-    <input type="text" class="search-input" id="searchBar" placeholder="🔍 စကားလုံး သို့မဟုတ် အဓိပ္ပာယ် ရှာဖွေပါ..." oninput="filterWords()">
-  </div>
-
-  <main id="tabVocab">
-    <div id="wordsList"></div>
+    <div style="font-weight: bold; margin: 16px 0 8px 0; color: #555; font-size: 14px;">📖 လေ့လာရန် မရှိမဖြစ် စကားလုံးများ</div>
+    <div id="vocabList"></div>
   </main>
 
-  <main id="tabQuiz" style="display: none; text-align: center;">
-    <div id="quizContainer">
-      <h2 id="quizWord" style="color: var(--primary); font-size: 24px; margin-top: 20px;">-</h2>
-      <p style="color: #666;">မှန်ကန်သော မြန်မာအဓိပ္ပာယ်ကို ရွေးပါ</p>
-      <div id="quizOptions" style="margin-top: 20px;"></div>
-      <button id="btnNextQuiz" onclick="nextQuizQuestion()" style="display:none; width:100%; padding:14px; background:var(--primary); color:white; border:none; border-radius:8px; font-size:16px; margin-top:20px;">နောက်တစ်ခု</button>
+  <!-- TAB 2: Quiz လေ့ကျင့်ရန် -->
+  <main id="tabQuiz" style="display: none;">
+    <div class="quiz-card">
+      <span class="badge" id="quizBadge">Quiz Time</span>
+      <h2 id="quizQuestion" style="color: var(--primary); margin: 12px 0 6px 0;">-</h2>
+      <button class="btn-speak" style="margin: 0 auto 14px auto;" onclick="speakText(currentQuizWord, currentVoice)">🔊</button>
+      <p style="color: #666; font-size: 14px; margin-bottom: 16px;">မှန်ကန်သော မြန်မာအဓိပ္ပာယ်ကို ရွေးချယ်ပါ</p>
+      <div id="quizOptions"></div>
+      <button id="btnNextQuiz" class="btn-main" style="display:none; margin-top:16px;" onclick="loadNextQuiz()">နောက်တစ်ခု ➡</button>
     </div>
   </main>
 
+  <!-- Bottom Navigation -->
   <div class="nav">
-    <button id="navVocab" class="active" onclick="switchTab('vocab')">📖 စကားလုံးများ</button>
-    <button id="navQuiz" onclick="switchTab('quiz')">🎯 Quiz စမ်းသပ်ရန်</button>
+    <button id="navLearn" class="active" onclick="switchTab('learn')">📚 လေ့လာရန်</button>
+    <button id="navQuiz" onclick="switchTab('quiz')">🎯 လေ့ကျင့်ရန် (Quiz)</button>
   </div>
 
   <script>
-    const database = {
-      en: {
-        code: 'en-US',
-        data: [
-          // ☕ နေ့စဉ်သုံး
-          { cat: "daily", word: "How are you?", phonetic: "/haʊ ɑːr juː/", meaning: "နေကောင်းလား?", example: "How are you doing today?" },
-          { cat: "daily", word: "Nice to meet you", phonetic: "/naɪs tuː miːt juː/", meaning: "တွေ့ရတာ ဝမ်းသာပါတယ်", example: "Nice to meet you, Mr. Alex." },
-          { cat: "daily", word: "Have a nice day", phonetic: "/hæv ə naɪs deɪ/", meaning: "သာယာသောနေ့လေး ဖြစ်ပါစေ", example: "Goodbye and have a nice day!" },
-          // 💼 ရုံးသုံး
-          { cat: "office", word: "Meeting", phonetic: "/ˈmiː.tɪŋ/", meaning: "အစည်းအဝေး", example: "We have an urgent team meeting at 10 AM." },
-          { cat: "office", word: "Deadline", phonetic: "/ˈded.laɪn/", meaning: "နောက်ဆုံးသတ်မှတ်ရက်", example: "The project deadline is this Friday." },
-          { cat: "office", word: "Send an email", phonetic: "/send ən ˈiː.meɪl/", meaning: "အီးမေးလ် ပို့သည်", example: "I will send an email with the report." },
-          // 🛒 ဈေးသုံး / ခရီးသွား
-          { cat: "shop", word: "How much is this?", phonetic: "/haʊ mʌtʃ ɪz ðɪs/", meaning: "ဒါ ဘယ်လောက်ကျလဲ?", example: "Excuse me, how much is this?" },
-          { cat: "shop", word: "Discount", phonetic: "/ˈdɪs.kaʊnt/", meaning: "လျှော့ဈေး / ဈေးလျှော့ပေးခြင်း", example: "Can you give me a small discount?" },
-          { cat: "shop", word: "Receipt", phonetic: "/rɪˈsiːt/", meaning: "ပြေစာ / ဘောက်ချာ", example: "Could I have a receipt, please?" },
-          // 🛠️ လုပ်ငန်းခွင်သုံး
-          { cat: "work", word: "Safety first", phonetic: "/ˈseɪf.ti fɝːst/", meaning: "ဘေးအန္တရာယ်ကင်းရှင်းရေး ပထမ", example: "Always remember: safety first." },
-          { cat: "work", word: "Shift", phonetic: "/ʃɪft/", meaning: "အလုပ်အဆိုင်း (မနက်ဆိုင်း/ညဆိုင်း)", example: "I am working on the night shift today." },
-          { cat: "work", word: "Overtime (OT)", phonetic: "/ˈoʊ.vɚ.taɪm/", meaning: "အချိန်ပို အလုပ်ဆင်းခြင်း", example: "Are you willing to work overtime?" },
-          // 🎓 ကျောင်းသုံး
-          { cat: "school", word: "Assignment", phonetic: "/əˈsaɪn.mənt/", meaning: "အိမ်စာ / ပေးထားသောတာဝန်", example: "Submit your assignment before Monday." },
-          { cat: "school", word: "Exam / Test", phonetic: "/ɪɡˈzæm/", meaning: "စာမေးပွဲ", example: "We have a final exam next week." },
-          { cat: "school", word: "Library", phonetic: "/ˈlaɪ.brer.i/", meaning: "စာကြည့်တိုက်", example: "Let's study together in the library." }
-        ]
-      },
-      th: {
-        code: 'th-TH',
-        data: [
-          // ☕ နေ့စဉ်သုံး
-          { cat: "daily", word: "สบายดีไหม (Sabai dee mai)", phonetic: "စာဘိုင်ဒီမိုင်", meaning: "နေကောင်းလားခင်ဗျာ/ရှင့်", example: "สวัสดีครับ สบายดีไหม (မင်္ဂလာပါ နေကောင်းလား)" },
-          { cat: "daily", word: "กินข้าวหรือยัง (Kin khao rue yang)", phonetic: "ကင်းခေါက်ရူယန်း", meaning: "ထမင်းစားပြီးပြီလား", example: "กินข้าวหรือยังครับ (ထမင်းစားပြီးပြီလားခင်ဗျာ)" },
-          // 💼 ရုံးသုံး
-          { cat: "office", word: "ประชุม (Pra-chum)", phonetic: "ပရာချွန်း", meaning: "အစည်းအဝေး", example: "มีประชุมกี่โมงครับ (အစည်းအဝေး ဘယ်အချိန်လဲ)" },
-          { cat: "office", word: "เอกสาร (Ek-ka-san)", phonetic: "အက်ကဆန်", meaning: "စာရွက်စာတမ်း", example: "ส่งเอกสารทางอีเมล (စာရွက်စာတမ်းကို အီးမေးလ်ဖြင့်ပို့ပါ)" },
-          { cat: "office", word: "เจ้านาย (Jao-nai)", phonetic: "ကျောက်နိုင်း", meaning: "အထက်လူကြီး / သူဌေး", example: "เจ้านายเรียกพบ (သူဌေးက ခေါ်တွေ့နေတယ်)" },
-          // 🛒 ဈေးသုံး / ခရီးသွား
-          { cat: "shop", word: "เท่าไหร่ (Thao rai)", phonetic: "ထောက်ရိုင်", meaning: "ဘယ်လောက်ကျလဲ", example: "อันนี้เท่าไหร่ครับ (ဒါ ဘယ်လောက်လဲခင်ဗျာ)" },
-          { cat: "shop", word: "ลดหน่อยได้ไหม (Lod noi dai mai)", phonetic: "လွတ်နွိုင်ဒိုင်မိုင်", meaning: "နည်းနည်း လျှော့ပေးလို့ရမလား", example: "แพงจัง ลดหน่อยได้ไหม (ဈေးကြီးလိုက်တာ လျှော့ပေးပါဦး)" },
-          { cat: "shop", word: "สแกนจ่าย (Scan jai)", phonetic: "စကန်ကျိုင်း", meaning: "QR Scan ဖြင့် ပိုက်ဆံပေးချေခြင်း", example: "สแกนจ่ายได้ไหมครับ (Scan ဖတ်ပြီး ပေးလို့ရမလား)" },
-          // 🛠️ လုပ်ငန်းခွင်သုံး
-          { cat: "work", word: "ทำโอที (Tham OT)", phonetic: "ထမ်အိုထီ", meaning: "OT / အချိန်ပိုဆင်းသည်", example: "วันนี้ทำโอทีไหม (ဒီနေ့ OT ဆင်းမလား)" },
-          { cat: "work", word: "ระวัง (Ra-wang)", phonetic: "ရာဝန်း", meaning: "သတိထားပါ / ဂရုစိုက်ပါ", example: "ระวังลื่นนะครับ (ချော်လဲမယ် သတိထားပါ)" },
-          { cat: "work", word: "เงินเดือน (Ngoen-duean)", phonetic: "ငွန်းဒူယန်", meaning: "လစာ", example: "เงินเดือนออกวันไหน (လစာ ဘယ်နေ့ထွက်မလဲ)" },
-          // 🎓 ကျောင်းသုံး
-          { cat: "school", word: "การบ้าน (Karn-baan)", phonetic: "ကန်ဘန်း", meaning: "အိမ်စာ", example: "ส่งการบ้านด้วยครับ (အိမ်စာတွေ လာထပ်ပါ)" },
-          { cat: "school", word: "สอบ (Sob)", phonetic: "ဆော့ပ်", meaning: "စာမေးပွဲဖြေသည်", example: "พรุ่งนี้มีสอบ (မနက်ဖြန် စာမေးပွဲရှိတယ်)" }
-        ]
-      },
-      ja: {
-        code: 'ja-JP',
-        data: [
-          // ☕ နေ့စဉ်သုံး
-          { cat: "daily", word: "お元気ですか (Ogenki desu ka)", phonetic: "အိုဂန်ခိ ဒက်စ်ကာ", meaning: "နေကောင်းပါသလား", example: "お元気ですか？ (နေကောင်းရဲ့လား)" },
-          { cat: "daily", word: "よろしくお願いします (Yoroshiku)", phonetic: "ယိုရိုရှိခု အိုနဲဂိုင်းရှိမတ်စ်", meaning: "ခင်မင်စွာ ကူညီစောင့်ရှောက်ပေးပါ", example: "どうぞよろしくお願いします" },
-          // 💼 ရုံးသုံး
-          { cat: "office", word: "お疲れ様です (Otsukaresama desu)", phonetic: "အိုဆုခါရဲဆာမ ဒက်စ်", meaning: "ပင်ပန်းသွားပါပြီ (ရုံးနှုတ်ဆက်စကား)", example: "今日もお疲れ様でした" },
-          { cat: "office", word: "会議 (Kaigi)", phonetic: "ခိုင်းဂိ", meaning: "အစည်းအဝေး", example: "10時から会議があります (၁၀ နာရီမှာ အစည်းအဝေးရှိတယ်)" },
-          // 🛒 ဈေးသုံး
-          { cat: "shop", word: "いくらですか (Ikura desu ka)", phonetic: "အီကုရ ဒက်စ်ကာ", meaning: "ဘယ်လောက်ကျပါသလဲ", example: "これはいくらですか？ (ဒါ ဘယ်လောက်လဲ)" },
-          { cat: "shop", word: "袋 (Fukuro)", phonetic: "ဖုခုရို", meaning: "ပလတ်စတစ်အိတ် / ဈေးဝယ်အိတ်", example: "袋は要りません (အိတ် မလိုပါဘူး)" },
-          // 🛠️ လုပ်ငန်းခွင်သုံး
-          { cat: "work", word: "残業 (Zangyou)", phonetic: "ဇန်ဂယိုး", meaning: "OT / အချိန်ပိုလုပ်ခြင်း", example: "今日は残業があります (ဒီနေ့ OT ဆင်းစရာရှိတယ်)" },
-          { cat: "work", word: "安全第一 (Anzen Daiichi)", phonetic: "အန်ဇန်း ဒိုင်းအိချိ", meaning: "ဘေးကင်းလုံခြုံရေး ပထမ", example: "現場は安全第一です (လုပ်ငန်းခွင်သည် ဘေးကင်းရေးပထမ)" },
-          // 🎓 ကျောင်းသုံး
-          { cat: "school", word: "宿題 (Shukudai)", phonetic: "ရှုခုဒိုင်း", meaning: "အိမ်စာ", example: "宿題を忘れました (အိမ်စာ မေ့ကျန်ခဲ့ပါတယ်)" },
-          { cat: "school", word: "試験 (Shiken)", phonetic: "ရှိခန်", meaning: "စာမေးပွဲ", example: "来週試験があります (နောက်အပတ် စာမေးပွဲရှိတယ်)" }
-        ]
-      },
-      de: {
-        code: 'de-DE',
-        data: [
-          // ☕ နေ့စဉ်သုံး
-          { cat: "daily", word: "Wie geht es Ihnen?", phonetic: "ဗွီ ဂိတ် အက်စ် အီးနန်", meaning: "နေကောင်းပါသလား?", example: "Guten Tag, wie geht es Ihnen?" },
-          // 💼 ရုံးသုံး
-          { cat: "office", word: "Die Besprechung", phonetic: "ဒီ ဘာ့ရှ်ပရဲရှွန်း", meaning: "အစည်းအဝေး", example: "Wir haben eine Besprechung um 9 Uhr." },
-          { cat: "office", word: "Das Projekt", phonetic: "ဒတ်စ် ပရိုယက်ခ်ထ်", meaning: "ပရောဂျက် / စီမံကိန်း", example: "Das Projekt ist sehr wichtig." },
-          // 🛒 ဈေးသုံး
-          { cat: "shop", word: "Wie viel kostet das?", phonetic: "ဗွီ ဖီးလ် ကော့စ်တက် ဒတ်စ်", meaning: "ဒါ ဘယ်လောက်ကျလဲ?", example: "Wie viel kostet das Hemd?" },
-          { cat: "shop", word: "Mit Karte zahlen", phonetic: "မစ်ထ် ခါးထာ့ ဇာလန်", meaning: "ကတ်ဖြင့် ငွေပေးချေခြင်း", example: "Kann ich mit Karte zahlen?" },
-          // 🛠️ လုပ်ငန်းခွင်သုံး
-          { cat: "work", word: "Die Überstunden", phonetic: "ဒီ အူးဘာ့ရှ်တွန်းဒန်", meaning: "အချိန်ပို / OT", example: "Ich mache heute Überstunden." },
-          // 🎓 ကျောင်းသုံး
-          { cat: "school", word: "Die Hausaufgabe", phonetic: "ဒီ ဟောင်းစ်အောင်ဖ်ဂါးဘား", meaning: "အိမ်စာ", example: "Hast du die Hausaufgabe gemacht?" }
-        ]
-      },
-      fr: {
-        code: 'fr-FR',
-        data: [
-          // ☕ နေ့စဉ်သုံး
-          { cat: "daily", word: "Comment allez-vous?", phonetic: "ကော်မွန် တာလေ ဗူး", meaning: "နေကောင်းပါသလား?", example: "Bonjour, comment allez-vous?" },
-          // 💼 ရုံးသုံး
-          { cat: "office", word: "La réunion", phonetic: "လာ ရေအူနီယွန်း", meaning: "အစည်းအဝေး", example: "La réunion commence à dix heures." },
-          // 🛒 ဈေးသုံး
-          { cat: "shop", word: "C'est combien?", phonetic: "ဆဲ ကုံဘီယန်", meaning: "ဒါ ဘယ်လောက်လဲ?", example: "Ce livre, c'est combien?" },
-          { cat: "shop", word: "Payer par carte", phonetic: "ပယေး ပါရ် ကာရ်တ်", meaning: "ကတ်ဖြင့် ငွေရှင်းခြင်း", example: "Je peux payer par carte?" },
-          // 🛠️ လုပ်ငန်းခွင်သုံး
-          { cat: "work", word: "Heures supplémentaires", phonetic: "အာရ် ဆူပလေမွန်တဲရ်", meaning: "အချိန်ပို / OT", example: "Faire des heures supplémentaires." },
-          // 🎓 ကျောင်းသုံး
-          { cat: "school", word: "Les devoirs", phonetic: "လေ ဒိုဗွားရ်", meaning: "အိမ်စာ", example: "Fais tes devoirs pour demain." }
-        ]
-      }
+    // Essential starter databases for instant offline learning
+    const starterPacks = {
+      en: [
+        { word: "Hello", meaning: "မင်္ဂလာပါ", cat: "နှုတ်ဆက်ခြင်း" },
+        { word: "Thank you", meaning: "ကျေးဇူးတင်ပါတယ်", cat: "ယဉ်ကျေးမှု" },
+        { word: "How much is this?", meaning: "ဒါ ဘယ်လောက်ကျပါသလဲ", cat: "ဈေးဝယ်" },
+        { word: "Where is the station?", meaning: "ဘူတာ ဘယ်မှာလဲ", cat: "ခရီးသွား" },
+        { word: "Excuse me", meaning: "တစ်ဆိတ်လောက်", cat: "နေ့စဉ်သုံး" },
+        { word: "Delicious", meaning: "အရသာရှိသော", cat: "စားသောက်" }
+      ],
+      th: [
+        { word: "สวัสดี (Sawasdee)", meaning: "မင်္ဂလာပါ", cat: "နှုတ်ဆက်ခြင်း" },
+        { word: "ขอบคุณ (Khob khun)", meaning: "ကျေးဇူးတင်ပါတယ်", cat: "ယဉ်ကျေးမှု" },
+        { word: "เท่าไหร่ (Thao rai)", meaning: "ဘယ်လောက်ကျလဲ", cat: "ဈေးဝယ်" },
+        { word: "ห้องน้ำอยู่ที่ไหน", meaning: "အိမ်သာ ဘယ်မှာလဲ", cat: "ခရီးသွား" },
+        { word: "อร่อยมาก (Aroi mak)", meaning: "အရမ်းစားကောင်းတယ်", cat: "စားသောက်" },
+        { word: "ช่วยด้วย (Chuay duay)", meaning: "ကူညီပါဦး / ကယ်ပါ", cat: "အရေးပေါ်" }
+      ],
+      ja: [
+        { word: "こんにちは (Konnichiwa)", meaning: "မင်္ဂလာပါ", cat: "နှုတ်ဆက်ခြင်း" },
+        { word: "ありがとう (Arigatou)", meaning: "ကျေးဇူးတင်ပါတယ်", cat: "ယဉ်ကျေးမှု" },
+        { word: "いくらですか (Ikura desu ka)", meaning: "ဘယ်လောက်ကျပါသလဲ", cat: "ဈေးဝယ်" },
+        { word: "すみません (Sumimasen)", meaning: "တစ်ဆိတ်လောက် / တောင်းပန်ပါတယ်", cat: "နေ့စဉ်သုံး" },
+        { word: "おいしい (Oishii)", meaning: "အရသာရှိသော", cat: "စားသောက်" },
+        { word: "たすけて (Tasukete)", meaning: "ကယ်ပါ / ကူညီပါဦး", cat: "အရေးပေါ်" }
+      ],
+      ko: [
+        { word: "안녕하세요 (Annyeonghaseyo)", meaning: "မင်္ဂလာပါ", cat: "နှုတ်ဆက်ခြင်း" },
+        { word: "감사합니다 (Gamsahamnida)", meaning: "ကျေးဇူးတင်ပါတယ်", cat: "ယဉ်ကျေးမှု" },
+        { word: "얼마예요? (Eolmayeyo?)", meaning: "ဘယ်လောက်လဲ", cat: "ဈေးဝယ်" },
+        { word: "맛있어요 (Masisseoyo)", meaning: "အရသာရှိတယ်", cat: "စားသောက်" },
+        { word: "화장실 어디예요?", meaning: "အိမ်သာ ဘယ်မှာလဲ", cat: "ခရီးသွား" }
+      ],
+      zh: [
+        { word: "你好 (Nǐ hǎo)", meaning: "မင်္ဂလာပါ", cat: "နှုတ်ဆက်ခြင်း" },
+        { word: "谢谢 (Xièxiè)", meaning: "ကျေးဇူးတင်ပါတယ်", cat: "ယဉ်ကျေးမှု" },
+        { word: "多少钱？(Duōshǎo qián?)", meaning: "ဘယ်လောက်ကျပါသလဲ", cat: "ဈေးဝယ်" },
+        { word: "好吃 (Hào chī)", meaning: "စားကောင်းတယ် / အရသာရှိတယ်", cat: "စားသောက်" },
+        { word: "厕所在哪里？", meaning: "အိမ်သာ ဘယ်မှာလဲ", cat: "ခရီးသွား" }
+      ]
     };
 
     let currentLang = 'en';
-    let currentCategory = 'all';
+    let currentVoice = 'en-US';
+    let currentSearchResult = '';
+    let currentQuizWord = '';
     let currentQuizIndex = 0;
-    let quizScore = 0;
+    let quizList = [];
 
-    const catLabels = {
-      daily: "☕ နေ့စဉ်သုံး",
-      office: "💼 ရုံးသုံး",
-      shop: "🛒 ဈေးသုံး",
-      work: "🛠️ လုပ်ငန်းခွင်",
-      school: "🎓 ကျောင်းသုံး"
-    };
-
-    function selectLang(lang, btn) {
-      currentLang = lang;
-      document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      filterWords();
+    function onLanguageChange() {
+      const select = document.getElementById('targetLangSelect');
+      currentLang = select.value;
+      currentVoice = select.options[select.selectedIndex].getAttribute('data-voice');
+      document.getElementById('searchResult').style.display = 'none';
+      renderVocabList();
     }
 
-    function selectCategory(cat, btn) {
-      currentCategory = cat;
-      document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      filterWords();
-    }
-
-    function speakWord(text) {
-      if ('speechSynthesis' in window) {
+    function speakText(text, voice) {
+      if ('speechSynthesis' in window && text) {
         window.speechSynthesis.cancel();
-        const utter = new SpeechSynthesisUtterance(text);
-        utter.lang = database[currentLang].code;
+        const utter = new SpeechSynthesisUtterance(text.split('(')[0]);
+        utter.lang = voice || currentVoice;
         window.speechSynthesis.speak(utter);
       }
     }
 
-    function renderWords(list) {
-      const container = document.getElementById('wordsList');
+    function getStorageKey() {
+      return `custom_vocab_${currentLang}`;
+    }
+
+    function getCombinedWords() {
+      const base = starterPacks[currentLang] || [
+        { word: "Hello", meaning: "မင်္ဂလာပါ", cat: "အခြေခံ" },
+        { word: "Thank you", meaning: "ကျေးဇူးတင်ပါတယ်", cat: "အခြေခံ" }
+      ];
+      const custom = JSON.parse(localStorage.getItem(getStorageKey())) || [];
+      return [...custom, ...base];
+    }
+
+    function renderVocabList() {
+      const list = getCombinedWords();
+      const container = document.getElementById('vocabList');
       container.innerHTML = '';
 
-      if (list.length === 0) {
-        container.innerHTML = '<p style="text-align:center; color:#888; margin-top:30px;">ဤကဏ္ဍတွင် စကားလုံး မရှိသေးပါ။</p>';
-        return;
-      }
-
-      list.forEach(item => {
+      list.forEach((item, index) => {
         container.innerHTML += `
           <div class="card">
-            <div class="word-row">
+            <div style="display:flex; justify-content:space-between; align-items:center;">
               <div>
-                <div class="word-text">${item.word}</div>
-                <div class="phonetic">${item.phonetic}</div>
-                <span class="badge">${catLabels[item.cat] || item.cat}</span>
+                <span class="badge">${item.cat || 'လေ့လာထားသောစကားလုံး'}</span>
+                <div style="font-size:18px; font-weight:bold; color:var(--primary-dark);">${item.word}</div>
+                <div style="font-size:14px; color:#444; margin-top:4px;">မြန်မာလို: ${item.meaning}</div>
               </div>
-              <button class="btn-speak" onclick="speakWord('${item.word.replace(/'/g, "\\'")}')">🔊</button>
+              <button class="btn-speak" onclick="speakText('${item.word.replace(/'/g, "\\'")}', '${currentVoice}')">🔊</button>
             </div>
-            <div class="meaning">မြန်မာအဓိပ္ပာယ်: ${item.meaning}</div>
-            <div class="example">ဥပမာ: ${item.example}</div>
           </div>
         `;
       });
     }
 
-    function filterWords() {
-      const query = document.getElementById('searchBar').value.toLowerCase().trim();
-      let list = database[currentLang].data;
+    async function searchGoogleWord() {
+      const text = document.getElementById('searchWordInput').value.trim();
+      if (!text) return alert('ကျေးဇူးပြု၍ စာရိုက်ထည့်ပါ');
 
-      if (currentCategory !== 'all') {
-        list = list.filter(item => item.cat === currentCategory);
-      }
+      document.getElementById('searchResult').style.display = 'block';
+      document.getElementById('resTarget').innerText = 'Google မှ ရှာဖွေနေပါသည်...';
+      document.getElementById('resMeaning').innerText = '';
 
-      if (query) {
-        list = list.filter(item => 
-          item.word.toLowerCase().includes(query) || 
-          item.meaning.toLowerCase().includes(query) ||
-          item.phonetic.toLowerCase().includes(query)
-        );
+      try {
+        const url = `https://translate.googleapis.com/translate_a/single?client=gtx&sl=auto&tl=${currentLang}&dt=t&q=${encodeURI(text)}`;
+        const res = await fetch(url);
+        const data = await res.json();
+        
+        const translated = data[0].map(item => item[0]).join('');
+        currentSearchResult = translated;
+
+        document.getElementById('resTarget').innerText = translated;
+        document.getElementById('resMeaning').innerText = `မြန်မာ: ${text}`;
+
+        // Save into study list
+        let custom = JSON.parse(localStorage.getItem(getStorageKey())) || [];
+        custom.unshift({ word: translated, meaning: text, cat: "Google ရှာဖွေထားသည်" });
+        localStorage.setItem(getStorageKey(), JSON.stringify(custom));
+
+        renderVocabList();
+        document.getElementById('searchWordInput').value = '';
+      } catch (e) {
+        document.getElementById('resTarget').innerText = 'ရှာမတွေ့ပါ သို့မဟုတ် အင်တာနက် လိုအပ်ပါသည်။';
       }
-      renderWords(list);
     }
 
     function switchTab(tab) {
-      if (tab === 'vocab') {
-        document.getElementById('tabVocab').style.display = 'block';
-        document.getElementById('searchArea').style.display = 'block';
+      if (tab === 'learn') {
+        document.getElementById('tabLearn').style.display = 'block';
         document.getElementById('tabQuiz').style.display = 'none';
-        document.getElementById('navVocab').className = 'active';
+        document.getElementById('navLearn').className = 'active';
         document.getElementById('navQuiz').className = '';
       } else {
-        document.getElementById('tabVocab').style.display = 'none';
-        document.getElementById('searchArea').style.display = 'none';
+        document.getElementById('tabLearn').style.display = 'none';
         document.getElementById('tabQuiz').style.display = 'block';
-        document.getElementById('navVocab').className = '';
+        document.getElementById('navLearn').className = '';
         document.getElementById('navQuiz').className = 'active';
         startQuiz();
       }
     }
 
     function startQuiz() {
+      quizList = getCombinedWords();
       currentQuizIndex = 0;
-      quizScore = 0;
-      renderQuizQuestion();
+      loadNextQuiz();
     }
 
-    function renderQuizQuestion() {
-      const list = database[currentLang].data;
-      const current = list[currentQuizIndex];
-      document.getElementById('quizWord').innerText = current.word;
+    function loadNextQuiz() {
+      if (quizList.length === 0) return;
+      const current = quizList[currentQuizIndex % quizList.length];
+      currentQuizWord = current.word;
+
+      document.getElementById('quizQuestion').innerText = current.word;
       document.getElementById('btnNextQuiz').style.display = 'none';
 
       let options = [current.meaning];
-      let others = list.filter(w => w.meaning !== current.meaning).map(w => w.meaning);
+      let others = quizList.filter(w => w.meaning !== current.meaning).map(w => w.meaning);
       others.sort(() => 0.5 - Math.random());
       options.push(...others.slice(0, 3));
       options.sort(() => 0.5 - Math.random());
 
-      const optContainer = document.getElementById('quizOptions');
-      optContainer.innerHTML = '';
+      const container = document.getElementById('quizOptions');
+      container.innerHTML = '';
       options.forEach(opt => {
         const btn = document.createElement('div');
         btn.className = 'quiz-option';
         btn.innerText = opt;
-        btn.onclick = () => checkQuizAnswer(btn, opt, current.meaning);
-        optContainer.appendChild(btn);
+        btn.onclick = () => checkQuiz(btn, opt, current.meaning);
+        container.appendChild(btn);
       });
     }
 
-    function checkQuizAnswer(btnElement, selected, correct) {
-      const allBtns = document.querySelectorAll('.quiz-option');
-      allBtns.forEach(b => b.onclick = null);
-
+    function checkQuiz(element, selected, correct) {
+      document.querySelectorAll('.quiz-option').forEach(b => b.onclick = null);
       if (selected === correct) {
-        btnElement.classList.add('correct');
-        quizScore++;
+        element.classList.add('correct');
       } else {
-        btnElement.classList.add('wrong');
-        allBtns.forEach(b => {
+        element.classList.add('wrong');
+        document.querySelectorAll('.quiz-option').forEach(b => {
           if (b.innerText === correct) b.classList.add('correct');
         });
       }
+      currentQuizIndex++;
       document.getElementById('btnNextQuiz').style.display = 'block';
     }
 
-    function nextQuizQuestion() {
-      const list = database[currentLang].data;
-      if (currentQuizIndex < list.length - 1) {
-        currentQuizIndex++;
-        renderQuizQuestion();
-      } else {
-        document.getElementById('quizContainer').innerHTML = `
-          <h2>🎉 Quiz ပြီးဆုံးပါပြီ!</h2>
-          <p style="font-size: 20px; font-weight: bold; margin: 20px 0;">ရမှတ်: ${quizScore} / ${list.length}</p>
-          <button onclick="startQuiz()" style="padding:12px 24px; background:var(--primary); color:white; border:none; border-radius:8px; font-size:16px;">ပြန်လည်ဖြေဆိုမည်</button>
-        `;
-      }
-    }
-
-    filterWords();
+    renderVocabList();
   </script>
 </body>
 </html>
