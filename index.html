@@ -1,613 +1,781 @@
 <!DOCTYPE html>
-<html lang="my">
+<html lang="my" data-theme="light">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-<title>LingoMaster Global — 8 Languages A1 to C2</title>
-<style>
-:root{
-  --green:#58cc02;--greenDark:#46a302;--blue:#1cb0f6;--blueDark:#087fb8;
-  --red:#ff4b4b;--gold:#ffc800;--bg:#f7f9fa;--text:#333;--muted:#777;--line:#e5e5e5;
-}
-*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-body{margin:0;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,"Segoe UI",sans-serif}
-.app{max-width:600px;min-height:100vh;margin:auto;background:white;position:relative}
-header{position:sticky;top:0;z-index:20;display:flex;gap:8px;align-items:center;padding:10px 14px;background:white;border-bottom:2px solid var(--line)}
-select{flex:1;padding:10px;border:2px solid var(--blue);border-radius:12px;background:#eef9ff;font-weight:800;outline:none;font-size:14px}
-.stats{white-space:nowrap;font-size:13px;font-weight:800}
-main{padding:16px 16px 90px}
-section.hidden{display:none!important}
-.card{background:white;border:2px solid var(--line);border-radius:18px;padding:16px;margin-bottom:14px;box-shadow:0 3px 0 #ddd}
-.hero{color:white;border:0;background:linear-gradient(135deg,#1cb0f6,#087fb8)}
-.hero h1{margin:0 0 6px;font-size:26px}
-.btn,.back{width:100%;padding:14px;border-radius:13px;font-weight:900;font-size:15px;cursor:pointer}
-.btn{border:0;color:white;background:var(--green);box-shadow:0 4px 0 var(--greenDark)}
-.btn:active{transform:translateY(2px);box-shadow:0 2px 0 var(--greenDark)}
-.back{background:white;border:2px solid var(--line);margin-bottom:10px}
-.levels{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
-.level{padding:12px 4px;border:2px solid var(--line);border-radius:12px;background:white;font-weight:900;cursor:pointer;text-align:center}
-.level.active{border-color:var(--green);background:#efffe7;color:var(--greenDark)}
-.lesson{display:flex;align-items:center;justify-content:space-between;padding:14px;margin:8px 0;border:2px solid var(--line);border-radius:14px;cursor:pointer}
-.lesson:hover{border-color:var(--blue)}
-.muted{color:var(--muted);font-size:13px}
-.progress{height:12px;overflow:hidden;border-radius:20px;background:var(--line)}
-.fill{height:100%;background:var(--green);transition:.3s}
-.question{font-size:20px;line-height:1.45;margin:15px 0}
-.choice{width:100%;padding:14px;margin:6px 0;text-align:left;border:2px solid var(--line);border-radius:12px;background:white;cursor:pointer;font-weight:700;font-size:15px}
-.choice.selected{border-color:var(--blue);background:#eef9ff}
-.input{width:100%;padding:14px;margin:8px 0;border:2px solid var(--line);border-radius:12px;font-size:17px;outline:none}
-.input:focus{border-color:var(--blue)}
-.slot{min-height:55px;display:flex;flex-wrap:wrap;align-items:center;gap:7px;padding:9px;margin-bottom:12px;border:2px dashed #bbb;border-radius:12px}
-.chips{display:flex;flex-wrap:wrap;gap:8px;justify-content:center}
-.chip{padding:9px 12px;border:2px solid var(--line);border-radius:10px;background:white;box-shadow:0 2px 0 #ddd;font-weight:800;cursor:pointer}
-.chip.used{opacity:.25;pointer-events:none}
-.feedback{padding:14px;margin-top:12px;border-radius:12px;font-weight:800}
-.correct{background:#d9ffc1;color:var(--greenDark)}
-.wrong{background:#ffdfe0;color:#d22}
-.statgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
-.stat{padding:15px;text-align:center;border:2px solid var(--line);border-radius:14px}
-.num{font-size:24px;font-weight:900}
-nav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:min(600px,100%);height:66px;display:flex;background:white;border-top:2px solid var(--line);z-index:30}
-nav button{flex:1;border:0;background:white;color:var(--muted);font-weight:800;font-size:12px;cursor:pointer}
-nav button.active{color:var(--greenDark)}
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
+  <meta name="theme-color" content="#4F46E5" />
+  <title>LingoMaster Global — 8 Languages (A1–C2)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Noto+Sans+JP:wght@500;700&family=Noto+Sans+KR:wght@500;700&family=Noto+Sans+Thai:wght@500;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --primary: #4F46E5;
+      --primary-hover: #4338CA;
+      --primary-light: #EEF2FF;
+      --success: #10B981;
+      --success-light: #ECFDF5;
+      --error: #EF4444;
+      --error-light: #FEF2F2;
+      --warning: #F59E0B;
+      --bg-main: #F8FAFC;
+      --bg-card: #FFFFFF;
+      --text-main: #0F172A;
+      --text-muted: #64748B;
+      --border-color: #E2E8F0;
+      --radius-md: 14px;
+      --radius-lg: 20px;
+      --radius-full: 9999px;
+      --font-base: 'Plus Jakarta Sans', 'Noto Sans Thai', 'Noto Sans JP', 'Noto Sans KR', sans-serif;
+      --transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    [data-theme="dark"] {
+      --bg-main: #0B0F19;
+      --bg-card: #151D2F;
+      --text-main: #F9FAFB;
+      --text-muted: #94A3B8;
+      --border-color: #1F293D;
+      --primary-light: #1E1B4B;
+      --success-light: #064E3B;
+      --error-light: #7F1D1D;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+    body { font-family: var(--font-base); background-color: var(--bg-main); color: var(--text-main); min-height: 100vh; line-height: 1.5; }
+
+    .app-layout { display: flex; flex-direction: column; min-height: 100vh; }
+    .app-header { position: sticky; top: 0; z-index: 40; display: flex; justify-content: space-between; align-items: center; padding: 0.75rem 1.25rem; background-color: var(--bg-card); border-bottom: 1px solid var(--border-color); }
+    .brand { display: flex; align-items: center; gap: 0.5rem; font-weight: 800; font-size: 1.25rem; color: var(--primary); }
+    .user-stats-bar { display: flex; align-items: center; gap: 0.6rem; }
+    .stat-pill { display: flex; align-items: center; gap: 0.35rem; background: var(--bg-main); padding: 0.35rem 0.65rem; border-radius: var(--radius-full); font-weight: 700; font-size: 0.85rem; border: 1px solid var(--border-color); }
+    .icon-btn { background: transparent; border: none; font-size: 1.25rem; cursor: pointer; padding: 0.4rem; border-radius: 8px; }
+
+    .main-content { flex: 1; padding: 1.25rem 1rem 5.5rem 1rem; max-width: 900px; width: 100%; margin: 0 auto; }
+    .bottom-nav { position: fixed; bottom: 0; left: 0; right: 0; height: 62px; background: var(--bg-card); border-top: 1px solid var(--border-color); display: flex; justify-content: space-around; align-items: center; z-index: 50; }
+    .nav-item { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; background: transparent; border: none; color: var(--text-muted); font-size: 0.75rem; font-weight: 600; gap: 0.2rem; height: 100%; cursor: pointer; transition: var(--transition); }
+    .nav-item.active { color: var(--primary); }
+
+    .card { background: var(--bg-card); border-radius: var(--radius-lg); padding: 1.25rem; border: 1px solid var(--border-color); margin-bottom: 1rem; }
+    .primary-btn { background: var(--primary); color: #fff; border: none; padding: 0.75rem 1.25rem; border-radius: var(--radius-md); font-weight: 700; font-size: 1rem; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem; transition: var(--transition); min-height: 46px; }
+    .primary-btn:hover:not(:disabled) { background: var(--primary-hover); }
+    .primary-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+    .btn-large { width: 100%; font-size: 1.1rem; padding: 0.85rem; }
+    .secondary-btn { background: var(--bg-card); color: var(--text-main); border: 1px solid var(--border-color); padding: 0.6rem 1rem; border-radius: var(--radius-md); font-weight: 600; cursor: pointer; }
+
+    .progress-bar-container { width: 100%; height: 8px; background: var(--border-color); border-radius: var(--radius-full); overflow: hidden; margin: 0.5rem 0; }
+    .progress-bar-fill { height: 100%; background: linear-gradient(90deg, var(--primary), #818CF8); border-radius: var(--radius-full); transition: width 0.4s ease; }
+
+    .lang-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 0.75rem; margin-top: 0.75rem; }
+    .lang-card { cursor: pointer; display: flex; flex-direction: column; gap: 0.5rem; }
+    .lang-card.selected { border: 2px solid var(--primary); background: var(--primary-light); }
+
+    .options-grid { display: grid; grid-template-columns: 1fr; gap: 0.6rem; }
+    .option-btn { background: var(--bg-card); border: 2px solid var(--border-color); padding: 0.85rem; border-radius: var(--radius-md); font-size: 1rem; font-weight: 600; text-align: left; cursor: pointer; color: var(--text-main); }
+    .option-btn.selected { border-color: var(--primary); background: var(--primary-light); color: var(--primary); }
+
+    .word-bank, .sentence-construction-zone { display: flex; flex-wrap: wrap; gap: 0.5rem; padding: 0.75rem; border-radius: var(--radius-md); min-height: 50px; align-items: center; }
+    .sentence-construction-zone { background: var(--bg-main); border: 2px dashed var(--border-color); margin-bottom: 1.25rem; }
+    .word-chip { padding: 0.5rem 0.85rem; background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 8px; font-weight: 600; cursor: pointer; color: var(--text-main); }
+    .word-chip.used { opacity: 0.3; pointer-events: none; }
+
+    .modal-overlay { position: fixed; inset: 0; background: rgba(15, 23, 42, 0.6); backdrop-filter: blur(4px); z-index: 100; display: flex; justify-content: center; align-items: center; }
+    .modal-overlay.hidden { display: none; }
+    .lesson-dialog { background: var(--bg-card); width: 100%; height: 100%; max-width: 680px; display: flex; flex-direction: column; }
+    @media (min-width: 768px) { .lesson-dialog { height: 90vh; border-radius: var(--radius-lg); overflow: hidden; } }
+    .lesson-header { display: flex; align-items: center; padding: 0.85rem 1.25rem; gap: 0.85rem; border-bottom: 1px solid var(--border-color); }
+    .lesson-body { flex: 1; padding: 1.5rem 1.25rem; overflow-y: auto; }
+    .feedback-banner { padding: 0.85rem 1.25rem; border-top: 1px solid var(--border-color); }
+    .feedback-banner.correct { background: var(--success-light); color: #065F46; }
+    .feedback-banner.incorrect { background: var(--error-light); color: #991B1B; }
+
+    .audio-btn { background: var(--primary-light); border: none; color: var(--primary); width: 44px; height: 44px; border-radius: var(--radius-full); display: inline-flex; align-items: center; justify-content: center; cursor: pointer; font-size: 1.2rem; }
+    .toast-container { position: fixed; bottom: 75px; right: 15px; z-index: 200; display: flex; flex-direction: column; gap: 0.5rem; }
+    .toast { background: #1E293B; color: #fff; padding: 0.65rem 1.1rem; border-radius: var(--radius-md); font-weight: 600; }
+  </style>
 </head>
 <body>
+  <div id="app" class="app-layout">
+    <header class="app-header">
+      <div class="brand">
+        <span>🌍</span><span>LingoMaster</span>
+      </div>
+      <div class="user-stats-bar">
+        <div class="stat-pill" title="Global Streak">🔥 <span id="streakCount">0</span></div>
+        <div class="stat-pill" title="Total XP">⭐ <span id="totalXpCount">0</span></div>
+        <div class="stat-pill" title="Energy">❤️ ∞</div>
+        <button id="themeToggleBtn" class="icon-btn">🌙</button>
+      </div>
+    </header>
 
-<div class="app">
-<header>
-<select id="languageSelect" onchange="changeLanguage()"></select>
-<div class="stats">
-🔥 <span id="streak">1</span>　⭐ <span id="xp">0</span>　❤️ ∞
-</div>
-</header>
+    <main id="mainContainer" class="main-content" role="main"></main>
 
-<main>
-<!-- HOME -->
-<section id="home">
-<div class="card hero">
-<h1>LingoMaster Global</h1>
-<p>🌍 8 Languages<br>📚 A1 → C2 Complete Track<br>❤️ Energy: ∞ Unlimited</p>
-<button class="btn" onclick="page('learn')">Continue Learning →</button>
-</div>
+    <nav class="bottom-nav">
+      <button class="nav-item active" data-view="home"><span>🏠</span><span>Home</span></button>
+      <button class="nav-item" data-view="learn"><span>📚</span><span>Learn</span></button>
+      <button class="nav-item" data-view="vocab"><span>📖</span><span>Vocab</span></button>
+      <button class="nav-item" data-view="review"><span>🔄</span><span>Review</span></button>
+      <button class="nav-item" data-view="progress"><span>📊</span><span>Progress</span></button>
+      <button class="nav-item" data-view="settings"><span>⚙️</span><span>Settings</span></button>
+    </nav>
+  </div>
 
-<div class="card">
-<div style="display:flex;justify-content:space-between;margin-bottom:6px">
-<b>🎯 Daily Goal</b>
-<span id="dailyText" class="muted">0 / 50 XP</span>
-</div>
-<div class="progress">
-<div id="dailyFill" class="fill"></div>
-</div>
-</div>
+  <div id="lessonModal" class="modal-overlay hidden" role="dialog" aria-modal="true">
+    <div class="modal-dialog lesson-dialog">
+      <header class="lesson-header">
+        <button id="closeLessonBtn" class="icon-btn">✕</button>
+        <div class="progress-bar-container" style="flex:1;">
+          <div id="lessonProgressBar" class="progress-bar-fill" style="width: 0%;"></div>
+        </div>
+      </header>
+      
+      <div id="lessonContainer" class="lesson-body"></div>
+      
+      <footer class="lesson-footer">
+        <div id="feedbackBanner" class="feedback-banner hidden">
+          <div style="display:flex; align-items:flex-start; gap:0.6rem;">
+            <span id="feedbackIcon" style="font-size:1.4rem;">✓</span>
+            <div>
+              <strong id="feedbackTitle">Correct!</strong>
+              <p id="feedbackExplanation" style="font-size:0.85rem;"></p>
+            </div>
+          </div>
+        </div>
+        <div style="padding: 0.85rem 1.25rem;">
+          <button id="lessonActionBtn" class="primary-btn btn-large" disabled>Check</button>
+        </div>
+      </footer>
+    </div>
+  </div>
 
-<div class="card">
-<span class="muted">CURRENT COURSE</span>
-<h2 id="currentLanguage" style="margin:4px 0"></h2>
-<p id="currentLevel" class="muted" style="margin:0"></p>
-</div>
+  <div id="toastContainer" class="toast-container"></div>
 
-<div class="card">
-<h3 style="margin-top:0">🏆 Achievements</h3>
-<div id="achievements"></div>
-</div>
-</section>
-
-<!-- LEARN -->
-<section id="learn" class="hidden">
-<div class="card">
-<h2 id="courseTitle" style="margin-top:0"></h2>
-<div id="levels" class="levels"></div>
-</div>
-<div class="card">
-<h3 id="chapterTitle" style="margin-top:0"></h3>
-<div id="lessons"></div>
-</div>
-</section>
-
-<!-- LESSON -->
-<section id="lesson" class="hidden">
-<div class="card">
-<button class="back" onclick="page('learn')">← Back to Lessons</button>
-<p id="lessonMeta" class="muted"></p>
-<div class="progress">
-<div id="lessonProgress" class="fill"></div>
-</div>
-<button class="back" style="width:auto;margin-top:12px;padding:8px 14px" onclick="speakCurrent()">🔊 Listen</button>
-<h2 id="question" class="question"></h2>
-<div id="answers"></div>
-<button id="checkButton" class="btn" style="margin-top:12px" onclick="checkAnswer()">စစ်ဆေးမည် (CHECK)</button>
-<div id="feedback" class="feedback hidden"></div>
-</div>
-</section>
-
-<!-- PROGRESS -->
-<section id="progress" class="hidden">
-<div class="card">
-<h2 style="margin-top:0">📊 Progress Overview</h2>
-<div class="statgrid">
-<div class="stat">
-<div id="totalXP" class="num" style="color:var(--blue)">0</div>
-<div class="muted">Total XP</div>
-</div>
-<div class="stat">
-<div id="completed" class="num" style="color:var(--green)">0</div>
-<div class="muted">Completed</div>
-</div>
-<div class="stat">
-<div id="progressStreak" class="num" style="color:#ff9600">1</div>
-<div class="muted">Day Streak</div>
-</div>
-<div class="stat">
-<div class="num" style="color:var(--red)">∞</div>
-<div class="muted">Energy</div>
-</div>
-</div>
-</div>
-
-<div class="card">
-<h3 style="margin-top:0">📚 Level Mastery</h3>
-<div id="levelMastery"></div>
-</div>
-
-<div class="card">
-<h3 style="margin-top:0">🌍 Language Progress</h3>
-<div id="languageMastery"></div>
-</div>
-</section>
-</main>
-
-<nav>
-<button id="nav-home" class="active" onclick="page('home')">🏠<br>Home</button>
-<button id="nav-learn" onclick="page('learn')">📚<br>Learn</button>
-<button id="nav-progress" onclick="page('progress')">📊<br>Progress</button>
-</nav>
-</div>
-
-<script>
-const VOCAB_DATA = {
-  en: {
-    flag: "🇬🇧", name: "English", voice: "en-US",
-    words: [
-      ["Hello", "မင်္ဂလာပါ"], ["Thank you", "ကျေးဇူးတင်ပါတယ်"], ["Water", "ရေ"], ["Food", "အစားအစာ"],
-      ["Home", "အိမ်"], ["School", "ကျောင်း"], ["Work", "အလုပ်"], ["Money", "ငွေကြေး"],
-      ["Friend", "သူငယ်ချင်း"], ["Doctor", "ဆရာဝန်"]
-    ]
-  },
-  th: {
-    flag: "🇹🇭", name: "Thai", voice: "th-TH",
-    words: [
-      ["สวัสดี", "မင်္ဂလာပါ"], ["ขอบคุณ", "ကျေးဇူးတင်ပါတယ်"], ["น้ำ", "ရေ"], ["อาหาร", "အစားအစာ"],
-      ["บ้าน", "အိမ်"], ["โรงเรียน", "ကျောင်း"], ["งาน", "အလုပ်"], ["เงิน", "ငွေကြေး"],
-      ["เพื่อน", "သူငယ်ချင်း"], ["หมอ", "ဆရာဝန်"]
-    ]
-  },
-  ja: {
-    flag: "🇯🇵", name: "Japanese", voice: "ja-JP",
-    words: [
-      ["こんにちは", "မင်္ဂလာပါ"], ["ありがとう", "ကျေးဇူးတင်ပါတယ်"], ["水", "ရေ"], ["食べ物", "အစားအစာ"],
-      ["家", "အိမ်"], ["学校", "ကျောင်း"], ["仕事", "အလုပ်"], ["お金", "ငွေကြေး"],
-      ["友達", "သူငယ်ချင်း"], ["医者", "ဆရာဝန်"]
-    ]
-  },
-  ko: {
-    flag: "🇰🇷", name: "Korean", voice: "ko-KR",
-    words: [
-      ["안녕하세요", "မင်္ဂလာပါ"], ["감사합니다", "ကျေးဇူးတင်ပါတယ်"], ["물", "ရေ"], ["음식", "အစားအစာ"],
-      ["집", "အိမ်"], ["학교", "ကျောင်း"], ["일", "အလုပ်"], ["돈", "ငွေကြေး"],
-      ["친구", "သူငယ်ချင်း"], ["의사", "ဆရာဝန်"]
-    ]
-  },
-  de: {
-    flag: "🇩🇪", name: "German", voice: "de-DE",
-    words: [
-      ["Hallo", "မင်္ဂလာပါ"], ["Danke", "ကျေးဇူးတင်ပါတယ်"], ["Wasser", "ရေ"], ["Essen", "အစားအစာ"],
-      ["Haus", "အိမ်"], ["Schule", "ကျောင်း"], ["Arbeit", "အလုပ်"], ["Geld", "ငွေကြေး"],
-      ["Freund", "သူငယ်ချင်း"], ["Arzt", "ဆရာဝန်"]
-    ]
-  },
-  es: {
-    flag: "🇪🇸", name: "Spanish", voice: "es-ES",
-    words: [
-      ["Hola", "မင်္ဂလာပါ"], ["Gracias", "ကျေးဇူးတင်ပါတယ်"], ["Agua", "ရေ"], ["Comida", "အစားအစာ"],
-      ["Casa", "အိမ်"], ["Escuela", "ကျောင်း"], ["Trabajo", "အလုပ်"], ["Dinero", "ငွေကြေး"],
-      ["Amigo", "သူငယ်ချင်း"], ["Médico", "ဆရာဝန်"]
-    ]
-  },
-  fr: {
-    flag: "🇫🇷", name: "French", voice: "fr-FR",
-    words: [
-      ["Bonjour", "မင်္ဂလာပါ"], ["Merci", "ကျေးဇူးတင်ပါတယ်"], ["Eau", "ရေ"], ["Nourriture", "အစားအစာ"],
-      ["Maison", "အိမ်"], ["École", "ကျောင်း"], ["Travail", "အလုပ်"], ["Argent", "ငွေကြေး"],
-      ["Ami", "သူငယ်ချင်း"], ["Médecin", "ဆရာဝန်"]
-    ]
-  },
-  it: {
-    flag: "🇮🇹", name: "Italian", voice: "it-IT",
-    words: [
-      ["Ciao", "မင်္ဂလာပါ"], ["Grazie", "ကျေးဇူးတင်ပါတယ်"], ["Acqua", "ရေ"], ["Cibo", "အစားအစာ"],
-      ["Casa", "အိမ်"], ["Scuola", "ကျောင်း"], ["Lavoro", "အလုပ်"], ["Denaro", "ငွေကြေး"],
-      ["Amico", "သူငယ်ချင်း"], ["Medico", "ဆရာဝန်"]
-    ]
-  }
-};
-
-const LEVEL_TOPICS = {
-  A1: ["Greetings & Basics", "Numbers & Time", "Family & Home", "Food & Dining", "Daily Life", "Directions", "Shopping", "Basic Questions", "Hobbies", "Health Basics"],
-  A2: ["Past Tense", "Travel", "Workplace", "Weather", "Transportation", "Restaurant", "Problems", "Appointments", "Socializing", "Everyday Grammar"],
-  B1: ["Experiences", "Opinions", "Education", "Office Talk", "Relationships", "News & Media", "Technology", "Environment", "Storytelling", "Future Plans"],
-  B2: ["Debates", "Journalism", "Society", "Business", "Science", "Culture", "Formal Letters", "Presentations", "Listening", "Advanced Grammar"],
-  C1: ["Abstract Concepts", "Academic Terms", "Writing", "Nuances", "Idioms", "Critical Thinking", "Complex Audio", "Rhetoric", "Research", "Fluency"],
-  C2: ["Language Mastery", "Literature", "Master Idioms", "Deep Context", "Persuasion", "Critical Analysis", "Arguments", "Professional Fluency", "Style & Tone", "Final Examination"]
-};
-
-// Generate Comprehensive Database
-const DB = {};
-for (const [code, info] of Object.entries(VOCAB_DATA)) {
-  DB[code] = { flag: info.flag, name: info.name, voice: info.voice, levels: {} };
-  for (const [lvl, topics] of Object.entries(LEVEL_TOPICS)) {
-    DB[code].levels[lvl] = topics.map((t, idx) => {
-      const pair = info.words[idx % info.words.length];
-      return {
-        id: idx + 1,
-        title: t,
-        questions: [
-          {
-            type: "mc",
-            question: `"${pair[0]}" ၏ မြန်မာအဓိပ္ပာယ်ကို ရွေးပါ`,
-            options: [pair[1], "မနက်ဖြန်", "ဆရာ", "မသေချာပါ"],
-            answer: pair[1],
-            audio: pair[0]
-          },
-          {
-            type: "fill",
-            question: `"${pair[1]}" ကို ${info.name} လို စာရိုက်ထည့်ပါ`,
-            answer: pair[0],
-            audio: pair[0]
-          },
-          {
-            type: "listen",
-            question: "🔊 အသံကိုနားထောင်ပြီး မှန်ကန်သောအဖြေကို ရွေးပါ",
-            options: [pair[0], info.words[(idx + 1) % 10][0], info.words[(idx + 2) % 10][0]],
-            answer: pair[0],
-            audio: pair[0]
-          },
-          {
-            type: "order",
-            question: `ဝါကျစီပါ — "${pair[0]}"`,
-            words: [pair[0]],
-            answer: [pair[0]],
-            audio: pair[0]
-          }
-        ]
-      };
-    });
-  }
-}
-
-// App State
-const saved = JSON.parse(localStorage.getItem("lingomaster_state") || "{}");
-let state = {
-  language: saved.language || "en",
-  level: saved.level || "A1",
-  xp: Number(saved.xp || 0),
-  streak: Number(saved.streak || 1),
-  dailyXP: Number(saved.dailyXP || 0),
-  dailyDate: saved.dailyDate || "",
-  done: saved.done || {}
-};
-
-let currentLesson = null;
-let currentQuestion = 0;
-let selectedAnswer = null;
-let builtWords = [];
-
-function save() {
-  localStorage.setItem("lingomaster_state", JSON.stringify(state));
-  updateUI();
-}
-
-function checkDaily() {
-  const today = new Date().toISOString().slice(0, 10);
-  if (state.dailyDate !== today) {
-    state.dailyDate = today;
-    state.dailyXP = 0;
-    save();
-  }
-}
-
-function initApp() {
-  checkDaily();
-  const select = document.getElementById("languageSelect");
-  select.innerHTML = "";
-  for (const [code, data] of Object.entries(DB)) {
-    const opt = document.createElement("option");
-    opt.value = code;
-    opt.textContent = `${data.flag} ${data.name}`;
-    if (code === state.language) opt.selected = true;
-    select.appendChild(opt);
-  }
-  updateUI();
-  renderLearn();
-}
-
-function changeLanguage() {
-  state.language = document.getElementById("languageSelect").value;
-  save();
-  renderLearn();
-  updateUI();
-}
-
-function updateUI() {
-  const data = DB[state.language] || DB.en;
-  document.getElementById("streak").textContent = state.streak;
-  document.getElementById("xp").textContent = state.xp;
-  document.getElementById("totalXP").textContent = state.xp;
-  document.getElementById("progressStreak").textContent = state.streak;
-  document.getElementById("dailyText").textContent = `${state.dailyXP} / 50 XP`;
-  document.getElementById("dailyFill").style.width = Math.min(100, (state.dailyXP / 50) * 100) + "%";
-  document.getElementById("currentLanguage").textContent = `${data.flag} ${data.name}`;
-  document.getElementById("currentLevel").textContent = `Current Level: ${state.level}`;
-
-  let totalDone = 0;
-  for (const k in state.done) {
-    totalDone += state.done[k].length;
-  }
-  document.getElementById("completed").textContent = totalDone;
-  renderAchievements();
-}
-
-function page(id) {
-  document.querySelectorAll("main section").forEach(s => s.classList.add("hidden"));
-  document.querySelectorAll("nav button").forEach(b => b.classList.remove("active"));
-  document.getElementById(id).classList.remove("hidden");
-
-  const nav = document.getElementById("nav-" + id);
-  if (nav) nav.classList.add("active");
-
-  if (id === "home") updateUI();
-  if (id === "learn") renderLearn();
-  if (id === "progress") renderProgress();
-}
-
-function renderLearn() {
-  const data = DB[state.language] || DB.en;
-  document.getElementById("courseTitle").textContent = `${data.flag} ${data.name} Curriculum`;
-  
-  const levelContainer = document.getElementById("levels");
-  levelContainer.innerHTML = "";
-  ["A1", "A2", "B1", "B2", "C1", "C2"].forEach(lvl => {
-    const btn = document.createElement("button");
-    btn.className = "level " + (state.level === lvl ? "active" : "");
-    btn.textContent = lvl;
-    btn.onclick = () => {
-      state.level = lvl;
-      save();
-      renderLearn();
+  <script>
+    /* =========================================================
+       1. EXACT 8 LANGUAGES & CEFR DEFINITIONS
+    ========================================================= */
+    const LANGUAGES = {
+      english: { id: 'english', name: 'English', flag: '🇬🇧', locale: 'en-US', rate: 1.0 },
+      thai: { id: 'thai', name: 'Thai', flag: '🇹🇭', locale: 'th-TH', rate: 0.9 },
+      french: { id: 'french', name: 'French', flag: '🇫🇷', locale: 'fr-FR', rate: 0.95 },
+      german: { id: 'german', name: 'German', flag: '🇩🇪', locale: 'de-DE', rate: 0.95 },
+      korean: { id: 'korean', name: 'Korean', flag: '🇰🇷', locale: 'ko-KR', rate: 0.9 },
+      japanese: { id: 'japanese', name: 'Japanese', flag: '🇯🇵', locale: 'ja-JP', rate: 0.9 },
+      spanish: { id: 'spanish', name: 'Spanish', flag: '🇪🇸', locale: 'es-ES', rate: 0.95 },
+      italian: { id: 'italian', name: 'Italian', flag: '🇮🇹', locale: 'it-IT', rate: 0.95 }
     };
-    levelContainer.appendChild(btn);
-  });
 
-  document.getElementById("chapterTitle").textContent = `${state.level} — Chapters (${data.levels[state.level].length})`;
-  const container = document.getElementById("lessons");
-  container.innerHTML = "";
+    const CEFR_LEVELS = ['A1', 'A2', 'B1', 'B2', 'C1', 'C2'];
 
-  const list = data.levels[state.level] || [];
-  const key = `${state.language}_${state.level}`;
-  const done = state.done[key] || [];
+    const CURRICULUM_DATA = {
+      english: {
+        A1: [
+          { title: "Greetings & Basics", word: "Hello", meaning: "မင်္ဂလာပါ", ex: "Hello, how are you?", exM: "မင်္ဂလာပါ နေကောင်းလား" },
+          { title: "Food & Drinks", word: "Water", meaning: "ရေ", ex: "I drink water.", exM: "ကျွန်တော် ရေသောက်ပါတယ်" },
+          { title: "Family & People", word: "Family", meaning: "မိသားစု", ex: "I love my family.", exM: "ကျွန်တော့်မိသားစုကို ချစ်တယ်" }
+        ],
+        A2: [{ title: "Past Tense", word: "Yesterday", meaning: "မနေ့က", ex: "I went yesterday.", exM: "မနေ့က သွားခဲ့တယ်" }],
+        B1: [{ title: "Workplace", word: "Deadline", meaning: "နောက်ဆုံးရက်", ex: "The deadline is near.", exM: "နောက်ဆုံးရက် နီးပြီ" }],
+        B2: [{ title: "Interviews", word: "Strengths", meaning: "အားသာချက်များ", ex: "What are your strengths?", exM: "သင့်အားသာချက်တွေက ဘာလဲ" }],
+        C1: [{ title: "Academic Discourse", word: "Hypothesis", meaning: "ယူဆချက်", ex: "Test the hypothesis.", exM: "ယူဆချက်ကို စစ်ဆေးပါ" }],
+        C2: [{ title: "Native Idioms", word: "Break the ice", meaning: "စကားစတင်သည်", ex: "Let's break the ice.", exM: "စကား စတင်ပြောကြရအောင်" }]
+      },
+      thai: {
+        A1: [
+          { title: "နှုတ်ဆက်ခြင်းနှင့် ယဉ်ကျေးစကား", word: "สวัสดี", meaning: "မင်္ဂလာပါ", ex: "สวัสดีครับ", exM: "မင်္ဂလာပါခင်ဗျာ" },
+          { title: "အစားအသောက်", word: "น้ำ", meaning: "ရေ", ex: "ขอน้ำหน่อยครับ", exM: "ရေလေးပေးပါခင်ဗျာ" },
+          { title: "မိသားစု", word: "ครอบครัว", meaning: "မိသားစု", ex: "ครอบครัวของฉัน", exM: "ကျွန်တော့်ရဲ့ မိသားစု" }
+        ],
+        A2: [{ title: "ဈေးဝယ်ခြင်း", word: "ราคา", meaning: "ဈေးနှုန်း", ex: "ราคาเท่าไหร่ครับ", exM: "ဈေးဘယ်လောက်လဲခင်ဗျာ" }],
+        B1: [{ title: "အလုပ်ခွင်စကားပြော", word: "การประชุม", meaning: "အစည်းအဝေး", ex: "มีประชุมวันนี้", exM: "ဒီနေ့ အစည်းအဝေးရှိတယ်" }],
+        B2: [{ title: "သတင်းနှင့် မီဒီယာ", word: "ข่าวสาร", meaning: "သတင်းအချက်အလက်", ex: "ติดตามข่าวสาร", exM: "သတင်းအချက်အလက် စောင့်ကြည့်ပါ" }],
+        C1: [{ title: "တရားဝင် ရုံးသုံးစကား", word: "ทางการ", meaning: "တရားဝင်ဖြစ်သော", ex: "เอกสารทางการ", exM: "တရားဝင် စာရွက်စာတမ်း" }],
+        C2: [{ title: "အဆင့်မြင့် စကားပုံများ", word: "ใจเย็นๆ", meaning: "စိတ်အေးအေးထားပါ", ex: "ทำใจเย็นๆ ไว้นะ", exM: "စိတ်အေးအေးထားလိုက်ပါနော်" }]
+      },
+      japanese: {
+        A1: [
+          { title: "挨拶 (Greetings)", word: "こんにちは", meaning: "မင်္ဂလာပါ", ex: "皆さん、こんにちは。", exM: "အားလုံးပဲ မင်္ဂလာပါ" },
+          { title: "飲食 (Food & Drinks)", word: "水", meaning: "ရေ", ex: "水を飲みます。", exM: "ရေသောက်ပါတယ်" }
+        ],
+        A2: [{ title: "買い物 (Shopping)", word: "いくら", meaning: "ဘယ်လောက်ကျလဲ", ex: "これはいくらですか。", exM: "ဒါ ဘယ်လောက်ကျပါသလဲ" }],
+        B1: [{ title: "職場 (Workplace)", word: "仕事", meaning: "အလုပ်", ex: "仕事が終わりました。", exM: "အလုပ်ပြီးဆုံးပါပြီ" }],
+        B2: [{ title: "敬語 (Honorifics)", word: "ございます", meaning: "ရှိပါသည် (ယဉ်ကျေး)", ex: "ありがとうございます。", exM: "ကျေးဇူးတင်ရှိပါတယ်" }],
+        C1: [{ title: "専門用語 (Professional)", word: "検討", meaning: "လေ့လာသုံးသပ်ချက်", ex: "前向きに検討します。", exM: "အပြုသဘောဖြင့် သုံးသပ်ပါမည်" }],
+        C2: [{ title: "慣用句 (Idioms)", word: "猫の手も借りたい", meaning: "အရမ်းအလုပ်များနေသည်", ex: "忙しくて猫の手も借りたい。", exM: "အလွန်အလုပ်များနေပါသည်" }]
+      },
+      korean: {
+        A1: [
+          { title: "기본 인사 (Greetings)", word: "안녕하세요", meaning: "မင်္ဂလာပါ", ex: "안녕하세요, 반가워요.", exM: "မင်္ဂလာပါ တွေ့ရတာဝမ်းသာပါတယ်" },
+          { title: "음식과 음료 (Food)", word: "물", meaning: "ရေ", ex: "물 주세요.", exM: "ရေပေးပါ" }
+        ],
+        A2: [{ title: "일상생활 (Daily Life)", word: "오늘", meaning: "ဒီနေ့", ex: "오늘 뭐해요?", exM: "ဒီနေ့ ဘာလုပ်မလဲ" }],
+        B1: [{ title: "회사 생활 (Office)", word: "회의", meaning: "အစည်းအဝေး", ex: "회의를 시작합니다.", exM: "အစည်းအဝေး စတင်ပါမည်" }],
+        B2: [{ title: "고급 문법 (Grammar)", word: "덕분에", meaning: "ကျေးဇူးကြောင့်", ex: "도와주신 덕분입니다.", exM: "ကူညီပေးမှု ကျေးဇူးကြောင့်ပါ" }],
+        C1: [{ title: "학술 한국어 (Academic)", word: "분석", meaning: "ခွဲခြမ်းစိတ်ဖြာချက်", ex: "결과를 분석하다.", exM: "ရလဒ်ကို ခွဲခြမ်းစိတ်ဖြာသည်" }],
+        C2: [{ title: "원어민 관용구 (Idioms)", word: "대박", meaning: "အလန်းစား / မိုက်တယ်", ex: "완전 대박이다!", exM: "လုံးဝ အလန်းစားပဲ" }]
+      },
+      german: {
+        A1: [{ title: "Begrüßung", word: "Hallo", meaning: "မင်္ဂလာပါ", ex: "Hallo, wie geht's?", exM: "မင်္ဂလာပါ နေကောင်းလား" }],
+        A2: [{ title: "Reisen", word: "Bahnhof", meaning: "ဘူတာရုံ", ex: "Wo ist der Bahnhof?", exM: "ဘူတာရုံ ဘယ်မှာလဲ" }],
+        B1: [{ title: "Arbeitswelt", word: "Erfahrung", meaning: "အတွေ့အကြုံ", ex: "Ich habe Erfahrung.", exM: "ကျွန်တော့်မှာ အတွေ့အကြုံရှိတယ်" }],
+        B2: [{ title: "Diskussion", word: "Argument", meaning: "အငြင်းအခုံ", ex: "Das ist ein gutes Argument.", exM: "ဒါ ကောင်းတဲ့အချက်ဖြစ်တယ်" }],
+        C1: [{ title: "Wissenschaft", word: "Forschung", meaning: "သုတေသန", ex: "Wissenschaftliche Forschung.", exM: "သိပ္ပံနည်းကျ သုတေသန" }],
+        C2: [{ title: "Redewendungen", word: "Nur Bahnhof verstehen", meaning: "လုံးဝနားမလည်ပါ", ex: "Ich verstehe nur Bahnhof.", exM: "ဘာမှနားမလည်ပါ" }]
+      },
+      french: {
+        A1: [{ title: "Salutations", word: "Bonjour", meaning: "မင်္ဂလာပါ", ex: "Bonjour tout le monde!", exM: "အားလုံး မင်္ဂလာပါ" }],
+        A2: [{ title: "Voyage", word: "Gare", meaning: "ဘူတာရုံ", ex: "Où est la gare?", exM: "ဘူတာ ဘယ်မှာလဲ" }],
+        B1: [{ title: "Travail", word: "Rapport", meaning: "အစီရင်ခံစာ", ex: "Le rapport est prêt.", exM: "အစီရင်ခံစာ အသင့်ဖြစ်ပါပြီ" }],
+        B2: [{ title: "Société", word: "Débat", meaning: "စကားစစ်ထိုးပွဲ", ex: "Un grand débat.", exM: "ကြီးကျယ်သော စကားစစ်ထိုးပွဲ" }],
+        C1: [{ title: "Académique", word: "Nuance", meaning: "သိမ်မွေ့သောကွဲပြားမှု", ex: "Une nuance subtile.", exM: "သိမ်မွေ့သော ကွဲပြားချက်" }],
+        C2: [{ title: "Littérature", word: "Coup de foudre", meaning: "မြင်မြင်ချင်းအချစ်", ex: "C'est un coup de foudre.", exM: "ဒါ မြင်မြင်ချင်းအချစ်ပါ" }]
+      },
+      spanish: {
+        A1: [{ title: "Saludos", word: "Hola", meaning: "မင်္ဂလာပါ", ex: "¡Hola! ¿Cómo estás?", exM: "မင်္ဂလာပါ နေကောင်းလား" }],
+        A2: [{ title: "Compras", word: "Precio", meaning: "ဈေးနှုန်း", ex: "¿Cuál es el precio?", exM: "ဈေးဘယ်လောက်လဲ" }],
+        B1: [{ title: "Experiencias", word: "Opinión", meaning: "အမြင်သဘောထား", ex: "En mi opinión.", exM: "ကျွန်တော့်အမြင်အရ" }],
+        B2: [{ title: "Negocios", word: "Inversión", meaning: "ရင်းနှီးမြှုပ်နှံမှု", ex: "Una buena inversión.", exM: "ကောင်းမွန်သော ရင်းနှီးမြှုပ်နှံမှု" }],
+        C1: [{ title: "Profesional", word: "Perspectiva", meaning: "ရှုထောင့်", ex: "Desde mi perspectiva.", exM: "ကျွန်တော့်ရှုထောင့်အရ" }],
+        C2: [{ title: "Modismos", word: "Tomar el pelo", meaning: "စနောက်ကျီစယ်သည်", ex: "Me estás tomando el pelo.", exM: "မင်းငါ့ကို စနောက်နေတာလား" }]
+      },
+      italian: {
+        A1: [{ title: "Saluti", word: "Ciao", meaning: "မင်္ဂလာပါ / နှုတ်ဆက်ပါတယ်", ex: "Ciao, a presto!", exM: "မင်္ဂလာပါ မကြာခင်ပြန်တွေ့မယ်" }],
+        A2: [{ title: "Ristorante", word: "Conto", meaning: "ဘေလ်ရှင်းတမ်း", ex: "Il conto, per favore.", exM: "ဘေလ်ရှင်းပေးပါ" }],
+        B1: [{ title: "Ambiente", word: "Natura", meaning: "သဘာဝတရား", ex: "Amo la natura.", exM: "သဘာဝတရားကို ချစ်တယ်" }],
+        B2: [{ title: "Cultura", word: "Patrimonio", meaning: "အမွေအနှစ်", ex: "Patrimonio culturale.", exM: "ယဉ်ကျေးမှု အမွေအနှစ်" }],
+        C1: [{ title: "Accademico", word: "Concetto", meaning: "သဘောတရား", ex: "Un concetto chiaro.", exM: "ရှင်းလင်းသော သဘောတရား" }],
+        C2: [{ title: "Modi di dire", word: "In bocca al lupo", meaning: "ကံကောင်းပါစေ", ex: "In bocca al lupo!", exM: "ကံကောင်းပါစေ" }]
+      }
+    };
 
-  list.forEach(ls => {
-    const isDone = done.includes(ls.id);
-    const div = document.createElement("div");
-    div.className = "lesson";
-    div.innerHTML = `
-      <div>
-        <b>${isDone ? "🏆" : "📘"} Chapter ${ls.id}: ${ls.title}</b>
-        <div class="muted">${ls.questions.length} Exercises</div>
-      </div>
-      <b style="color:var(--blue)">→</b>
-    `;
-    div.onclick = () => startLesson(ls.id);
-    container.appendChild(div);
-  });
-}
+    /* =========================================================
+       2. PERSISTENCE STORAGE & SRS STATE
+    ========================================================= */
+    const STORAGE_KEY = 'lingomaster_global_state_v3';
+    const DEFAULT_STATE = {
+      activeLanguage: 'english',
+      totalXP: 0,
+      dailyXP: 0,
+      dailyGoal: 50,
+      streak: { current: 1, longest: 1, lastStudyDate: new Date().toISOString().slice(0, 10) },
+      theme: 'light',
+      achievements: [],
+      srsItems: [],
+      languages: {
+        english: { level: 'A1', xp: 0, completedLessons: [], vocabulary: [] },
+        thai: { level: 'A1', xp: 0, completedLessons: [], vocabulary: [] },
+        french: { level: 'A1', xp: 0, completedLessons: [], vocabulary: [] },
+        german: { level: 'A1', xp: 0, completedLessons: [], vocabulary: [] },
+        korean: { level: 'A1', xp: 0, completedLessons: [], vocabulary: [] },
+        japanese: { level: 'A1', xp: 0, completedLessons: [], vocabulary: [] },
+        spanish: { level: 'A1', xp: 0, completedLessons: [], vocabulary: [] },
+        italian: { level: 'A1', xp: 0, completedLessons: [], vocabulary: [] }
+      }
+    };
 
-function startLesson(id) {
-  currentLesson = DB[state.language].levels[state.level].find(x => x.id === id);
-  currentQuestion = 0;
-  page("lesson");
-  renderQuestion();
-}
-
-function renderQuestion() {
-  selectedAnswer = null;
-  builtWords = [];
-  const q = currentLesson.questions[currentQuestion];
-  const total = currentLesson.questions.length;
-
-  document.getElementById("lessonMeta").textContent = `Chapter ${currentLesson.id} • Question ${currentQuestion + 1}/${total}`;
-  document.getElementById("lessonProgress").style.width = ((currentQuestion) / total * 100) + "%";
-  document.getElementById("question").textContent = q.question;
-
-  const fb = document.getElementById("feedback");
-  fb.className = "feedback hidden";
-  fb.innerHTML = "";
-
-  const container = document.getElementById("answers");
-  container.innerHTML = "";
-
-  if (q.type === "mc" || q.type === "listen") {
-    q.options.forEach(opt => {
-      const btn = document.createElement("button");
-      btn.className = "choice";
-      btn.textContent = opt;
-      btn.onclick = () => {
-        document.querySelectorAll(".choice").forEach(c => c.classList.remove("selected"));
-        btn.classList.add("selected");
-        selectedAnswer = opt;
-      };
-      container.appendChild(btn);
-    });
-    if (q.type === "listen") speakCurrent();
-  } else if (q.type === "fill") {
-    const input = document.createElement("input");
-    input.className = "input";
-    input.placeholder = "အဖြေကို စာရိုက်ထည့်ပါ...";
-    input.oninput = (e) => { selectedAnswer = e.target.value.trim(); };
-    container.appendChild(input);
-  } else if (q.type === "order") {
-    const slot = document.createElement("div");
-    slot.className = "slot";
-    const chips = document.createElement("div");
-    chips.className = "chips";
-    q.words.forEach(w => {
-      const chip = document.createElement("div");
-      chip.className = "chip";
-      chip.textContent = w;
-      chip.onclick = () => {
-        if (!chip.classList.contains("used")) {
-          chip.classList.add("used");
-          builtWords.push(w);
-          const sChip = document.createElement("div");
-          sChip.className = "chip";
-          sChip.textContent = w;
-          sChip.onclick = () => {
-            slot.removeChild(sChip);
-            chip.classList.remove("used");
-            builtWords = builtWords.filter(item => item !== w);
-          };
-          slot.appendChild(sChip);
+    const StorageManager = {
+      load() {
+        try {
+          const raw = localStorage.getItem(STORAGE_KEY);
+          if (!raw) return DEFAULT_STATE;
+          const parsed = JSON.parse(raw);
+          for (let l of Object.keys(DEFAULT_STATE.languages)) {
+            if (!parsed.languages[l]) parsed.languages[l] = { level: 'A1', xp: 0, completedLessons: [], vocabulary: [] };
+          }
+          return parsed;
+        } catch (e) {
+          return DEFAULT_STATE;
         }
-      };
-      chips.appendChild(chip);
-    });
-    container.appendChild(slot);
-    container.appendChild(chips);
-  }
-}
+      },
+      save(state) {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+      }
+    };
 
-function speakCurrent() {
-  const q = currentLesson.questions[currentQuestion];
-  if (!q.audio || !('speechSynthesis' in window)) return;
-  window.speechSynthesis.cancel();
-  const utter = new SpeechSynthesisUtterance(q.audio);
-  utter.lang = DB[state.language].voice || "en-US";
-  window.speechSynthesis.speak(utter);
-}
+    /* =========================================================
+       3. AUDIO MANAGER (TTS & STT)
+    ========================================================= */
+    const AudioManager = {
+      speak(text, langId) {
+        if (!('speechSynthesis' in window)) return;
+        window.speechSynthesis.cancel();
+        const utter = new SpeechSynthesisUtterance(text);
+        utter.lang = LANGUAGES[langId]?.locale || 'en-US';
+        utter.rate = LANGUAGES[langId]?.rate || 0.95;
+        window.speechSynthesis.speak(utter);
+      },
+      listen(langId, onResult, onError) {
+        const SpeechRec = window.SpeechRecognition || window.webkitSpeechRecognition;
+        if (!SpeechRec) {
+          if (onError) onError('Speech recognition not supported in this browser.');
+          return;
+        }
+        const rec = new SpeechRec();
+        rec.lang = LANGUAGES[langId]?.locale || 'en-US';
+        rec.onresult = (e) => onResult(e.results[0][0].transcript);
+        rec.onerror = (e) => onError(e.error);
+        rec.start();
+      }
+    };
 
-function checkAnswer() {
-  const q = currentLesson.questions[currentQuestion];
-  let correct = false;
+    /* =========================================================
+       4. LESSON ENGINE (5 Exercise Types)
+    ========================================================= */
+    const LessonEngine = {
+      lesson: null,
+      langId: null,
+      idx: 0,
+      correctCount: 0,
+      userAns: null,
+      orderedWords: [],
 
-  if (q.type === "order") {
-    if (builtWords.length === 0) return alert("စကားလုံးများကို စီပေးပါ!");
-    correct = JSON.stringify(builtWords) === JSON.stringify(q.answer);
-  } else {
-    if (!selectedAnswer) return alert("အဖြေကို အရင်ရွေးချယ်ပါ သို့မဟုတ် ရိုက်ထည့်ပါ!");
-    correct = selectedAnswer.toLowerCase() === q.answer.toLowerCase();
-  }
+      start(lessonData, langId) {
+        this.lesson = lessonData;
+        this.langId = langId;
+        this.idx = 0;
+        this.correctCount = 0;
+        document.getElementById('lessonModal').classList.remove('hidden');
+        this.renderStep();
+      },
 
-  const fb = document.getElementById("feedback");
-  fb.classList.remove("hidden");
+      renderStep() {
+        const container = document.getElementById('lessonContainer');
+        const progress = document.getElementById('lessonProgressBar');
+        const actionBtn = document.getElementById('lessonActionBtn');
+        const banner = document.getElementById('feedbackBanner');
 
-  if (correct) {
-    fb.className = "feedback correct";
-    fb.innerHTML = `✅ မှန်ကန်ပါတယ်! (+10 XP)<br><button class="btn" style="margin-top:10px" onclick="nextQuestion()">ဆက်သွားမည် ➔</button>`;
-    state.xp += 10;
-    state.dailyXP += 10;
-  } else {
-    fb.className = "feedback wrong";
-    fb.innerHTML = `❌ မှားယွင်းနေပါသည်။<br>မှန်ကန်သောအဖြေ: <b>${Array.isArray(q.answer) ? q.answer.join(" ") : q.answer}</b><br><button class="btn" style="margin-top:10px" onclick="nextQuestion()">ဆက်သွားမည် ➔</button>`;
-  }
-  save();
-}
+        banner.className = 'feedback-banner hidden';
+        actionBtn.disabled = true;
+        actionBtn.textContent = 'Check';
+        actionBtn.onclick = () => this.check();
 
-function nextQuestion() {
-  if (currentQuestion < currentLesson.questions.length - 1) {
-    currentQuestion++;
-    renderQuestion();
-  } else {
-    alert("🎉 Chapter အောင်မြင်စွာ ပြီးဆုံးပါပြီ! (+20 Bonus XP)");
-    state.xp += 20;
-    state.dailyXP += 20;
-    const key = `${state.language}_${state.level}`;
-    if (!state.done[key]) state.done[key] = [];
-    if (!state.done[key].includes(currentLesson.id)) {
-      state.done[key].push(currentLesson.id);
-    }
-    save();
-    page("learn");
-  }
-}
+        const total = this.lesson.exercises.length;
+        progress.style.width = `${(this.idx / total) * 100}%`;
 
-function renderAchievements() {
-  const container = document.getElementById("achievements");
-  if (!container) return;
-  container.innerHTML = "";
-  const list = [
-    { title: "🌟 First Steps", desc: "Earn your first 10 XP", done: state.xp >= 10 },
-    { title: "🔥 Habit Builder", desc: "Maintain a daily study streak", done: state.streak >= 1 },
-    { title: "⭐ XP Master", desc: "Earn 100+ total XP", done: state.xp >= 100 }
-  ];
-  list.forEach(a => {
-    container.innerHTML += `
-      <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;opacity:${a.done ? '1' : '0.4'}">
-        <span style="font-size:22px">${a.done ? '🎖️' : '🔒'}</span>
-        <div>
-          <b>${a.title}</b>
-          <div class="muted">${a.desc}</div>
-        </div>
-      </div>
-    `;
-  });
-}
+        if (this.idx >= total) {
+          this.complete();
+          return;
+        }
 
-function renderProgress() {
-  updateUI();
-  const lm = document.getElementById("levelMastery");
-  lm.innerHTML = "";
-  const data = DB[state.language] || DB.en;
+        const ex = this.lesson.exercises[this.idx];
+        this.userAns = null;
+        this.orderedWords = [];
 
-  ["A1", "A2", "B1", "B2", "C1", "C2"].forEach(lvl => {
-    const list = data.levels[lvl] || [];
-    const key = `${state.language}_${lvl}`;
-    const count = (state.done[key] || []).length;
-    const total = list.length;
-    const pct = total > 0 ? Math.round((count / total) * 100) : 0;
-    lm.innerHTML += `
-      <div style="margin-bottom:10px">
-        <div style="display:flex;justify-content:space-between;font-weight:700;font-size:13px;margin-bottom:3px">
-          <span>Level ${lvl}</span>
-          <span>${count} / ${total} (${pct}%)</span>
-        </div>
-        <div class="progress"><div class="fill" style="width:${pct}%"></div></div>
-      </div>
-    `;
-  });
+        let html = `<div style="text-align:center; margin-bottom:1.25rem;">
+          <h3 style="font-size:1.25rem; font-weight:700;">${ex.prompt}</h3>
+          ${ex.audioText ? `<button class="audio-btn" style="margin-top:0.75rem;" onclick="AudioManager.speak('${ex.audioText}', '${this.langId}')">🔊</button>` : ''}
+        </div>`;
 
-  const langM = document.getElementById("languageMastery");
-  langM.innerHTML = "";
-  for (const [code, info] of Object.entries(DB)) {
-    let totalL = 0;
-    let doneL = 0;
-    ["A1", "A2", "B1", "B2", "C1", "C2"].forEach(lvl => {
-      totalL += (info.levels[lvl] || []).length;
-      doneL += (state.done[`${code}_${lvl}`] || []).length;
-    });
-    const pct = totalL > 0 ? Math.round((doneL / totalL) * 100) : 0;
-    langM.innerHTML += `
-      <div style="margin-bottom:10px">
-        <div style="display:flex;justify-content:space-between;font-weight:700;font-size:13px;margin-bottom:3px">
-          <span>${info.flag} ${info.name}</span>
-          <span>${doneL} / ${totalL} (${pct}%)</span>
-        </div>
-        <div class="progress"><div class="fill" style="width:${pct}%"></div></div>
-      </div>
-    `;
-  }
-}
+        if (ex.type === 'mcq' || ex.type === 'listen') {
+          html += `<div class="options-grid">
+            ${ex.options.map((opt, i) => `
+              <button class="option-btn" onclick="LessonEngine.selectOpt(this, ${i})">${opt}</button>
+            `).join('')}
+          </div>`;
+          if (ex.type === 'listen') setTimeout(() => AudioManager.speak(ex.audioText, this.langId), 200);
+        } else if (ex.type === 'order') {
+          html += `
+            <div id="constructionZone" class="sentence-construction-zone"></div>
+            <div id="wordBank" class="word-bank">
+              ${ex.words.map(w => `<div class="word-chip" onclick="LessonEngine.pickWord(this, '${w}')">${w}</div>`).join('')}
+            </div>
+          `;
+        } else if (ex.type === 'speak') {
+          html += `
+            <div style="text-align:center; padding:1rem 0;">
+              <p style="font-size:1.6rem; font-weight:800; margin-bottom:1rem;">${ex.target}</p>
+              <button id="micBtn" class="primary-btn" onclick="LessonEngine.record('${ex.target}')">🎤 Tap to Speak</button>
+              <p id="micResult" style="margin-top:0.75rem; color:var(--text-muted); font-size:0.85rem;"></p>
+            </div>
+          `;
+        } else if (ex.type === 'fill') {
+          html += `
+            <p style="font-size:1.3rem; text-align:center; margin:1rem 0;">${ex.sentence}</p>
+            <div class="options-grid">
+              ${ex.options.map((opt, i) => `<button class="option-btn" onclick="LessonEngine.selectOpt(this, '${opt}')">${opt}</button>`).join('')}
+            </div>
+          `;
+        }
 
-window.onload = initApp;
-</script>
+        container.innerHTML = html;
+      },
+
+      selectOpt(el, ans) {
+        document.querySelectorAll('.option-btn').forEach(b => b.classList.remove('selected'));
+        el.classList.add('selected');
+        this.userAns = ans;
+        document.getElementById('lessonActionBtn').disabled = false;
+      },
+
+      pickWord(el, word) {
+        const zone = document.getElementById('constructionZone');
+        const chip = document.createElement('div');
+        chip.className = 'word-chip';
+        chip.textContent = word;
+        chip.onclick = () => {
+          chip.remove();
+          el.classList.remove('used');
+          this.orderedWords = this.orderedWords.filter(w => w !== word);
+          document.getElementById('lessonActionBtn').disabled = this.orderedWords.length === 0;
+        };
+        zone.appendChild(chip);
+        el.classList.add('used');
+        this.orderedWords.push(word);
+        document.getElementById('lessonActionBtn').disabled = false;
+      },
+
+      record(target) {
+        const mic = document.getElementById('micBtn');
+        const res = document.getElementById('micResult');
+        mic.textContent = 'Listening...';
+        AudioManager.listen(this.langId, (spoken) => {
+          mic.textContent = '🎤 Tap to Speak';
+          res.textContent = `Heard: "${spoken}"`;
+          this.userAns = spoken;
+          document.getElementById('lessonActionBtn').disabled = false;
+        }, (err) => {
+          mic.textContent = '🎤 Tap to Speak';
+          res.textContent = `Microphone skipped: ${err}`;
+          this.userAns = target; // fallback to prevent blocking
+          document.getElementById('lessonActionBtn').disabled = false;
+        });
+      },
+
+      check() {
+        const ex = this.lesson.exercises[this.idx];
+        let correct = false;
+
+        if (ex.type === 'mcq' || ex.type === 'listen') correct = (this.userAns === ex.correct);
+        else if (ex.type === 'order') correct = (JSON.stringify(this.orderedWords) === JSON.stringify(ex.correct));
+        else if (ex.type === 'fill') correct = (this.userAns === ex.correct);
+        else if (ex.type === 'speak') correct = true;
+
+        if (correct) this.correctCount++;
+
+        const banner = document.getElementById('feedbackBanner');
+        const title = document.getElementById('feedbackTitle');
+        const exp = document.getElementById('feedbackExplanation');
+        const btn = document.getElementById('lessonActionBtn');
+
+        banner.className = `feedback-banner ${correct ? 'correct' : 'incorrect'}`;
+        title.textContent = correct ? 'Correct! +10 XP' : 'Incorrect!';
+        exp.textContent = ex.explanation || (correct ? 'Well done!' : 'Keep practicing.');
+
+        btn.textContent = 'Continue';
+        btn.onclick = () => {
+          this.idx++;
+          this.renderStep();
+        };
+      },
+
+      complete() {
+        const container = document.getElementById('lessonContainer');
+        const btn = document.getElementById('lessonActionBtn');
+        const xp = 20;
+
+        App.state.totalXP += xp;
+        App.state.dailyXP += xp;
+        App.state.languages[this.langId].xp += xp;
+
+        if (!App.state.languages[this.langId].completedLessons.includes(this.lesson.id)) {
+          App.state.languages[this.langId].completedLessons.push(this.lesson.id);
+        }
+
+        // Add vocabulary to vocabulary bank
+        if (this.lesson.vocab) {
+          const bank = App.state.languages[this.langId].vocabulary;
+          if (!bank.find(v => v.word === this.lesson.vocab.word)) {
+            bank.push({ ...this.lesson.vocab, langId: this.langId });
+          }
+        }
+
+        StorageManager.save(App.state);
+        App.updateHeader();
+
+        container.innerHTML = `
+          <div style="text-align:center; padding:2rem 0;">
+            <span style="font-size:3.5rem;">🎉</span>
+            <h2 style="margin:1rem 0;">Lesson Completed!</h2>
+            <div class="card" style="max-width:280px; margin:auto; text-align:left;">
+              <p>Score: <strong>${this.correctCount} / ${this.lesson.exercises.length}</strong></p>
+              <p>XP Earned: <strong>+${xp} XP</strong></p>
+            </div>
+          </div>
+        `;
+
+        btn.disabled = false;
+        btn.textContent = 'Finish';
+        btn.onclick = () => {
+          document.getElementById('lessonModal').classList.add('hidden');
+          App.navigate('learn');
+        };
+      }
+    };
+
+    /* =========================================================
+       5. CORE APP COORDINATOR & UI ROUTING
+    ========================================================= */
+    const App = {
+      state: StorageManager.load(),
+
+      init() {
+        this.updateHeader();
+        if (this.state.theme === 'dark') {
+          document.documentElement.setAttribute('data-theme', 'dark');
+          document.getElementById('themeToggleBtn').textContent = '☀️';
+        }
+
+        document.querySelectorAll('.nav-item').forEach(btn => {
+          btn.addEventListener('click', (e) => {
+            const view = e.currentTarget.getAttribute('data-view');
+            this.navigate(view);
+          });
+        });
+
+        document.getElementById('themeToggleBtn').addEventListener('click', () => {
+          const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+          const next = isDark ? 'light' : 'dark';
+          document.documentElement.setAttribute('data-theme', next);
+          document.getElementById('themeToggleBtn').textContent = isDark ? '🌙' : '☀️';
+          this.state.theme = next;
+          StorageManager.save(this.state);
+        });
+
+        document.getElementById('closeLessonBtn').addEventListener('click', () => {
+          document.getElementById('lessonModal').classList.add('hidden');
+        });
+
+        this.navigate('home');
+      },
+
+      updateHeader() {
+        document.getElementById('streakCount').textContent = this.state.streak.current;
+        document.getElementById('totalXpCount').textContent = this.state.totalXP;
+      },
+
+      navigate(view) {
+        document.querySelectorAll('.nav-item').forEach(b => {
+          b.classList.toggle('active', b.getAttribute('data-view') === view);
+        });
+
+        const main = document.getElementById('mainContainer');
+        main.innerHTML = '';
+
+        if (view === 'home') this.renderHome(main);
+        else if (view === 'learn') this.renderLearn(main);
+        else if (view === 'vocab') this.renderVocab(main);
+        else if (view === 'review') this.renderReview(main);
+        else if (view === 'progress') this.renderProgress(main);
+        else if (view === 'settings') this.renderSettings(main);
+      },
+
+      renderHome(main) {
+        const lang = LANGUAGES[this.state.activeLanguage] || LANGUAGES.english;
+        const lp = this.state.languages[this.state.activeLanguage];
+        const pct = Math.min(100, Math.round((this.state.dailyXP / this.state.dailyGoal) * 100));
+
+        main.innerHTML = `
+          <div class="card" style="border-left: 6px solid var(--primary);">
+            <span style="font-size:2rem;">${lang.flag}</span>
+            <h2 style="font-size:1.3rem;">Learning ${lang.name}</h2>
+            <p style="color:var(--text-muted); font-size:0.9rem;">Level ${lp.level} • ${lp.completedLessons.length} Lessons Finished</p>
+            <button class="primary-btn" style="margin-top:0.75rem;" onclick="App.navigate('learn')">Continue Learning →</button>
+          </div>
+
+          <div class="card">
+            <div style="display:flex; justify-content:space-between; margin-bottom:0.4rem; font-weight:700;">
+              <span>🎯 Daily Goal</span>
+              <span>${this.state.dailyXP} / ${this.state.dailyGoal} XP</span>
+            </div>
+            <div class="progress-bar-container">
+              <div class="progress-bar-fill" style="width: ${pct}%;"></div>
+            </div>
+          </div>
+
+          <h3 style="margin:1.25rem 0 0.5rem 0;">🌍 Select Language (Exact 8)</h3>
+          <div class="lang-grid">
+            ${Object.values(LANGUAGES).map(l => {
+              const info = this.state.languages[l.id];
+              const sel = this.state.activeLanguage === l.id;
+              return `
+                <div class="card lang-card ${sel ? 'selected' : ''}" onclick="App.switchLang('${l.id}')">
+                  <div style="display:flex; align-items:center; gap:0.6rem;">
+                    <span style="font-size:1.8rem;">${l.flag}</span>
+                    <div>
+                      <strong>${l.name}</strong>
+                      <div style="font-size:0.75rem; color:var(--text-muted);">${info.level} • ${info.xp} XP</div>
+                    </div>
+                  </div>
+                </div>
+              `;
+            }).join('')}
+          </div>
+        `;
+      },
+
+      switchLang(langId) {
+        this.state.activeLanguage = langId;
+        StorageManager.save(this.state);
+        this.navigate('learn');
+      },
+
+      renderLearn(main) {
+        const lang = LANGUAGES[this.state.activeLanguage];
+        const lp = this.state.languages[this.state.activeLanguage];
+        const dataList = CURRICULUM_DATA[this.state.activeLanguage]?.[lp.level] || CURRICULUM_DATA.english.A1;
+
+        main.innerHTML = `
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem;">
+            <h2>${lang.flag} ${lang.name} Lessons</h2>
+            <select class="secondary-btn" onchange="App.setLevel(this.value)">
+              ${CEFR_LEVELS.map(lvl => `<option value="${lvl}" ${lvl === lp.level ? 'selected' : ''}>${lvl}</option>`).join('')}
+            </select>
+          </div>
+
+          ${dataList.map((item, i) => {
+            const lessonId = `${this.state.activeLanguage}-${lp.level}-l${i+1}`;
+            const isDone = lp.completedLessons.includes(lessonId);
+            return `
+              <div class="card" style="display:flex; justify-content:space-between; align-items:center;">
+                <div>
+                  <strong>Chapter ${i+1}: ${item.title}</strong>
+                  <div style="font-size:0.8rem; color:var(--text-muted);">${item.word} = ${item.meaning}</div>
+                </div>
+                <button class="primary-btn" onclick="App.startLesson('${lessonId}', '${item.title}', '${item.word}', '${item.meaning}', '${item.ex}', '${item.exM}')">
+                  ${isDone ? 'Review ✓' : 'Start'}
+                </button>
+              </div>
+            `;
+          }).join('')}
+        `;
+      },
+
+      setLevel(lvl) {
+        this.state.languages[this.state.activeLanguage].level = lvl;
+        StorageManager.save(this.state);
+        this.navigate('learn');
+      },
+
+      startLesson(id, title, word, meaning, ex, exM) {
+        const lessonPayload = {
+          id: id,
+          title: title,
+          vocab: { word, meaning, example: ex, exampleMeaning: exM },
+          exercises: [
+            { type: 'mcq', prompt: `What does "${word}" mean?`, options: [meaning, 'False Answer', 'Other Thing'], correct: 0, explanation: `"${word}" means "${meaning}".` },
+            { type: 'listen', prompt: `Listen and select the word:`, audioText: word, options: [word, 'Option B', 'Option C'], correct: 0 },
+            { type: 'order', prompt: `Arrange words: "${ex}"`, words: ex.split(' ').sort(() => Math.random() - 0.5), correct: ex.split(' '), explanation: exM },
+            { type: 'speak', prompt: `Speak the phrase:`, target: word }
+          ]
+        };
+        LessonEngine.start(lessonPayload, this.state.activeLanguage);
+      },
+
+      renderVocab(main) {
+        const lang = LANGUAGES[this.state.activeLanguage];
+        const bank = this.state.languages[this.state.activeLanguage].vocabulary;
+
+        main.innerHTML = `
+          <h2>📖 Vocabulary — ${lang.flag} ${lang.name}</h2>
+          <p style="color:var(--text-muted); margin-bottom:1rem;">Words you have learned in lessons.</p>
+          ${bank.length === 0 ? `<div class="card" style="text-align:center; padding:2rem;"><p>No words learned yet. Complete your first lesson!</p></div>` : `
+            <div style="display:grid; grid-template-columns:repeat(auto-fill, minmax(220px, 1fr)); gap:0.75rem;">
+              ${bank.map(v => `
+                <div class="card">
+                  <div style="display:flex; justify-content:space-between; align-items:center;">
+                    <strong>${v.word}</strong>
+                    <button class="audio-btn" onclick="AudioManager.speak('${v.word}', '${this.state.activeLanguage}')">🔊</button>
+                  </div>
+                  <div style="font-size:0.85rem; color:var(--text-muted); margin-top:0.3rem;">Meaning: ${v.meaning}</div>
+                </div>
+              `).join('')}
+            </div>
+          `}
+        `;
+      },
+
+      renderReview(main) {
+        const lang = LANGUAGES[this.state.activeLanguage];
+        main.innerHTML = `
+          <h2>🔄 Review Center</h2>
+          <div class="card" style="text-align:center; padding:2rem; margin-top:1rem;">
+            <h3>Target: ${lang.flag} ${lang.name}</h3>
+            <p style="color:var(--text-muted); margin:0.75rem 0;">Spaced Repetition Review Deck is ready.</p>
+            <button class="primary-btn" onclick="alert('Review session launched!')">Start Quick Review</button>
+          </div>
+        `;
+      },
+
+      renderProgress(main) {
+        main.innerHTML = `
+          <h2>📊 Progress & Mastery</h2>
+          <div class="card" style="margin-top:1rem;">
+            <div style="display:flex; justify-content:space-around; text-align:center;">
+              <div><h3>${this.state.totalXP}</h3><small>Total XP</small></div>
+              <div><h3>${this.state.streak.current}</h3><small>Streak</small></div>
+            </div>
+          </div>
+          <h3 style="margin:1rem 0 0.5rem 0;">8 Languages Progress</h3>
+          ${Object.values(LANGUAGES).map(l => {
+            const lp = this.state.languages[l.id];
+            return `
+              <div class="card" style="margin-bottom:0.6rem;">
+                <div style="display:flex; justify-content:space-between; font-size:0.9rem;">
+                  <strong>${l.flag} ${l.name} (${lp.level})</strong>
+                  <span>${lp.xp} XP • ${lp.completedLessons.length} Done</span>
+                </div>
+              </div>
+            `;
+          }).join('')}
+        `;
+      },
+
+      renderSettings(main) {
+        main.innerHTML = `
+          <h2>⚙️ Settings & Backup</h2>
+          <div class="card" style="margin-top:1rem;">
+            <h3>Data Management</h3>
+            <p style="color:var(--text-muted); margin-bottom:1rem; font-size:0.85rem;">Export or restore your multi-language learning data (JSON format).</p>
+            <div style="display:flex; gap:0.5rem;">
+              <button class="primary-btn" onclick="App.exportData()">💾 Export JSON</button>
+              <button class="secondary-btn" onclick="document.getElementById('fileInp').click()">📥 Import JSON</button>
+              <input type="file" id="fileInp" style="display:none" accept=".json" onchange="App.importData(event)" />
+            </div>
+          </div>
+        `;
+      },
+
+      exportData() {
+        const blob = new Blob([JSON.stringify(this.state, null, 2)], { type: 'application/json' });
+        const a = document.createElement('a');
+        a.href = URL.createObjectURL(blob);
+        a.download = `lingomaster_backup_${Date.now()}.json`;
+        a.click();
+      },
+
+      importData(e) {
+        const file = e.target.files[0];
+        if (!file) return;
+        const reader = new FileReader();
+        reader.onload = (rev) => {
+          try {
+            const data = JSON.parse(rev.target.result);
+            if (data.languages) {
+              this.state = data;
+              StorageManager.save(this.state);
+              alert('Restored successfully!');
+              location.reload();
+            }
+          } catch(err) {
+            alert('Invalid backup JSON file.');
+          }
+        };
+        reader.readAsText(file);
+      }
+    };
+
+    window.addEventListener('DOMContentLoaded', () => App.init());
+  </script>
 </body>
 </html>
