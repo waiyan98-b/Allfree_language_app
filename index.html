@@ -136,21 +136,40 @@
     .badge-c1 { background: var(--purple); }
     .badge-c2 { background: var(--gold-dark); }
     
+    /* Game View Header & Back Button */
     .game-container {
       display: none;
       width: 100%;
       flex-direction: column;
       height: 100%;
     }
-    .progress-bar {
+    .game-top-bar {
+      display: flex;
+      align-items: center;
+      gap: 12px;
       width: 100%;
+      margin-bottom: 14px;
+    }
+    .btn-back {
+      background: none;
+      border: none;
+      font-size: 20px;
+      font-weight: bold;
+      color: #777;
+      cursor: pointer;
+      padding: 4px 8px;
+      border-radius: 8px;
+    }
+    .btn-back:hover { background: #eee; }
+    .progress-bar {
+      flex: 1;
       height: 12px;
       background: var(--gray);
       border-radius: 8px;
       overflow: hidden;
-      margin-bottom: 14px;
     }
     .progress-fill { height: 100%; width: 0%; background: var(--green); transition: width 0.3s; }
+    
     .speaker-btn {
       background: var(--blue);
       color: white;
@@ -239,6 +258,7 @@
 <body>
 
   <div class="app-wrapper">
+    <!-- Top Bar -->
     <div class="top-bar">
       <select class="lang-select" id="langPicker" onchange="changeLanguage()">
         <option value="en">🇬🇧 English</option>
@@ -258,6 +278,7 @@
     </div>
 
     <main>
+      <!-- Curriculum View -->
       <div id="curriculumView" style="width: 100%; display: flex; flex-direction: column; align-items: center;">
         <div class="summary-card">
           <div class="summary-stat-box">
@@ -289,10 +310,16 @@
         <div id="chapterContainer" style="width: 100%;"></div>
       </div>
 
+      <!-- Game View -->
       <div id="gameScreen" class="game-container">
-        <div class="progress-bar">
-          <div class="progress-fill" id="progressFill"></div>
+        <!-- Top Game Bar with Back Button -->
+        <div class="game-top-bar">
+          <button class="btn-back" onclick="confirmBack()" title="ပင်မစာမျက်နှာသို့ ပြန်သွားမည်">✕</button>
+          <div class="progress-bar">
+            <div class="progress-fill" id="progressFill"></div>
+          </div>
         </div>
+
         <button class="speaker-btn" onclick="speakCurrent()">🔊 အသံနားထောင်မည်</button>
         <div class="prompt-box" id="promptText">-</div>
         
@@ -650,14 +677,21 @@
       }
     }
 
+    // Back to Chapter List Function
+    function confirmBack() {
+      if (confirm('သင်ခန်းစာမှ ထွက်ပြီး ပင်မစာမျက်နှာသို့ ပြန်သွားမည်လား?')) {
+        backToCurriculum();
+      }
+    }
+
     function backToCurriculum() {
+      document.getElementById('feedbackSheet').style.display = 'none';
       document.getElementById('gameScreen').style.display = 'none';
       document.getElementById('bottomBar').style.display = 'none';
       document.getElementById('curriculumView').style.display = 'flex';
       renderChapters();
     }
 
-    // Initialize UI on load
     window.onload = () => {
       renderChapters();
     };
