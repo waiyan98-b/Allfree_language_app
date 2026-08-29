@@ -3,14 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Free Language App</title>
+  <title>All-in-One Multi-Language App</title>
   <style>
     :root {
       --primary: #00897b;
       --primary-dark: #00695c;
       --bg: #f4f6f8;
       --card-bg: #ffffff;
-      --text: #333333;
+      --text: #222222;
     }
     body {
       margin: 0;
@@ -24,10 +24,33 @@
     header {
       background-color: var(--primary);
       color: white;
-      padding: 16px;
+      padding: 12px 16px;
       text-align: center;
-      font-size: 20px;
+      font-size: 18px;
       font-weight: bold;
+    }
+    .lang-bar {
+      display: flex;
+      overflow-x: auto;
+      background: #ffffff;
+      padding: 8px;
+      gap: 8px;
+      border-bottom: 1px solid #ddd;
+    }
+    .lang-btn {
+      flex: 0 0 auto;
+      padding: 6px 14px;
+      border-radius: 20px;
+      border: 1px solid #00897b;
+      background: white;
+      color: #00897b;
+      font-size: 13px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    .lang-btn.active {
+      background: #00897b;
+      color: white;
     }
     main {
       flex: 1;
@@ -38,44 +61,49 @@
     .card {
       background: var(--card-bg);
       border-radius: 12px;
-      padding: 16px;
+      padding: 14px;
       margin-bottom: 12px;
       box-shadow: 0 2px 5px rgba(0,0,0,0.05);
     }
-    .word-header {
+    .word-row {
       display: flex;
       justify-content: space-between;
       align-items: center;
     }
-    .word-title {
+    .word-text {
       font-size: 20px;
       font-weight: bold;
       color: var(--primary-dark);
     }
     .phonetic {
-      font-size: 14px;
-      color: #777;
-      font-style: italic;
+      font-size: 13px;
+      color: #666;
+      margin-top: 2px;
     }
-    .btn-icon {
-      background: none;
-      border: none;
-      font-size: 22px;
-      cursor: pointer;
+    .meaning {
+      margin-top: 8px;
+      font-size: 15px;
+      font-weight: 500;
     }
-    .btn-add {
-      position: fixed;
-      bottom: 75px;
-      right: 20px;
-      background: var(--primary);
-      color: white;
+    .example {
+      margin-top: 4px;
+      font-size: 13px;
+      color: #555;
+      background: #f9f9f9;
+      padding: 6px;
+      border-radius: 6px;
+    }
+    .btn-speak {
+      background: #e0f2f1;
       border: none;
-      border-radius: 50px;
-      padding: 14px 20px;
-      font-size: 16px;
-      font-weight: bold;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      font-size: 20px;
       cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
     .nav {
       position: fixed;
@@ -84,13 +112,13 @@
       background: white;
       display: flex;
       border-top: 1px solid #ddd;
-      height: 60px;
+      height: 55px;
     }
     .nav button {
       flex: 1;
       border: none;
       background: none;
-      font-size: 16px;
+      font-size: 15px;
       font-weight: bold;
       color: #777;
       cursor: pointer;
@@ -110,97 +138,118 @@
       text-align: center;
       cursor: pointer;
     }
-    .quiz-option.correct {
-      background: #c8e6c9;
-      border-color: #4caf50;
-    }
-    .quiz-option.wrong {
-      background: #ffcdd2;
-      border-color: #f44336;
-    }
-    .modal {
-      display: none;
-      position: fixed;
-      top: 0; left: 0; width: 100%; height: 100%;
-      background: rgba(0,0,0,0.5);
-      justify-content: center;
-      align-items: center;
-    }
-    .modal-content {
-      background: white;
-      padding: 20px;
-      border-radius: 12px;
-      width: 85%;
-      max-width: 400px;
-    }
-    .modal-content input {
-      width: 90%;
-      padding: 10px;
-      margin-bottom: 10px;
-      border: 1px solid #ccc;
-      border-radius: 6px;
-    }
+    .quiz-option.correct { background: #c8e6c9; border-color: #4caf50; }
+    .quiz-option.wrong { background: #ffcdd2; border-color: #f44336; }
   </style>
 </head>
 <body>
 
-  <header id="headerTitle">စကားလုံးများ</header>
+  <header id="headerTitle">Multi-Language Learning</header>
+
+  <!-- Language Switcher Bar -->
+  <div class="lang-bar">
+    <button class="lang-btn active" onclick="selectLang('en')">🇬🇧 English</button>
+    <button class="lang-btn" onclick="selectLang('th')">🇹🇭 ไทย (Thai)</button>
+    <button class="lang-btn" onclick="selectLang('ja')">🇯🇵 日本語 (Japanese)</button>
+    <button class="lang-btn" onclick="selectLang('de')">🇩🇪 Deutsch (German)</button>
+    <button class="lang-btn" onclick="selectLang('fr')">🇫🇷 Français (French)</button>
+  </div>
 
   <main id="tabVocab">
     <div id="wordsList"></div>
   </main>
 
-  <button class="btn-add" id="btnAddWord" onclick="openModal()">+ စကားလုံး ထည့်မည်</button>
-
   <main id="tabQuiz" style="display: none; text-align: center;">
     <div id="quizContainer">
-      <h2 id="quizWord" style="color: var(--primary); font-size: 28px;">-</h2>
-      <p style="color: #666;">မှန်ကန်သော အဓိပ္ပာယ်ကို ရွေးပါ</p>
+      <h2 id="quizWord" style="color: var(--primary); font-size: 26px; margin-top: 20px;">-</h2>
+      <p style="color: #666;">မှန်ကန်သော မြန်မာအဓိပ္ပာယ်ကို ရွေးပါ</p>
       <div id="quizOptions" style="margin-top: 20px;"></div>
       <button id="btnNextQuiz" onclick="nextQuizQuestion()" style="display:none; width:100%; padding:14px; background:var(--primary); color:white; border:none; border-radius:8px; font-size:16px; margin-top:20px;">နောက်တစ်ခု</button>
     </div>
   </main>
 
   <div class="nav">
-    <button id="navVocab" class="active" onclick="switchTab('vocab')">📖 လေ့လာရန်</button>
-    <button id="navQuiz" onclick="switchTab('quiz')">🎯 Quiz ဖြေရန်</button>
-  </div>
-
-  <div class="modal" id="addModal">
-    <div class="modal-content">
-      <h3>စကားလုံးအသစ် ထည့်သွင်းရန်</h3>
-      <input type="text" id="inWord" placeholder="English Word (e.g. Hope)">
-      <input type="text" id="inPhonetic" placeholder="အသံထွက် (e.g. /hoʊp/)">
-      <input type="text" id="inMeaning" placeholder="မြန်မာ အဓိပ္ပာယ် (e.g. မျှော်လင့်ချက်)">
-      <input type="text" id="inExample" placeholder="ဥပမာ ဝါကျ">
-      <div style="display: flex; justify-content: flex-end; gap: 10px; margin-top: 10px;">
-        <button onclick="closeModal()" style="padding: 8px 16px; border:none; background:#eee; border-radius:6px;">မလုပ်တော့ပါ</button>
-        <button onclick="saveWord()" style="padding: 8px 16px; border:none; background:var(--primary); color:white; border-radius:6px;">သိမ်းမည်</button>
-      </div>
-    </div>
+    <button id="navVocab" class="active" onclick="switchTab('vocab')">📖 စကားလုံးများ</button>
+    <button id="navQuiz" onclick="switchTab('quiz')">🎯 Quiz စမ်းသပ်ရန်</button>
   </div>
 
   <script>
-    const defaultData = [
-      { word: "Hello", phonetic: "/həˈloʊ/", meaning: "မင်္ဂလာပါ", example: "Hello! How are you?" },
-      { word: "Gratitude", phonetic: "/ˈɡræt.ɪ.tʃuːd/", meaning: "ကျေးဇူးတင်ရှိခြင်း", example: "Express your gratitude." },
-      { word: "Opportunity", phonetic: "/ˌɑː.pɚˈtuː.nə.t̬i/", meaning: "အခွင့်အလမ်း", example: "Grab the opportunity." },
-      { word: "Perseverance", phonetic: "/ˌpɝː.səˈvɪr.əns/", meaning: "ဇွဲလုံ့လ", example: "Perseverance brings success." }
-    ];
+    const database = {
+      en: {
+        code: 'en-US',
+        data: [
+          { word: "Hello", phonetic: "/həˈloʊ/", meaning: "မင်္ဂလာပါ", example: "Hello! How are you doing?" },
+          { word: "Thank you", phonetic: "/θæŋk juː/", meaning: "ကျေးဇူးတင်ပါတယ်", example: "Thank you very much for your help." },
+          { word: "Opportunity", phonetic: "/ˌɑː.pɚˈtuː.nə.t̬i/", meaning: "အခွင့်အလမ်း", example: "Learning languages gives new opportunity." },
+          { word: "Perseverance", phonetic: "/ˌpɝː.səˈvɪr.əns/", meaning: "ဇွဲလုံ့လ", example: "Perseverance leads to success." },
+          { word: "Confidence", phonetic: "/ˈkɑːn.fə.dəns/", meaning: "ယုံကြည်မှု", example: "Speak daily to build confidence." },
+          { word: "Delicious", phonetic: "/dɪˈlɪʃ.əs/", meaning: "အရသာရှိသော", example: "This food is really delicious." }
+        ]
+      },
+      th: {
+        code: 'th-TH',
+        data: [
+          { word: "สวัสดี (Sawasdee)", phonetic: "ဆာဝါဒီ", meaning: "မင်္ဂလာပါ", example: "สวัสดีครับ (မင်္ဂလာပါခင်ဗျာ)" },
+          { word: "ขอบคุณ (Khob khun)", phonetic: "ခေါ့ပ်ခွန်း", meaning: "ကျေးဇူးတင်ပါတယ်", example: "ขอบคุณมากครับ (ကျေးဇူးအများကြီးတင်ပါတယ်)" },
+          { word: "เท่าไหร่ (Thao rai)", phonetic: "ထောက်ရိုင်", meaning: "ဘယ်လောက်လဲ", example: "อันนี้เท่าไหร่ครับ (ဒါဘယ်လောက်လဲခင်ဗျာ)" },
+          { word: "อร่อย (Aroi)", phonetic: "အာရွိုင်", meaning: "အရသာရှိတယ် / စားကောင်းတယ်", example: "อาหารอร่อยมาก (အစားအသောက် အရမ်းကောင်းတယ်)" },
+          { word: "ห้องน้ำ (Hong nam)", phonetic: "ဟောင်းနမ့်", meaning: "အိမ်သာ / ရေချိုးခန်း", example: "ห้องน้ำอยู่ที่ไหน (အိမ်သာ ဘယ်နားမှာလဲ)" },
+          { word: "ช่วยด้วย (Chuay duay)", phonetic: "ချွေဒွေ့", meaning: "ကယ်ပါ / ကူညီပါဦး", example: "ช่วยด้วยครับ (ကူညီပါဦးခင်ဗျာ)" }
+        ]
+      },
+      ja: {
+        code: 'ja-JP',
+        data: [
+          { word: "こんにちは (Konnichiwa)", phonetic: "ကွန်းနိချိဝ", meaning: "မင်္ဂလာပါ", example: "皆さん、こんにちは (အားလုံး မင်္ဂလာပါ)" },
+          { word: "ありがとう (Arigatou)", phonetic: "အာရီဂါတိုး", meaning: "ကျေးဇူးတင်ပါတယ်", example: "どうもありがとう (ကျေးဇူးအများကြီးတင်ပါတယ်)" },
+          { word: "すみません (Sumimasen)", phonetic: "ဆုမိမဆန်", meaning: "တောင်းပန်ပါတယ် / အားနာပါတယ်", example: "すみません、トイレはどこ？ (တစ်ဆိတ်လောက် အိမ်သာဘယ်မှာလဲ)" },
+          { word: "おいしい (Oishii)", phonetic: "အိုအီရှီ", meaning: "အရသာရှိသော", example: "とてもおいしいです (အရမ်းအရသာရှိပါတယ်)" },
+          { word: "いくら (Ikura)", phonetic: "အီကုရ", meaning: "ဘယ်လောက်လဲ (ဈေးနှုန်း)", example: "これはいくらですか (ဒါ ဘယ်လောက်ကျပါသလဲ)" },
+          { word: "がんばって (Ganbatte)", phonetic: "ဂမ်ဘတ်တဲ", meaning: "ကြိုးစားပါ / အားတင်းထား", example: "明日もがんばって (မနက်ဖြန်လည်း ကြိုးစားပါ)" }
+        ]
+      },
+      de: {
+        code: 'de-DE',
+        data: [
+          { word: "Guten Tag", phonetic: "ဂူတန် ထာ့ခ်", meaning: "မင်္ဂလာပါ", example: "Guten Tag, wie geht's? (မင်္ဂလာပါ နေကောင်းလား)" },
+          { word: "Danke", phonetic: "ဒန်ခါ့", meaning: "ကျေးဇူးတင်ပါတယ်", example: "Danke schön! (အရမ်းကျေးဇူးတင်ပါတယ်)" },
+          { word: "Bitte", phonetic: "ဘစ်တာ့", meaning: "ရပါတယ် / ကျေးဇူးပြု၍", example: "Bitte sehr! (ကြိုဆိုပါတယ်/ရပါတယ်)" },
+          { word: "Entschuldigung", phonetic: "အန့်ရှူးလ်ဒီဂွန်း", meaning: "တောင်းပန်ပါတယ် / ခွင့်လွှတ်ပါ", example: "Entschuldigung, wo ist...? (တောင်းပန်ပါတယ်...ဘယ်မှာလဲ)" },
+          { word: "Wie viel", phonetic: "ဗွီ ဖီးလ်", meaning: "ဘယ်လောက်လဲ", example: "Wie viel kostet das? (ဒါ ဘယ်လောက်ကျလဲ)" },
+          { word: "Auf Wiedersehen", phonetic: "အောင်ဖ် ဗီဒါဇိန်း", meaning: "နှုတ်ဆက်ပါတယ် / နောက်မှတွေ့မယ်", example: "Auf Wiedersehen, bis bald! (နှုတ်ဆက်ပါတယ် နောက်မှတွေ့ကြမယ်)" }
+        ]
+      },
+      fr: {
+        code: 'fr-FR',
+        data: [
+          { word: "Bonjour", phonetic: "ဘုံရှူးရ်", meaning: "မင်္ဂလာပါ", example: "Bonjour tout le monde! (အားလုံး မင်္ဂလာပါ)" },
+          { word: "Merci", phonetic: "မဲရ်စီ", meaning: "ကျေးဇူးတင်ပါတယ်", example: "Merci beaucoup! (ကျေးဇူး အထူးတင်ပါတယ်)" },
+          { word: "S'il vous plaît", phonetic: "စီ ဗူး ပလဲ", meaning: "ကျေးဇူးပြု၍", example: "L'addition, s'il vous plaît (ကျေးဇူးပြု၍ ဘေလ်ရှင်းပေးပါ)" },
+          { word: "Pardon", phonetic: "ပါရ်ဒုံ", meaning: "တောင်းပန်ပါတယ်", example: "Pardon, où sont les toilettes? (တောင်းပန်ပါတယ် အိမ်သာဘယ်မှာလဲ)" },
+          { word: "Combien", phonetic: "ကုံဘီယန်", meaning: "ဘယ်လောက်လဲ", example: "C'est combien? (ဒါ ဘယ်လောက်လဲ)" },
+          { word: "Au revoir", phonetic: "အို ရဗွားရ်", meaning: "နှုတ်ဆက်ပါတယ်", example: "Au revoir et bonne journée! (နှုတ်ဆက်ပါတယ် သာယာသောနေ့ဖြစ်ပါစေ)" }
+        ]
+      }
+    };
 
-    let words = JSON.parse(localStorage.getItem('my_words')) || defaultData;
+    let currentLang = 'en';
     let currentQuizIndex = 0;
     let quizScore = 0;
 
-    function saveToStorage() {
-      localStorage.setItem('my_words', JSON.stringify(words));
+    function selectLang(lang) {
+      currentLang = lang;
+      document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
+      event.target.classList.add('active');
       renderWords();
+      if (document.getElementById('tabQuiz').style.display === 'block') {
+        startQuiz();
+      }
     }
 
     function speakWord(text) {
       if ('speechSynthesis' in window) {
         const utter = new SpeechSynthesisUtterance(text);
-        utter.lang = 'en-US';
+        utter.lang = database[currentLang].code;
         speechSynthesis.speak(utter);
       }
     }
@@ -208,88 +257,54 @@
     function renderWords() {
       const container = document.getElementById('wordsList');
       container.innerHTML = '';
-      words.forEach((item, index) => {
+      const list = database[currentLang].data;
+
+      list.forEach(item => {
         container.innerHTML += `
           <div class="card">
-            <div class="word-header">
+            <div class="word-row">
               <div>
-                <span class="word-title">${item.word}</span>
-                <span class="phonetic">${item.phonetic}</span>
+                <div class="word-text">${item.word}</div>
+                <div class="phonetic">${item.phonetic}</div>
               </div>
-              <div>
-                <button class="btn-icon" onclick="speakWord('${item.word}')">🔊</button>
-                <button class="btn-icon" onclick="deleteWord(${index})" style="color:red;">🗑️</button>
-              </div>
+              <button class="btn-speak" onclick="speakWord('${item.word}')">🔊</button>
             </div>
-            <div style="margin-top: 10px; font-weight: 500;">အဓိပ္ပာယ်: ${item.meaning}</div>
-            <div style="margin-top: 5px; color: #555; font-size: 14px;">ဥပမာ: ${item.example}</div>
+            <div class="meaning">မြန်မာအဓိပ္ပာယ်: ${item.meaning}</div>
+            <div class="example">ဥပမာ: ${item.example}</div>
           </div>
         `;
       });
-      document.getElementById('headerTitle').innerText = `စကားလုံးများ (${words.length})`;
-    }
-
-    function deleteWord(index) {
-      words.splice(index, 1);
-      saveToStorage();
-    }
-
-    function openModal() { document.getElementById('addModal').style.display = 'flex'; }
-    function closeModal() { document.getElementById('addModal').style.display = 'none'; }
-
-    function saveWord() {
-      const w = document.getElementById('inWord').value.trim();
-      const p = document.getElementById('inPhonetic').value.trim();
-      const m = document.getElementById('inMeaning').value.trim();
-      const e = document.getElementById('inExample').value.trim();
-
-      if (!w || !m) return alert('Word နှင့် Meaning ကို ဖြည့်စွက်ပါ');
-
-      words.unshift({ word: w, phonetic: p, meaning: m, example: e || '-' });
-      saveToStorage();
-      closeModal();
-      document.getElementById('inWord').value = '';
-      document.getElementById('inPhonetic').value = '';
-      document.getElementById('inMeaning').value = '';
-      document.getElementById('inExample').value = '';
     }
 
     function switchTab(tab) {
       if (tab === 'vocab') {
         document.getElementById('tabVocab').style.display = 'block';
         document.getElementById('tabQuiz').style.display = 'none';
-        document.getElementById('btnAddWord').style.display = 'block';
         document.getElementById('navVocab').className = 'active';
         document.getElementById('navQuiz').className = '';
-        document.getElementById('headerTitle').innerText = `စကားလုံးများ (${words.length})`;
       } else {
         document.getElementById('tabVocab').style.display = 'none';
         document.getElementById('tabQuiz').style.display = 'block';
-        document.getElementById('btnAddWord').style.display = 'none';
         document.getElementById('navVocab').className = '';
         document.getElementById('navQuiz').className = 'active';
-        document.getElementById('headerTitle').innerText = 'Quiz စာမျက်နှာ';
         startQuiz();
       }
     }
 
     function startQuiz() {
-      if (words.length < 4) {
-        document.getElementById('quizContainer').innerHTML = '<p style="color:#777; margin-top:50px;">Quiz ဖြေရန် စကားလုံး အနည်းဆုံး ၄ လုံး လိုအပ်ပါသည်။</p>';
-        return;
-      }
       currentQuizIndex = 0;
       quizScore = 0;
       renderQuizQuestion();
     }
 
     function renderQuizQuestion() {
-      const current = words[currentQuizIndex];
+      const list = database[currentLang].data;
+      const current = list[currentQuizIndex];
       document.getElementById('quizWord').innerText = current.word;
       document.getElementById('btnNextQuiz').style.display = 'none';
 
       let options = [current.meaning];
-      let others = words.filter(w => w.meaning !== current.meaning).map(w => w.meaning);
+      let others = list.filter(w => w.meaning !== current.meaning).map(w => w.meaning);
       others.sort(() => 0.5 - Math.random());
       options.push(...others.slice(0, 3));
       options.sort(() => 0.5 - Math.random());
@@ -322,13 +337,14 @@
     }
 
     function nextQuizQuestion() {
-      if (currentQuizIndex < words.length - 1) {
+      const list = database[currentLang].data;
+      if (currentQuizIndex < list.length - 1) {
         currentQuizIndex++;
         renderQuizQuestion();
       } else {
         document.getElementById('quizContainer').innerHTML = `
           <h2>🎉 Quiz ပြီးဆုံးပါပြီ!</h2>
-          <p style="font-size: 20px; font-weight: bold; margin: 20px 0;">ရမှတ်: ${quizScore} / ${words.length}</p>
+          <p style="font-size: 20px; font-weight: bold; margin: 20px 0;">ရမှတ်: ${quizScore} / ${list.length}</p>
           <button onclick="startQuiz()" style="padding:12px 24px; background:var(--primary); color:white; border:none; border-radius:8px; font-size:16px;">ပြန်လည်ဖြေဆိုမည်</button>
         `;
       }
