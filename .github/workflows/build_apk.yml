@@ -10,22 +10,33 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      
+
       - uses: actions/setup-java@v4
         with:
           distribution: 'temurin'
           java-version: '17'
-          
+
       - uses: subosito/flutter-action@v2
         with:
           channel: 'stable'
-          
+
+      - name: Scaffold Flutter App
+        run: |
+          mkdir temp_app
+          cd temp_app
+          flutter create --org com.allfree.language --project-name free_language_app .
+          cp -r android ../
+          cp -r ios ../
+          cp -r web ../
+          cd ..
+          rm -rf temp_app
+
       - name: Install Dependencies
         run: flutter pub get
-        
+
       - name: Build APK
         run: flutter build apk --release
-        
+
       - name: Upload APK Artifact
         uses: actions/upload-artifact@v4
         with:
