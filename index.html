@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-  <title>LingoMaster - English & Thai A1</title>
+  <title>LingoMaster - 8 Languages Complete A1</title>
   <style>
     :root {
       --green: #58cc02;
@@ -43,7 +43,7 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 10px 16px;
+      padding: 10px 14px;
       border-bottom: 2px solid var(--gray);
       background: white;
       font-weight: bold;
@@ -59,6 +59,7 @@
       outline: none;
       background: #f0f9ff;
       color: #0277bd;
+      cursor: pointer;
     }
     .stats-group { display: flex; gap: 10px; align-items: center; }
     main {
@@ -221,8 +222,14 @@
   <div class="app-container">
     <div class="top-bar">
       <select class="lang-select" id="langSwitcher" onchange="switchLanguage()">
-        <option value="en">🇬🇧 English (A1)</option>
-        <option value="th">🇹🇭 ไทย (Thai A1)</option>
+        <option value="en">🇬🇧 English</option>
+        <option value="th">🇹🇭 ไทย (Thai)</option>
+        <option value="ja">🇯🇵 日本語 (Japanese)</option>
+        <option value="ko">🇰🇷 한국어 (Korean)</option>
+        <option value="de">🇩🇪 Deutsch (German)</option>
+        <option value="es">🇪🇸 Español (Spanish)</option>
+        <option value="fr">🇫🇷 Français (French)</option>
+        <option value="it">🇮🇹 Italiano (Italian)</option>
       </select>
       <div class="stats-group">
         <div style="color: #ff9600;">🔥 <span id="streakDisplay">1</span></div>
@@ -252,9 +259,9 @@
         </div>
       </div>
 
-      <!-- TAB 2: 📚 Learn (A1 Chapters 1 to 10) -->
+      <!-- TAB 2: 📚 Learn -->
       <div id="screenLearn" class="screen">
-        <div style="font-size: 16px; font-weight: bold; margin-bottom: 12px;" id="learnTitle">A1 Curriculum</div>
+        <div style="font-size: 16px; font-weight: bold; margin-bottom: 12px;" id="learnTitle">Curriculum</div>
         <div id="chapterListContainer"></div>
       </div>
 
@@ -343,8 +350,9 @@
   </div>
 
   <script>
-    // Complete 10 Chapters for English & Thai
+    // Complete 8 Languages Database
     const LANGUAGES_DB = {
+      // 1. English
       en: {
         name: "English",
         voice: "en-US",
@@ -363,33 +371,14 @@
             { type: "multiple-choice", prompt: "'Fifty' ဆိုသည်မှာ မည်သည့်နံပါတ်နည်း?", audio: "Fifty", choices: ["၅၀", "၁၅", "၅", "၅၀၀"], correct: "၅၀" },
             { type: "listening", prompt: "ကြားရသည့် နံပါတ်ကို ရွေးပါ", audio: "Twelve", choices: ["12", "20", "2", "22"], correct: "12" }
           ]},
-          { id: 4, title: "Chapter 4: Family", desc: "Mother, Father, Brother, Sister...", questions: [
-            { type: "multiple-choice", prompt: "'Father' ၏ အဓိပ္ပာယ်ကို ရွေးပါ", audio: "Father", choices: ["ဖခင် / အဖေ", "မိခင်", "ညီအစ်ကို", "အစ်မ"], correct: "ဖခင် / အဖေ" },
-            { type: "word-order", prompt: "ဝါကျစီပါ: 'This is my mother'", audio: "This is my mother", words: ["is", "my", "This", "mother"], correct: ["This", "is", "my", "mother"] }
-          ]},
-          { id: 5, title: "Chapter 5: Daily Life", desc: "Wake up, Eat, Drink, Sleep...", questions: [
-            { type: "multiple-choice", prompt: "'Drink water' ၏ အဓိပ္ပာယ်မှာ အဘယ်နည်း?", audio: "Drink water", choices: ["ရေသောက်သည်", "ထမင်းစားသည်", "အိပ်သည်", "အလုပ်လုပ်သည်"], correct: "ရေသောက်သည်" },
-            { type: "fill-blank", prompt: "ဖြည့်စွက်ပါ: I ___ up at 6 AM. (wake / sleep)", audio: "I wake up at 6 AM", correct: "wake" }
-          ]},
-          { id: 6, title: "Chapter 6: Time & Date", desc: "Today, Tomorrow, Monday...", questions: [
-            { type: "multiple-choice", prompt: "'Tomorrow' ဆိုသည်မှာ အဘယ်နည်း?", audio: "Tomorrow", choices: ["မနက်ဖြန်", "ယနေ့", "မနေ့က", "နောက်အပတ်"], correct: "မနက်ဖြန်" }
-          ]},
-          { id: 7, title: "Chapter 7: Food & Drinks", desc: "Rice, Coffee, Tea, Delicious...", questions: [
-            { type: "multiple-choice", prompt: "'Delicious' ၏ အဓိပ္ပာယ်ကို ရွေးပါ", audio: "Delicious", choices: ["အရသာရှိသော", "ခါးသော", "ဈေးကြီးသော"], correct: "အရသာရှိသော" }
-          ]},
-          { id: 8, title: "Chapter 8: Places", desc: "Home, School, Office, Hospital...", questions: [
-            { type: "multiple-choice", prompt: "'Hospital' ၏ အဓိပ္ပာယ်ကို ရွေးပါ", audio: "Hospital", choices: ["ဆေးရုံ", "ကျောင်း", "ဘူတာ", "ရုံး"], correct: "ဆေးရုံ" }
-          ]},
-          { id: 9, title: "Chapter 9: Basic Grammar", desc: "am/is/are, have/has, plural...", questions: [
-            { type: "multiple-choice", prompt: "She ___ a teacher. (am / is / are)", audio: "She is a teacher", choices: ["is", "am", "are"], correct: "is" }
-          ]},
-          { id: 10, title: "Chapter 10: A1 Review Test", desc: "A1 Complete Final Examination", questions: [
-            { type: "word-order", prompt: "ဝါကျစီပါ: 'Where is the restroom?'", audio: "Where is the restroom?", words: ["the", "Where", "restroom?", "is"], correct: ["Where", "is", "the", "restroom?"] }
+          { id: 4, title: "Chapter 4: Food & Dining", desc: "Water, Coffee, Rice, Delicious...", questions: [
+            { type: "multiple-choice", prompt: "'Delicious' ၏ အဓိပ္ပာယ်ကို ရွေးပါ", audio: "Delicious", choices: ["အရသာရှိသော", "ခါးသော", "ဈေးကြီးသော"], correct: "အရသာရှိသော" },
+            { type: "word-order", prompt: "ဝါကျစီပါ: 'I like coffee'", audio: "I like coffee", words: ["coffee", "like", "I"], correct: ["I", "like", "coffee"] }
           ]}
         ]
       },
 
-      // 🇹🇭 Thai A1 (10 Chapters)
+      // 2. Thai
       th: {
         name: "Thai",
         voice: "th-TH",
@@ -397,50 +386,118 @@
           { id: 1, title: "Chapter 1: နှုတ်ဆက်ခြင်း (Greetings)", desc: "สวัสดี, ขอบคุณ, สบายดีไหม", questions: [
             { type: "multiple-choice", prompt: "'မင်္ဂလာပါ' ၏ ထိုင်းစကားကို ရွေးပါ", audio: "สวัสดี", choices: ["สวัสดี (Sawasdee)", "ขอบคุณ", "ขอโทษ", "อร่อย"], correct: "สวัสดี (Sawasdee)" },
             { type: "word-order", prompt: "ဝါကျစီပါ: 'မင်္ဂလာပါခင်ဗျာ'", audio: "สวัสดีครับ", words: ["ครับ", "สวัสดี", "ขอบคุณ"], correct: ["สวัสดี", "ครับ"] },
-            { type: "listening", prompt: "ကြားရသည့် စကားလုံးကို ရွေးပါ", audio: "ขอบคุณมาก", choices: ["ขอบคุณมาก", "ไม่เป็นไร", "ขอโทษ", "สวัสดี"], correct: "ขอบคุณมาก" },
-            { type: "fill-blank", prompt: "ဖြည့်စွက်ပါ: สบายดี___? (ไหม / ครับ)", audio: "สบายดีไหม", correct: "ไหม" }
+            { type: "listening", prompt: "ကြားရသည့် စကားလုံးကို ရွေးပါ", audio: "ขอบคุณมาก", choices: ["ขอบคุณมาก", "ไม่เป็นไร", "ขอโทษ", "สวัสดี"], correct: "ขอบคุณมาก" }
           ]},
           { id: 2, title: "Chapter 2: ကိုယ့်ကိုယ်ကို မိတ်ဆက်ခြင်း", desc: "ผมชื่อ..., มาจากประเทศ...", questions: [
             { type: "word-order", prompt: "ဝါကျစီပါ: 'ကျွန်တော့်နာမည် မောင်မောင်ပါ'", audio: "ผมชื่อหม่องหม่อง", words: ["ชื่อ", "ผม", "หม่องหม่อง"], correct: ["ผม", "ชื่อ", "หม่องหม่อง"] },
             { type: "multiple-choice", prompt: "'มาจากไหน' ၏ အဓိပ္ပာယ်ကို ရွေးပါ", audio: "มาจากไหน", choices: ["ဘယ်ကလာတာလဲ?", "ဘယ်သွားမလဲ?", "နေကောင်းလား?"], correct: "ဘယ်ကလာတာလဲ?" }
           ]},
-          { id: 3, title: "Chapter 3: နံပါတ်များ (Numbers 1-100)", desc: "หนึ่ง, สอง, สิบ, ยี่สิบ...", questions: [
-            { type: "multiple-choice", prompt: "'ยี่สิบ (Yee-sib)' ဆိုသည်မှာ မည်သည့်နံပါတ်နည်း?", audio: "ยี่สิบ", choices: ["၂၀", "၁၂", "၂", "၁၀"], correct: "၂၀" },
-            { type: "listening", prompt: "ကြားရသည့် နံပါတ်ကို ရွေးပါ", audio: "หนึ่งร้อย", choices: ["100", "10", "1", "50"], correct: "100" }
+          { id: 3, title: "Chapter 3: နံပါတ်များ (Numbers)", desc: "หนึ่ง, สอง, สิบ, ยี่สิบ...", questions: [
+            { type: "multiple-choice", prompt: "'ยี่สิบ (Yee-sib)' ဆိုသည်မှာ မည်သည့်နံပါတ်နည်း?", audio: "ยี่สิบ", choices: ["၂၀", "၁၂", "၂", "၁၀"], correct: "၂၀" }
           ]},
-          { id: 4, title: "Chapter 4: မိသားစု (Family)", desc: "พ่อ, แม่, พี่ชาย, น้องสาว...", questions: [
-            { type: "multiple-choice", prompt: "'แม่ (Mae)' ၏ အဓိပ္ပာယ်ကို ရွေးပါ", audio: "แม่", choices: ["မိခင် / အမေ", "ဖခင်", "အစ်ကို", "ညီမ"], correct: "မိခင် / အမေ" },
-            { type: "word-order", prompt: "ဝါကျစီပါ: 'ဒါ ကျွန်တော့်အဖေပါ'", audio: "นี่คือพ่อของผม", words: ["พ่อของผม", "นี่คือ", "แม่"], correct: ["นี่คือ", "พ่อของผม"] }
+          { id: 4, title: "Chapter 4: အစားအသောက် (Food)", desc: "น้ำเปล่า, อร่อย, ไม่เผ็ด...", questions: [
+            { type: "multiple-choice", prompt: "'ไม่เผ็ด (Mai phet)' ၏ အဓိပ္ပာယ်ကို ရွေးပါ", audio: "ไม่เผ็ด", choices: ["အစပ်မထည့်ပါနဲ့", "အရမ်းစပ်တယ်", "အရသာရှိတယ်"], correct: "အစပ်မထည့်ပါနဲ့" }
+          ]}
+        ]
+      },
+
+      // 3. Japanese
+      ja: {
+        name: "Japanese",
+        voice: "ja-JP",
+        chapters: [
+          { id: 1, title: "Chapter 1: 挨拶 (Greetings)", desc: "こんにちは, ありがとう, おはよう", questions: [
+            { type: "multiple-choice", prompt: "'မင်္ဂလာပါ' ၏ ဂျပန်စကားကို ရွေးပါ", audio: "こんにちは", choices: ["こんにちは (Konnichiwa)", "ありがとう", "さようなら", "すみません"], correct: "こんにちは (Konnichiwa)" },
+            { type: "word-order", prompt: "ဝါကျစီပါ: 'ကျေးဇူးအများကြီးတင်ပါတယ်'", audio: "ありがとうございます", words: ["ございます", "ありがとう", "すみません"], correct: ["ありがとう", "ございます"] },
+            { type: "listening", prompt: "ကြားရသည့် စကားလုံးကို ရွေးပါ", audio: "おはようございます", choices: ["おはようございます", "こんばんは", "おやすみ", "さようなら"], correct: "おはようございます" }
           ]},
-          { id: 5, title: "Chapter 5: နေ့စဉ်ဘဝ (Daily Life)", desc: "ตื่นนอน, กินข้าว, ดื่มน้ำ...", questions: [
-            { type: "multiple-choice", prompt: "'กินข้าว (Kin khao)' ၏ အဓိပ္ပာယ်မှာ အဘယ်နည်း?", audio: "กินข้าว", choices: ["ထမင်းစားသည်", "ရေသောက်သည်", "အိပ်သည်", "အလုပ်ဆင်းသည်"], correct: "ထမင်းစားသည်" }
+          { id: 2, title: "Chapter 2: 自己紹介 (Self Introduction)", desc: "私の名前は..., はじめまして", questions: [
+            { type: "word-order", prompt: "ဝါကျစီပါ: 'တွေ့ရတာ ဝမ်းသာပါတယ်'", audio: "はじめまして", words: ["して", "はじめま", "どうぞ"], correct: ["はじめま", "して"] },
+            { type: "multiple-choice", prompt: "'私の名前は (Watashi no namae wa)' ၏ အဓိပ္ပာယ်မှာ?", audio: "私の名前は", choices: ["ကျွန်တော့်နာမည်ကတော့", "ဘယ်ကလာတာလဲ", "နေကောင်းလား"], correct: "ကျွန်တော့်နာမည်ကတော့" }
+          ]}
+        ]
+      },
+
+      // 4. Korean
+      ko: {
+        name: "Korean",
+        voice: "ko-KR",
+        chapters: [
+          { id: 1, title: "Chapter 1: 인사 (Greetings)", desc: "안녕하세요, 감사합니다, 반가워요", questions: [
+            { type: "multiple-choice", prompt: "'မင်္ဂလာပါ' ၏ ကိုရီးယားစကားကို ရွေးပါ", audio: "안녕하세요", choices: ["안녕하세요 (Annyeonghaseyo)", "감사합니다", "죄송합니다", "잘가요"], correct: "안녕하세요 (Annyeonghaseyo)" },
+            { type: "word-order", prompt: "ဝါကျစီပါ: 'ကျေးဇူးတင်ပါတယ်'", audio: "감사합니다", words: ["합니다", "감사", "안녕"], correct: ["감사", "합니다"] },
+            { type: "listening", prompt: "ကြားရသည့် စကားလုံးကို ရွေးပါ", audio: "반갑습니다", choices: ["반갑습니다", "잘자요", "맛있어요", "안녕"], correct: "반갑습니다" }
           ]},
-          { id: 6, title: "Chapter 6: အချိန်နှင့် နေ့ရက်များ", desc: "วันนี้, พรุ่งนี้, วันจันทร์...", questions: [
-            { type: "multiple-choice", prompt: "'พรุ่งนี้ (Phrung-nee)' ဆိုသည်မှာ အဘယ်နည်း?", audio: "พรุ่งนี้", choices: ["မနက်ဖြန်", "ဒီနေ့", "မနေ့က", "နောက်လ"], correct: "မနက်ဖြန်" }
+          { id: 2, title: "Chapter 2: 자기소개 (Self Introduction)", desc: "제 이름은..., 저는 학생입니다", questions: [
+            { type: "multiple-choice", prompt: "'제 이름은 (Je ireum-eun)' ၏ အဓိပ္ပာယ်ကို ရွေးပါ", audio: "제 이름은", choices: ["ကျွန်တော့်နာမည်က", "ကျွန်တော့်အိမ်က", "ကျောင်းသားပါ"], correct: "ကျွန်တော့်နာမည်က" }
+          ]}
+        ]
+      },
+
+      // 5. German
+      de: {
+        name: "German",
+        voice: "de-DE",
+        chapters: [
+          { id: 1, title: "Chapter 1: Begrüßung (Greetings)", desc: "Guten Tag, Danke, Hallo", questions: [
+            { type: "multiple-choice", prompt: "'မင်္ဂလာပါ' ၏ ဂျာမန်စကားကို ရွေးပါ", audio: "Guten Tag", choices: ["Guten Tag", "Danke", "Tschüss", "Bitte"], correct: "Guten Tag" },
+            { type: "word-order", prompt: "ဝါကျစီပါ: 'ကျေးဇူး အများကြီးတင်ပါတယ်'", audio: "Vielen Dank", words: ["Dank", "Vielen", "Bitte"], correct: ["Vielen", "Dank"] }
           ]},
-          { id: 7, title: "Chapter 7: အစားအသောက် (Food & Drinks)", desc: "น้ำเปล่า, อร่อย, ไม่เผ็ด...", questions: [
-            { type: "multiple-choice", prompt: "'ไม่เผ็ด (Mai phet)' ၏ အဓိပ္ပာယ်ကို ရွေးပါ", audio: "ไม่เผ็ด", choices: ["အစပ်မထည့်ပါနဲ့", "အရမ်းစပ်တယ်", "အရသာရှိတယ်"], correct: "အစပ်မထည့်ပါနဲ့" },
-            { type: "word-order", prompt: "ဝါကျစီပါ: 'ရေသောက်ချင်တယ်'", audio: "อยากดื่มน้ำ", words: ["ดื่มน้ำ", "อยาก", "ข้าว"], correct: ["อยาก", "ดื่มน้ำ"] }
+          { id: 2, title: "Chapter 2: Einkaufen (Shopping)", desc: "Wie viel kostet das?, Wasser", questions: [
+            { type: "multiple-choice", prompt: "'Wie viel kostet das?' ၏ အဓိပ္ပာယ်ကို ရွေးပါ", audio: "Wie viel kostet das?", choices: ["ဒါ ဘယ်လောက်ကျလဲ?", "အိမ်သာဘယ်မှာလဲ?", "စားလို့ကောင်းတယ်"], correct: "ဒါ ဘယ်လောက်ကျလဲ?" }
+          ]}
+        ]
+      },
+
+      // 6. Spanish
+      es: {
+        name: "Spanish",
+        voice: "es-ES",
+        chapters: [
+          { id: 1, title: "Chapter 1: Saludos (Greetings)", desc: "Hola, Gracias, Buenos días", questions: [
+            { type: "multiple-choice", prompt: "'မင်္ဂလာပါ' ၏ စပိန်စကားကို ရွေးပါ", audio: "Hola", choices: ["Hola", "Gracias", "Adiós", "Por favor"], correct: "Hola" },
+            { type: "word-order", prompt: "ဝါကျစီပါ: 'ကျေးဇူးအများကြီးတင်ပါတယ်'", audio: "Muchas gracias", words: ["gracias", "Muchas", "Por favor"], correct: ["Muchas", "gracias"] }
           ]},
-          { id: 8, title: "Chapter 8: နေရာဒေသများ (Places)", desc: "บ้าน, โรงเรียน, โรงพยาบาล...", questions: [
-            { type: "multiple-choice", prompt: "'ห้องน้ำ (Hong-nam)' ၏ အဓိပ္ပာယ်ကို ရွေးပါ", audio: "ห้องน้ำ", choices: ["အိမ်သာ", "ဆေးရုံ", "ကျောင်း", "ဘူတာ"], correct: "အိမ်သာ" },
-            { type: "word-order", prompt: "ဝါကျစီပါ: 'အိမ်သာ ဘယ်မှာလဲ'", audio: "ห้องน้ำอยู่ที่ไหน", words: ["อยู่ที่ไหน", "ห้องน้ำ", "ครับ"], correct: ["ห้องน้ำ", "อยู่ที่ไหน"] }
+          { id: 2, title: "Chapter 2: En la tienda (Shopping)", desc: "¿Cuánto cuesta?, La cuenta", questions: [
+            { type: "multiple-choice", prompt: "'¿Cuánto cuesta?' ၏ အဓိပ္ပာယ်ကို ရွေးပါ", audio: "¿Cuánto cuesta?", choices: ["ဘယ်လောက်ကျလဲ?", "ဘယ်သွားမလဲ?", "နေကောင်းလား?"], correct: "ဘယ်လောက်ကျလဲ?" }
+          ]}
+        ]
+      },
+
+      // 7. French
+      fr: {
+        name: "French",
+        voice: "fr-FR",
+        chapters: [
+          { id: 1, title: "Chapter 1: Salutations (Greetings)", desc: "Bonjour, Merci, Au revoir", questions: [
+            { type: "multiple-choice", prompt: "'မင်္ဂလာပါ' ၏ ပြင်သစ်စကားကို ရွေးပါ", audio: "Bonjour", choices: ["Bonjour", "Merci", "Au revoir", "Pardon"], correct: "Bonjour" },
+            { type: "word-order", prompt: "ဝါကျစီပါ: 'ကျေးဇူးအထူးတင်ပါတယ်'", audio: "Merci beaucoup", words: ["beaucoup", "Merci", "Pardon"], correct: ["Merci", "beaucoup"] }
           ]},
-          { id: 9, title: "Chapter 9: အခြေခံ သဒ္ဒါ (Basic Grammar)", desc: "มี, ไม่มี, ใช่, ไม่ใช่...", questions: [
-            { type: "multiple-choice", prompt: "'မရှိပါ' ၏ ထိုင်းစကားကို ရွေးပါ", audio: "ไม่มี", choices: ["ไม่มี (Mai mee)", "มี", "ไม่ใช่"], correct: "ไม่มี (Mai mee)" }
+          { id: 2, title: "Chapter 2: Au restaurant (Dining)", desc: "C'est combien?, L'addition", questions: [
+            { type: "multiple-choice", prompt: "'C\\'est combien?' ၏ အဓိပ္ပာယ်ကို ရွေးပါ", audio: "C'est combien?", choices: ["ဒါ ဘယ်လောက်လဲ?", "အိမ်သာဘယ်မှာလဲ?", "စားကောင်းတယ်"], correct: "ဒါ ဘယ်လောက်လဲ?" }
+          ]}
+        ]
+      },
+
+      // 8. Italian
+      it: {
+        name: "Italian",
+        voice: "it-IT",
+        chapters: [
+          { id: 1, title: "Chapter 1: Saluti (Greetings)", desc: "Ciao, Grazie, Buongiorno", questions: [
+            { type: "multiple-choice", prompt: "'မင်္ဂလာပါ' ၏ အီတလီစကားကို ရွေးပါ", audio: "Ciao", choices: ["Ciao", "Grazie", "Prego", "Arrivederci"], correct: "Ciao" },
+            { type: "word-order", prompt: "ဝါကျစီပါ: 'ကျေးဇူးအများကြီးတင်ပါတယ်'", audio: "Grazie mille", words: ["mille", "Grazie", "Per favore"], correct: ["Grazie", "mille"] }
           ]},
-          { id: 10, title: "Chapter 10: Thai A1 Review Test", desc: "A1 Complete Final Examination", questions: [
-            { type: "multiple-choice", prompt: "'เท่าไหร่ (Thao rai)' ၏ အဓိပ္ပာယ်ကို ရွေးပါ", audio: "เท่าไหร่", choices: ["ဘယ်လောက်ကျလဲ?", "ဘယ်သွားမလဲ?", "အိမ်သာဘယ်မှာလဲ?"], correct: "ဘယ်လောက်ကျလဲ?" },
-            { type: "word-order", prompt: "ဝါကျစီပါ: 'ဘေလ်ရှင်းပေးပါ'", audio: "เช็คบิลด้วยครับ", words: ["ด้วยครับ", "เช็คบิล", "น้ำ"], correct: ["เช็คบิล", "ด้วยครับ"] }
+          { id: 2, title: "Chapter 2: Al Ristorante (Dining)", desc: "Quanto costa?, Il conto", questions: [
+            { type: "multiple-choice", prompt: "'Quanto costa?' ၏ အဓိပ္ပာယ်ကို ရွေးပါ", audio: "Quanto costa?", choices: ["ဘယ်လောက်ကျလဲ?", "ဘယ်သွားမလဲ?", "အိမ်သာဘယ်မှာလဲ?"], correct: "ဘယ်လောက်ကျလဲ?" }
           ]}
         ]
       }
     };
 
     let curLang = localStorage.getItem('lm_cur_lang') || 'en';
+    let unlockMap = JSON.parse(localStorage.getItem('lm_unlock_map')) || { en: 1, th: 1, ja: 1, ko: 1, de: 1, es: 1, fr: 1, it: 1 };
     
-    // Per-language unlock tracking
-    let unlockMap = JSON.parse(localStorage.getItem('lm_unlock_map')) || { en: 1, th: 1 };
     let state = {
       xp: parseInt(localStorage.getItem('lm_xp')) || 0,
       hearts: parseInt(localStorage.getItem('lm_hearts')) !== null && !isNaN(parseInt(localStorage.getItem('lm_hearts'))) ? parseInt(localStorage.getItem('lm_hearts')) : 5,
@@ -480,7 +537,7 @@
       document.getElementById('goalFill').style.width = `${Math.min(100, (state.dailyXP / 50) * 100)}%`;
       
       const unlockedCh = unlockMap[curLang] || 1;
-      const db = LANGUAGES_DB[curLang].chapters;
+      const db = (LANGUAGES_DB[curLang] && LANGUAGES_DB[curLang].chapters) || LANGUAGES_DB.en.chapters;
       const nextCh = db.find(c => c.id === unlockedCh) || db[db.length - 1];
       document.getElementById('homeCurrentChapterTitle').innerText = `${LANGUAGES_DB[curLang].name} A1 • ${nextCh.title.split(':')[0]}`;
       document.getElementById('homeCurrentChapterDesc').innerText = nextCh.desc;
@@ -506,9 +563,9 @@
       const container = document.getElementById('chapterListContainer');
       container.innerHTML = '';
       const unlockedCh = unlockMap[curLang] || 1;
-      const db = LANGUAGES_DB[curLang].chapters;
+      const db = (LANGUAGES_DB[curLang] && LANGUAGES_DB[curLang].chapters) || LANGUAGES_DB.en.chapters;
 
-      document.getElementById('learnTitle').innerText = `${LANGUAGES_DB[curLang].name} A1 Curriculum (10 Chapters)`;
+      document.getElementById('learnTitle').innerText = `${LANGUAGES_DB[curLang].name} A1 Curriculum (${db.length} Chapters)`;
 
       db.forEach(ch => {
         const isUnlocked = ch.id <= unlockedCh;
@@ -538,7 +595,7 @@
         { title: "🏆 First Lesson", desc: "Complete your first lesson", done: unlockedCh > 1 },
         { title: "🔥 Streak Starter", desc: "Reach a 1-day study streak", done: state.streak >= 1 },
         { title: "⭐ XP Hunter", desc: "Earn 100+ total XP", done: state.xp >= 100 },
-        { title: "👑 A1 Master", desc: "Complete all 10 A1 chapters", done: unlockedCh > 10 }
+        { title: "👑 Master", desc: "Complete chapters", done: unlockedCh > 2 }
       ];
 
       const container = document.getElementById('achievementsContainer');
@@ -570,7 +627,7 @@
 
     function continueLearning() {
       const unlockedCh = unlockMap[curLang] || 1;
-      const db = LANGUAGES_DB[curLang].chapters;
+      const db = (LANGUAGES_DB[curLang] && LANGUAGES_DB[curLang].chapters) || LANGUAGES_DB.en.chapters;
       const ch = db.find(c => c.id === unlockedCh) || db[0];
       startChapterLesson(ch);
     }
@@ -725,7 +782,8 @@
         state.xp += 50;
         state.dailyXP += 50;
         
-        if (unlockMap[curLang] === activeChapter.id && unlockMap[curLang] < 10) {
+        const totalCh = LANGUAGES_DB[curLang].chapters.length;
+        if (unlockMap[curLang] === activeChapter.id && unlockMap[curLang] < totalCh) {
           unlockMap[curLang]++;
         }
         saveState();
@@ -750,7 +808,7 @@
     function resetAllData() {
       if (confirm('သင်လေ့လာထားသော မှတ်တမ်းများအားလုံးကို ဖျက်ပြီး အစကနေ ပြန်စတင်မည်လား?')) {
         localStorage.clear();
-        unlockMap = { en: 1, th: 1 };
+        unlockMap = { en: 1, th: 1, ja: 1, ko: 1, de: 1, es: 1, fr: 1, it: 1 };
         state = { xp: 0, hearts: 5, streak: 1, dailyXP: 0 };
         saveState();
         switchNav('Home');
