@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>All-in-One Multi-Language App</title>
+  <title>All-in-One Multi-Category Language App</title>
   <style>
     :root {
       --primary: #00897b;
@@ -52,6 +52,42 @@
       background: #00897b;
       color: white;
     }
+    .category-bar {
+      display: flex;
+      overflow-x: auto;
+      background: #fafafa;
+      padding: 8px 12px;
+      gap: 8px;
+      border-bottom: 1px solid #e0e0e0;
+    }
+    .cat-btn {
+      flex: 0 0 auto;
+      padding: 5px 12px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      background: white;
+      color: #555;
+      font-size: 12px;
+      cursor: pointer;
+    }
+    .cat-btn.active {
+      background: #37474f;
+      color: white;
+      border-color: #37474f;
+    }
+    .search-box {
+      padding: 8px 16px;
+      background: #ffffff;
+      border-bottom: 1px solid #eee;
+    }
+    .search-input {
+      width: 100%;
+      padding: 8px 12px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      box-sizing: border-box;
+      font-size: 13px;
+    }
     main {
       flex: 1;
       overflow-y: auto;
@@ -71,7 +107,7 @@
       align-items: center;
     }
     .word-text {
-      font-size: 20px;
+      font-size: 18px;
       font-weight: bold;
       color: var(--primary-dark);
     }
@@ -80,14 +116,23 @@
       color: #666;
       margin-top: 2px;
     }
+    .badge {
+      display: inline-block;
+      font-size: 11px;
+      background: #e0f2f1;
+      color: #00796b;
+      padding: 2px 8px;
+      border-radius: 4px;
+      margin-top: 4px;
+    }
     .meaning {
       margin-top: 8px;
-      font-size: 15px;
+      font-size: 14px;
       font-weight: 500;
     }
     .example {
       margin-top: 4px;
-      font-size: 13px;
+      font-size: 12px;
       color: #555;
       background: #f9f9f9;
       padding: 6px;
@@ -97,9 +142,9 @@
       background: #e0f2f1;
       border: none;
       border-radius: 50%;
-      width: 40px;
-      height: 40px;
-      font-size: 20px;
+      width: 38px;
+      height: 38px;
+      font-size: 18px;
       cursor: pointer;
       display: flex;
       align-items: center;
@@ -118,7 +163,7 @@
       flex: 1;
       border: none;
       background: none;
-      font-size: 15px;
+      font-size: 14px;
       font-weight: bold;
       color: #777;
       cursor: pointer;
@@ -134,7 +179,7 @@
       border-radius: 8px;
       border: 2px solid #ddd;
       background: white;
-      font-size: 16px;
+      font-size: 15px;
       text-align: center;
       cursor: pointer;
     }
@@ -144,15 +189,29 @@
 </head>
 <body>
 
-  <header id="headerTitle">Multi-Language Learning</header>
+  <header id="headerTitle">အထူးပြု ဘာသာစကား လေ့လာရေး</header>
 
   <!-- Language Switcher Bar -->
   <div class="lang-bar">
-    <button class="lang-btn active" onclick="selectLang('en')">🇬🇧 English</button>
-    <button class="lang-btn" onclick="selectLang('th')">🇹🇭 ไทย (Thai)</button>
-    <button class="lang-btn" onclick="selectLang('ja')">🇯🇵 日本語 (Japanese)</button>
-    <button class="lang-btn" onclick="selectLang('de')">🇩🇪 Deutsch (German)</button>
-    <button class="lang-btn" onclick="selectLang('fr')">🇫🇷 Français (French)</button>
+    <button class="lang-btn active" onclick="selectLang('en', this)">🇬🇧 English</button>
+    <button class="lang-btn" onclick="selectLang('th', this)">🇹🇭 ไทย (Thai)</button>
+    <button class="lang-btn" onclick="selectLang('ja', this)">🇯🇵 日本語 (Japanese)</button>
+    <button class="lang-btn" onclick="selectLang('de', this)">🇩🇪 Deutsch (German)</button>
+    <button class="lang-btn" onclick="selectLang('fr', this)">🇫🇷 Français (French)</button>
+  </div>
+
+  <!-- Category Selector Bar -->
+  <div class="category-bar">
+    <button class="cat-btn active" onclick="selectCategory('all', this)">အားလုံး</button>
+    <button class="cat-btn" onclick="selectCategory('daily', this)">☕ နေ့စဉ်သုံး</button>
+    <button class="cat-btn" onclick="selectCategory('office', this)">💼 ရုံးသုံး</button>
+    <button class="cat-btn" onclick="selectCategory('shop', this)">🛒 ဈေးသုံး/ခရီးသွား</button>
+    <button class="cat-btn" onclick="selectCategory('work', this)">🛠️ လုပ်ငန်းခွင်သုံး</button>
+    <button class="cat-btn" onclick="selectCategory('school', this)">🎓 ကျောင်းသုံး</button>
+  </div>
+
+  <div class="search-box" id="searchArea">
+    <input type="text" class="search-input" id="searchBar" placeholder="🔍 စကားလုံး သို့မဟုတ် အဓိပ္ပာယ် ရှာဖွေပါ..." oninput="filterWords()">
   </div>
 
   <main id="tabVocab">
@@ -161,7 +220,7 @@
 
   <main id="tabQuiz" style="display: none; text-align: center;">
     <div id="quizContainer">
-      <h2 id="quizWord" style="color: var(--primary); font-size: 26px; margin-top: 20px;">-</h2>
+      <h2 id="quizWord" style="color: var(--primary); font-size: 24px; margin-top: 20px;">-</h2>
       <p style="color: #666;">မှန်ကန်သော မြန်မာအဓိပ္ပာယ်ကို ရွေးပါ</p>
       <div id="quizOptions" style="margin-top: 20px;"></div>
       <button id="btnNextQuiz" onclick="nextQuizQuestion()" style="display:none; width:100%; padding:14px; background:var(--primary); color:white; border:none; border-radius:8px; font-size:16px; margin-top:20px;">နောက်တစ်ခု</button>
@@ -178,86 +237,150 @@
       en: {
         code: 'en-US',
         data: [
-          { word: "Hello", phonetic: "/həˈloʊ/", meaning: "မင်္ဂလာပါ", example: "Hello! How are you doing?" },
-          { word: "Thank you", phonetic: "/θæŋk juː/", meaning: "ကျေးဇူးတင်ပါတယ်", example: "Thank you very much for your help." },
-          { word: "Opportunity", phonetic: "/ˌɑː.pɚˈtuː.nə.t̬i/", meaning: "အခွင့်အလမ်း", example: "Learning languages gives new opportunity." },
-          { word: "Perseverance", phonetic: "/ˌpɝː.səˈvɪr.əns/", meaning: "ဇွဲလုံ့လ", example: "Perseverance leads to success." },
-          { word: "Confidence", phonetic: "/ˈkɑːn.fə.dəns/", meaning: "ယုံကြည်မှု", example: "Speak daily to build confidence." },
-          { word: "Delicious", phonetic: "/dɪˈlɪʃ.əs/", meaning: "အရသာရှိသော", example: "This food is really delicious." }
+          // ☕ နေ့စဉ်သုံး
+          { cat: "daily", word: "How are you?", phonetic: "/haʊ ɑːr juː/", meaning: "နေကောင်းလား?", example: "How are you doing today?" },
+          { cat: "daily", word: "Nice to meet you", phonetic: "/naɪs tuː miːt juː/", meaning: "တွေ့ရတာ ဝမ်းသာပါတယ်", example: "Nice to meet you, Mr. Alex." },
+          { cat: "daily", word: "Have a nice day", phonetic: "/hæv ə naɪs deɪ/", meaning: "သာယာသောနေ့လေး ဖြစ်ပါစေ", example: "Goodbye and have a nice day!" },
+          // 💼 ရုံးသုံး
+          { cat: "office", word: "Meeting", phonetic: "/ˈmiː.tɪŋ/", meaning: "အစည်းအဝေး", example: "We have an urgent team meeting at 10 AM." },
+          { cat: "office", word: "Deadline", phonetic: "/ˈded.laɪn/", meaning: "နောက်ဆုံးသတ်မှတ်ရက်", example: "The project deadline is this Friday." },
+          { cat: "office", word: "Send an email", phonetic: "/send ən ˈiː.meɪl/", meaning: "အီးမေးလ် ပို့သည်", example: "I will send an email with the report." },
+          // 🛒 ဈေးသုံး / ခရီးသွား
+          { cat: "shop", word: "How much is this?", phonetic: "/haʊ mʌtʃ ɪz ðɪs/", meaning: "ဒါ ဘယ်လောက်ကျလဲ?", example: "Excuse me, how much is this?" },
+          { cat: "shop", word: "Discount", phonetic: "/ˈdɪs.kaʊnt/", meaning: "လျှော့ဈေး / ဈေးလျှော့ပေးခြင်း", example: "Can you give me a small discount?" },
+          { cat: "shop", word: "Receipt", phonetic: "/rɪˈsiːt/", meaning: "ပြေစာ / ဘောက်ချာ", example: "Could I have a receipt, please?" },
+          // 🛠️ လုပ်ငန်းခွင်သုံး
+          { cat: "work", word: "Safety first", phonetic: "/ˈseɪf.ti fɝːst/", meaning: "ဘေးအန္တရာယ်ကင်းရှင်းရေး ပထမ", example: "Always remember: safety first." },
+          { cat: "work", word: "Shift", phonetic: "/ʃɪft/", meaning: "အလုပ်အဆိုင်း (မနက်ဆိုင်း/ညဆိုင်း)", example: "I am working on the night shift today." },
+          { cat: "work", word: "Overtime (OT)", phonetic: "/ˈoʊ.vɚ.taɪm/", meaning: "အချိန်ပို အလုပ်ဆင်းခြင်း", example: "Are you willing to work overtime?" },
+          // 🎓 ကျောင်းသုံး
+          { cat: "school", word: "Assignment", phonetic: "/əˈsaɪn.mənt/", meaning: "အိမ်စာ / ပေးထားသောတာဝန်", example: "Submit your assignment before Monday." },
+          { cat: "school", word: "Exam / Test", phonetic: "/ɪɡˈzæm/", meaning: "စာမေးပွဲ", example: "We have a final exam next week." },
+          { cat: "school", word: "Library", phonetic: "/ˈlaɪ.brer.i/", meaning: "စာကြည့်တိုက်", example: "Let's study together in the library." }
         ]
       },
       th: {
         code: 'th-TH',
         data: [
-          { word: "สวัสดี (Sawasdee)", phonetic: "ဆာဝါဒီ", meaning: "မင်္ဂလာပါ", example: "สวัสดีครับ (မင်္ဂလာပါခင်ဗျာ)" },
-          { word: "ขอบคุณ (Khob khun)", phonetic: "ခေါ့ပ်ခွန်း", meaning: "ကျေးဇူးတင်ပါတယ်", example: "ขอบคุณมากครับ (ကျေးဇူးအများကြီးတင်ပါတယ်)" },
-          { word: "เท่าไหร่ (Thao rai)", phonetic: "ထောက်ရိုင်", meaning: "ဘယ်လောက်လဲ", example: "อันนี้เท่าไหร่ครับ (ဒါဘယ်လောက်လဲခင်ဗျာ)" },
-          { word: "อร่อย (Aroi)", phonetic: "အာရွိုင်", meaning: "အရသာရှိတယ် / စားကောင်းတယ်", example: "อาหารอร่อยมาก (အစားအသောက် အရမ်းကောင်းတယ်)" },
-          { word: "ห้องน้ำ (Hong nam)", phonetic: "ဟောင်းနမ့်", meaning: "အိမ်သာ / ရေချိုးခန်း", example: "ห้องน้ำอยู่ที่ไหน (အိမ်သာ ဘယ်နားမှာလဲ)" },
-          { word: "ช่วยด้วย (Chuay duay)", phonetic: "ချွေဒွေ့", meaning: "ကယ်ပါ / ကူညီပါဦး", example: "ช่วยด้วยครับ (ကူညီပါဦးခင်ဗျာ)" }
+          // ☕ နေ့စဉ်သုံး
+          { cat: "daily", word: "สบายดีไหม (Sabai dee mai)", phonetic: "စာဘိုင်ဒီမိုင်", meaning: "နေကောင်းလားခင်ဗျာ/ရှင့်", example: "สวัสดีครับ สบายดีไหม (မင်္ဂလာပါ နေကောင်းလား)" },
+          { cat: "daily", word: "กินข้าวหรือยัง (Kin khao rue yang)", phonetic: "ကင်းခေါက်ရူယန်း", meaning: "ထမင်းစားပြီးပြီလား", example: "กินข้าวหรือยังครับ (ထမင်းစားပြီးပြီလားခင်ဗျာ)" },
+          // 💼 ရုံးသုံး
+          { cat: "office", word: "ประชุม (Pra-chum)", phonetic: "ပရာချွန်း", meaning: "အစည်းအဝေး", example: "มีประชุมกี่โมงครับ (အစည်းအဝေး ဘယ်အချိန်လဲ)" },
+          { cat: "office", word: "เอกสาร (Ek-ka-san)", phonetic: "အက်ကဆန်", meaning: "စာရွက်စာတမ်း", example: "ส่งเอกสารทางอีเมล (စာရွက်စာတမ်းကို အီးမေးလ်ဖြင့်ပို့ပါ)" },
+          { cat: "office", word: "เจ้านาย (Jao-nai)", phonetic: "ကျောက်နိုင်း", meaning: "အထက်လူကြီး / သူဌေး", example: "เจ้านายเรียกพบ (သူဌေးက ခေါ်တွေ့နေတယ်)" },
+          // 🛒 ဈေးသုံး / ခရီးသွား
+          { cat: "shop", word: "เท่าไหร่ (Thao rai)", phonetic: "ထောက်ရိုင်", meaning: "ဘယ်လောက်ကျလဲ", example: "อันนี้เท่าไหร่ครับ (ဒါ ဘယ်လောက်လဲခင်ဗျာ)" },
+          { cat: "shop", word: "ลดหน่อยได้ไหม (Lod noi dai mai)", phonetic: "လွတ်နွိုင်ဒိုင်မိုင်", meaning: "နည်းနည်း လျှော့ပေးလို့ရမလား", example: "แพงจัง ลดหน่อยได้ไหม (ဈေးကြီးလိုက်တာ လျှော့ပေးပါဦး)" },
+          { cat: "shop", word: "สแกนจ่าย (Scan jai)", phonetic: "စကန်ကျိုင်း", meaning: "QR Scan ဖြင့် ပိုက်ဆံပေးချေခြင်း", example: "สแกนจ่ายได้ไหมครับ (Scan ဖတ်ပြီး ပေးလို့ရမလား)" },
+          // 🛠️ လုပ်ငန်းခွင်သုံး
+          { cat: "work", word: "ทำโอที (Tham OT)", phonetic: "ထမ်အိုထီ", meaning: "OT / အချိန်ပိုဆင်းသည်", example: "วันนี้ทำโอทีไหม (ဒီနေ့ OT ဆင်းမလား)" },
+          { cat: "work", word: "ระวัง (Ra-wang)", phonetic: "ရာဝန်း", meaning: "သတိထားပါ / ဂရုစိုက်ပါ", example: "ระวังลื่นนะครับ (ချော်လဲမယ် သတိထားပါ)" },
+          { cat: "work", word: "เงินเดือน (Ngoen-duean)", phonetic: "ငွန်းဒူယန်", meaning: "လစာ", example: "เงินเดือนออกวันไหน (လစာ ဘယ်နေ့ထွက်မလဲ)" },
+          // 🎓 ကျောင်းသုံး
+          { cat: "school", word: "การบ้าน (Karn-baan)", phonetic: "ကန်ဘန်း", meaning: "အိမ်စာ", example: "ส่งการบ้านด้วยครับ (အိမ်စာတွေ လာထပ်ပါ)" },
+          { cat: "school", word: "สอบ (Sob)", phonetic: "ဆော့ပ်", meaning: "စာမေးပွဲဖြေသည်", example: "พรุ่งนี้มีสอบ (မနက်ဖြန် စာမေးပွဲရှိတယ်)" }
         ]
       },
       ja: {
         code: 'ja-JP',
         data: [
-          { word: "こんにちは (Konnichiwa)", phonetic: "ကွန်းနိချိဝ", meaning: "မင်္ဂလာပါ", example: "皆さん、こんにちは (အားလုံး မင်္ဂလာပါ)" },
-          { word: "ありがとう (Arigatou)", phonetic: "အာရီဂါတိုး", meaning: "ကျေးဇူးတင်ပါတယ်", example: "どうもありがとう (ကျေးဇူးအများကြီးတင်ပါတယ်)" },
-          { word: "すみません (Sumimasen)", phonetic: "ဆုမိမဆန်", meaning: "တောင်းပန်ပါတယ် / အားနာပါတယ်", example: "すみません、トイレはどこ？ (တစ်ဆိတ်လောက် အိမ်သာဘယ်မှာလဲ)" },
-          { word: "おいしい (Oishii)", phonetic: "အိုအီရှီ", meaning: "အရသာရှိသော", example: "とてもおいしいです (အရမ်းအရသာရှိပါတယ်)" },
-          { word: "いくら (Ikura)", phonetic: "အီကုရ", meaning: "ဘယ်လောက်လဲ (ဈေးနှုန်း)", example: "これはいくらですか (ဒါ ဘယ်လောက်ကျပါသလဲ)" },
-          { word: "がんばって (Ganbatte)", phonetic: "ဂမ်ဘတ်တဲ", meaning: "ကြိုးစားပါ / အားတင်းထား", example: "明日もがんばって (မနက်ဖြန်လည်း ကြိုးစားပါ)" }
+          // ☕ နေ့စဉ်သုံး
+          { cat: "daily", word: "お元気ですか (Ogenki desu ka)", phonetic: "အိုဂန်ခိ ဒက်စ်ကာ", meaning: "နေကောင်းပါသလား", example: "お元気ですか？ (နေကောင်းရဲ့လား)" },
+          { cat: "daily", word: "よろしくお願いします (Yoroshiku)", phonetic: "ယိုရိုရှိခု အိုနဲဂိုင်းရှိမတ်စ်", meaning: "ခင်မင်စွာ ကူညီစောင့်ရှောက်ပေးပါ", example: "どうぞよろしくお願いします" },
+          // 💼 ရုံးသုံး
+          { cat: "office", word: "お疲れ様です (Otsukaresama desu)", phonetic: "အိုဆုခါရဲဆာမ ဒက်စ်", meaning: "ပင်ပန်းသွားပါပြီ (ရုံးနှုတ်ဆက်စကား)", example: "今日もお疲れ様でした" },
+          { cat: "office", word: "会議 (Kaigi)", phonetic: "ခိုင်းဂိ", meaning: "အစည်းအဝေး", example: "10時から会議があります (၁၀ နာရီမှာ အစည်းအဝေးရှိတယ်)" },
+          // 🛒 ဈေးသုံး
+          { cat: "shop", word: "いくらですか (Ikura desu ka)", phonetic: "အီကုရ ဒက်စ်ကာ", meaning: "ဘယ်လောက်ကျပါသလဲ", example: "これはいくらですか？ (ဒါ ဘယ်လောက်လဲ)" },
+          { cat: "shop", word: "袋 (Fukuro)", phonetic: "ဖုခုရို", meaning: "ပလတ်စတစ်အိတ် / ဈေးဝယ်အိတ်", example: "袋は要りません (အိတ် မလိုပါဘူး)" },
+          // 🛠️ လုပ်ငန်းခွင်သုံး
+          { cat: "work", word: "残業 (Zangyou)", phonetic: "ဇန်ဂယိုး", meaning: "OT / အချိန်ပိုလုပ်ခြင်း", example: "今日は残業があります (ဒီနေ့ OT ဆင်းစရာရှိတယ်)" },
+          { cat: "work", word: "安全第一 (Anzen Daiichi)", phonetic: "အန်ဇန်း ဒိုင်းအိချိ", meaning: "ဘေးကင်းလုံခြုံရေး ပထမ", example: "現場は安全第一です (လုပ်ငန်းခွင်သည် ဘေးကင်းရေးပထမ)" },
+          // 🎓 ကျောင်းသုံး
+          { cat: "school", word: "宿題 (Shukudai)", phonetic: "ရှုခုဒိုင်း", meaning: "အိမ်စာ", example: "宿題を忘れました (အိမ်စာ မေ့ကျန်ခဲ့ပါတယ်)" },
+          { cat: "school", word: "試験 (Shiken)", phonetic: "ရှိခန်", meaning: "စာမေးပွဲ", example: "来週試験があります (နောက်အပတ် စာမေးပွဲရှိတယ်)" }
         ]
       },
       de: {
         code: 'de-DE',
         data: [
-          { word: "Guten Tag", phonetic: "ဂူတန် ထာ့ခ်", meaning: "မင်္ဂလာပါ", example: "Guten Tag, wie geht's? (မင်္ဂလာပါ နေကောင်းလား)" },
-          { word: "Danke", phonetic: "ဒန်ခါ့", meaning: "ကျေးဇူးတင်ပါတယ်", example: "Danke schön! (အရမ်းကျေးဇူးတင်ပါတယ်)" },
-          { word: "Bitte", phonetic: "ဘစ်တာ့", meaning: "ရပါတယ် / ကျေးဇူးပြု၍", example: "Bitte sehr! (ကြိုဆိုပါတယ်/ရပါတယ်)" },
-          { word: "Entschuldigung", phonetic: "အန့်ရှူးလ်ဒီဂွန်း", meaning: "တောင်းပန်ပါတယ် / ခွင့်လွှတ်ပါ", example: "Entschuldigung, wo ist...? (တောင်းပန်ပါတယ်...ဘယ်မှာလဲ)" },
-          { word: "Wie viel", phonetic: "ဗွီ ဖီးလ်", meaning: "ဘယ်လောက်လဲ", example: "Wie viel kostet das? (ဒါ ဘယ်လောက်ကျလဲ)" },
-          { word: "Auf Wiedersehen", phonetic: "အောင်ဖ် ဗီဒါဇိန်း", meaning: "နှုတ်ဆက်ပါတယ် / နောက်မှတွေ့မယ်", example: "Auf Wiedersehen, bis bald! (နှုတ်ဆက်ပါတယ် နောက်မှတွေ့ကြမယ်)" }
+          // ☕ နေ့စဉ်သုံး
+          { cat: "daily", word: "Wie geht es Ihnen?", phonetic: "ဗွီ ဂိတ် အက်စ် အီးနန်", meaning: "နေကောင်းပါသလား?", example: "Guten Tag, wie geht es Ihnen?" },
+          // 💼 ရုံးသုံး
+          { cat: "office", word: "Die Besprechung", phonetic: "ဒီ ဘာ့ရှ်ပရဲရှွန်း", meaning: "အစည်းအဝေး", example: "Wir haben eine Besprechung um 9 Uhr." },
+          { cat: "office", word: "Das Projekt", phonetic: "ဒတ်စ် ပရိုယက်ခ်ထ်", meaning: "ပရောဂျက် / စီမံကိန်း", example: "Das Projekt ist sehr wichtig." },
+          // 🛒 ဈေးသုံး
+          { cat: "shop", word: "Wie viel kostet das?", phonetic: "ဗွီ ဖီးလ် ကော့စ်တက် ဒတ်စ်", meaning: "ဒါ ဘယ်လောက်ကျလဲ?", example: "Wie viel kostet das Hemd?" },
+          { cat: "shop", word: "Mit Karte zahlen", phonetic: "မစ်ထ် ခါးထာ့ ဇာလန်", meaning: "ကတ်ဖြင့် ငွေပေးချေခြင်း", example: "Kann ich mit Karte zahlen?" },
+          // 🛠️ လုပ်ငန်းခွင်သုံး
+          { cat: "work", word: "Die Überstunden", phonetic: "ဒီ အူးဘာ့ရှ်တွန်းဒန်", meaning: "အချိန်ပို / OT", example: "Ich mache heute Überstunden." },
+          // 🎓 ကျောင်းသုံး
+          { cat: "school", word: "Die Hausaufgabe", phonetic: "ဒီ ဟောင်းစ်အောင်ဖ်ဂါးဘား", meaning: "အိမ်စာ", example: "Hast du die Hausaufgabe gemacht?" }
         ]
       },
       fr: {
         code: 'fr-FR',
         data: [
-          { word: "Bonjour", phonetic: "ဘုံရှူးရ်", meaning: "မင်္ဂလာပါ", example: "Bonjour tout le monde! (အားလုံး မင်္ဂလာပါ)" },
-          { word: "Merci", phonetic: "မဲရ်စီ", meaning: "ကျေးဇူးတင်ပါတယ်", example: "Merci beaucoup! (ကျေးဇူး အထူးတင်ပါတယ်)" },
-          { word: "S'il vous plaît", phonetic: "စီ ဗူး ပလဲ", meaning: "ကျေးဇူးပြု၍", example: "L'addition, s'il vous plaît (ကျေးဇူးပြု၍ ဘေလ်ရှင်းပေးပါ)" },
-          { word: "Pardon", phonetic: "ပါရ်ဒုံ", meaning: "တောင်းပန်ပါတယ်", example: "Pardon, où sont les toilettes? (တောင်းပန်ပါတယ် အိမ်သာဘယ်မှာလဲ)" },
-          { word: "Combien", phonetic: "ကုံဘီယန်", meaning: "ဘယ်လောက်လဲ", example: "C'est combien? (ဒါ ဘယ်လောက်လဲ)" },
-          { word: "Au revoir", phonetic: "အို ရဗွားရ်", meaning: "နှုတ်ဆက်ပါတယ်", example: "Au revoir et bonne journée! (နှုတ်ဆက်ပါတယ် သာယာသောနေ့ဖြစ်ပါစေ)" }
+          // ☕ နေ့စဉ်သုံး
+          { cat: "daily", word: "Comment allez-vous?", phonetic: "ကော်မွန် တာလေ ဗူး", meaning: "နေကောင်းပါသလား?", example: "Bonjour, comment allez-vous?" },
+          // 💼 ရုံးသုံး
+          { cat: "office", word: "La réunion", phonetic: "လာ ရေအူနီယွန်း", meaning: "အစည်းအဝေး", example: "La réunion commence à dix heures." },
+          // 🛒 ဈေးသုံး
+          { cat: "shop", word: "C'est combien?", phonetic: "ဆဲ ကုံဘီယန်", meaning: "ဒါ ဘယ်လောက်လဲ?", example: "Ce livre, c'est combien?" },
+          { cat: "shop", word: "Payer par carte", phonetic: "ပယေး ပါရ် ကာရ်တ်", meaning: "ကတ်ဖြင့် ငွေရှင်းခြင်း", example: "Je peux payer par carte?" },
+          // 🛠️ လုပ်ငန်းခွင်သုံး
+          { cat: "work", word: "Heures supplémentaires", phonetic: "အာရ် ဆူပလေမွန်တဲရ်", meaning: "အချိန်ပို / OT", example: "Faire des heures supplémentaires." },
+          // 🎓 ကျောင်းသုံး
+          { cat: "school", word: "Les devoirs", phonetic: "လေ ဒိုဗွားရ်", meaning: "အိမ်စာ", example: "Fais tes devoirs pour demain." }
         ]
       }
     };
 
     let currentLang = 'en';
+    let currentCategory = 'all';
     let currentQuizIndex = 0;
     let quizScore = 0;
 
-    function selectLang(lang) {
+    const catLabels = {
+      daily: "☕ နေ့စဉ်သုံး",
+      office: "💼 ရုံးသုံး",
+      shop: "🛒 ဈေးသုံး",
+      work: "🛠️ လုပ်ငန်းခွင်",
+      school: "🎓 ကျောင်းသုံး"
+    };
+
+    function selectLang(lang, btn) {
       currentLang = lang;
-      document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
-      event.target.classList.add('active');
-      renderWords();
-      if (document.getElementById('tabQuiz').style.display === 'block') {
-        startQuiz();
-      }
+      document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      filterWords();
+    }
+
+    function selectCategory(cat, btn) {
+      currentCategory = cat;
+      document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      filterWords();
     }
 
     function speakWord(text) {
       if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel();
         const utter = new SpeechSynthesisUtterance(text);
         utter.lang = database[currentLang].code;
-        speechSynthesis.speak(utter);
+        window.speechSynthesis.speak(utter);
       }
     }
 
-    function renderWords() {
+    function renderWords(list) {
       const container = document.getElementById('wordsList');
       container.innerHTML = '';
-      const list = database[currentLang].data;
+
+      if (list.length === 0) {
+        container.innerHTML = '<p style="text-align:center; color:#888; margin-top:30px;">ဤကဏ္ဍတွင် စကားလုံး မရှိသေးပါ။</p>';
+        return;
+      }
 
       list.forEach(item => {
         container.innerHTML += `
@@ -266,8 +389,9 @@
               <div>
                 <div class="word-text">${item.word}</div>
                 <div class="phonetic">${item.phonetic}</div>
+                <span class="badge">${catLabels[item.cat] || item.cat}</span>
               </div>
-              <button class="btn-speak" onclick="speakWord('${item.word}')">🔊</button>
+              <button class="btn-speak" onclick="speakWord('${item.word.replace(/'/g, "\\'")}')">🔊</button>
             </div>
             <div class="meaning">မြန်မာအဓိပ္ပာယ်: ${item.meaning}</div>
             <div class="example">ဥပမာ: ${item.example}</div>
@@ -276,14 +400,34 @@
       });
     }
 
+    function filterWords() {
+      const query = document.getElementById('searchBar').value.toLowerCase().trim();
+      let list = database[currentLang].data;
+
+      if (currentCategory !== 'all') {
+        list = list.filter(item => item.cat === currentCategory);
+      }
+
+      if (query) {
+        list = list.filter(item => 
+          item.word.toLowerCase().includes(query) || 
+          item.meaning.toLowerCase().includes(query) ||
+          item.phonetic.toLowerCase().includes(query)
+        );
+      }
+      renderWords(list);
+    }
+
     function switchTab(tab) {
       if (tab === 'vocab') {
         document.getElementById('tabVocab').style.display = 'block';
+        document.getElementById('searchArea').style.display = 'block';
         document.getElementById('tabQuiz').style.display = 'none';
         document.getElementById('navVocab').className = 'active';
         document.getElementById('navQuiz').className = '';
       } else {
         document.getElementById('tabVocab').style.display = 'none';
+        document.getElementById('searchArea').style.display = 'none';
         document.getElementById('tabQuiz').style.display = 'block';
         document.getElementById('navVocab').className = '';
         document.getElementById('navQuiz').className = 'active';
@@ -350,7 +494,7 @@
       }
     }
 
-    renderWords();
+    filterWords();
   </script>
 </body>
 </html>
