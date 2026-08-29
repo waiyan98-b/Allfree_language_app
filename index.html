@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-  <title>LingoMaster - Complete A1 English</title>
+  <title>LingoMaster - English & Thai A1</title>
   <style>
     :root {
       --green: #58cc02;
@@ -11,12 +11,10 @@
       --green-light: #d7ffb8;
       --blue: #1cb0f6;
       --blue-dark: #0f86be;
-      --purple: #a435f0;
       --gold: #ffc800;
       --red: #ff4b4b;
       --red-light: #ffdfe0;
       --gray: #e5e5e5;
-      --gray-dark: #afafaf;
       --text: #3c3c3c;
       --bg: #f7f9fa;
     }
@@ -41,8 +39,6 @@
       background: white;
       position: relative;
     }
-
-    /* Top Stats Bar */
     .top-bar {
       display: flex;
       justify-content: space-between;
@@ -54,10 +50,17 @@
       font-size: 14px;
       z-index: 10;
     }
-    .lang-badge { display: flex; align-items: center; gap: 4px; font-size: 13px; font-weight: bold; color: var(--blue-dark); }
-    .stats-group { display: flex; gap: 12px; align-items: center; }
-
-    /* Main Scrollable Screen */
+    .lang-select {
+      border: 2px solid var(--blue);
+      border-radius: 10px;
+      padding: 4px 8px;
+      font-weight: bold;
+      font-size: 13px;
+      outline: none;
+      background: #f0f9ff;
+      color: #0277bd;
+    }
+    .stats-group { display: flex; gap: 10px; align-items: center; }
     main {
       flex: 1;
       overflow-y: auto;
@@ -66,8 +69,6 @@
     }
     .screen { display: none; flex-direction: column; width: 100%; }
     .screen.active { display: flex; }
-
-    /* Card Components */
     .card {
       background: white;
       border: 2px solid var(--gray);
@@ -96,8 +97,6 @@
       text-align: center;
     }
     .btn-main:active { transform: translateY(2px); box-shadow: 0 2px 0 var(--green-dark); }
-
-    /* Progress & Goal Bars */
     .goal-track {
       width: 100%;
       height: 12px;
@@ -107,8 +106,6 @@
       margin: 8px 0 4px 0;
     }
     .goal-fill { height: 100%; background: var(--gold); width: 0%; transition: width 0.3s; }
-
-    /* Chapter Tree Path */
     .chapter-item {
       display: flex;
       align-items: center;
@@ -121,20 +118,11 @@
       box-shadow: 0 3px 0 var(--gray);
       cursor: pointer;
     }
-    .chapter-item.locked {
-      background: #fafafa;
-      opacity: 0.6;
-      cursor: not-allowed;
-      box-shadow: none;
-    }
+    .chapter-item.locked { background: #fafafa; opacity: 0.6; cursor: not-allowed; box-shadow: none; }
     .chapter-item.completed { border-color: var(--green); }
-
-    /* Bottom Tab Navigation */
     .bottom-nav {
       position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
+      bottom: 0; left: 0; right: 0;
       height: 60px;
       background: white;
       border-top: 2px solid var(--gray);
@@ -160,12 +148,11 @@
     .nav-btn.active { color: var(--green-dark); }
     .nav-btn span { font-size: 18px; margin-bottom: 2px; }
 
-    /* Game Interface & 5 Quiz Styles */
+    /* Game Screen */
     .game-header { display: flex; align-items: center; gap: 12px; width: 100%; margin-bottom: 16px; }
     .btn-close { background: none; border: none; font-size: 20px; font-weight: bold; color: #888; cursor: pointer; }
     .progress-wrap { flex: 1; height: 12px; background: var(--gray); border-radius: 8px; overflow: hidden; }
     .progress-bar-fill { height: 100%; width: 0%; background: var(--green); transition: width 0.3s; }
-    
     .prompt-box { font-size: 19px; font-weight: bold; margin-bottom: 16px; line-height: 1.4; }
     .speaker-btn {
       background: var(--blue);
@@ -180,8 +167,6 @@
       align-self: flex-start;
       margin-bottom: 14px;
     }
-    
-    /* Quiz Options */
     .choice-option {
       width: 100%;
       padding: 13px;
@@ -196,8 +181,6 @@
       text-align: left;
     }
     .choice-option.selected { border-color: var(--blue); background: #e1f5fe; }
-    
-    /* Word Builder Slots */
     .slot-container { min-height: 48px; border-bottom: 2px solid var(--gray); display: flex; flex-wrap: wrap; gap: 6px; padding: 4px 0; margin-bottom: 20px; }
     .bubble-pool { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; }
     .word-chip {
@@ -211,8 +194,6 @@
       cursor: pointer;
     }
     .word-chip.used { opacity: 0.2; pointer-events: none; }
-
-    /* Fill in the blank input */
     .fill-input {
       width: 100%;
       padding: 12px;
@@ -222,8 +203,6 @@
       margin-bottom: 16px;
       outline: none;
     }
-
-    /* Feedback Sheet */
     .feedback-sheet {
       position: absolute;
       bottom: 0; left: 0; right: 0;
@@ -240,9 +219,11 @@
 <body>
 
   <div class="app-container">
-    <!-- Top Stats -->
     <div class="top-bar">
-      <div class="lang-badge">🇬🇧 English (A1)</div>
+      <select class="lang-select" id="langSwitcher" onchange="switchLanguage()">
+        <option value="en">🇬🇧 English (A1)</option>
+        <option value="th">🇹🇭 ไทย (Thai A1)</option>
+      </select>
       <div class="stats-group">
         <div style="color: #ff9600;">🔥 <span id="streakDisplay">1</span></div>
         <div style="color: #1cb0f6;">⭐ <span id="xpDisplay">0</span></div>
@@ -250,14 +231,13 @@
       </div>
     </div>
 
-    <!-- Main Screens Content -->
     <main>
       <!-- TAB 1: 🏠 Home -->
       <div id="screenHome" class="screen active">
         <div class="card hero-card">
           <div style="font-size: 12px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.9;">Continue Learning</div>
           <div style="font-size: 20px; font-weight: bold; margin: 6px 0;" id="homeCurrentChapterTitle">A1 • Chapter 1</div>
-          <div style="font-size: 13px; opacity: 0.9; margin-bottom: 14px;" id="homeCurrentChapterDesc">Greetings & Basic Phrases</div>
+          <div style="font-size: 13px; opacity: 0.9; margin-bottom: 14px;" id="homeCurrentChapterDesc">Loading...</div>
           <button class="btn-main" onclick="continueLearning()">CONTINUE →</button>
         </div>
 
@@ -270,18 +250,11 @@
             <div class="goal-fill" id="goalFill"></div>
           </div>
         </div>
-
-        <div class="card" style="background:#f0fdf4; border-color:#bbf7d0;">
-          <div style="font-weight: bold; color: #166534; font-size: 14px;">💡 Study Tip</div>
-          <div style="font-size: 13px; color: #15803d; margin-top: 4px;">
-            နေ့စဉ် ၅ မိနစ်မှ ၁၀ မိနစ်ခန့် ပုံမှန်လေ့ကျင့်ခြင်းသည် သင့်မှတ်ဉာဏ်ကို အကောင်းဆုံးဖြစ်စေပါသည်။
-          </div>
-        </div>
       </div>
 
       <!-- TAB 2: 📚 Learn (A1 Chapters 1 to 10) -->
       <div id="screenLearn" class="screen">
-        <div style="font-size: 16px; font-weight: bold; margin-bottom: 12px;">A1 Beginner Curriculum (10 Chapters)</div>
+        <div style="font-size: 16px; font-weight: bold; margin-bottom: 12px;" id="learnTitle">A1 Curriculum</div>
         <div id="chapterListContainer"></div>
       </div>
 
@@ -289,13 +262,12 @@
       <div id="screenProgress" class="screen">
         <div class="card">
           <div style="font-size: 16px; font-weight: bold; margin-bottom: 8px;">📊 Overall Progress</div>
-          <div style="font-size: 13px; color: #666; margin-bottom: 12px;">English A1 Completion Rate</div>
+          <div style="font-size: 13px; color: #666; margin-bottom: 12px;" id="progressLangTitle">A1 Completion Rate</div>
           <div class="goal-track" style="height: 14px; background: var(--gray);">
             <div class="goal-fill" id="overallProgressFill" style="background: var(--green);"></div>
           </div>
           <div style="text-align: right; font-size: 12px; font-weight: bold; margin-top: 4px;" id="overallPercent">0%</div>
         </div>
-
         <div class="card">
           <div style="font-weight: bold; font-size: 14px; margin-bottom: 10px;">🏆 Achievements</div>
           <div id="achievementsContainer"></div>
@@ -323,10 +295,10 @@
             <b id="profileHearts">5</b>
           </div>
         </div>
-        <button class="btn-main" style="background: var(--red); box-shadow: 0 4px 0 #cc3a3a;" onclick="resetAllData()">RESET PROGRESS (စမှပြန်စရန်)</button>
+        <button class="btn-main" style="background: var(--red); box-shadow: 0 4px 0 #cc3a3a;" onclick="resetAllData()">RESET PROGRESS</button>
       </div>
 
-      <!-- GAME SCREEN (Interactive Practice Engine) -->
+      <!-- GAME SCREEN -->
       <div id="screenGame" class="screen">
         <div class="game-header">
           <button class="btn-close" onclick="exitGame()">✕</button>
@@ -338,23 +310,18 @@
         <button class="speaker-btn" id="btnAudio" onclick="playCurrentAudio()">🔊 Listen</button>
         <div class="prompt-box" id="gamePrompt">-</div>
 
-        <!-- 1. Multiple Choice / Listening Area -->
         <div id="choiceArea" style="display:none; width: 100%;"></div>
-
-        <!-- 2. Word Order Area -->
         <div id="wordOrderArea" style="display:none; width: 100%;">
           <div class="slot-container" id="wordSlot"></div>
           <div class="bubble-pool" id="wordPool"></div>
         </div>
-
-        <!-- 3. Fill in the Blank / Translation Area -->
         <div id="inputArea" style="display:none; width: 100%;">
           <input type="text" class="fill-input" id="fillInput" placeholder="အဖြေကို စာရိုက်ထည့်ပါ..." autocomplete="off">
         </div>
       </div>
     </main>
 
-    <!-- Bottom Action Check Bar for Game -->
+    <!-- Bottom Action Check Bar -->
     <div id="gameBottomBar" style="display: none; position: absolute; bottom: 0; left: 0; right: 0; padding: 12px 18px; background: white; border-top: 2px solid var(--gray); z-index: 50;">
       <button class="btn-main" id="btnCheck" onclick="checkCurrentAnswer()">စစ်ဆေးမည် (CHECK)</button>
     </div>
@@ -376,110 +343,108 @@
   </div>
 
   <script>
-    // Complete 10 Chapters for A1 English
-    const A1_DATABASE = [
-      {
-        id: 1,
-        title: "Chapter 1: Greetings",
-        desc: "Hello, Good morning, How are you?",
-        questions: [
-          { type: "multiple-choice", prompt: "'Hello' ၏ မြန်မာအဓိပ္ပာယ်ကို ရွေးပါ", audio: "Hello", choices: ["မင်္ဂလာပါ", "ကျေးဇူးတင်ပါတယ်", "နှုတ်ဆက်ပါတယ်", "တောင်းပန်ပါတယ်"], correct: "မင်္ဂလာပါ" },
-          { type: "word-order", prompt: "ဝါကျစီပါ: 'တွေ့ရတာ ဝမ်းသာပါတယ်'", audio: "Nice to meet you", words: ["meet", "Nice", "to", "you"], correct: ["Nice", "to", "meet", "you"] },
-          { type: "listening", prompt: "ကြားရသည့် အသံကို ရွေးပါ", audio: "Good morning", choices: ["Good night", "Good morning", "Goodbye", "Good evening"], correct: "Good morning" },
-          { type: "fill-blank", prompt: "ဖြည့်စွက်ပါ: How ___ you? (are / is)", audio: "How are you?", correct: "are" }
+    // Complete 10 Chapters for English & Thai
+    const LANGUAGES_DB = {
+      en: {
+        name: "English",
+        voice: "en-US",
+        chapters: [
+          { id: 1, title: "Chapter 1: Greetings", desc: "Hello, Good morning, How are you?", questions: [
+            { type: "multiple-choice", prompt: "'Hello' ၏ မြန်မာအဓိပ္ပာယ်ကို ရွေးပါ", audio: "Hello", choices: ["မင်္ဂလာပါ", "ကျေးဇူးတင်ပါတယ်", "နှုတ်ဆက်ပါတယ်", "တောင်းပန်ပါတယ်"], correct: "မင်္ဂလာပါ" },
+            { type: "word-order", prompt: "ဝါကျစီပါ: 'တွေ့ရတာ ဝမ်းသာပါတယ်'", audio: "Nice to meet you", words: ["meet", "Nice", "to", "you"], correct: ["Nice", "to", "meet", "you"] },
+            { type: "listening", prompt: "ကြားရသည့် အသံကို ရွေးပါ", audio: "Good morning", choices: ["Good night", "Good morning", "Goodbye", "Good evening"], correct: "Good morning" },
+            { type: "fill-blank", prompt: "ဖြည့်စွက်ပါ: How ___ you? (are / is)", audio: "How are you?", correct: "are" }
+          ]},
+          { id: 2, title: "Chapter 2: Introducing Yourself", desc: "My name is..., I am from...", questions: [
+            { type: "word-order", prompt: "ဝါကျစီပါ: 'ကျွန်တော့်နာမည် ဂျွန်ပါ'", audio: "My name is John", words: ["is", "My", "name", "John"], correct: ["My", "name", "is", "John"] },
+            { type: "multiple-choice", prompt: "'Where are you from?' ၏ အဓိပ္ပာယ်ကို ရွေးပါ", audio: "Where are you from?", choices: ["ခင်ဗျား ဘယ်ကလာတာလဲ?", "ဘယ်သွားမလဲ?", "နေကောင်းလား?"], correct: "ခင်ဗျား ဘယ်ကလာတာလဲ?" }
+          ]},
+          { id: 3, title: "Chapter 3: Numbers (1-100)", desc: "One, Two, Twelve, Fifty...", questions: [
+            { type: "multiple-choice", prompt: "'Fifty' ဆိုသည်မှာ မည်သည့်နံပါတ်နည်း?", audio: "Fifty", choices: ["၅၀", "၁၅", "၅", "၅၀၀"], correct: "၅၀" },
+            { type: "listening", prompt: "ကြားရသည့် နံပါတ်ကို ရွေးပါ", audio: "Twelve", choices: ["12", "20", "2", "22"], correct: "12" }
+          ]},
+          { id: 4, title: "Chapter 4: Family", desc: "Mother, Father, Brother, Sister...", questions: [
+            { type: "multiple-choice", prompt: "'Father' ၏ အဓိပ္ပာယ်ကို ရွေးပါ", audio: "Father", choices: ["ဖခင် / အဖေ", "မိခင်", "ညီအစ်ကို", "အစ်မ"], correct: "ဖခင် / အဖေ" },
+            { type: "word-order", prompt: "ဝါကျစီပါ: 'This is my mother'", audio: "This is my mother", words: ["is", "my", "This", "mother"], correct: ["This", "is", "my", "mother"] }
+          ]},
+          { id: 5, title: "Chapter 5: Daily Life", desc: "Wake up, Eat, Drink, Sleep...", questions: [
+            { type: "multiple-choice", prompt: "'Drink water' ၏ အဓိပ္ပာယ်မှာ အဘယ်နည်း?", audio: "Drink water", choices: ["ရေသောက်သည်", "ထမင်းစားသည်", "အိပ်သည်", "အလုပ်လုပ်သည်"], correct: "ရေသောက်သည်" },
+            { type: "fill-blank", prompt: "ဖြည့်စွက်ပါ: I ___ up at 6 AM. (wake / sleep)", audio: "I wake up at 6 AM", correct: "wake" }
+          ]},
+          { id: 6, title: "Chapter 6: Time & Date", desc: "Today, Tomorrow, Monday...", questions: [
+            { type: "multiple-choice", prompt: "'Tomorrow' ဆိုသည်မှာ အဘယ်နည်း?", audio: "Tomorrow", choices: ["မနက်ဖြန်", "ယနေ့", "မနေ့က", "နောက်အပတ်"], correct: "မနက်ဖြန်" }
+          ]},
+          { id: 7, title: "Chapter 7: Food & Drinks", desc: "Rice, Coffee, Tea, Delicious...", questions: [
+            { type: "multiple-choice", prompt: "'Delicious' ၏ အဓိပ္ပာယ်ကို ရွေးပါ", audio: "Delicious", choices: ["အရသာရှိသော", "ခါးသော", "ဈေးကြီးသော"], correct: "အရသာရှိသော" }
+          ]},
+          { id: 8, title: "Chapter 8: Places", desc: "Home, School, Office, Hospital...", questions: [
+            { type: "multiple-choice", prompt: "'Hospital' ၏ အဓိပ္ပာယ်ကို ရွေးပါ", audio: "Hospital", choices: ["ဆေးရုံ", "ကျောင်း", "ဘူတာ", "ရုံး"], correct: "ဆေးရုံ" }
+          ]},
+          { id: 9, title: "Chapter 9: Basic Grammar", desc: "am/is/are, have/has, plural...", questions: [
+            { type: "multiple-choice", prompt: "She ___ a teacher. (am / is / are)", audio: "She is a teacher", choices: ["is", "am", "are"], correct: "is" }
+          ]},
+          { id: 10, title: "Chapter 10: A1 Review Test", desc: "A1 Complete Final Examination", questions: [
+            { type: "word-order", prompt: "ဝါကျစီပါ: 'Where is the restroom?'", audio: "Where is the restroom?", words: ["the", "Where", "restroom?", "is"], correct: ["Where", "is", "the", "restroom?"] }
+          ]}
         ]
       },
-      {
-        id: 2,
-        title: "Chapter 2: Introducing Yourself",
-        desc: "My name is..., I am from...",
-        questions: [
-          { type: "word-order", prompt: "ဝါကျစီပါ: 'ကျွန်တော့်နာမည် ဂျွန်ပါ'", audio: "My name is John", words: ["is", "My", "name", "John"], correct: ["My", "name", "is", "John"] },
-          { type: "multiple-choice", prompt: "'Where are you from?' ၏ အဓိပ္ပာယ်ကို ရွေးပါ", audio: "Where are you from?", choices: ["ခင်ဗျား ဘယ်ကလာတာလဲ?", "ဘယ်သွားမလဲ?", "နေကောင်းလား?"], correct: "ခင်ဗျား ဘယ်ကလာတာလဲ?" },
-          { type: "fill-blank", prompt: "ဖြည့်စွက်ပါ: I ___ from Myanmar. (am / is / are)", audio: "I am from Myanmar", correct: "am" }
-        ]
-      },
-      {
-        id: 3,
-        title: "Chapter 3: Numbers (1-100)",
-        desc: "One, Two, Three, Ten, Fifty...",
-        questions: [
-          { type: "multiple-choice", prompt: "'Fifty' ဆိုသည်မှာ မည်သည့်နံပါတ်နည်း?", audio: "Fifty", choices: ["၅၀", "၁၅", "၅", "၅၀၀"], correct: "၅၀" },
-          { type: "listening", prompt: "ကြားရသည့် နံပါတ်ကို ရွေးပါ", audio: "Twelve", choices: ["12", "20", "2", "22"], correct: "12" }
-        ]
-      },
-      {
-        id: 4,
-        title: "Chapter 4: Family",
-        desc: "Mother, Father, Brother, Sister...",
-        questions: [
-          { type: "multiple-choice", prompt: "'Father' ၏ အဓိပ္ပာယ်ကို ရွေးပါ", audio: "Father", choices: ["ဖခင် / အဖေ", "မိခင်", "ညီအစ်ကို", "အစ်မ"], correct: "ဖခင် / အဖေ" },
-          { type: "word-order", prompt: "ဝါကျစီပါ: 'This is my mother'", audio: "This is my mother", words: ["is", "my", "This", "mother"], correct: ["This", "is", "my", "mother"] }
-        ]
-      },
-      {
-        id: 5,
-        title: "Chapter 5: Daily Life",
-        desc: "Wake up, Eat, Drink, Sleep...",
-        questions: [
-          { type: "multiple-choice", prompt: "'Drink water' ၏ အဓိပ္ပာယ်မှာ အဘယ်နည်း?", audio: "Drink water", choices: ["ရေသောက်သည်", "ထမင်းစားသည်", "အိပ်သည်", "အလုပ်လုပ်သည်"], correct: "ရေသောက်သည်" },
-          { type: "fill-blank", prompt: "ဖြည့်စွက်ပါ: I ___ up at 6 AM. (wake / sleep)", audio: "I wake up at 6 AM", correct: "wake" }
-        ]
-      },
-      {
-        id: 6,
-        title: "Chapter 6: Time & Date",
-        desc: "Today, Tomorrow, Monday...",
-        questions: [
-          { type: "multiple-choice", prompt: "'Tomorrow' ဆိုသည်မှာ အဘယ်နည်း?", audio: "Tomorrow", choices: ["မနက်ဖြန်", "ယနေ့", "မနေ့က", "နောက်အပတ်"], correct: "မနက်ဖြန်" },
-          { type: "listening", prompt: "ကြားရသည့် စကားလုံးကို ရွေးပါ", audio: "Monday", choices: ["Monday", "Sunday", "Friday", "Today"], correct: "Monday" }
-        ]
-      },
-      {
-        id: 7,
-        title: "Chapter 7: Food & Drinks",
-        desc: "Rice, Coffee, Tea, Delicious...",
-        questions: [
-          { type: "multiple-choice", prompt: "'Delicious' ၏ အဓိပ္ပာယ်ကို ရွေးပါ", audio: "Delicious", choices: ["အရသာရှိသော", "ခါးသော", "ဈေးကြီးသော"], correct: "အရသာရှိသော" },
-          { type: "word-order", prompt: "ဝါကျစီပါ: 'I like coffee'", audio: "I like coffee", words: ["coffee", "like", "I"], correct: ["I", "like", "coffee"] }
-        ]
-      },
-      {
-        id: 8,
-        title: "Chapter 8: Places",
-        desc: "Home, School, Office, Hospital...",
-        questions: [
-          { type: "multiple-choice", prompt: "'Hospital' ၏ အဓိပ္ပာယ်ကို ရွေးပါ", audio: "Hospital", choices: ["ဆေးရုံ", "ကျောင်း", "ဘူတာ", "ရုံး"], correct: "ဆေးရုံ" },
-          { type: "fill-blank", prompt: "Where is the ___? (ဆေးရုံဘယ်မှာလဲ)", audio: "Where is the hospital?", correct: "hospital" }
-        ]
-      },
-      {
-        id: 9,
-        title: "Chapter 9: Basic Grammar",
-        desc: "am/is/are, have/has, plural...",
-        questions: [
-          { type: "multiple-choice", prompt: "She ___ a teacher. (am / is / are)", audio: "She is a teacher", choices: ["is", "am", "are"], correct: "is" },
-          { type: "multiple-choice", prompt: "They ___ two cars. (have / has)", audio: "They have two cars", choices: ["have", "has"], correct: "have" }
-        ]
-      },
-      {
-        id: 10,
-        title: "Chapter 10: A1 Review Test",
-        desc: "A1 Complete Final Examination",
-        questions: [
-          { type: "multiple-choice", prompt: "'Excuse me' ၏ အဓိပ္ပာယ်ကို ရွေးပါ", audio: "Excuse me", choices: ["တစ်ဆိတ်လောက်", "ကျေးဇူးတင်ပါတယ်", "နှုတ်ဆက်ပါတယ်"], correct: "တစ်ဆိတ်လောက်" },
-          { type: "word-order", prompt: "ဝါကျစီပါ: 'Where is the restroom?'", audio: "Where is the restroom?", words: ["the", "Where", "restroom?", "is"], correct: ["Where", "is", "the", "restroom?"] },
-          { type: "fill-blank", prompt: "Nice to ___ you. (meet / meat)", audio: "Nice to meet you", correct: "meet" }
+
+      // 🇹🇭 Thai A1 (10 Chapters)
+      th: {
+        name: "Thai",
+        voice: "th-TH",
+        chapters: [
+          { id: 1, title: "Chapter 1: နှုတ်ဆက်ခြင်း (Greetings)", desc: "สวัสดี, ขอบคุณ, สบายดีไหม", questions: [
+            { type: "multiple-choice", prompt: "'မင်္ဂလာပါ' ၏ ထိုင်းစကားကို ရွေးပါ", audio: "สวัสดี", choices: ["สวัสดี (Sawasdee)", "ขอบคุณ", "ขอโทษ", "อร่อย"], correct: "สวัสดี (Sawasdee)" },
+            { type: "word-order", prompt: "ဝါကျစီပါ: 'မင်္ဂလာပါခင်ဗျာ'", audio: "สวัสดีครับ", words: ["ครับ", "สวัสดี", "ขอบคุณ"], correct: ["สวัสดี", "ครับ"] },
+            { type: "listening", prompt: "ကြားရသည့် စကားလုံးကို ရွေးပါ", audio: "ขอบคุณมาก", choices: ["ขอบคุณมาก", "ไม่เป็นไร", "ขอโทษ", "สวัสดี"], correct: "ขอบคุณมาก" },
+            { type: "fill-blank", prompt: "ဖြည့်စွက်ပါ: สบายดี___? (ไหม / ครับ)", audio: "สบายดีไหม", correct: "ไหม" }
+          ]},
+          { id: 2, title: "Chapter 2: ကိုယ့်ကိုယ်ကို မိတ်ဆက်ခြင်း", desc: "ผมชื่อ..., มาจากประเทศ...", questions: [
+            { type: "word-order", prompt: "ဝါကျစီပါ: 'ကျွန်တော့်နာမည် မောင်မောင်ပါ'", audio: "ผมชื่อหม่องหม่อง", words: ["ชื่อ", "ผม", "หม่องหม่อง"], correct: ["ผม", "ชื่อ", "หม่องหม่อง"] },
+            { type: "multiple-choice", prompt: "'มาจากไหน' ၏ အဓိပ္ပာယ်ကို ရွေးပါ", audio: "มาจากไหน", choices: ["ဘယ်ကလာတာလဲ?", "ဘယ်သွားမလဲ?", "နေကောင်းလား?"], correct: "ဘယ်ကလာတာလဲ?" }
+          ]},
+          { id: 3, title: "Chapter 3: နံပါတ်များ (Numbers 1-100)", desc: "หนึ่ง, สอง, สิบ, ยี่สิบ...", questions: [
+            { type: "multiple-choice", prompt: "'ยี่สิบ (Yee-sib)' ဆိုသည်မှာ မည်သည့်နံပါတ်နည်း?", audio: "ยี่สิบ", choices: ["၂၀", "၁၂", "၂", "၁၀"], correct: "၂၀" },
+            { type: "listening", prompt: "ကြားရသည့် နံပါတ်ကို ရွေးပါ", audio: "หนึ่งร้อย", choices: ["100", "10", "1", "50"], correct: "100" }
+          ]},
+          { id: 4, title: "Chapter 4: မိသားစု (Family)", desc: "พ่อ, แม่, พี่ชาย, น้องสาว...", questions: [
+            { type: "multiple-choice", prompt: "'แม่ (Mae)' ၏ အဓိပ္ပာယ်ကို ရွေးပါ", audio: "แม่", choices: ["မိခင် / အမေ", "ဖခင်", "အစ်ကို", "ညီမ"], correct: "မိခင် / အမေ" },
+            { type: "word-order", prompt: "ဝါကျစီပါ: 'ဒါ ကျွန်တော့်အဖေပါ'", audio: "นี่คือพ่อของผม", words: ["พ่อของผม", "นี่คือ", "แม่"], correct: ["นี่คือ", "พ่อของผม"] }
+          ]},
+          { id: 5, title: "Chapter 5: နေ့စဉ်ဘဝ (Daily Life)", desc: "ตื่นนอน, กินข้าว, ดื่มน้ำ...", questions: [
+            { type: "multiple-choice", prompt: "'กินข้าว (Kin khao)' ၏ အဓိပ္ပာယ်မှာ အဘယ်နည်း?", audio: "กินข้าว", choices: ["ထမင်းစားသည်", "ရေသောက်သည်", "အိပ်သည်", "အလုပ်ဆင်းသည်"], correct: "ထမင်းစားသည်" }
+          ]},
+          { id: 6, title: "Chapter 6: အချိန်နှင့် နေ့ရက်များ", desc: "วันนี้, พรุ่งนี้, วันจันทร์...", questions: [
+            { type: "multiple-choice", prompt: "'พรุ่งนี้ (Phrung-nee)' ဆိုသည်မှာ အဘယ်နည်း?", audio: "พรุ่งนี้", choices: ["မနက်ဖြန်", "ဒီနေ့", "မနေ့က", "နောက်လ"], correct: "မနက်ဖြန်" }
+          ]},
+          { id: 7, title: "Chapter 7: အစားအသောက် (Food & Drinks)", desc: "น้ำเปล่า, อร่อย, ไม่เผ็ด...", questions: [
+            { type: "multiple-choice", prompt: "'ไม่เผ็ด (Mai phet)' ၏ အဓိပ္ပာယ်ကို ရွေးပါ", audio: "ไม่เผ็ด", choices: ["အစပ်မထည့်ပါနဲ့", "အရမ်းစပ်တယ်", "အရသာရှိတယ်"], correct: "အစပ်မထည့်ပါနဲ့" },
+            { type: "word-order", prompt: "ဝါကျစီပါ: 'ရေသောက်ချင်တယ်'", audio: "อยากดื่มน้ำ", words: ["ดื่มน้ำ", "อยาก", "ข้าว"], correct: ["อยาก", "ดื่มน้ำ"] }
+          ]},
+          { id: 8, title: "Chapter 8: နေရာဒေသများ (Places)", desc: "บ้าน, โรงเรียน, โรงพยาบาล...", questions: [
+            { type: "multiple-choice", prompt: "'ห้องน้ำ (Hong-nam)' ၏ အဓိပ္ပာယ်ကို ရွေးပါ", audio: "ห้องน้ำ", choices: ["အိမ်သာ", "ဆေးရုံ", "ကျောင်း", "ဘူတာ"], correct: "အိမ်သာ" },
+            { type: "word-order", prompt: "ဝါကျစီပါ: 'အိမ်သာ ဘယ်မှာလဲ'", audio: "ห้องน้ำอยู่ที่ไหน", words: ["อยู่ที่ไหน", "ห้องน้ำ", "ครับ"], correct: ["ห้องน้ำ", "อยู่ที่ไหน"] }
+          ]},
+          { id: 9, title: "Chapter 9: အခြေခံ သဒ္ဒါ (Basic Grammar)", desc: "มี, ไม่มี, ใช่, ไม่ใช่...", questions: [
+            { type: "multiple-choice", prompt: "'မရှိပါ' ၏ ထိုင်းစကားကို ရွေးပါ", audio: "ไม่มี", choices: ["ไม่มี (Mai mee)", "มี", "ไม่ใช่"], correct: "ไม่มี (Mai mee)" }
+          ]},
+          { id: 10, title: "Chapter 10: Thai A1 Review Test", desc: "A1 Complete Final Examination", questions: [
+            { type: "multiple-choice", prompt: "'เท่าไหร่ (Thao rai)' ၏ အဓိပ္ပာယ်ကို ရွေးပါ", audio: "เท่าไหร่", choices: ["ဘယ်လောက်ကျလဲ?", "ဘယ်သွားမလဲ?", "အိမ်သာဘယ်မှာလဲ?"], correct: "ဘယ်လောက်ကျလဲ?" },
+            { type: "word-order", prompt: "ဝါကျစီပါ: 'ဘေလ်ရှင်းပေးပါ'", audio: "เช็คบิลด้วยครับ", words: ["ด้วยครับ", "เช็คบิล", "น้ำ"], correct: ["เช็คบิล", "ด้วยครับ"] }
+          ]}
         ]
       }
-    ];
+    };
 
-    // App State Management (LocalStorage synced)
+    let curLang = localStorage.getItem('lm_cur_lang') || 'en';
+    
+    // Per-language unlock tracking
+    let unlockMap = JSON.parse(localStorage.getItem('lm_unlock_map')) || { en: 1, th: 1 };
     let state = {
       xp: parseInt(localStorage.getItem('lm_xp')) || 0,
       hearts: parseInt(localStorage.getItem('lm_hearts')) !== null && !isNaN(parseInt(localStorage.getItem('lm_hearts'))) ? parseInt(localStorage.getItem('lm_hearts')) : 5,
       streak: parseInt(localStorage.getItem('lm_streak')) || 1,
-      unlockedChapter: parseInt(localStorage.getItem('lm_unlocked')) || 1,
       dailyXP: parseInt(localStorage.getItem('lm_daily_xp')) || 0
     };
 
@@ -489,33 +454,42 @@
     let userBuiltWords = [];
 
     function saveState() {
+      localStorage.setItem('lm_cur_lang', curLang);
       localStorage.setItem('lm_xp', state.xp);
       localStorage.setItem('lm_hearts', state.hearts);
       localStorage.setItem('lm_streak', state.streak);
-      localStorage.setItem('lm_unlocked', state.unlockedChapter);
+      localStorage.setItem('lm_unlock_map', JSON.stringify(unlockMap));
       localStorage.setItem('lm_daily_xp', state.dailyXP);
       updateStatsUI();
     }
 
+    function switchLanguage() {
+      curLang = document.getElementById('langSwitcher').value;
+      saveState();
+      renderChaptersTree();
+      updateStatsUI();
+    }
+
     function updateStatsUI() {
+      document.getElementById('langSwitcher').value = curLang;
       document.getElementById('xpDisplay').innerText = state.xp;
       document.getElementById('heartDisplay').innerText = state.hearts;
       document.getElementById('streakDisplay').innerText = state.streak;
 
-      // Home Screen stats
       document.getElementById('goalText').innerText = `${state.dailyXP} / 50 XP`;
       document.getElementById('goalFill').style.width = `${Math.min(100, (state.dailyXP / 50) * 100)}%`;
       
-      const nextCh = A1_DATABASE.find(c => c.id === state.unlockedChapter) || A1_DATABASE[A1_DATABASE.length - 1];
-      document.getElementById('homeCurrentChapterTitle').innerText = `A1 • ${nextCh.title.split(':')[0]}`;
+      const unlockedCh = unlockMap[curLang] || 1;
+      const db = LANGUAGES_DB[curLang].chapters;
+      const nextCh = db.find(c => c.id === unlockedCh) || db[db.length - 1];
+      document.getElementById('homeCurrentChapterTitle').innerText = `${LANGUAGES_DB[curLang].name} A1 • ${nextCh.title.split(':')[0]}`;
       document.getElementById('homeCurrentChapterDesc').innerText = nextCh.desc;
 
-      // Progress Screen stats
-      const percent = Math.round(((state.unlockedChapter - 1) / A1_DATABASE.length) * 100);
+      const percent = Math.round(((unlockedCh - 1) / db.length) * 100);
       document.getElementById('overallProgressFill').style.width = `${percent}%`;
       document.getElementById('overallPercent').innerText = `${percent}% Completed`;
+      document.getElementById('progressLangTitle').innerText = `${LANGUAGES_DB[curLang].name} A1 Completion Rate`;
 
-      // Profile Screen stats
       document.getElementById('profileTotalXP').innerText = `${state.xp} XP`;
       document.getElementById('profileStreak').innerText = `${state.streak} Day${state.streak > 1 ? 's' : ''}`;
       document.getElementById('profileHearts').innerText = state.hearts;
@@ -531,10 +505,14 @@
     function renderChaptersTree() {
       const container = document.getElementById('chapterListContainer');
       container.innerHTML = '';
+      const unlockedCh = unlockMap[curLang] || 1;
+      const db = LANGUAGES_DB[curLang].chapters;
 
-      A1_DATABASE.forEach(ch => {
-        const isUnlocked = ch.id <= state.unlockedChapter;
-        const isCompleted = ch.id < state.unlockedChapter;
+      document.getElementById('learnTitle').innerText = `${LANGUAGES_DB[curLang].name} A1 Curriculum (10 Chapters)`;
+
+      db.forEach(ch => {
+        const isUnlocked = ch.id <= unlockedCh;
+        const isCompleted = ch.id < unlockedCh;
         
         const item = document.createElement('div');
         item.className = `chapter-item ${!isUnlocked ? 'locked' : ''} ${isCompleted ? 'completed' : ''}`;
@@ -555,11 +533,12 @@
     }
 
     function renderAchievements() {
+      const unlockedCh = unlockMap[curLang] || 1;
       const achievements = [
-        { title: "🏆 First Lesson", desc: "Complete your first lesson", done: state.unlockedChapter > 1 },
+        { title: "🏆 First Lesson", desc: "Complete your first lesson", done: unlockedCh > 1 },
         { title: "🔥 Streak Starter", desc: "Reach a 1-day study streak", done: state.streak >= 1 },
         { title: "⭐ XP Hunter", desc: "Earn 100+ total XP", done: state.xp >= 100 },
-        { title: "👑 A1 Master", desc: "Complete all 10 A1 chapters", done: state.unlockedChapter > 10 }
+        { title: "👑 A1 Master", desc: "Complete all 10 A1 chapters", done: unlockedCh > 10 }
       ];
 
       const container = document.getElementById('achievementsContainer');
@@ -590,15 +569,17 @@
     }
 
     function continueLearning() {
-      const ch = A1_DATABASE.find(c => c.id === state.unlockedChapter) || A1_DATABASE[0];
+      const unlockedCh = unlockMap[curLang] || 1;
+      const db = LANGUAGES_DB[curLang].chapters;
+      const ch = db.find(c => c.id === unlockedCh) || db[0];
       startChapterLesson(ch);
     }
 
     function playAudio(text) {
       if ('speechSynthesis' in window && text) {
         window.speechSynthesis.cancel();
-        const utter = new SpeechSynthesisUtterance(text);
-        utter.lang = 'en-US';
+        const utter = new SpeechSynthesisUtterance(text.replace(/\(.*\)/, '').trim());
+        utter.lang = LANGUAGES_DB[curLang].voice;
         window.speechSynthesis.speak(utter);
       }
     }
@@ -639,7 +620,6 @@
 
       if (q.audio) playAudio(q.audio);
 
-      // Quiz Engine Routing
       if (q.type === 'multiple-choice' || q.type === 'listening') {
         const area = document.getElementById('choiceArea');
         area.style.display = 'block';
@@ -705,9 +685,9 @@
         if (userBuiltWords.length === 0) return alert('စကားလုံးများကို စီပေးပါ!');
         isCorrect = JSON.stringify(userBuiltWords) === JSON.stringify(q.correct);
       } else if (q.type === 'fill-blank') {
-        const val = document.getElementById('fillInput').value.trim().toLowerCase();
+        const val = document.getElementById('fillInput').value.trim();
         if (!val) return alert('အဖြေကို စာရိုက်ထည့်ပါ!');
-        isCorrect = (val === q.correct.toLowerCase());
+        isCorrect = (val.toLowerCase() === q.correct.toLowerCase());
       }
 
       const sheet = document.getElementById('feedbackSheet');
@@ -732,7 +712,7 @@
       document.getElementById('feedbackSheet').style.display = 'none';
 
       if (state.hearts <= 0) {
-        alert('❤️ Hearts are empty! အသက်ကုန်သွားပါပြီ။ Practice လုပ်ပြီး ပြန်လည်လေ့ကျင့်ပါ။');
+        alert('❤️ Hearts are empty! အသက်ကုန်သွားပါပြီ။');
         exitGame();
         return;
       }
@@ -744,8 +724,9 @@
         alert(`🏆 Chapter Complete! သင်ခန်းစာ အောင်မြင်စွာ ပြီးဆုံးပါပြီ။ (+50 Bonus XP)`);
         state.xp += 50;
         state.dailyXP += 50;
-        if (state.unlockedChapter === activeChapter.id && state.unlockedChapter < 10) {
-          state.unlockedChapter++;
+        
+        if (unlockMap[curLang] === activeChapter.id && unlockMap[curLang] < 10) {
+          unlockMap[curLang]++;
         }
         saveState();
         exitGame();
@@ -769,13 +750,13 @@
     function resetAllData() {
       if (confirm('သင်လေ့လာထားသော မှတ်တမ်းများအားလုံးကို ဖျက်ပြီး အစကနေ ပြန်စတင်မည်လား?')) {
         localStorage.clear();
-        state = { xp: 0, hearts: 5, streak: 1, unlockedChapter: 1, dailyXP: 0 };
+        unlockMap = { en: 1, th: 1 };
+        state = { xp: 0, hearts: 5, streak: 1, dailyXP: 0 };
         saveState();
         switchNav('Home');
       }
     }
 
-    // App Initialization
     window.onload = () => {
       saveState();
       renderChaptersTree();
