@@ -20,16 +20,15 @@ jobs:
         with:
           channel: 'stable'
 
-      - name: Scaffold Flutter App
+      - name: Recreate Android Project Setup
         run: |
-          mkdir temp_app
-          cd temp_app
+          mkdir -p /tmp/fresh_app
+          cd /tmp/fresh_app
           flutter create --org com.allfree.language --project-name free_language_app .
-          cp -r android ../
-          cp -r ios ../
-          cp -r web ../
-          cd ..
-          rm -rf temp_app
+          cp -rn android $GITHUB_WORKSPACE/
+          cp -rn ios $GITHUB_WORKSPACE/
+          cp -rn web $GITHUB_WORKSPACE/
+          cd $GITHUB_WORKSPACE
 
       - name: Install Dependencies
         run: flutter pub get
