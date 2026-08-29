@@ -4,330 +4,50 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
 <title>LingoMaster Global</title>
-
 <style>
-:root{
- --green:#58cc02;
- --greenDark:#46a302;
- --blue:#1cb0f6;
- --blueDark:#087fb8;
- --red:#ff4b4b;
- --gold:#ffc800;
- --bg:#f7f9fa;
- --text:#333;
- --muted:#777;
- --line:#e5e5e5;
-}
-
-*{
- box-sizing:border-box;
- -webkit-tap-highlight-color:transparent;
-}
-
-body{
- margin:0;
- background:var(--bg);
- color:var(--text);
- font-family:system-ui,-apple-system,"Segoe UI",sans-serif;
-}
-
-.app{
- max-width:600px;
- min-height:100vh;
- margin:auto;
- background:white;
- position:relative;
-}
-
-header{
- position:sticky;
- top:0;
- z-index:20;
- display:flex;
- gap:8px;
- align-items:center;
- padding:10px;
- background:white;
- border-bottom:2px solid var(--line);
-}
-
-select{
- flex:1;
- padding:10px;
- border:2px solid var(--blue);
- border-radius:12px;
- background:#eef9ff;
- font-weight:800;
- outline:none;
-}
-
-.stats{
- white-space:nowrap;
- font-size:13px;
- font-weight:800;
-}
-
-main{
- padding:16px 16px 90px;
-}
-
-section.hidden{
- display:none!important;
-}
-
-.card{
- background:white;
- border:2px solid var(--line);
- border-radius:18px;
- padding:17px;
- margin-bottom:14px;
- box-shadow:0 3px 0 #ddd;
-}
-
-.hero{
- color:white;
- border:0;
- background:linear-gradient(135deg,#1cb0f6,#087fb8);
-}
-
-.hero h1{
- margin:0 0 6px;
- font-size:28px;
-}
-
-.btn,
-.back{
- width:100%;
- padding:14px;
- border-radius:13px;
- font-weight:900;
- font-size:15px;
- cursor:pointer;
-}
-
-.btn{
- border:0;
- color:white;
- background:var(--green);
- box-shadow:0 4px 0 var(--greenDark);
-}
-
-.btn:active{
- transform:translateY(2px);
- box-shadow:0 2px 0 var(--greenDark);
-}
-
-.back{
- background:white;
- border:2px solid var(--line);
- margin-bottom:10px;
-}
-
-.levels{
- display:grid;
- grid-template-columns:repeat(3,1fr);
- gap:8px;
-}
-
-.level{
- padding:12px 4px;
- border:2px solid var(--line);
- border-radius:12px;
- background:white;
- font-weight:900;
- cursor:pointer;
-}
-
-.level.active{
- border-color:var(--green);
- background:#efffe7;
- color:var(--greenDark);
-}
-
-.lesson{
- display:flex;
- align-items:center;
- justify-content:space-between;
- padding:14px;
- margin:8px 0;
- border:2px solid var(--line);
- border-radius:14px;
- cursor:pointer;
-}
-
-.lesson:hover{
- border-color:var(--blue);
-}
-
-.muted{
- color:var(--muted);
- font-size:13px;
-}
-
-.progress{
- height:12px;
- overflow:hidden;
- border-radius:20px;
- background:var(--line);
-}
-
-.fill{
- height:100%;
- background:var(--green);
- transition:.3s;
-}
-
-.question{
- font-size:20px;
- line-height:1.45;
- margin:15px 0;
-}
-
-.choice{
- width:100%;
- padding:14px;
- margin:6px 0;
- text-align:left;
- border:2px solid var(--line);
- border-radius:12px;
- background:white;
- cursor:pointer;
- font-weight:700;
- font-size:15px;
-}
-
-.choice.selected{
- border-color:var(--blue);
- background:#eef9ff;
-}
-
-.input{
- width:100%;
- padding:14px;
- margin:8px 0;
- border:2px solid var(--line);
- border-radius:12px;
- font-size:17px;
- outline:none;
-}
-
-.input:focus{
- border-color:var(--blue);
-}
-
-.slot{
- min-height:55px;
- display:flex;
- flex-wrap:wrap;
- align-items:center;
- gap:7px;
- padding:9px;
- margin-bottom:12px;
- border:2px dashed #bbb;
- border-radius:12px;
-}
-
-.chips{
- display:flex;
- flex-wrap:wrap;
- gap:8px;
- justify-content:center;
-}
-
-.chip{
- padding:9px 12px;
- border:2px solid var(--line);
- border-radius:10px;
- background:white;
- box-shadow:0 2px 0 #ddd;
- font-weight:800;
- cursor:pointer;
-}
-
-.chip.used{
- opacity:.25;
- pointer-events:none;
-}
-
-.feedback{
- padding:14px;
- margin-top:12px;
- border-radius:12px;
- font-weight:800;
-}
-
-.correct{
- background:#d9ffc1;
- color:var(--greenDark);
-}
-
-.wrong{
- background:#ffdfe0;
- color:#d22;
-}
-
-.statgrid{
- display:grid;
- grid-template-columns:repeat(2,1fr);
- gap:10px;
-}
-
-.stat{
- padding:15px;
- text-align:center;
- border:2px solid var(--line);
- border-radius:14px;
-}
-
-.num{
- font-size:24px;
- font-weight:900;
-}
-
-.badge{
- display:inline-block;
- padding:6px 9px;
- border-radius:9px;
- background:#fff5c9;
- margin:3px;
- font-size:12px;
- font-weight:800;
-}
-
-nav{
- position:fixed;
- bottom:0;
- left:50%;
- transform:translateX(-50%);
- width:min(600px,100%);
- height:66px;
- display:flex;
- background:white;
- border-top:2px solid var(--line);
- z-index:30;
-}
-
-nav button{
- flex:1;
- border:0;
- background:white;
- color:var(--muted);
- font-weight:800;
- font-size:12px;
- cursor:pointer;
-}
-
-nav button.active{
- color:var(--greenDark);
-}
-
-.small{
- font-size:12px;
-}
-
-.center{
- text-align:center;
-}
+:root{--green:#58cc02;--greenDark:#46a302;--blue:#1cb0f6;--blueDark:#087fb8;--red:#ff4b4b;--gold:#ffc800;--bg:#f7f9fa;--text:#333;--muted:#777;--line:#e5e5e5}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{margin:0;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,"Segoe UI",sans-serif}
+.app{max-width:600px;min-height:100vh;margin:auto;background:white;position:relative}
+header{position:sticky;top:0;z-index:20;display:flex;gap:8px;align-items:center;padding:10px;background:white;border-bottom:2px solid var(--line)}
+select{flex:1;padding:10px;border:2px solid var(--blue);border-radius:12px;background:#eef9ff;font-weight:800;outline:none}
+.stats{white-space:nowrap;font-size:13px;font-weight:800}
+main{padding:16px 16px 90px}
+section.hidden{display:none!important}
+.card{background:white;border:2px solid var(--line);border-radius:18px;padding:17px;margin-bottom:14px;box-shadow:0 3px 0 #ddd}
+.hero{color:white;border:0;background:linear-gradient(135deg,#1cb0f6,#087fb8)}
+.hero h1{margin:0 0 6px;font-size:28px}
+.btn,.back{width:100%;padding:14px;border-radius:13px;font-weight:900;font-size:15px;cursor:pointer}
+.btn{border:0;color:white;background:var(--green);box-shadow:0 4px 0 var(--greenDark)}
+.btn:active{transform:translateY(2px);box-shadow:0 2px 0 var(--greenDark)}
+.back{background:white;border:2px solid var(--line);margin-bottom:10px}
+.levels{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.level{padding:12px 4px;border:2px solid var(--line);border-radius:12px;background:white;font-weight:900;cursor:pointer;text-align:center}
+.level.active{border-color:var(--green);background:#efffe7;color:var(--greenDark)}
+.lesson{display:flex;align-items:center;justify-content:space-between;padding:14px;margin:8px 0;border:2px solid var(--line);border-radius:14px;cursor:pointer}
+.lesson:hover{border-color:var(--blue)}
+.muted{color:var(--muted);font-size:13px}
+.progress{height:12px;overflow:hidden;border-radius:20px;background:var(--line)}
+.fill{height:100%;background:var(--green);transition:.3s}
+.question{font-size:20px;line-height:1.45;margin:15px 0}
+.choice{width:100%;padding:14px;margin:6px 0;text-align:left;border:2px solid var(--line);border-radius:12px;background:white;cursor:pointer;font-weight:700;font-size:15px}
+.choice.selected{border-color:var(--blue);background:#eef9ff}
+.input{width:100%;padding:14px;margin:8px 0;border:2px solid var(--line);border-radius:12px;font-size:17px;outline:none}
+.input:focus{border-color:var(--blue)}
+.slot{min-height:55px;display:flex;flex-wrap:wrap;align-items:center;gap:7px;padding:9px;margin-bottom:12px;border:2px dashed #bbb;border-radius:12px}
+.chips{display:flex;flex-wrap:wrap;gap:8px;justify-content:center}
+.chip{padding:9px 12px;border:2px solid var(--line);border-radius:10px;background:white;box-shadow:0 2px 0 #ddd;font-weight:800;cursor:pointer}
+.chip.used{opacity:.25;pointer-events:none}
+.feedback{padding:14px;margin-top:12px;border-radius:12px;font-weight:800}
+.correct{background:#d9ffc1;color:var(--greenDark)}
+.wrong{background:#ffdfe0;color:#d22}
+.statgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+.stat{padding:15px;text-align:center;border:2px solid var(--line);border-radius:14px}
+.num{font-size:24px;font-weight:900}
+.badge{display:inline-block;padding:6px 9px;border-radius:9px;background:#fff5c9;margin:3px;font-size:12px;font-weight:800}
+nav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:min(600px,100%);height:66px;display:flex;background:white;border-top:2px solid var(--line);z-index:30}
+nav button{flex:1;border:0;background:white;color:var(--muted);font-weight:800;font-size:12px;cursor:pointer}
+nav button.active{color:var(--greenDark)}
 </style>
 </head>
 
@@ -337,13 +57,8 @@ nav button.active{
 
 <header>
 <select id="languageSelect"></select>
-
 <div class="stats">
-🔥 <span id="streak">1</span>
-　
-⭐ <span id="xp">0</span>
-　
-❤️ ∞
+🔥 <span id="streak">1</span>　⭐ <span id="xp">0</span>　❤️ ∞
 </div>
 </header>
 
@@ -351,740 +66,504 @@ nav button.active{
 
 <!-- HOME -->
 <section id="home">
-
 <div class="card hero">
-
 <h1>LingoMaster Global</h1>
-
-<p>
-🌍 8 Languages<br>
-📚 A1 → C2<br>
-🎯 Complete Language Mastery
-</p>
-
-<p>
-❤️ Energy: ∞<br>
-Unlimited Practice
-</p>
-
-<button class="btn" onclick="page('learn')">
-Continue Learning →
-</button>
-
+<p>🌍 8 Languages<br>📚 A1 → C2<br>🎯 Complete Language Mastery</p>
+<p>❤️ Energy: ∞<br>Unlimited Practice</p>
+<button class="btn" onclick="page('learn')">Continue Learning →</button>
 </div>
 
 <div class="card">
-
 <div style="display:flex;justify-content:space-between">
 <b>🎯 Daily Goal</b>
 <span id="dailyText" class="muted">0 / 50 XP</span>
 </div>
-
 <div class="progress" style="margin-top:8px">
 <div id="dailyFill" class="fill"></div>
 </div>
-
 </div>
 
 <div class="card">
-
 <span class="muted">CURRENT COURSE</span>
-
-<h2 id="currentLanguage"></h2>
-
-<p id="currentLevel" class="muted"></p>
-
+<h2 id="currentLanguage" style="margin:4px 0"></h2>
+<p id="currentLevel" class="muted" style="margin:0"></p>
 </div>
 
 <div class="card">
-
-<h3>🏆 Achievements</h3>
-
+<h3 style="margin-top:0">🏆 Achievements</h3>
 <div id="achievements"></div>
-
 </div>
-
 </section>
-
 
 <!-- LEARN -->
 <section id="learn" class="hidden">
-
 <div class="card">
-
-<h2 id="courseTitle"></h2>
-
+<h2 id="courseTitle" style="margin-top:0"></h2>
 <div id="levels" class="levels"></div>
-
 </div>
 
 <div class="card">
-
-<h3 id="chapterTitle"></h3>
-
+<h3 id="chapterTitle" style="margin-top:0"></h3>
 <div id="lessons"></div>
-
 </div>
-
 </section>
-
 
 <!-- LESSON -->
 <section id="lesson" class="hidden">
-
 <div class="card">
-
-<button class="back" onclick="page('learn')">
-← Back to Lessons
-</button>
-
+<button class="back" onclick="page('learn')">← Back to Lessons</button>
 <p id="lessonMeta" class="muted"></p>
-
 <div class="progress">
 <div id="lessonProgress" class="fill"></div>
 </div>
-
-<button
-class="back"
-style="width:auto;margin-top:12px;padding:8px 13px"
-onclick="speakCurrent()">
-🔊 Listen
-</button>
-
+<button class="back" style="width:auto;margin-top:12px;padding:8px 13px" onclick="speakCurrent()">🔊 Listen</button>
 <h2 id="question" class="question"></h2>
-
 <div id="answers"></div>
-
-<button
-id="checkButton"
-class="btn"
-onclick="checkAnswer()">
-CHECK
-</button>
-
+<button id="checkButton" class="btn" onclick="checkAnswer()">စစ်ဆေးမည် (CHECK)</button>
 <div id="feedback" class="feedback hidden"></div>
-
 </div>
-
 </section>
-
 
 <!-- PROGRESS -->
 <section id="progress" class="hidden">
-
 <div class="card">
-
-<h2>📊 Progress Overview</h2>
-
+<h2 style="margin-top:0">📊 Progress Overview</h2>
 <div class="statgrid">
-
 <div class="stat">
-<div id="totalXP" class="num">0</div>
+<div id="totalXP" class="num" style="color:var(--blue)">0</div>
 <div class="muted">Total XP</div>
 </div>
-
 <div class="stat">
-<div id="completed" class="num">0</div>
+<div id="completed" class="num" style="color:var(--green)">0</div>
 <div class="muted">Completed</div>
 </div>
-
 <div class="stat">
-<div id="progressStreak" class="num">1</div>
+<div id="progressStreak" class="num" style="color:#ff9600">1</div>
 <div class="muted">Day Streak</div>
 </div>
-
 <div class="stat">
-<div class="num">∞</div>
+<div class="num" style="color:var(--red)">∞</div>
 <div class="muted">Energy</div>
 </div>
-
 </div>
-
 </div>
-
 
 <div class="card">
-
-<h3>📚 Level Mastery</h3>
-
+<h3 style="margin-top:0">📚 Level Mastery</h3>
 <div id="levelMastery"></div>
-
 </div>
-
 
 <div class="card">
-
-<h3>🌍 Language Progress</h3>
-
+<h3 style="margin-top:0">🌍 Language Progress</h3>
 <div id="languageMastery"></div>
-
 </div>
-
 </section>
 
 </main>
 
-
 <nav>
-
-<button
-id="nav-home"
-class="active"
-onclick="page('home')">
-🏠<br>
-Home
-</button>
-
-<button
-id="nav-learn"
-onclick="page('learn')">
-📚<br>
-Learn
-</button>
-
-<button
-id="nav-progress"
-onclick="page('progress')">
-📊<br>
-Progress
-</button>
-
+<button id="nav-home" class="active" onclick="page('home')">🏠<br>Home</button>
+<button id="nav-learn" onclick="page('learn')">📚<br>Learn</button>
+<button id="nav-progress" onclick="page('progress')">📊<br>Progress</button>
 </nav>
 
 </div>
 
-
 <script>
-
-/* =========================================================
-   LANGUAGE DATABASE
-========================================================= */
-
 const DB = {
-
-en:{
-flag:"🇬🇧",
-name:"English",
-voice:"en-US",
-
-levels:{
-
-A1:[
-["Greetings & Introductions",
-"Hello","မင်္ဂလာပါ"],
-["Numbers & Time",
-"one","တစ်"],
-["Family & People",
-"family","မိသားစု"],
-["Food & Drinks",
-"water","ရေ"],
-["Home & Daily Life",
-"home","အိမ်"],
-["Places & Directions",
-"left","ဘယ်ဘက်"],
-["Shopping",
-"price","ဈေးနှုန်း"],
-["Basic Questions",
-"where","ဘယ်မှာ"],
-["Hobbies",
-"music","ဂီတ"],
-["Health Basics",
-"doctor","ဆရာဝန်"]
-],
-
-A2:[
-["Past & Future","yesterday","မနေ့က"],
-["Travel","airport","လေဆိပ်"],
-["Work & Jobs","salary","လစာ"],
-["Weather","rainy","မိုးရွာသော"],
-["Transport","station","ဘူတာ"],
-["Restaurants","menu","မီနူး"],
-["Shopping Problems","expensive","ဈေးကြီးသော"],
-["Appointments","appointment","ချိန်းဆိုမှု"],
-["Social Life","invite","ဖိတ်ခေါ်သည်"],
-["Everyday Grammar","because","အကြောင်းမှာ"]
-],
-
-B1:[
-["Experiences","experience","အတွေ့အကြုံ"],
-["Opinions","opinion","အမြင်"],
-["Education","education","ပညာရေး"],
-["Workplace","deadline","နောက်ဆုံးသတ်မှတ်ရက်"],
-["Relationships","relationship","ဆက်ဆံရေး"],
-["News","report","အစီရင်ခံစာ"],
-["Technology","device","စက်ပစ္စည်း"],
-["Environment","environment","ပတ်ဝန်းကျင်"],
-["Storytelling","although","သော်လည်း"],
-["Plans & Goals","achievement","အောင်မြင်မှု"]
-],
-
-B2:[
-["Debate & Argument","argument","အငြင်းအခုံ"],
-["Media","journalism","သတင်းစာပညာ"],
-["Society","inequality","မညီမျှမှု"],
-["Business","investment","ရင်းနှီးမြှုပ်နှံမှု"],
-["Science","research","သုတေသန"],
-["Culture","heritage","အမွေအနှစ်"],
-["Formal Communication","regarding","နှင့်ပတ်သက်၍"],
-["Presentations","therefore","ထို့ကြောင့်"],
-["Advanced Listening","nevertheless","သို့သော်လည်း"],
-["Complex Grammar","despite","ရှိသော်လည်း"]
-],
-
-C1:[
-["Abstract Ideas","perspective","ရှုမြင်ချက်"],
-["Academic Vocabulary","hypothesis","ယူဆချက်"],
-["Professional Writing","subsequently","နောက်ပိုင်းတွင်"],
-["Nuance & Register","subtle","သိမ်မွေ့သော"],
-["Idioms","break the ice","အဆင်ပြေအောင် စကားစသည်"],
-["Critical Reading","bias","ဘက်လိုက်မှု"],
-["Complex Listening","implication","သွယ်ဝိုက်အဓိပ္ပာယ်"],
-["Rhetoric","persuasion","ဆွဲဆောင်မှု"],
-["Research & Evidence","evidence","အထောက်အထား"],
-["Advanced Speaking","articulate","ရှင်းလင်းစွာဖော်ပြသည်"]
-],
-
-C2:[
-["Language Mastery","proficiency","ကျွမ်းကျင်မှု"],
-["Literary Language","metaphor","ဥပမာပေးဖော်ပြချက်"],
-["Advanced Idioms","spill the beans","လျှို့ဝှက်ချက်ဖော်ထုတ်သည်"],
-["Subtle Meaning","ambiguous","မရှင်းလင်းသော"],
-["Persuasion","compelling","ဆွဲဆောင်အားကောင်းသော"],
-["Critical Analysis","scrutinize","အသေးစိတ်စစ်ဆေးသည်"],
-["Complex Arguments","counterargument","တန်ပြန်အငြင်းအခုံ"],
-["Professional Fluency","nevertheless","သို့သော်လည်း"],
-["Literature & Style","eloquent","စကားအရေးအသားကောင်းသော"],
-["C2 Master Test","sophisticated","အဆင့်မြင့်ရှုပ်ထွေးသော"]
-]
-
-},
-
-
-},
-
-th:{
-flag:"🇹🇭",
-name:"Thai",
-voice:"th-TH",
-levels:{}
-},
-
-ja:{
-flag:"🇯🇵",
-name:"Japanese",
-voice:"ja-JP",
-levels:{}
-},
-
-ko:{
-flag:"🇰🇷",
-name:"Korean",
-voice:"ko-KR",
-levels:{}
-},
-
-de:{
-flag:"🇩🇪",
-name:"German",
-voice:"de-DE",
-levels:{}
-},
-
-es:{
-flag:"🇪🇸",
-name:"Spanish",
-voice:"es-ES",
-levels:{}
-},
-
-fr:{
-flag:"🇫🇷",
-name:"French",
-voice:"fr-FR",
-levels:{}
-},
-
-it:{
-flag:"🇮🇹",
-name:"Italian",
-voice:"it-IT",
-levels:{}
-}
-
+en:{flag:"🇬🇧",name:"English",voice:"en-US",levels:{
+A1:[["Greetings & Introductions","Hello","မင်္ဂလာပါ"],["Numbers & Time","one","တစ်"],["Family & People","family","မိသားစု"],["Food & Drinks","water","ရေ"],["Home & Daily Life","home","အိမ်"],["Places & Directions","left","ဘယ်ဘက်"],["Shopping","price","ဈေးနှုန်း"],["Basic Questions","where","ဘယ်မှာ"],["Hobbies","music","ဂီတ"],["Health Basics","doctor","ဆရာဝန်"]],
+A2:[["Past & Future","yesterday","မနေ့က"],["Travel","airport","လေဆိပ်"],["Work & Jobs","salary","လစာ"],["Weather","rainy","မိုးရွာသော"],["Transport","station","ဘူတာ"],["Restaurants","menu","မီနူး"],["Shopping Problems","expensive","ဈေးကြီးသော"],["Appointments","appointment","ချိန်းဆိုမှု"],["Social Life","invite","ဖိတ်ခေါ်သည်"],["Everyday Grammar","because","အကြောင်းမှာ"]],
+B1:[["Experiences","experience","အတွေ့အကြုံ"],["Opinions","opinion","အမြင်"],["Education","education","ပညာရေး"],["Workplace","deadline","နောက်ဆုံးသတ်မှတ်ရက်"],["Relationships","relationship","ဆက်ဆံရေး"],["News","report","အစီရင်ခံစာ"],["Technology","device","စက်ပစ္စည်း"],["Environment","environment","ပတ်ဝန်းကျင်"],["Storytelling","although","သော်လည်း"],["Plans & Goals","achievement","အောင်မြင်မှု"]],
+B2:[["Debate & Argument","argument","အငြင်းအခုံ"],["Media","journalism","သတင်းစာပညာ"],["Society","inequality","မညီမျှမှု"],["Business","investment","ရင်းနှီးမြှုပ်နှံမှု"],["Science","research","သုတေသန"],["Culture","heritage","အမွေအနှစ်"],["Formal Communication","regarding","နှင့်ပတ်သက်၍"],["Presentations","therefore","ထို့ကြောင့်"],["Advanced Listening","nevertheless","သို့သော်လည်း"],["Complex Grammar","despite","ရှိသော်လည်း"]],
+C1:[["Abstract Ideas","perspective","ရှုမြင်ချက်"],["Academic Vocabulary","hypothesis","ယူဆချက်"],["Professional Writing","subsequently","နောက်ပိုင်းတွင်"],["Nuance & Register","subtle","သိမ်မွေ့သော"],["Idioms","break the ice","အဆင်ပြေအောင် စကားစသည်"],["Critical Reading","bias","ဘက်လိုက်မှု"],["Complex Listening","implication","သွယ်ဝိုက်အဓိပ္ပာယ်"],["Rhetoric","persuasion","ဆွဲဆောင်မှု"],["Research & Evidence","evidence","အထောက်အထား"],["Advanced Speaking","articulate","ရှင်းလင်းစွာဖော်ပြသည်"]],
+C2:[["Language Mastery","proficiency","ကျွမ်းကျင်မှု"],["Literary Language","metaphor","ဥပမာပေးဖော်ပြချက်"],["Advanced Idioms","spill the beans","လျှို့ဝှက်ချက်ဖော်ထုတ်သည်"],["Subtle Meaning","ambiguous","မရှင်းလင်းသော"],["Persuasion","compelling","ဆွဲဆောင်အားကောင်းသော"],["Critical Analysis","scrutinize","အသေးစိတ်စစ်ဆေးသည်"],["Complex Arguments","counterargument","တန်ပြန်အငြင်းအခုံ"],["Professional Fluency","nevertheless","သို့သော်လည်း"],["Literature & Style","eloquent","စကားအရေးအသားကောင်းသော"],["C2 Master Test","sophisticated","အဆင့်မြင့်ရှုပ်ထွေးသော"]]
+}},
+th:{flag:"🇹🇭",name:"Thai",voice:"th-TH",levels:{}},
+ja:{flag:"🇯🇵",name:"Japanese",voice:"ja-JP",levels:{}},
+ko:{flag:"🇰🇷",name:"Korean",voice:"ko-KR",levels:{}},
+de:{flag:"🇩🇪",name:"German",voice:"de-DE",levels:{}},
+es:{flag:"🇪🇸",name:"Spanish",voice:"es-ES",levels:{}},
+fr:{flag:"🇫🇷",name:"French",voice:"fr-FR",levels:{}},
+it:{flag:"🇮🇹",name:"Italian",voice:"it-IT",levels:{}}
 };
-
-
-/* =========================================================
-   8 LANGUAGE CONTENT
-========================================================= */
 
 const WORDS={
-
-th:[
-["สวัสดี","မင်္ဂလာပါ"],
-["ขอบคุณ","ကျေးဇူးတင်ပါတယ်"],
-["น้ำ","ရေ"],
-["อาหาร","အစားအစာ"],
-["บ้าน","အိမ်"],
-["ซ้าย","ဘယ်ဘက်"],
-["ราคา","ဈေးနှုန်း"],
-["ที่ไหน","ဘယ်မှာ"],
-["เพลง","သီချင်း"],
-["หมอ","ဆရာဝန်"]
-],
-
-ja:[
-["こんにちは","မင်္ဂလာပါ"],
-["ありがとう","ကျေးဇူးတင်ပါတယ်"],
-["水","ရေ"],
-["食べ物","အစားအစာ"],
-["家","အိမ်"],
-["左","ဘယ်ဘက်"],
-["値段","ဈေးနှုန်း"],
-["どこ","ဘယ်မှာ"],
-["音楽","ဂီတ"],
-["医者","ဆရာဝန်"]
-],
-
-ko:[
-["안녕하세요","မင်္ဂလာပါ"],
-["감사합니다","ကျေးဇူးတင်ပါတယ်"],
-["물","ရေ"],
-["음식","အစားအစာ"],
-["집","အိမ်"],
-["왼쪽","ဘယ်ဘက်"],
-["가격","ဈေးနှုန်း"],
-["어디","ဘယ်မှာ"],
-["음악","ဂီတ"],
-["의사","ဆရာဝန်"]
-],
-
-de:[
-["Hallo","မင်္ဂလာပါ"],
-["Danke","ကျေးဇူးတင်ပါတယ်"],
-["Wasser","ရေ"],
-["Essen","အစားအစာ"],
-["Haus","အိမ်"],
-["links","ဘယ်ဘက်"],
-["Preis","ဈေးနှုန်း"],
-["wo","ဘယ်မှာ"],
-["Musik","ဂီတ"],
-["Arzt","ဆရာဝန်"]
-],
-
-es:[
-["Hola","မင်္ဂလာပါ"],
-["Gracias","ကျေးဇူးတင်ပါတယ်"],
-["agua","ရေ"],
-["comida","အစားအစာ"],
-["casa","အိမ်"],
-["izquierda","ဘယ်ဘက်"],
-["precio","ဈေးနှုန်း"],
-["dónde","ဘယ်မှာ"],
-["música","ဂီတ"],
-["médico","ဆရာဝန်"]
-],
-
-fr:[
-["Bonjour","မင်္ဂလာပါ"],
-["Merci","ကျေးဇူးတင်ပါတယ်"],
-["eau","ရေ"],
-["nourriture","အစားအစာ"],
-["maison","အိမ်"],
-["gauche","ဘယ်ဘက်"],
-["prix","ဈေးနှုန်း"],
-["où","ဘယ်မှာ"],
-["musique","ဂီတ"],
-["médecin","ဆရာဝန်"]
-],
-
-it:[
-["Ciao","မင်္ဂလာပါ"],
-["Grazie","ကျေးဇူးတင်ပါတယ်"],
-["acqua","ရေ"],
-["cibo","အစားအစာ"],
-["casa","အိမ်"],
-["sinistra","ဘယ်ဘက်"],
-["prezzo","ဈေးနှုန်း"],
-["dove","ဘယ်မှာ"],
-["musica","ဂီတ"],
-["medico","ဆရာဝန်"]
-]
-
+th:[["สวัสดี","မင်္ဂလာပါ"],["ขอบคุณ","ကျေးဇူးတင်ပါတယ်"],["น้ำ","ရေ"],["อาหาร","အစားအစာ"],["บ้าน","အိမ်"],["ซ้าย","ဘယ်ဘက်"],["ราคา","ဈေးနှုန်း"],["ที่ไหน","ဘယ်မှာ"],["เพลง","သီချင်း"],["หมอ","ဆရာဝန်"]],
+ja:[["こんにちは","မင်္ဂလာပါ"],["ありがとう","ကျေးဇူးတင်ပါတယ်"],["水","ရေ"],["食べ物","အစားအစာ"],["家","အိမ်"],["左","ဘယ်ဘက်"],["値段","ဈေးနှုန်း"],["どこ","ဘယ်မှာ"],["音楽","ဂီတ"],["医者","ဆရာဝန်"]],
+ko:[["안녕하세요","မင်္ဂလာပါ"],["감사합니다","ကျေးဇူးတင်ပါတယ်"],["물","ရေ"],["음식","အစားအစာ"],["집","အိမ်"],["왼쪽","ဘယ်ဘက်"],["가격","ဈေးနှုန်း"],["어디","ဘယ်မှာ"],["음악","ဂီတ"],["의사","ဆရာဝန်"]],
+de:[["Hallo","မင်္ဂလာပါ"],["Danke","ကျေးဇူးတင်ပါတယ်"],["Wasser","ရေ"],["Essen","အစားအစာ"],["Haus","အိမ်"],["links","ဘယ်ဘက်"],["Preis","ဈေးနှုန်း"],["wo","ဘယ်မှာ"],["Musik","ဂီတ"],["Arzt","ဆရာဝန်"]],
+es:[["Hola","မင်္ဂလာပါ"],["Gracias","ကျေးဇူးတင်ပါတယ်"],["agua","ရေ"],["comida","အစားအစာ"],["casa","အိမ်"],["izquierda","ဘယ်ဘက်"],["precio","ဈေးနှုန်း"],["dónde","ဘယ်မှာ"],["música","ဂီတ"],["médico","ဆရာဝန်"]],
+fr:[["Bonjour","မင်္ဂလာပါ"],["Merci","ကျေးဇူးတင်ပါတယ်"],["eau","ရေ"],["nourriture","အစားအစာ"],["maison","အိမ်"],["gauche","ဘယ်ဘက်"],["prix","ဈေးနှုန်း"],["où","ဘယ်မှာ"],["musique","ဂီတ"],["médecin","ဆရာဝန်"]],
+it:[["Ciao","မင်္ဂလာပါ"],["Grazie","ကျေးဇူးတင်ပါတယ်"],["acqua","ရေ"],["cibo","အစားအစာ"],["casa","အိမ်"],["sinistra","ဘယ်ဘက်"],["prezzo","ဈေးနှုန်း"],["dove","ဘယ်မှာ"],["musica","ဂီတ"],["medico","ဆရာဝန်"]]
 };
-
-
-/* =========================================================
-   GENERATE LEVELS FOR ALL 8 LANGUAGES
-========================================================= */
 
 const TOPICS={
-
-A1:[
-"Greetings & Introductions",
-"Numbers & Time",
-"Family & People",
-"Food & Drinks",
-"Home & Daily Life",
-"Places & Directions",
-"Shopping",
-"Basic Questions",
-"Hobbies",
-"Health Basics"
-],
-
-A2:[
-"Past & Future",
-"Travel",
-"Work & Jobs",
-"Weather",
-"Transport",
-"Restaurants",
-"Shopping Problems",
-"Appointments",
-"Social Life",
-"Everyday Grammar"
-],
-
-B1:[
-"Experiences",
-"Opinions",
-"Education",
-"Workplace",
-"Relationships",
-"News",
-"Technology",
-"Environment",
-"Storytelling",
-"Plans & Goals"
-],
-
-B2:[
-"Debate & Argument",
-"Media",
-"Society",
-"Business",
-"Science",
-"Culture",
-"Formal Communication",
-"Presentations",
-"Advanced Listening",
-"Complex Grammar"
-],
-
-C1:[
-"Abstract Ideas",
-"Academic Vocabulary",
-"Professional Writing",
-"Nuance & Register",
-"Idioms",
-"Critical Reading",
-"Complex Listening",
-"Rhetoric",
-"Research & Evidence",
-"Advanced Speaking"
-],
-
-C2:[
-"Language Mastery",
-"Literary Language",
-"Advanced Idioms",
-"Subtle Meaning",
-"Persuasion",
-"Critical Analysis",
-"Complex Arguments",
-"Professional Fluency",
-"Literature & Style",
-"C2 Master Test"
-]
-
+A1:["Greetings & Introductions","Numbers & Time","Family & People","Food & Drinks","Home & Daily Life","Places & Directions","Shopping","Basic Questions","Hobbies","Health Basics"],
+A2:["Past & Future","Travel","Work & Jobs","Weather","Transport","Restaurants","Shopping Problems","Appointments","Social Life","Everyday Grammar"],
+B1:["Experiences","Opinions","Education","Workplace","Relationships","News","Technology","Environment","Storytelling","Plans & Goals"],
+B2:["Debate & Argument","Media","Society","Business","Science","Culture","Formal Communication","Presentations","Advanced Listening","Complex Grammar"],
+C1:["Abstract Ideas","Academic Vocabulary","Professional Writing","Nuance & Register","Idioms","Critical Reading","Complex Listening","Rhetoric","Research & Evidence","Advanced Speaking"],
+C2:["Language Mastery","Literary Language","Advanced Idioms","Subtle Meaning","Persuasion","Critical Analysis","Complex Arguments","Professional Fluency","Literature & Style","C2 Master Test"]
 };
 
-
-for(const code of Object.keys(WORDS)){
-
- DB[code].levels={};
-
- for(const level of Object.keys(TOPICS)){
-
-  DB[code].levels[level]=[];
-
-  for(let i=0;i<10;i++){
-
-   const w=WORDS[code][i];
-
-   DB[code].levels[level].push({
-
-    id:i+1,
-
-    title:TOPICS[level][i],
-
-    questions:[
-
-     {
-      type:"mc",
-      question:`"${w[0]}" ၏ မြန်မာအဓိပ္ပာယ်ကို ရွေးပါ`,
-      options:[
-       w[1],
-       "မသေချာပါ",
-       "ဆရာ",
-       "မနက်ဖြန်"
-      ],
-      answer:w[1],
-      audio:w[0]
-     },
-
-     {
-      type:"fill",
-      question:`"${w[1]}" ကို ${DB[code].name} လိုရေးပါ`,
-      answer:w[0],
-      audio:w[0]
-     },
-
-     {
-      type:"listen",
-      question:"🔊 အသံကိုနားထောင်ပြီး မှန်ကန်သောစကားလုံးကိုရွေးပါ",
-      options:[
-       w[0],
-       WORDS[code][(i+1)%10][0],
-       WORDS[code][(i+2)%10][0],
-       WORDS[code][(i+3)%10][0]
-      ],
-      answer:w[0],
-      audio:w[0]
-     },
-
-     {
-      type:"order",
-      question:`ဝါကျစီပါ — "${w[0]}"`,
-      words:[w[0]],
-      answer:[w[0]],
-      audio:w[0]
-     }
-
-    ]
-
-   });
-
-  }
-
- }
-
+// Build English Chapters
+for(const level of Object.keys(DB.en.levels)){
+  const rawList = DB.en.levels[level];
+  DB.en.levels[level] = rawList.map((item, i) => {
+    const title = item[0];
+    const w = [item[1], item[2]];
+    return {
+      id: i+1,
+      title: title,
+      questions: [
+        { type:"mc", question:`"${w[0]}" ၏ မြန်မာအဓိပ္ပာယ်ကို ရွေးပါ`, options:[w[1],"မသေချာပါ","ဆရာ","မနက်ဖြန်"], answer:w[1], audio:w[0] },
+        { type:"fill", question:`"${w[1]}" ကို English လိုရေးပါ`, answer:w[0], audio:w[0] },
+        { type:"listen", question:"🔊 အသံကိုနားထောင်ပြီး မှန်ကန်သောစကားလုံးကိုရွေးပါ", options:[w[0],"food","hello","water"], answer:w[0], audio:w[0] },
+        { type:"order", question:`ဝါကျစီပါ — "${w[0]}"`, words:[w[0]], answer:[w[0]], audio:w[0] }
+      ]
+    };
+  });
 }
 
+// Generate for other 7 languages
+for(const code of Object.keys(WORDS)){
+  DB[code].levels = {};
+  for(const level of Object.keys(TOPICS)){
+    DB[code].levels[level] = [];
+    for(let i=0; i<10; i++){
+      const w = WORDS[code][i];
+      DB[code].levels[level].push({
+        id: i+1,
+        title: TOPICS[level][i],
+        questions: [
+          { type:"mc", question:`"${w[0]}" ၏ မြန်မာအဓိပ္ပာယ်ကို ရွေးပါ`, options:[w[1],"မသေချာပါ","ဆရာ","မနက်ဖြန်"], answer:w[1], audio:w[0] },
+          { type:"fill", question:`"${w[1]}" ကို ${DB[code].name} လိုရေးပါ`, answer:w[0], audio:w[0] },
+          { type:"listen", question:"🔊 အသံကိုနားထောင်ပြီး မှန်ကန်သောစကားလုံးကိုရွေးပါ", options:[w[0], WORDS[code][(i+1)%10][0], WORDS[code][(i+2)%10][0], WORDS[code][(i+3)%10][0]], answer:w[0], audio:w[0] },
+          { type:"order", question:`ဝါကျစီပါ — "${w[0]}"`, words:[w[0]], answer:[w[0]], audio:w[0] }
+        ]
+      });
+    }
+  }
+}
 
-/* =========================================================
-   STATE
-========================================================= */
-
-const saved=JSON.parse(
- localStorage.getItem("lingomaster_state") ||
- "{}"
-);
-
-let state={
-
- language:saved.language || "en",
-
- level:saved.level || "A1",
-
- xp:Number(saved.xp||0),
-
- streak:Number(saved.streak||1),
-
- dailyXP:Number(saved.dailyXP||0),
-
- dailyDate:saved.dailyDate || "",
-
- done:saved.done || {}
-
+const saved = JSON.parse(localStorage.getItem("lingomaster_state") || "{}");
+let state = {
+  language: saved.language || "en",
+  level: saved.level || "A1",
+  xp: Number(saved.xp || 0),
+  streak: Number(saved.streak || 1),
+  dailyXP: Number(saved.dailyXP || 0),
+  dailyDate: saved.dailyDate || "",
+  done: saved.done || {}
 };
 
-let currentLesson=null;
-
-let currentQuestion=0;
-
-let selectedAnswer=null;
-
-let builtWords=[];
-
-
-/* =========================================================
-   SAVE
-========================================================= */
+let currentLesson = null;
+let currentQuestion = 0;
+let selectedAnswer = null;
+let builtWords = [];
 
 function save(){
-
- localStorage.setItem(
-  "lingomaster_state",
-  JSON.stringify(state)
- );
-
- updateUI();
-
+  localStorage.setItem("lingomaster_state", JSON.stringify(state));
+  updateUI();
 }
-
-
-/* =========================================================
-   DAILY RESET
-========================================================= */
 
 function checkDaily(){
-
- const today=new Date().toISOString().slice(0,10);
-
- if(state.dailyDate!==today){
-
-  state.dailyDate=today;
-
-  state.dailyXP=0;
-
-  save();
-
- }
-
+  const today = new Date().toISOString().slice(0,10);
+  if(state.dailyDate !== today){
+    state.dailyDate = today;
+    state.dailyXP = 0;
+    save();
+  }
 }
 
-
-/* =========================================================
-   INIT
-========================================================= */
-
 function init(){
-
- checkDaily();
-
- const select=document.getElementById(
-  "languageSelect"
- );
-
- select.innerHTML="";
-
- for(const [code,data] of Object.entries(DB)){
-
-  const option=document.createElement("option");
-
-  option.value=code;
-
-  option.textContent=
-   `${data.flag} ${data.name}`;
-
-  select.appendChild(option);
-
- }
-
- select.value=state.language;
-
- select.onchange=function(){
-
-  state.language=this.value;
-
-  state.level="A1";
-
-  save();
-
+  checkDaily();
+  const select = document.getElementById("languageSelect");
+  select.innerHTML = "";
+  for(const [code,data] of Object.entries(DB)){
+    const option = document.createElement("option");
+    option.value = code;
+    option.textContent = `${data.flag} ${data.name}`;
+    select.appendChild(option);
+  }
+  select.value = state.language;
+  select.onchange = function(){
+    state.language = this.value;
+    save();
+    renderLearn();
+  };
+  updateUI();
   renderLearn();
+}
 
- };
+function updateUI(){
+  const data = DB[state.language] || DB.en;
+  document.getElementById("streak").textContent = state.streak;
+  document.getElementById("xp").textContent = state.xp;
+  document.getElementById("totalXP").textContent = state.xp;
+  document.getElementById("progressStreak").textContent = state.streak;
+  document.getElementById("dailyText").textContent = `${state.dailyXP} / 50 XP`;
+  document.getElementById("dailyFill").style.width = Math.min(100, state.dailyXP/50*100) + "%";
+  document.getElementById("currentLanguage").textContent = `${data.flag} ${data.name}`;
+  document.getElementById("currentLevel").textContent = `Current Level: ${state.level}`;
 
- update
+  let completed = 0;
+  for(const key of Object.keys(state.done)){
+    completed += state.done[key].length;
+  }
+  document.getElementById("completed").textContent = completed;
+  renderAchievements();
+}
+
+function page(id){
+  document.querySelectorAll("main section").forEach(s => s.classList.add("hidden"));
+  document.querySelectorAll("nav button").forEach(b => b.classList.remove("active"));
+  document.getElementById(id).classList.remove("hidden");
+  const nav = document.getElementById("nav-" + id);
+  if(nav) nav.classList.add("active");
+  if(id === "home") updateUI();
+  if(id === "learn") renderLearn();
+  if(id === "progress") renderProgress();
+}
+
+function renderLearn(){
+  const data = DB[state.language] || DB.en;
+  document.getElementById("courseTitle").textContent = `${data.flag} ${data.name} Curriculum`;
+  const levelContainer = document.getElementById("levels");
+  levelContainer.innerHTML = "";
+  ["A1","A2","B1","B2","C1","C2"].forEach(level => {
+    const button = document.createElement("button");
+    button.className = "level " + (state.level === level ? "active" : "");
+    button.textContent = level;
+    button.onclick = function(){
+      state.level = level;
+      save();
+      renderLearn();
+    };
+    levelContainer.appendChild(button);
+  });
+
+  document.getElementById("chapterTitle").textContent = `${state.level} — Chapters`;
+  const container = document.getElementById("lessons");
+  container.innerHTML = "";
+  const list = data.levels[state.level] || [];
+  const key = state.language + "_" + state.level;
+  const done = state.done[key] || [];
+
+  list.forEach(lesson => {
+    const div = document.createElement("div");
+    div.className = "lesson";
+    const completed = done.includes(lesson.id);
+    div.innerHTML = `
+      <div>
+        <b>${completed ? "🏆" : "📘"} Chapter ${lesson.id}: ${lesson.title}</b>
+        <div class="muted">${lesson.questions.length} Exercises</div>
+      </div>
+      <b style="color:var(--blue)">→</b>
+    `;
+    div.onclick = function(){
+      startLesson(lesson.id);
+    };
+    container.appendChild(div);
+  });
+}
+
+function startLesson(id){
+  currentLesson = DB[state.language].levels[state.level].find(x => x.id === id);
+  currentQuestion = 0;
+  page("lesson");
+  renderQuestion();
+}
+
+function renderQuestion(){
+  selectedAnswer = null;
+  builtWords = [];
+  const q = currentLesson.questions[currentQuestion];
+  const total = currentLesson.questions.length;
+
+  document.getElementById("lessonMeta").textContent = `Chapter ${currentLesson.id} • Question ${currentQuestion + 1}/${total}`;
+  document.getElementById("lessonProgress").style.width = ((currentQuestion)/total*100) + "%";
+  document.getElementById("question").textContent = q.question;
+
+  const fb = document.getElementById("feedback");
+  fb.className = "feedback hidden";
+  fb.innerHTML = "";
+
+  const container = document.getElementById("answers");
+  container.innerHTML = "";
+
+  if(q.type === "mc" || q.type === "listen"){
+    q.options.forEach(opt => {
+      const btn = document.createElement("button");
+      btn.className = "choice";
+      btn.textContent = opt;
+      btn.onclick = function(){
+        document.querySelectorAll(".choice").forEach(c => c.classList.remove("selected"));
+        btn.classList.add("selected");
+        selectedAnswer = opt;
+      };
+      container.appendChild(btn);
+    });
+    if(q.type === "listen") speakCurrent();
+  } else if(q.type === "fill"){
+    const input = document.createElement("input");
+    input.className = "input";
+    input.placeholder = "အဖြေကို စာရိုက်ထည့်ပါ...";
+    input.oninput = function(e){ selectedAnswer = e.target.value.trim(); };
+    container.appendChild(input);
+  } else if(q.type === "order"){
+    const slot = document.createElement("div");
+    slot.className = "slot";
+    const chips = document.createElement("div");
+    chips.className = "chips";
+    q.words.forEach(w => {
+      const chip = document.createElement("div");
+      chip.className = "chip";
+      chip.textContent = w;
+      chip.onclick = function(){
+        if(!chip.classList.contains("used")){
+          chip.classList.add("used");
+          builtWords.push(w);
+          const sChip = document.createElement("div");
+          sChip.className = "chip";
+          sChip.textContent = w;
+          sChip.onclick = function(){
+            slot.removeChild(sChip);
+            chip.classList.remove("used");
+            builtWords = builtWords.filter(item => item !== w);
+          };
+          slot.appendChild(sChip);
+        }
+      };
+      chips.appendChild(chip);
+    });
+    container.appendChild(slot);
+    container.appendChild(chips);
+  }
+}
+
+function speakCurrent(){
+  const q = currentLesson.questions[currentQuestion];
+  if(!q.audio || !('speechSynthesis' in window)) return;
+  window.speechSynthesis.cancel();
+  const utter = new SpeechSynthesisUtterance(q.audio);
+  utter.lang = DB[state.language].voice || "en-US";
+  window.speechSynthesis.speak(utter);
+}
+
+function checkAnswer(){
+  const q = currentLesson.questions[currentQuestion];
+  let correct = false;
+
+  if(q.type === "order"){
+    if(builtWords.length === 0) return alert("စကားလုံးများကို စီပေးပါ!");
+    correct = JSON.stringify(builtWords) === JSON.stringify(q.answer);
+  } else {
+    if(!selectedAnswer) return alert("အဖြေကို အရင်ရွေးချယ်ပါ သို့မဟုတ် ရိုက်ထည့်ပါ!");
+    correct = selectedAnswer.toLowerCase() === q.answer.toLowerCase();
+  }
+
+  const fb = document.getElementById("feedback");
+  fb.classList.remove("hidden");
+
+  if(correct){
+    fb.className = "feedback correct";
+    fb.innerHTML = `✅ မှန်ကန်ပါတယ်! (+10 XP)<br><button class="btn" style="margin-top:10px" onclick="nextQuestion()">ဆက်သွားမည် ➔</button>`;
+    state.xp += 10;
+    state.dailyXP += 10;
+  } else {
+    fb.className = "feedback wrong";
+    fb.innerHTML = `❌ မှားယွင်းနေပါသည်။<br>မှန်ကန်သောအဖြေ: <b>${Array.isArray(q.answer) ? q.answer.join(" ") : q.answer}</b><br><button class="btn" style="margin-top:10px" onclick="nextQuestion()">ဆက်သွားမည် ➔</button>`;
+  }
+  save();
+}
+
+function nextQuestion(){
+  if(currentQuestion < currentLesson.questions.length - 1){
+    currentQuestion++;
+    renderQuestion();
+  } else {
+    alert("🎉 Chapter အောင်မြင်စွာ ပြီးဆုံးပါပြီ! (+20 Bonus XP)");
+    state.xp += 20;
+    state.dailyXP += 20;
+    const key = state.language + "_" + state.level;
+    if(!state.done[key]) state.done[key] = [];
+    if(!state.done[key].includes(currentLesson.id)){
+      state.done[key].push(currentLesson.id);
+    }
+    save();
+    page("learn");
+  }
+}
+
+function renderAchievements(){
+  const container = document.getElementById("achievements");
+  if(!container) return;
+  container.innerHTML = "";
+  const list = [
+    { title: "🌟 First Steps", desc: "Earn your first 10 XP", done: state.xp >= 10 },
+    { title: "🔥 Habit Builder", desc: "Maintain a study streak", done: state.streak >= 1 },
+    { title: "⭐ XP Master", desc: "Earn 100+ total XP", done: state.xp >= 100 }
+  ];
+  list.forEach(a => {
+    container.innerHTML += `
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;opacity:${a.done ? '1' : '0.4'}">
+        <span style="font-size:22px">${a.done ? '🎖️' : '🔒'}</span>
+        <div>
+          <b>${a.title}</b>
+          <div class="muted">${a.desc}</div>
+        </div>
+      </div>
+    `;
+  });
+}
+
+function renderProgress(){
+  updateUI();
+  const lm = document.getElementById("levelMastery");
+  lm.innerHTML = "";
+  const data = DB[state.language] || DB.en;
+  ["A1","A2","B1","B2","C1","C2"].forEach(lvl => {
+    const list = data.levels[lvl] || [];
+    const key = state.language + "_" + lvl;
+    const count = (state.done[key] || []).length;
+    const total = list.length;
+    const pct = total > 0 ? Math.round(count/total*100) : 0;
+    lm.innerHTML += `
+      <div style="margin-bottom:10px">
+        <div style="display:flex;justify-content:space-between;font-weight:700;font-size:13px;margin-bottom:3px">
+          <span>Level ${lvl}</span>
+          <span>${count} / ${total} (${pct}%)</span>
+        </div>
+        <div class="progress"><div class="fill" style="width:${pct}%"></div></div>
+      </div>
+    `;
+  });
+
+  const langM = document.getElementById("languageMastery");
+  langM.innerHTML = "";
+  for(const [code, info] of Object.entries(DB)){
+    let totalL = 0;
+    let doneL = 0;
+    ["A1","A2","B1","B2","C1","C2"].forEach(lvl => {
+      totalL += (info.levels[lvl] || []).length;
+      doneL += (state.done[code + "_" + lvl] || []).length;
+    });
+    const pct = totalL > 0 ? Math.round(doneL/totalL*100) : 0;
+    langM.innerHTML += `
+      <div style="margin-bottom:10px">
+        <div style="display:flex;justify-content:space-between;font-weight:700;font-size:13px;margin-bottom:3px">
+          <span>${info.flag} ${info.name}</span>
+          <span>${doneL} / ${totalL} (${pct}%)</span>
+        </div>
+        <div class="progress"><div class="fill" style="width:${pct}%"></div></div>
+      </div>
+    `;
+  }
+}
+
+window.onload = init;
+</script>
+</body>
+</html>
