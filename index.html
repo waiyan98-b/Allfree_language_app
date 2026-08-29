@@ -140,69 +140,202 @@
     const LESSON_DATABASE = {
       english: {
         A1: {
-          units: [{
-            id: 'en-a1-u1',
-            title: 'Unit 1: Introductions & Basics',
-            description: 'Learn pronouns, the "be" verb, and daily greetings.',
-            lessons: [{
-              id: 'en-a1-u1-l1',
-              title: 'Lesson 1: First Introductions',
-              description: 'Saying hello and introducing yourself.',
-              objectives: ['Introduce yourself', 'Use "am", "is", "are"'],
-              vocabulary: [
-                { id: 'en-v1', word: 'Hello', meaning: 'မင်္ဂလာပါ', example: 'Hello, I am John.' },
-                { id: 'en-v2', word: 'Name', meaning: 'နာမည်', example: 'My name is Sarah.' }
-              ],
-              grammar: {
-                title: 'Subject Pronouns + "to be"',
-                rule: 'I am, You/We/They are, He/She/It is.',
-                explanation: 'The verb "to be" changes depending on the subject.',
-                examples: ['I am a student.', 'He is my friend.']
-              },
-              exercises: [
-                { type: 'mcq', prompt: 'What does "Hello" mean?', options: ['မင်္ဂလာပါ', 'ကျေးဇူးတင်ပါတယ်', 'နှုတ်ဆက်ပါတယ်'], correct: 0, explanation: '"Hello" means "မင်္ဂလာပါ".' },
-                { type: 'fill_blank', prompt: 'Complete the sentence:', sentence: 'I ___ a student.', options: ['am', 'is', 'are'], correct: 0, explanation: 'With "I", use "am".' },
-                { type: 'word_order', prompt: 'Arrange into a correct sentence:', words: ['is', 'My', 'name', 'John.'], correctSequence: ['My', 'name', 'is', 'John.'], explanation: 'Subject + Verb + Object.' },
-                { type: 'listening', prompt: 'Listen and select the word:', targetText: 'Hello', options: ['Hello', 'Home', 'Hand'], correct: 0 },
-                { type: 'speaking', prompt: 'Speak the target phrase:', targetText: 'Hello' }
-              ],
-              quiz: [
-                { type: 'mcq', prompt: 'Which sentence is grammatically correct?', options: ['I am Sarah.', 'I is Sarah.', 'I are Sarah.'], correct: 0 }
-              ]
-            }]
-          }]
+          units: [
+            {
+              id: 'en-a1-u1',
+              title: 'Unit 1: Introductions & Basics',
+              description: 'Learn pronouns, the "be" verb, and daily greetings.',
+              lessons: [{
+                id: 'en-a1-u1-l1',
+                title: 'Lesson 1: First Introductions',
+                description: 'Saying hello and introducing yourself.',
+                vocabulary: [{ id: 'en-v1', word: 'Hello', meaning: 'မင်္ဂလာပါ', example: 'Hello, I am John.' }],
+                grammar: { title: 'Subject Pronouns + "to be"', rule: 'I am, You are, He/She/It is.', explanation: 'The verb changes with the subject.', examples: ['I am a student.'] },
+                exercises: [
+                  { type: 'mcq', prompt: 'What does "Hello" mean?', options: ['မင်္ဂလာပါ', 'ကျေးဇူးတင်ပါတယ်', 'နှုတ်ဆက်ပါတယ်'], correct: 0, explanation: '"Hello" means "မင်္ဂလာပါ".' },
+                  { type: 'fill_blank', prompt: 'Complete the sentence:', sentence: 'I ___ a student.', options: ['am', 'is', 'are'], correct: 0 },
+                  { type: 'word_order', prompt: 'Arrange into a correct sentence:', words: ['is', 'My', 'name', 'John.'], correctSequence: ['My', 'name', 'is', 'John.'] }
+                ],
+                quiz: [{ type: 'mcq', prompt: 'Which sentence is correct?', options: ['I am Sarah.', 'I is Sarah.'], correct: 0 }]
+              }]
+            },
+            {
+              id: 'en-a1-u2',
+              title: 'Unit 2: Food & Ordering',
+              description: 'Food vocabulary and simple requests.',
+              lessons: [{
+                id: 'en-a1-u2-l1',
+                title: 'Lesson 1: Food & Drinks',
+                description: 'Ordering food and drinks.',
+                vocabulary: [{ id: 'en-v2', word: 'Water', meaning: 'ရေ', example: 'I drink water.' }],
+                grammar: { title: 'Simple Requests', rule: 'I want + noun', explanation: 'Expressing what you want.', examples: ['I want water.'] },
+                exercises: [
+                  { type: 'mcq', prompt: 'What does "Water" mean?', options: ['ရေ', 'ထမင်း', 'မုန့်'], correct: 0 },
+                  { type: 'listening', prompt: 'Listen and select:', targetText: 'Water', options: ['Water', 'Tea', 'Juice'], correct: 0 }
+                ],
+                quiz: [{ type: 'mcq', prompt: 'Translate: "I want water."', options: ['ကျွန်တော် ရေလိုချင်တယ်', 'ကျွန်တော် ထမင်းစားတယ်'], correct: 0 }]
+              }]
+            }
+          ]
         }
       },
       thai: {
         A1: {
+          units: [
+            {
+              id: 'th-a1-u1',
+              title: 'Unit 1: Thai Script & Polite Greetings',
+              description: 'Master polite particles (ครับ/ค่ะ) and greetings.',
+              lessons: [{
+                id: 'th-a1-u1-l1',
+                title: 'Lesson 1: Greetings & Politeness',
+                description: 'Everyday polite greetings in Thai.',
+                vocabulary: [{ id: 'th-v1', word: 'สวัสดี', meaning: 'မင်္ဂလာပါ', example: 'สวัสดีครับ' }],
+                grammar: { title: 'Polite Ending Particles', rule: 'Male: ครับ (khráp), Female: ค่ะ (khâ)', explanation: 'Used at the end of sentences.', examples: ['สวัสดีครับ'] },
+                exercises: [
+                  { type: 'mcq', prompt: '"สวัสดี" ၏ အဓိပ္ပာယ်မှာ?', options: ['မင်္ဂလာပါ', 'ကျေးဇူးတင်ပါတယ်', 'တောင်းပန်ပါတယ်'], correct: 0 },
+                  { type: 'word_order', prompt: 'ဝါကျစီပါ: "မင်္ဂလာပါခင်ဗျာ"', words: ['ครับ', 'สวัสดี'], correctSequence: ['สวัสดี', 'ครับ'] }
+                ],
+                quiz: [{ type: 'mcq', prompt: 'အမျိုးသားသုံး ယဉ်ကျေးစကားလုံးမှာ?', options: ['ครับ', 'ค่ะ'], correct: 0 }]
+              }]
+            },
+            {
+              id: 'th-a1-u2',
+              title: 'Unit 2: အစားအသောက်နှင့် မှာယူခြင်း',
+              description: 'ထိုင်းအစားအစာ အခေါ်အဝေါ်များ',
+              lessons: [{
+                id: 'th-a1-u2-l1',
+                title: 'Lesson 1: ထမင်းနှင့် ရေ',
+                description: 'အစားအသောက် မှာယူနည်း',
+                vocabulary: [{ id: 'th-v2', word: 'น้ำ', meaning: 'ရေ', example: 'ขอน้ำหน่อยครับ' }],
+                grammar: { title: 'ขอ (တောင်းဆိုခြင်း)', rule: 'ขอ + ပစ္စည်းအမည်', explanation: 'ယဉ်ကျေးစွာ တောင်းဆိုခြင်း', examples: ['ขอน้ำ (ရေပေးပါ)'] },
+                exercises: [
+                  { type: 'mcq', prompt: '"น้ำ" ၏ အဓိပ္ပာယ်မှာ?', options: ['ရေ', 'ထမင်း', 'ဟင်း'], correct: 0 },
+                  { type: 'listening', prompt: 'နားထောင်ပြီး ရွေးပါ:', targetText: 'น้ำ', options: ['น้ำ', 'ข้าว', 'ไก่'], correct: 0 }
+                ],
+                quiz: [{ type: 'mcq', prompt: 'ရေကို ထိုင်းလို မည်သို့ခေါ်သနည်း?', options: ['น้ำ (Nam)', 'ข้าว (Khao)'], correct: 0 }]
+              }]
+            }
+          ]
+        }
+      },
+      japanese: {
+        A1: {
           units: [{
-            id: 'th-a1-u1',
-            title: 'Unit 1: Thai Script & Polite Greetings',
-            description: 'Master polite particles (ครับ/ค่ะ) and daily greetings.',
+            id: 'ja-a1-u1',
+            title: 'Unit 1: 挨拶 (Greetings)',
+            description: 'Basic Japanese introductions and greetings.',
             lessons: [{
-              id: 'th-a1-u1-l1',
-              title: 'Lesson 1: Greetings & Politeness',
-              description: 'Everyday polite greetings in Thai.',
-              objectives: ['Say hello and goodbye', 'Understand gender particles'],
-              vocabulary: [
-                { id: 'th-v1', word: 'สวัสดี', meaning: 'မင်္ဂလာပါ', example: 'สวัสดีครับ' },
-                { id: 'th-v2', word: 'ครับ', meaning: 'ယဉ်ကျေးစကားလုံး (ကျား)', example: 'ขอบคุณครับ' }
-              ],
-              grammar: {
-                title: 'Polite Ending Particles (ครับ / ค่ะ)',
-                rule: 'Male speakers use ครับ (khráp); female speakers use ค่ะ (khâ).',
-                explanation: 'Polite particles are placed at the end of sentences.',
-                examples: ['สวัสดีครับ (Hello - Male)', 'สวัสดีค่ะ (Hello - Female)']
-              },
+              id: 'ja-a1-u1-l1',
+              title: 'Lesson 1: こんにちは',
+              description: 'Saying hello in Japanese.',
+              vocabulary: [{ id: 'ja-v1', word: 'こんにちは', meaning: 'မင်္ဂလာပါ', example: '皆さん、こんにちは。' }],
+              grammar: { title: 'Topic Particle は', rule: 'Noun + は', explanation: 'Marks the sentence topic.', examples: ['私は学生です。'] },
               exercises: [
-                { type: 'mcq', prompt: '"สวัสดี" ၏ အဓိပ္ပာယ်မှာ?', options: ['မင်္ဂလာပါ', 'ကျေးဇူးတင်ပါတယ်', 'တောင်းပန်ပါတယ်'], correct: 0, explanation: 'สวัสดี (sà-wàt-dii) ဆိုသည်မှာ မင်္ဂလာပါ ဖြစ်ပါသည်။' },
-                { type: 'word_order', prompt: 'ဝါကျစီပါ: "မင်္ဂလာပါခင်ဗျာ"', words: ['ครับ', 'สวัสดี'], correctSequence: ['สวัสดี', 'ครับ'], explanation: 'ယဉ်ကျေးစကားလုံး "ครับ" ကို ဝါကျအဆုံးတွင် ထားရမည်။' },
-                { type: 'listening', prompt: 'ကြားရသည့် အသံကို ရွေးပါ:', targetText: 'สวัสดี', options: ['สวัสดี', 'ขอบคุณ', 'ไม่เป็นไร'], correct: 0 },
-                { type: 'speaking', prompt: 'အသံထွက် ဖတ်ပါ:', targetText: 'สวัสดี' }
+                { type: 'mcq', prompt: '"こんにちは" ၏ အဓိပ္ပာယ်မှာ?', options: ['မင်္ဂလာပါ', 'ကျေးဇူးတင်ပါတယ်', 'နှုတ်ဆက်ပါတယ်'], correct: 0 },
+                { type: 'fill_blank', prompt: 'ဖြည့်ပါ: 私 ___ 田中です。', sentence: '私 ___ 田中です。', options: ['は', 'の', 'を'], correct: 0 }
               ],
-              quiz: [
-                { type: 'mcq', prompt: 'အမျိုးသားများ သုံးရမည့် ယဉ်ကျေးစကားလုံးမှာ?', options: ['ครับ (khráp)', 'ค่ะ (khâ)', 'นะ (ná)'], correct: 0 }
-              ]
+              quiz: [{ type: 'mcq', prompt: 'Topic Marker particle မှာ?', options: ['は', 'わ'], correct: 0 }]
+            }]
+          }]
+        }
+      },
+      korean: {
+        A1: {
+          units: [{
+            id: 'ko-a1-u1',
+            title: 'Unit 1: 기본 인사 (Greetings)',
+            description: 'Essential polite greetings in Korean.',
+            lessons: [{
+              id: 'ko-a1-u1-l1',
+              title: 'Lesson 1: 안녕하세요',
+              description: 'Polite Korean greetings.',
+              vocabulary: [{ id: 'ko-v1', word: '안녕하세요', meaning: 'မင်္ဂလာပါ', example: '안녕하세요, 반가워요.' }],
+              grammar: { title: 'Polite Ending 이에요/예요', rule: 'Consonant + 이에요, Vowel + 예요', explanation: 'Serves as is/am/are.', examples: ['학생이에요'] },
+              exercises: [
+                { type: 'mcq', prompt: '"안녕하세요" ၏ အဓိပ္ပာယ်မှာ?', options: ['မင်္ဂလာပါ', 'ကျေးဇူးတင်ပါတယ်', 'တောင်းပန်ပါတယ်'], correct: 0 }
+              ],
+              quiz: [{ type: 'mcq', prompt: 'ကျေးဇူးတင်ပါတယ် ကို ကိုရီးယားလို မည်သို့ခေါ်သနည်း?', options: ['감사합니다', '안녕하세요'], correct: 0 }]
+            }]
+          }]
+        }
+      },
+      german: {
+        A1: {
+          units: [{
+            id: 'de-a1-u1',
+            title: 'Unit 1: Erste Schritte',
+            description: 'German greetings and verb sein.',
+            lessons: [{
+              id: 'de-a1-u1-l1',
+              title: 'Lesson 1: Hallo!',
+              description: 'German greetings.',
+              vocabulary: [{ id: 'de-v1', word: 'Hallo', meaning: 'မင်္ဂလာပါ', example: 'Hallo, wie gehts?' }],
+              grammar: { title: 'Verb sein (to be)', rule: 'ich bin, du bist, er/sie ist', explanation: 'Conjugation of sein.', examples: ['Ich bin Peter.'] },
+              exercises: [
+                { type: 'mcq', prompt: 'What does "Hallo" mean?', options: ['မင်္ဂလာပါ', 'ကျေးဇူးတင်ပါတယ်', 'နှုတ်ဆက်ပါတယ်'], correct: 0 }
+              ],
+              quiz: [{ type: 'mcq', prompt: 'Fill: Ich ___ Alex.', options: ['bin', 'ist'], correct: 0 }]
+            }]
+          }]
+        }
+      },
+      french: {
+        A1: {
+          units: [{
+            id: 'fr-a1-u1',
+            title: 'Unit 1: Les Salutations',
+            description: 'French greetings and gender.',
+            lessons: [{
+              id: 'fr-a1-u1-l1',
+              title: 'Lesson 1: Bonjour!',
+              description: 'French greetings.',
+              vocabulary: [{ id: 'fr-v1', word: 'Bonjour', meaning: 'မင်္ဂလာပါ', example: 'Bonjour tout le monde!' }],
+              grammar: { title: 'Articles: Le / La', rule: 'Le (Masculine), La (Feminine)', explanation: 'Nouns have gender.', examples: ['Le livre'] },
+              exercises: [
+                { type: 'mcq', prompt: 'What does "Bonjour" mean?', options: ['မင်္ဂလာပါ', 'ကျေးဇူးတင်ပါတယ်', 'နှုတ်ဆက်ပါတယ်'], correct: 0 }
+              ],
+              quiz: [{ type: 'mcq', prompt: 'Daytime greeting in French?', options: ['Bonjour', 'Bonsoir'], correct: 0 }]
+            }]
+          }]
+        }
+      },
+      spanish: {
+        A1: {
+          units: [{
+            id: 'es-a1-u1',
+            title: 'Unit 1: Primeros Pasos',
+            description: 'Spanish greetings and basics.',
+            lessons: [{
+              id: 'es-a1-u1-l1',
+              title: 'Lesson 1: ¡Hola!',
+              description: 'Greetings in Spanish.',
+              vocabulary: [{ id: 'es-v1', word: 'Hola', meaning: 'မင်္ဂလာပါ', example: '¡Hola! ¿Cómo estás?' }],
+              grammar: { title: 'Ser vs Estar', rule: 'Ser (Identity), Estar (State)', explanation: 'Two verbs for "to be".', examples: ['Soy Juan.'] },
+              exercises: [
+                { type: 'mcq', prompt: 'What does "Hola" mean?', options: ['မင်္ဂလာပါ', 'ကျေးဇူးတင်ပါတယ်', 'နှုတ်ဆက်ပါတယ်'], correct: 0 }
+              ],
+              quiz: [{ type: 'mcq', prompt: '"Hello" in Spanish?', options: ['Hola', 'Adios'], correct: 0 }]
+            }]
+          }]
+        }
+      },
+      italian: {
+        A1: {
+          units: [{
+            id: 'it-a1-u1',
+            title: 'Unit 1: Primi Passi',
+            description: 'Italian essentials and greetings.',
+            lessons: [{
+              id: 'it-a1-u1-l1',
+              title: 'Lesson 1: Ciao!',
+              description: 'Greetings in Italian.',
+              vocabulary: [{ id: 'it-v1', word: 'Ciao', meaning: 'မင်္ဂလာပါ / နှုတ်ဆက်ပါတယ်', example: 'Ciao, a presto!' }],
+              grammar: { title: 'Gender endings -o / -a', rule: '-o (Masculine), -a (Feminine)', explanation: 'Noun vowel agreement.', examples: ['Il ragazzo'] },
+              exercises: [
+                { type: 'mcq', prompt: 'What does "Ciao" mean?', options: ['မင်္ဂလာပါ / နှုတ်ဆက်ပါတယ်', 'ကျေးဇူးတင်ပါတယ်', 'တောင်းပန်ပါတယ်'], correct: 0 }
+              ],
+              quiz: [{ type: 'mcq', prompt: '"Ciao" is used for:', options: ['Both Hello and Goodbye', 'Only Goodbye'], correct: 0 }]
             }]
           }]
         }
@@ -217,13 +350,10 @@
         id: lessonId,
         title: `${meta.name} Practice Session`,
         description: `Proficiency session for ${levelId}.`,
-        objectives: [`Build fluency in ${meta.name}`],
-        vocabulary: [{ id: `${langId}-sample`, word: `${meta.name} Word`, meaning: 'Practice term', example: 'Standard example.' }],
-        grammar: { title: 'Linguistic Structure', rule: 'Standard agreement pattern.', explanation: 'Follow language rules.', examples: ['Example sentence.'] },
-        exercises: [
-          { type: 'mcq', prompt: `Select the correct translation:`, options: ['Correct concept', 'False cognate', 'Incorrect term'], correct: 0, explanation: 'Accurate contextual usage.' }
-        ],
-        quiz: [{ type: 'mcq', prompt: 'Confirm your comprehension:', options: ['Understood', 'Needs review'], correct: 0 }]
+        vocabulary: [{ id: `${langId}-sample`, word: `${meta.name} Word`, meaning: 'Practice term', example: 'Example.' }],
+        grammar: { title: 'Structure', rule: 'Standard pattern.', explanation: 'Follow rules.', examples: ['Example.'] },
+        exercises: [{ type: 'mcq', prompt: `Select translation:`, options: ['Correct concept', 'False concept'], correct: 0 }],
+        quiz: [{ type: 'mcq', prompt: 'Comprehension check:', options: ['Understood', 'Review'], correct: 0 }]
       };
     }
 
@@ -276,33 +406,6 @@
         utter.lang = LANGUAGES[langId]?.locale || 'en-US';
         utter.rate = LANGUAGES[langId]?.rate || 0.95;
         window.speechSynthesis.speak(utter);
-      },
-      listen(langId, onResult, onError) {
-        const SpeechRec = window.SpeechRecognition || window.webkitSpeechRecognition;
-        if (!SpeechRec) {
-          if (onError) onError('Speech recognition not supported.');
-          return;
-        }
-        const rec = new SpeechRec();
-        rec.lang = LANGUAGES[langId]?.locale || 'en-US';
-        rec.onresult = (e) => onResult(e.results[0][0].transcript);
-        rec.onerror = (e) => onError(e.error);
-        rec.start();
-      },
-      calculateSimilarity(s1, s2) {
-        const a = s1.trim().toLowerCase();
-        const b = s2.trim().toLowerCase();
-        if (a === b) return 1.0;
-        const matrix = Array(b.length + 1).fill(null).map(() => Array(a.length + 1).fill(null));
-        for (let i = 0; i <= a.length; i++) matrix[0][i] = i;
-        for (let j = 0; j <= b.length; j++) matrix[j][0] = j;
-        for (let j = 1; j <= b.length; j++) {
-          for (let i = 1; i <= a.length; i++) {
-            const ind = a[i - 1] === b[j - 1] ? 0 : 1;
-            matrix[j][i] = Math.min(matrix[j][i - 1] + 1, matrix[j - 1][i] + 1, matrix[j - 1][i - 1] + ind);
-          }
-        }
-        return Math.max(0, 1 - matrix[b.length][a.length] / Math.max(a.length, b.length));
       }
     };
 
@@ -383,7 +486,7 @@
           `;
         } else if (step.type === 'vocab_overview') {
           html = `
-            <h3>📖 Key Vocabulary</h3>
+            <h3>📖 Vocabulary</h3>
             <div style="display:flex; flex-direction:column; gap:0.75rem; margin-top:1rem;">
               ${(this.lesson.vocabulary || []).map(v => `
                 <div class="card" style="display:flex; justify-content:space-between; align-items:center;">
@@ -455,17 +558,6 @@
             </div>
           `;
           setTimeout(() => AudioManager.speak(ex.targetText, this.langId), 200);
-        } else if (ex.type === 'speaking') {
-          html += `
-            <div style="text-align:center; padding:1rem 0;">
-              <p style="font-size:1.8rem; font-weight:800; margin-bottom:1rem;">${ex.targetText}</p>
-              <button class="audio-btn" onclick="AudioManager.speak('${ex.targetText}', '${this.langId}')">🔊</button>
-              <div style="margin-top:1.5rem;">
-                <button id="micBtn" class="primary-btn" onclick="LessonEngine.record('${ex.targetText}')">🎤 Tap to Speak</button>
-                <p id="micResult" style="margin-top:0.75rem; color:var(--text-muted); font-size:0.9rem;"></p>
-              </div>
-            </div>
-          `;
         }
 
         container.innerHTML = html;
@@ -495,29 +587,10 @@
         document.getElementById('lessonActionBtn').disabled = false;
       },
 
-      record(target) {
-        const mic = document.getElementById('micBtn');
-        const res = document.getElementById('micResult');
-        mic.textContent = 'Listening...';
-        AudioManager.listen(this.langId, (spoken) => {
-          mic.textContent = '🎤 Tap to Speak';
-          const sim = AudioManager.calculateSimilarity(spoken, target);
-          res.textContent = `Heard: "${spoken}" (${Math.round(sim * 100)}%)`;
-          this.userAnswer = sim >= 0.70;
-          document.getElementById('lessonActionBtn').disabled = false;
-        }, (err) => {
-          mic.textContent = '🎤 Tap to Speak';
-          res.textContent = `Mic note: ${err}.`;
-          this.userAnswer = true;
-          document.getElementById('lessonActionBtn').disabled = false;
-        });
-      },
-
       checkCurrentExercise(ex) {
         let isCorrect = false;
         if (ex.type === 'mcq' || ex.type === 'fill_blank' || ex.type === 'listening') isCorrect = (this.userAnswer === ex.correct);
         else if (ex.type === 'word_order') isCorrect = (JSON.stringify(this.orderedWords) === JSON.stringify(ex.correctSequence));
-        else if (ex.type === 'speaking') isCorrect = (this.userAnswer === true);
 
         if (isCorrect) this.correctCount++;
 
