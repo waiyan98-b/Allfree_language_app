@@ -20,24 +20,19 @@ jobs:
         with:
           channel: 'stable'
 
-      - name: Recreate Android Project Setup
+      - name: Build Full Flutter Project
         run: |
-          mkdir -p /tmp/fresh_app
-          cd /tmp/fresh_app
-          flutter create --org com.allfree.language --project-name free_language_app .
-          cp -rn android $GITHUB_WORKSPACE/
-          cp -rn ios $GITHUB_WORKSPACE/
-          cp -rn web $GITHUB_WORKSPACE/
-          cd $GITHUB_WORKSPACE
-
-      - name: Install Dependencies
-        run: flutter pub get
-
-      - name: Build APK
-        run: flutter build apk --release
+          cd /tmp
+          flutter create --org com.allfree.language --project-name free_language_app myapp
+          cd myapp
+          cp "$GITHUB_WORKSPACE/pubspec.yaml" ./pubspec.yaml
+          cp "$GITHUB_WORKSPACE/lib/main.dart" ./lib/main.dart
+          flutter pub get
+          flutter build apk --release
+          cp build/app/outputs/flutter-apk/app-release.apk "$GITHUB_WORKSPACE/app-release.apk"
 
       - name: Upload APK Artifact
         uses: actions/upload-artifact@v4
         with:
           name: free-language-app-apk
-          path: build/app/outputs/flutter-apk/app-release.apk
+          path: app-release.apk
