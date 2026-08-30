@@ -3,18 +3,17 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
-  <meta name="theme-color" content="#4F46E5" />
-  <title>LingoMaster Global — 8 Languages Complete</title>
+  <title>LingoMaster — Thai Edition (Bilingual)</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Noto+Sans+JP:wght@500;700&family=Noto+Sans+KR:wght@500;700&family=Noto+Sans+Thai:wght@500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Noto+Sans+Thai:wght@400;600;700&family=Padauk:wght@400;700&display=swap" rel="stylesheet">
   <style>
     :root {
       --primary: #4F46E5; --primary-hover: #4338CA; --primary-light: #EEF2FF;
       --success: #10B981; --success-light: #ECFDF5; --error: #EF4444; --error-light: #FEF2F2;
       --bg-main: #F8FAFC; --bg-card: #FFFFFF; --text-main: #0F172A; --text-muted: #64748B;
       --border-color: #E2E8F0; --radius-md: 14px; --radius-lg: 20px; --radius-full: 9999px;
-      --font-base: 'Plus Jakarta Sans', 'Noto Sans Thai', 'Noto Sans JP', 'Noto Sans KR', sans-serif;
+      --font-base: 'Plus Jakarta Sans', 'Padauk', 'Noto Sans Thai', sans-serif;
       --transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
     }
     [data-theme="dark"] {
@@ -26,24 +25,24 @@
     .app-layout { display: flex; flex-direction: column; min-height: 100vh; }
     .app-header { position: sticky; top: 0; z-index: 40; display: flex; justify-content: space-between; align-items: center; padding: 0.75rem 1.25rem; background-color: var(--bg-card); border-bottom: 1px solid var(--border-color); }
     .brand { display: flex; align-items: center; gap: 0.5rem; font-weight: 800; font-size: 1.25rem; color: var(--primary); }
-    .user-stats-bar { display: flex; align-items: center; gap: 0.6rem; }
+    .header-actions { display: flex; align-items: center; gap: 0.5rem; }
     .stat-pill { display: flex; align-items: center; gap: 0.35rem; background: var(--bg-main); padding: 0.35rem 0.65rem; border-radius: var(--radius-full); font-weight: 700; font-size: 0.85rem; border: 1px solid var(--border-color); }
-    .icon-btn { background: transparent; border: none; font-size: 1.25rem; cursor: pointer; padding: 0.4rem; border-radius: 8px; }
+    .icon-btn { background: transparent; border: none; font-size: 1.1rem; cursor: pointer; padding: 0.4rem; border-radius: 8px; color: var(--text-main); }
+    .lang-switcher-btn { font-weight: 700; font-size: 0.8rem; padding: 0.35rem 0.65rem; border-radius: var(--radius-full); border: 1px solid var(--border-color); background: var(--bg-main); cursor: pointer; color: var(--text-main); }
     .main-content { flex: 1; padding: 1.25rem 1rem 5.5rem 1rem; max-width: 900px; width: 100%; margin: 0 auto; }
     .bottom-nav { position: fixed; bottom: 0; left: 0; right: 0; height: 62px; background: var(--bg-card); border-top: 1px solid var(--border-color); display: flex; justify-content: space-around; align-items: center; z-index: 50; }
     .nav-item { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; background: transparent; border: none; color: var(--text-muted); font-size: 0.75rem; font-weight: 600; gap: 0.2rem; height: 100%; cursor: pointer; transition: var(--transition); }
     .nav-item.active { color: var(--primary); }
-    .card { background: var(--bg-card); border-radius: var(--radius-lg); padding: 1.25rem; border: 1px solid var(--border-color); margin-bottom: 1rem; }
-    .primary-btn { background: var(--primary); color: #fff; border: none; padding: 0.75rem 1.25rem; border-radius: var(--radius-md); font-weight: 700; font-size: 1rem; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem; transition: var(--transition); min-height: 46px; }
+    .card { background: var(--bg-card); border-radius: var(--radius-lg); padding: 1.25rem; border: 1px solid var(--border-color); margin-bottom: 1.25rem; }
+    .primary-btn { background: var(--primary); color: #fff; border: none; padding: 0.75rem 1.25rem; border-radius: var(--radius-md); font-weight: 700; font-size: 1rem; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem; transition: var(--transition); min-height: 44px; }
     .primary-btn:hover:not(:disabled) { background: var(--primary-hover); }
     .primary-btn:disabled { opacity: 0.5; cursor: not-allowed; }
-    .btn-large { width: 100%; font-size: 1.1rem; padding: 0.85rem; }
-    .secondary-btn { background: var(--bg-card); color: var(--text-main); border: 1px solid var(--border-color); padding: 0.6rem 1rem; border-radius: var(--radius-md); font-weight: 600; cursor: pointer; }
-    .progress-bar-container { width: 100%; height: 8px; background: var(--border-color); border-radius: var(--radius-full); overflow: hidden; margin: 0.5rem 0; }
+    .btn-large { width: 100%; font-size: 1.05rem; padding: 0.85rem; }
+    .secondary-btn { background: var(--bg-card); color: var(--text-main); border: 1px solid var(--border-color); padding: 0.5rem 0.85rem; border-radius: var(--radius-md); font-weight: 600; cursor: pointer; font-size: 0.85rem; }
+    .progress-bar-container { width: 100%; height: 8px; background: var(--border-color); border-radius: var(--radius-full); overflow: hidden; }
     .progress-bar-fill { height: 100%; background: linear-gradient(90deg, var(--primary), #818CF8); border-radius: var(--radius-full); transition: width 0.4s ease; }
-    .lang-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 0.75rem; margin-top: 0.75rem; }
-    .lang-card { cursor: pointer; display: flex; flex-direction: column; gap: 0.5rem; }
-    .lang-card.selected { border: 2px solid var(--primary); background: var(--primary-light); }
+    .chapter-banner { width: 100%; height: 120px; border-radius: var(--radius-md); object-fit: cover; margin-bottom: 0.75rem; }
+    .vocab-img { width: 65px; height: 65px; border-radius: 10px; object-fit: cover; }
     .options-grid { display: grid; grid-template-columns: 1fr; gap: 0.6rem; }
     .option-btn { background: var(--bg-card); border: 2px solid var(--border-color); padding: 0.85rem; border-radius: var(--radius-md); font-size: 1rem; font-weight: 600; text-align: left; cursor: pointer; color: var(--text-main); }
     .option-btn.selected { border-color: var(--primary); background: var(--primary-light); color: var(--primary); }
@@ -56,45 +55,43 @@
     .lesson-dialog { background: var(--bg-card); width: 100%; height: 100%; max-width: 680px; display: flex; flex-direction: column; }
     @media (min-width: 768px) { .lesson-dialog { height: 90vh; border-radius: var(--radius-lg); overflow: hidden; } }
     .lesson-header { display: flex; align-items: center; padding: 0.85rem 1.25rem; gap: 0.85rem; border-bottom: 1px solid var(--border-color); }
-    .lesson-body { flex: 1; padding: 1.5rem 1.25rem; overflow-y: auto; }
+    .lesson-body { flex: 1; padding: 1.25rem; overflow-y: auto; }
     .feedback-banner { padding: 0.85rem 1.25rem; border-top: 1px solid var(--border-color); }
     .feedback-banner.correct { background: var(--success-light); color: #065F46; }
     .feedback-banner.incorrect { background: var(--error-light); color: #991B1B; }
-    .audio-btn { background: var(--primary-light); border: none; color: var(--primary); width: 44px; height: 44px; border-radius: var(--radius-full); display: inline-flex; align-items: center; justify-content: center; cursor: pointer; font-size: 1.2rem; }
+    .audio-btn { background: var(--primary-light); border: none; color: var(--primary); width: 40px; height: 40px; border-radius: var(--radius-full); display: inline-flex; align-items: center; justify-content: center; cursor: pointer; font-size: 1.1rem; }
   </style>
 </head>
 <body>
   <div id="app" class="app-layout">
     <header class="app-header">
-      <div class="brand"><span>🌍</span><span>LingoMaster</span></div>
-      <div class="user-stats-bar">
-        <div class="stat-pill" title="Global Streak">🔥 <span id="streakCount">0</span></div>
-        <div class="stat-pill" title="Total XP">⭐ <span id="totalXpCount">0</span></div>
-        <div class="stat-pill" title="Energy">❤️ ∞</div>
+      <div class="brand"><span>🇹🇭</span><span>Thai Master</span></div>
+      <div class="header-actions">
+        <button id="uiLangToggleBtn" class="lang-switcher-btn" title="Switch UI Language">🇲🇲 မြန်မာ</button>
+        <div class="stat-pill">🔥 <span id="streakCount">1</span></div>
+        <div class="stat-pill">⭐ <span id="totalXpCount">0</span></div>
         <button id="themeToggleBtn" class="icon-btn">🌙</button>
       </div>
     </header>
 
-    <main id="mainContainer" class="main-content" role="main"></main>
+    <main id="mainContainer" class="main-content"></main>
 
     <nav class="bottom-nav">
-      <button class="nav-item active" data-view="home"><span>🏠</span><span>Home</span></button>
-      <button class="nav-item" data-view="learn"><span>📚</span><span>Learn</span></button>
-      <button class="nav-item" data-view="vocab"><span>📖</span><span>Vocab</span></button>
-      <button class="nav-item" data-view="review"><span>🔄</span><span>Review</span></button>
-      <button class="nav-item" data-view="progress"><span>📊</span><span>Progress</span></button>
-      <button class="nav-item" data-view="settings"><span>⚙️</span><span>Settings</span></button>
+      <button class="nav-item active" data-view="learn"><span style="font-size:1.2rem;">📚</span><span data-i18n="nav_learn">Learn</span></button>
+      <button class="nav-item" data-view="vocab"><span style="font-size:1.2rem;">📖</span><span data-i18n="nav_vocab">Vocab</span></button>
+      <button class="nav-item" data-view="progress"><span style="font-size:1.2rem;">📊</span><span data-i18n="nav_progress">Progress</span></button>
+      <button class="nav-item" data-view="settings"><span style="font-size:1.2rem;">⚙️</span><span data-i18n="nav_settings">Settings</span></button>
     </nav>
   </div>
 
-  <div id="lessonModal" class="modal-overlay hidden" role="dialog" aria-modal="true">
+  <div id="lessonModal" class="modal-overlay hidden">
     <div class="modal-dialog lesson-dialog">
       <header class="lesson-header">
         <button id="closeLessonBtn" class="icon-btn">✕</button>
         <div class="progress-bar-container" style="flex:1;">
           <div id="lessonProgressBar" class="progress-bar-fill" style="width: 0%;"></div>
         </div>
-        <div id="lessonStepIndicator" style="font-size: 0.85rem; font-weight: 700; color: var(--text-muted);">Step 1/8</div>
+        <div id="lessonStepIndicator" style="font-size: 0.85rem; font-weight: 700; color: var(--text-muted);">Step 1/6</div>
       </header>
       
       <div id="lessonContainer" class="lesson-body"></div>
@@ -102,7 +99,7 @@
       <footer class="lesson-footer">
         <div id="feedbackBanner" class="feedback-banner hidden">
           <div style="display:flex; align-items:flex-start; gap:0.6rem;">
-            <span id="feedbackIcon" style="font-size:1.4rem;">✓</span>
+            <span id="feedbackIcon" style="font-size:1.3rem;">✓</span>
             <div>
               <strong id="feedbackTitle">Correct!</strong>
               <p id="feedbackExplanation" style="font-size:0.85rem;"></p>
@@ -116,282 +113,47 @@
     </div>
   </div>
 
+  <!-- External Thai Data File -->
+  <script src="data/thai.js"></script>
+
   <script>
-    const LANGUAGES = {
-      english: { id: 'english', name: 'English', flag: '🇬🇧', locale: 'en-US', rate: 1.0 },
-      thai: { id: 'thai', name: 'Thai', flag: '🇹🇭', locale: 'th-TH', rate: 0.9 },
-      french: { id: 'french', name: 'French', flag: '🇫🇷', locale: 'fr-FR', rate: 0.95 },
-      german: { id: 'german', name: 'German', flag: '🇩🇪', locale: 'de-DE', rate: 0.95 },
-      korean: { id: 'korean', name: 'Korean', flag: '🇰🇷', locale: 'ko-KR', rate: 0.9 },
-      japanese: { id: 'japanese', name: 'Japanese', flag: '🇯🇵', locale: 'ja-JP', rate: 0.9 },
-      spanish: { id: 'spanish', name: 'Spanish', flag: '🇪🇸', locale: 'es-ES', rate: 0.95 },
-      italian: { id: 'italian', name: 'Italian', flag: '🇮🇹', locale: 'it-IT', rate: 0.95 }
-    };
-
-    const CEFR_LEVELS = [
-      { id: 'A1', name: 'A1 Beginner' },
-      { id: 'A2', name: 'A2 Elementary' },
-      { id: 'B1', name: 'B1 Intermediate' },
-      { id: 'B2', name: 'B2 Upper Intermediate' },
-      { id: 'C1', name: 'C1 Advanced' },
-      { id: 'C2', name: 'C2 Mastery' }
-    ];
-
-    const LESSON_DATABASE = {
-      english: {
-        A1: {
-          units: [
-            {
-              id: 'en-a1-u1',
-              title: 'Unit 1: Introductions & Basics',
-              description: 'Learn pronouns, the "be" verb, and daily greetings.',
-              lessons: [{
-                id: 'en-a1-u1-l1',
-                title: 'Lesson 1: First Introductions',
-                description: 'Saying hello and introducing yourself.',
-                vocabulary: [{ id: 'en-v1', word: 'Hello', meaning: 'မင်္ဂလာပါ', example: 'Hello, I am John.' }],
-                grammar: { title: 'Subject Pronouns + "to be"', rule: 'I am, You are, He/She/It is.', explanation: 'The verb changes with the subject.', examples: ['I am a student.'] },
-                exercises: [
-                  { type: 'mcq', prompt: 'What does "Hello" mean?', options: ['မင်္ဂလာပါ', 'ကျေးဇူးတင်ပါတယ်', 'နှုတ်ဆက်ပါတယ်'], correct: 0, explanation: '"Hello" means "မင်္ဂလာပါ".' },
-                  { type: 'fill_blank', prompt: 'Complete the sentence:', sentence: 'I ___ a student.', options: ['am', 'is', 'are'], correct: 0 },
-                  { type: 'word_order', prompt: 'Arrange into a correct sentence:', words: ['is', 'My', 'name', 'John.'], correctSequence: ['My', 'name', 'is', 'John.'] }
-                ],
-                quiz: [{ type: 'mcq', prompt: 'Which sentence is correct?', options: ['I am Sarah.', 'I is Sarah.'], correct: 0 }]
-              }]
-            },
-            {
-              id: 'en-a1-u2',
-              title: 'Unit 2: Food & Ordering',
-              description: 'Food vocabulary and simple requests.',
-              lessons: [{
-                id: 'en-a1-u2-l1',
-                title: 'Lesson 1: Food & Drinks',
-                description: 'Ordering food and drinks.',
-                vocabulary: [{ id: 'en-v2', word: 'Water', meaning: 'ရေ', example: 'I drink water.' }],
-                grammar: { title: 'Simple Requests', rule: 'I want + noun', explanation: 'Expressing what you want.', examples: ['I want water.'] },
-                exercises: [
-                  { type: 'mcq', prompt: 'What does "Water" mean?', options: ['ရေ', 'ထမင်း', 'မုန့်'], correct: 0 },
-                  { type: 'listening', prompt: 'Listen and select:', targetText: 'Water', options: ['Water', 'Tea', 'Juice'], correct: 0 }
-                ],
-                quiz: [{ type: 'mcq', prompt: 'Translate: "I want water."', options: ['ကျွန်တော် ရေလိုချင်တယ်', 'ကျွန်တော် ထမင်းစားတယ်'], correct: 0 }]
-              }]
-            }
-          ]
-        }
+    const I18N = {
+      my: {
+        nav_learn: "သင်ယူရန်", nav_vocab: "ဝေါဟာရ", nav_progress: "တိုးတက်မှု", nav_settings: "ဆက်တင်များ",
+        continue_btn: "ဆက်လုပ်ရန်", check_btn: "စစ်ဆေးမည်", finish_btn: "ပြီးပါပြီ",
+        correct: "✓ မှန်ကန်ပါသည်!", incorrect: "✕ မမှန်သေးပါ", great_job: "တော်လိုက်တာ!",
+        start: "စတင်မည်", review: "ပြန်လေ့ကျင့်မည် ✓", words_count: "လုံး",
+        score: "ရမှတ်", xp_earned: "ရရှိသော XP", total_xp: "စုစုပေါင်း XP", streak: "ရက်ဆက်လေ့လာမှု",
+        vocab_empty: "စကားလုံးများ မကျက်ရသေးပါ။ သင်ခန်းစာများ စတင်လေ့လာပါ!",
+        export_btn: "💾 Data သိမ်းဆည်းရန် (Backup)"
       },
-      thai: {
-        A1: {
-          units: [
-            {
-              id: 'th-a1-u1',
-              title: 'Unit 1: Thai Script & Polite Greetings',
-              description: 'Master polite particles (ครับ/ค่ะ) and greetings.',
-              lessons: [{
-                id: 'th-a1-u1-l1',
-                title: 'Lesson 1: Greetings & Politeness',
-                description: 'Everyday polite greetings in Thai.',
-                vocabulary: [{ id: 'th-v1', word: 'สวัสดี', meaning: 'မင်္ဂလာပါ', example: 'สวัสดีครับ' }],
-                grammar: { title: 'Polite Ending Particles', rule: 'Male: ครับ (khráp), Female: ค่ะ (khâ)', explanation: 'Used at the end of sentences.', examples: ['สวัสดีครับ'] },
-                exercises: [
-                  { type: 'mcq', prompt: '"สวัสดี" ၏ အဓိပ္ပာယ်မှာ?', options: ['မင်္ဂလာပါ', 'ကျေးဇူးတင်ပါတယ်', 'တောင်းပန်ပါတယ်'], correct: 0 },
-                  { type: 'word_order', prompt: 'ဝါကျစီပါ: "မင်္ဂလာပါခင်ဗျာ"', words: ['ครับ', 'สวัสดี'], correctSequence: ['สวัสดี', 'ครับ'] }
-                ],
-                quiz: [{ type: 'mcq', prompt: 'အမျိုးသားသုံး ယဉ်ကျေးစကားလုံးမှာ?', options: ['ครับ', 'ค่ะ'], correct: 0 }]
-              }]
-            },
-            {
-              id: 'th-a1-u2',
-              title: 'Unit 2: အစားအသောက်နှင့် မှာယူခြင်း',
-              description: 'ထိုင်းအစားအစာ အခေါ်အဝေါ်များ',
-              lessons: [{
-                id: 'th-a1-u2-l1',
-                title: 'Lesson 1: ထမင်းနှင့် ရေ',
-                description: 'အစားအသောက် မှာယူနည်း',
-                vocabulary: [{ id: 'th-v2', word: 'น้ำ', meaning: 'ရေ', example: 'ขอน้ำหน่อยครับ' }],
-                grammar: { title: 'ขอ (တောင်းဆိုခြင်း)', rule: 'ขอ + ပစ္စည်းအမည်', explanation: 'ယဉ်ကျေးစွာ တောင်းဆိုခြင်း', examples: ['ขอน้ำ (ရေပေးပါ)'] },
-                exercises: [
-                  { type: 'mcq', prompt: '"น้ำ" ၏ အဓိပ္ပာယ်မှာ?', options: ['ရေ', 'ထမင်း', 'ဟင်း'], correct: 0 },
-                  { type: 'listening', prompt: 'နားထောင်ပြီး ရွေးပါ:', targetText: 'น้ำ', options: ['น้ำ', 'ข้าว', 'ไก่'], correct: 0 }
-                ],
-                quiz: [{ type: 'mcq', prompt: 'ရေကို ထိုင်းလို မည်သို့ခေါ်သနည်း?', options: ['น้ำ (Nam)', 'ข้าว (Khao)'], correct: 0 }]
-              }]
-            }
-          ]
-        }
-      },
-      japanese: {
-        A1: {
-          units: [{
-            id: 'ja-a1-u1',
-            title: 'Unit 1: 挨拶 (Greetings)',
-            description: 'Basic Japanese introductions and greetings.',
-            lessons: [{
-              id: 'ja-a1-u1-l1',
-              title: 'Lesson 1: こんにちは',
-              description: 'Saying hello in Japanese.',
-              vocabulary: [{ id: 'ja-v1', word: 'こんにちは', meaning: 'မင်္ဂလာပါ', example: '皆さん、こんにちは。' }],
-              grammar: { title: 'Topic Particle は', rule: 'Noun + は', explanation: 'Marks the sentence topic.', examples: ['私は学生です。'] },
-              exercises: [
-                { type: 'mcq', prompt: '"こんにちは" ၏ အဓိပ္ပာယ်မှာ?', options: ['မင်္ဂလာပါ', 'ကျေးဇူးတင်ပါတယ်', 'နှုတ်ဆက်ပါတယ်'], correct: 0 },
-                { type: 'fill_blank', prompt: 'ဖြည့်ပါ: 私 ___ 田中です。', sentence: '私 ___ 田中です。', options: ['は', 'の', 'を'], correct: 0 }
-              ],
-              quiz: [{ type: 'mcq', prompt: 'Topic Marker particle မှာ?', options: ['は', 'わ'], correct: 0 }]
-            }]
-          }]
-        }
-      },
-      korean: {
-        A1: {
-          units: [{
-            id: 'ko-a1-u1',
-            title: 'Unit 1: 기본 인사 (Greetings)',
-            description: 'Essential polite greetings in Korean.',
-            lessons: [{
-              id: 'ko-a1-u1-l1',
-              title: 'Lesson 1: 안녕하세요',
-              description: 'Polite Korean greetings.',
-              vocabulary: [{ id: 'ko-v1', word: '안녕하세요', meaning: 'မင်္ဂလာပါ', example: '안녕하세요, 반가워요.' }],
-              grammar: { title: 'Polite Ending 이에요/예요', rule: 'Consonant + 이에요, Vowel + 예요', explanation: 'Serves as is/am/are.', examples: ['학생이에요'] },
-              exercises: [
-                { type: 'mcq', prompt: '"안녕하세요" ၏ အဓိပ္ပာယ်မှာ?', options: ['မင်္ဂလာပါ', 'ကျေးဇူးတင်ပါတယ်', 'တောင်းပန်ပါတယ်'], correct: 0 }
-              ],
-              quiz: [{ type: 'mcq', prompt: 'ကျေးဇူးတင်ပါတယ် ကို ကိုရီးယားလို မည်သို့ခေါ်သနည်း?', options: ['감사합니다', '안녕하세요'], correct: 0 }]
-            }]
-          }]
-        }
-      },
-      german: {
-        A1: {
-          units: [{
-            id: 'de-a1-u1',
-            title: 'Unit 1: Erste Schritte',
-            description: 'German greetings and verb sein.',
-            lessons: [{
-              id: 'de-a1-u1-l1',
-              title: 'Lesson 1: Hallo!',
-              description: 'German greetings.',
-              vocabulary: [{ id: 'de-v1', word: 'Hallo', meaning: 'မင်္ဂလာပါ', example: 'Hallo, wie gehts?' }],
-              grammar: { title: 'Verb sein (to be)', rule: 'ich bin, du bist, er/sie ist', explanation: 'Conjugation of sein.', examples: ['Ich bin Peter.'] },
-              exercises: [
-                { type: 'mcq', prompt: 'What does "Hallo" mean?', options: ['မင်္ဂလာပါ', 'ကျေးဇူးတင်ပါတယ်', 'နှုတ်ဆက်ပါတယ်'], correct: 0 }
-              ],
-              quiz: [{ type: 'mcq', prompt: 'Fill: Ich ___ Alex.', options: ['bin', 'ist'], correct: 0 }]
-            }]
-          }]
-        }
-      },
-      french: {
-        A1: {
-          units: [{
-            id: 'fr-a1-u1',
-            title: 'Unit 1: Les Salutations',
-            description: 'French greetings and gender.',
-            lessons: [{
-              id: 'fr-a1-u1-l1',
-              title: 'Lesson 1: Bonjour!',
-              description: 'French greetings.',
-              vocabulary: [{ id: 'fr-v1', word: 'Bonjour', meaning: 'မင်္ဂလာပါ', example: 'Bonjour tout le monde!' }],
-              grammar: { title: 'Articles: Le / La', rule: 'Le (Masculine), La (Feminine)', explanation: 'Nouns have gender.', examples: ['Le livre'] },
-              exercises: [
-                { type: 'mcq', prompt: 'What does "Bonjour" mean?', options: ['မင်္ဂလာပါ', 'ကျေးဇူးတင်ပါတယ်', 'နှုတ်ဆက်ပါတယ်'], correct: 0 }
-              ],
-              quiz: [{ type: 'mcq', prompt: 'Daytime greeting in French?', options: ['Bonjour', 'Bonsoir'], correct: 0 }]
-            }]
-          }]
-        }
-      },
-      spanish: {
-        A1: {
-          units: [{
-            id: 'es-a1-u1',
-            title: 'Unit 1: Primeros Pasos',
-            description: 'Spanish greetings and basics.',
-            lessons: [{
-              id: 'es-a1-u1-l1',
-              title: 'Lesson 1: ¡Hola!',
-              description: 'Greetings in Spanish.',
-              vocabulary: [{ id: 'es-v1', word: 'Hola', meaning: 'မင်္ဂလာပါ', example: '¡Hola! ¿Cómo estás?' }],
-              grammar: { title: 'Ser vs Estar', rule: 'Ser (Identity), Estar (State)', explanation: 'Two verbs for "to be".', examples: ['Soy Juan.'] },
-              exercises: [
-                { type: 'mcq', prompt: 'What does "Hola" mean?', options: ['မင်္ဂလာပါ', 'ကျေးဇူးတင်ပါတယ်', 'နှုတ်ဆက်ပါတယ်'], correct: 0 }
-              ],
-              quiz: [{ type: 'mcq', prompt: '"Hello" in Spanish?', options: ['Hola', 'Adios'], correct: 0 }]
-            }]
-          }]
-        }
-      },
-      italian: {
-        A1: {
-          units: [{
-            id: 'it-a1-u1',
-            title: 'Unit 1: Primi Passi',
-            description: 'Italian essentials and greetings.',
-            lessons: [{
-              id: 'it-a1-u1-l1',
-              title: 'Lesson 1: Ciao!',
-              description: 'Greetings in Italian.',
-              vocabulary: [{ id: 'it-v1', word: 'Ciao', meaning: 'မင်္ဂလာပါ / နှုတ်ဆက်ပါတယ်', example: 'Ciao, a presto!' }],
-              grammar: { title: 'Gender endings -o / -a', rule: '-o (Masculine), -a (Feminine)', explanation: 'Noun vowel agreement.', examples: ['Il ragazzo'] },
-              exercises: [
-                { type: 'mcq', prompt: 'What does "Ciao" mean?', options: ['မင်္ဂလာပါ / နှုတ်ဆက်ပါတယ်', 'ကျေးဇူးတင်ပါတယ်', 'တောင်းပန်ပါတယ်'], correct: 0 }
-              ],
-              quiz: [{ type: 'mcq', prompt: '"Ciao" is used for:', options: ['Both Hello and Goodbye', 'Only Goodbye'], correct: 0 }]
-            }]
-          }]
-        }
+      en: {
+        nav_learn: "Learn", nav_vocab: "Vocab", nav_progress: "Progress", nav_settings: "Settings",
+        continue_btn: "Continue", check_btn: "Check", finish_btn: "Finish",
+        correct: "✓ Correct!", incorrect: "✕ Not quite", great_job: "Great job!",
+        start: "Start", review: "Review ✓", words_count: "Words",
+        score: "Score", xp_earned: "XP Earned", total_xp: "Total XP", streak: "Streak",
+        vocab_empty: "No words mastered yet. Start learning Thai units!",
+        export_btn: "💾 Export Progress (Backup)"
       }
     };
 
-    function getLessonData(langId, levelId, unitId, lessonId) {
-      const l = LESSON_DATABASE[langId]?.[levelId]?.units?.find(u => u.id === unitId)?.lessons?.find(ls => ls.id === lessonId);
-      if (l) return l;
-      const meta = LANGUAGES[langId] || LANGUAGES.english;
-      return {
-        id: lessonId,
-        title: `${meta.name} Practice Session`,
-        description: `Proficiency session for ${levelId}.`,
-        vocabulary: [{ id: `${langId}-sample`, word: `${meta.name} Word`, meaning: 'Practice term', example: 'Example.' }],
-        grammar: { title: 'Structure', rule: 'Standard pattern.', explanation: 'Follow rules.', examples: ['Example.'] },
-        exercises: [{ type: 'mcq', prompt: `Select translation:`, options: ['Correct concept', 'False concept'], correct: 0 }],
-        quiz: [{ type: 'mcq', prompt: 'Comprehension check:', options: ['Understood', 'Review'], correct: 0 }]
-      };
-    }
-
-    const STORAGE_KEY = 'lingomaster_global_state_v4';
+    const STORAGE_KEY = 'lingomaster_thai_edition_v1';
     const DEFAULT_STATE = {
-      activeLanguage: 'english',
+      uiLang: 'my',
       totalXP: 0,
-      dailyXP: 0,
-      dailyGoal: 50,
-      streak: { current: 1, longest: 1, lastStudyDate: new Date().toISOString().slice(0, 10) },
+      streak: 1,
       theme: 'light',
-      achievements: [],
-      srsItems: [],
-      languages: {
-        english: { level: 'A1', xp: 0, completedLessons: [], vocabulary: [] },
-        thai: { level: 'A1', xp: 0, completedLessons: [], vocabulary: [] },
-        french: { level: 'A1', xp: 0, completedLessons: [], vocabulary: [] },
-        german: { level: 'A1', xp: 0, completedLessons: [], vocabulary: [] },
-        korean: { level: 'A1', xp: 0, completedLessons: [], vocabulary: [] },
-        japanese: { level: 'A1', xp: 0, completedLessons: [], vocabulary: [] },
-        spanish: { level: 'A1', xp: 0, completedLessons: [], vocabulary: [] },
-        italian: { level: 'A1', xp: 0, completedLessons: [], vocabulary: [] }
-      }
+      completedLessons: [],
+      masteredVocab: []
     };
 
     const StorageManager = {
       load() {
         try {
           const raw = localStorage.getItem(STORAGE_KEY);
-          if (!raw) return DEFAULT_STATE;
-          const parsed = JSON.parse(raw);
-          for (let l of Object.keys(DEFAULT_STATE.languages)) {
-            if (!parsed.languages[l]) parsed.languages[l] = { level: 'A1', xp: 0, completedLessons: [], vocabulary: [] };
-          }
-          return parsed;
-        } catch (e) {
-          return DEFAULT_STATE;
-        }
+          return raw ? JSON.parse(raw) : DEFAULT_STATE;
+        } catch(e) { return DEFAULT_STATE; }
       },
       save(state) {
         localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
@@ -399,57 +161,30 @@
     };
 
     const AudioManager = {
-      speak(text, langId) {
+      speak(text) {
         if (!('speechSynthesis' in window) || !text) return;
         window.speechSynthesis.cancel();
         const utter = new SpeechSynthesisUtterance(text);
-        utter.lang = LANGUAGES[langId]?.locale || 'en-US';
-        utter.rate = LANGUAGES[langId]?.rate || 0.95;
+        utter.lang = 'th-TH';
+        utter.rate = 0.9;
         window.speechSynthesis.speak(utter);
       }
     };
 
-    const ProgressTracker = {
-      addXP(state, baseXP, langId, isReview = false) {
-        const xp = isReview ? Math.floor(baseXP * 0.5) : baseXP;
-        state.totalXP += xp;
-        state.dailyXP += xp;
-        if (langId && state.languages[langId]) state.languages[langId].xp += xp;
-        StorageManager.save(state);
-        App.updateUI();
-        return xp;
-      },
-      isLevelUnlocked(state, langId, levelId) {
-        const idx = CEFR_LEVELS.findIndex(l => l.id === levelId);
-        if (idx <= 0) return true;
-        const prev = CEFR_LEVELS[idx - 1].id;
-        return (state.languages[langId].completedLessons || []).filter(id => id.includes(`-${prev.toLowerCase()}-`)).length >= 1;
-      }
-    };
-
     const LessonEngine = {
-      lesson: null,
-      langId: null,
-      stepIndex: 0,
-      steps: [],
-      correctCount: 0,
-      userAnswer: null,
-      orderedWords: [],
-      stateRef: null,
+      lesson: null, stepIndex: 0, steps: [], correctCount: 0, userAnswer: null, orderedWords: [], stateRef: null,
 
-      start(lessonData, langId, appState) {
+      start(lessonData, appState) {
         this.lesson = lessonData;
-        this.langId = langId;
         this.stateRef = appState;
         this.stepIndex = 0;
         this.correctCount = 0;
 
         this.steps = [
-          { type: 'intro' },
           { type: 'vocab_overview' },
           { type: 'grammar_concept' },
-          ...lessonData.exercises.map(ex => ({ type: 'exercise', data: ex })),
-          ...lessonData.quiz.map(q => ({ type: 'quiz', data: q })),
+          ...(lessonData.exercises || []).map(ex => ({ type: 'exercise', data: ex })),
+          ...(lessonData.quiz || []).map(q => ({ type: 'quiz', data: q })),
           { type: 'completion' }
         ];
 
@@ -458,6 +193,8 @@
       },
 
       renderStep() {
+        const lang = this.stateRef.uiLang;
+        const t = I18N[lang];
         const container = document.getElementById('lessonContainer');
         const progressBar = document.getElementById('lessonProgressBar');
         const indicator = document.getElementById('lessonStepIndicator');
@@ -466,7 +203,7 @@
 
         banner.className = 'feedback-banner hidden';
         actionBtn.disabled = false;
-        actionBtn.textContent = 'Continue';
+        actionBtn.textContent = t.continue_btn;
         actionBtn.onclick = () => this.handleNext();
 
         const total = this.steps.length;
@@ -476,38 +213,36 @@
         const step = this.steps[this.stepIndex];
         let html = '';
 
-        if (step.type === 'intro') {
+        if (step.type === 'vocab_overview') {
           html = `
-            <div class="card" style="text-align:center; padding: 2rem 1rem;">
-              <span style="font-size: 3rem;">📘</span>
-              <h2 style="font-size: 1.5rem; margin: 1rem 0;">${this.lesson.title}</h2>
-              <p style="color: var(--text-muted);">${this.lesson.description}</p>
-            </div>
-          `;
-        } else if (step.type === 'vocab_overview') {
-          html = `
-            <h3>📖 Vocabulary</h3>
+            <h3>📖 ${typeof this.lesson.title === 'object' ? (this.lesson.title[lang] || this.lesson.title.en) : this.lesson.title}</h3>
             <div style="display:flex; flex-direction:column; gap:0.75rem; margin-top:1rem;">
               ${(this.lesson.vocabulary || []).map(v => `
-                <div class="card" style="display:flex; justify-content:space-between; align-items:center;">
-                  <div>
-                    <h4 style="font-size:1.2rem;">${v.word}</h4>
-                    <p style="color:var(--text-muted); font-size:0.9rem;">${v.meaning}</p>
+                <div class="card" style="display:flex; justify-content:space-between; align-items:center; gap:0.75rem;">
+                  ${v.image ? `<img src="${v.image}" class="vocab-img" alt="${v.word}">` : ''}
+                  <div style="flex:1;">
+                    <h4 style="font-size:1.3rem;">${v.word}</h4>
+                    <small style="color:var(--primary); font-weight:700;">[${v.roman}]</small>
+                    <p style="color:var(--text-muted); font-size:0.9rem;">${typeof v.meaning === 'object' ? (v.meaning[lang] || v.meaning.en) : v.meaning}</p>
                   </div>
-                  <button class="audio-btn" onclick="AudioManager.speak('${v.word}', '${this.langId}')">🔊</button>
+                  <button class="audio-btn" onclick="AudioManager.speak('${v.word}')">🔊</button>
                 </div>
               `).join('')}
             </div>
           `;
         } else if (step.type === 'grammar_concept') {
           const g = this.lesson.grammar;
+          const gTitle = typeof g.title === 'object' ? (g.title[lang] || g.title.en) : g.title;
+          const gRule = typeof g.rule === 'object' ? (g.rule[lang] || g.rule.en) : g.rule;
+          const gExp = typeof g.explanation === 'object' ? (g.explanation[lang] || g.explanation.en) : g.explanation;
+
           html = `
             <div class="card">
-              <h3>📐 Grammar: ${g.title}</h3>
+              <h3>📐 ${gTitle}</h3>
               <div style="margin: 1rem 0; padding:1rem; background:var(--bg-main); border-radius:var(--radius-md);">
-                <strong>Rule:</strong> ${g.rule}
+                <strong>Rule:</strong> ${gRule}
               </div>
-              <p style="color:var(--text-muted);">${g.explanation}</p>
+              <p style="color:var(--text-muted);">${gExp}</p>
             </div>
           `;
         } else if (step.type === 'exercise' || step.type === 'quiz') {
@@ -522,25 +257,23 @@
       },
 
       renderInteractiveExercise(ex, container, actionBtn) {
+        const lang = this.stateRef.uiLang;
+        const t = I18N[lang];
         actionBtn.disabled = true;
-        actionBtn.textContent = 'Check';
+        actionBtn.textContent = t.check_btn;
         actionBtn.onclick = () => this.checkCurrentExercise(ex);
         this.userAnswer = null;
         this.orderedWords = [];
 
-        let html = `<div class="exercise-prompt">${ex.prompt}</div>`;
+        const promptText = typeof ex.prompt === 'object' ? (ex.prompt[lang] || ex.prompt.en) : ex.prompt;
+        let html = `<div style="font-weight:700; font-size:1.1rem; margin-bottom:1rem;">${promptText}</div>`;
 
         if (ex.type === 'mcq') {
+          const rawOpts = ex.options;
+          const optsList = (rawOpts && typeof rawOpts === 'object' && !Array.isArray(rawOpts)) ? (rawOpts[lang] || rawOpts.en) : rawOpts;
           html += `<div class="options-grid">
-            ${ex.options.map((opt, i) => `<button class="option-btn" onclick="LessonEngine.selectOpt(this, ${i})">${opt}</button>`).join('')}
+            ${optsList.map((opt, i) => `<button class="option-btn" onclick="LessonEngine.selectOpt(this, ${i})">${opt}</button>`).join('')}
           </div>`;
-        } else if (ex.type === 'fill_blank') {
-          html += `
-            <p style="font-size:1.3rem; text-align:center; margin:1rem 0;">${ex.sentence}</p>
-            <div class="options-grid">
-              ${ex.options.map((opt, i) => `<button class="option-btn" onclick="LessonEngine.selectOpt(this, ${i})">${opt}</button>`).join('')}
-            </div>
-          `;
         } else if (ex.type === 'word_order') {
           html += `
             <div id="constructionZone" class="sentence-construction-zone"></div>
@@ -548,16 +281,6 @@
               ${ex.words.map(w => `<div class="word-chip" onclick="LessonEngine.pickWord(this, '${w}')">${w}</div>`).join('')}
             </div>
           `;
-        } else if (ex.type === 'listening') {
-          html += `
-            <div style="text-align:center; margin-bottom:1.5rem;">
-              <button class="audio-btn" onclick="AudioManager.speak('${ex.targetText}', '${this.langId}')">🔊</button>
-            </div>
-            <div class="options-grid">
-              ${ex.options.map((opt, i) => `<button class="option-btn" onclick="LessonEngine.selectOpt(this, ${i})">${opt}</button>`).join('')}
-            </div>
-          `;
-          setTimeout(() => AudioManager.speak(ex.targetText, this.langId), 200);
         }
 
         container.innerHTML = html;
@@ -588,8 +311,10 @@
       },
 
       checkCurrentExercise(ex) {
+        const lang = this.stateRef.uiLang;
+        const t = I18N[lang];
         let isCorrect = false;
-        if (ex.type === 'mcq' || ex.type === 'fill_blank' || ex.type === 'listening') isCorrect = (this.userAnswer === ex.correct);
+        if (ex.type === 'mcq') isCorrect = (this.userAnswer === ex.correct);
         else if (ex.type === 'word_order') isCorrect = (JSON.stringify(this.orderedWords) === JSON.stringify(ex.correctSequence));
 
         if (isCorrect) this.correctCount++;
@@ -600,10 +325,13 @@
         const actionBtn = document.getElementById('lessonActionBtn');
 
         banner.className = `feedback-banner ${isCorrect ? 'correct' : 'incorrect'}`;
-        title.textContent = isCorrect ? '✓ Correct!' : '✕ Not quite.';
-        exp.textContent = ex.explanation || (isCorrect ? 'Great job!' : 'Review this concept.');
+        title.textContent = isCorrect ? t.correct : t.incorrect;
+        
+        let expText = '';
+        if (ex.explanation) expText = typeof ex.explanation === 'object' ? (ex.explanation[lang] || ex.explanation.en) : ex.explanation;
+        exp.textContent = expText || (isCorrect ? t.great_job : '');
 
-        actionBtn.textContent = 'Continue';
+        actionBtn.textContent = t.continue_btn;
         actionBtn.onclick = () => this.handleNext();
       },
 
@@ -613,34 +341,35 @@
       },
 
       renderCompletionScreen(container, actionBtn) {
-        const isReview = this.stateRef.languages[this.langId].completedLessons.includes(this.lesson.id);
-        const xpEarned = ProgressTracker.addXP(this.stateRef, 20, this.langId, isReview);
-        const total = this.steps.filter(s => s.type === 'exercise' || s.type === 'quiz').length;
-        const accuracy = total > 0 ? Math.round((this.correctCount / total) * 100) : 100;
+        const lang = this.stateRef.uiLang;
+        const t = I18N[lang];
+        const isDone = this.stateRef.completedLessons.includes(this.lesson.id);
+        const xp = isDone ? 10 : 25;
+        this.stateRef.totalXP += xp;
 
-        if (!isReview) this.stateRef.languages[this.langId].completedLessons.push(this.lesson.id);
+        if (!isDone) this.stateRef.completedLessons.push(this.lesson.id);
         (this.lesson.vocabulary || []).forEach(v => {
-          if (!this.stateRef.srsItems.find(i => i.id === v.id)) {
-            this.stateRef.srsItems.push({ ...v, langId: this.langId });
+          if (!this.stateRef.masteredVocab.find(item => item.id === v.id)) {
+            this.stateRef.masteredVocab.push(v);
           }
         });
 
         StorageManager.save(this.stateRef);
+        App.updateUI();
 
         container.innerHTML = `
           <div style="text-align:center; padding: 2rem 0;">
             <span style="font-size: 3.5rem;">🎉</span>
-            <h2 style="margin: 1rem 0;">Lesson Completed!</h2>
+            <h2 style="margin: 1rem 0;">Unit Complete!</h2>
             <div class="card" style="max-width: 280px; margin: auto; text-align: left;">
-              <p>Score: <strong>${this.correctCount} / ${total}</strong></p>
-              <p>Accuracy: <strong>${accuracy}%</strong></p>
-              <p>XP Earned: <strong>+${xpEarned} XP</strong></p>
+              <p>${t.score}: <strong>${this.correctCount}</strong></p>
+              <p>${t.xp_earned}: <strong>+${xp} XP</strong></p>
             </div>
           </div>
         `;
 
         actionBtn.disabled = false;
-        actionBtn.textContent = 'Finish';
+        actionBtn.textContent = t.finish_btn;
         actionBtn.onclick = () => {
           document.getElementById('lessonModal').classList.add('hidden');
           App.navigate('learn');
@@ -652,7 +381,9 @@
       state: StorageManager.load(),
 
       init() {
+        this.applyLanguage();
         this.updateUI();
+
         if (this.state.theme === 'dark') {
           document.documentElement.setAttribute('data-theme', 'dark');
           document.getElementById('themeToggleBtn').textContent = '☀️';
@@ -660,6 +391,13 @@
 
         document.querySelectorAll('.nav-item').forEach(btn => {
           btn.addEventListener('click', (e) => this.navigate(e.currentTarget.getAttribute('data-view')));
+        });
+
+        document.getElementById('uiLangToggleBtn').addEventListener('click', () => {
+          this.state.uiLang = (this.state.uiLang === 'my') ? 'en' : 'my';
+          StorageManager.save(this.state);
+          this.applyLanguage();
+          this.navigate(document.querySelector('.nav-item.active').getAttribute('data-view'));
         });
 
         document.getElementById('themeToggleBtn').addEventListener('click', () => {
@@ -675,11 +413,20 @@
           document.getElementById('lessonModal').classList.add('hidden');
         });
 
-        this.navigate('home');
+        this.navigate('learn');
+      },
+
+      applyLanguage() {
+        const lang = this.state.uiLang;
+        document.getElementById('uiLangToggleBtn').textContent = (lang === 'my') ? '🇲🇲 မြန်မာ' : '🇬🇧 English';
+        document.querySelectorAll('[data-i18n]').forEach(el => {
+          const key = el.getAttribute('data-i18n');
+          if (I18N[lang][key]) el.textContent = I18N[lang][key];
+        });
       },
 
       updateUI() {
-        document.getElementById('streakCount').textContent = this.state.streak.current;
+        document.getElementById('streakCount').textContent = this.state.streak;
         document.getElementById('totalXpCount').textContent = this.state.totalXP;
       },
 
@@ -687,176 +434,41 @@
         document.querySelectorAll('.nav-item').forEach(b => b.classList.toggle('active', b.getAttribute('data-view') === view));
         const main = document.getElementById('mainContainer');
         main.innerHTML = '';
-        if (view === 'home') this.renderHome(main);
-        else if (view === 'learn') this.renderLearn(main);
+        if (view === 'learn') this.renderLearn(main);
         else if (view === 'vocab') this.renderVocab(main);
-        else if (view === 'review') this.renderReview(main);
         else if (view === 'progress') this.renderProgress(main);
         else if (view === 'settings') this.renderSettings(main);
       },
 
-      renderHome(main) {
-        const lang = LANGUAGES[this.state.activeLanguage] || LANGUAGES.english;
-        const lp = this.state.languages[this.state.activeLanguage];
-        const pct = Math.min(100, Math.round((this.state.dailyXP / this.state.dailyGoal) * 100));
-
-        main.innerHTML = `
-          <div class="card" style="border-left: 6px solid var(--primary);">
-            <span style="font-size: 2rem;">${lang.flag}</span>
-            <h2 style="font-size: 1.35rem; margin: 0.25rem 0;">Learning ${lang.name}</h2>
-            <p style="color: var(--text-muted); font-size: 0.9rem;">Level ${lp.level} • ${lp.completedLessons.length} Lessons Finished</p>
-            <button class="primary-btn" style="margin-top: 0.85rem;" onclick="App.navigate('learn')">Continue Learning →</button>
-          </div>
-
-          <div class="card">
-            <div style="display:flex; justify-content:space-between; margin-bottom:0.4rem; font-weight:700;">
-              <span>🎯 Daily Goal</span>
-              <span>${this.state.dailyXP} / ${this.state.dailyGoal} XP</span>
-            </div>
-            <div class="progress-bar-container">
-              <div class="progress-bar-fill" style="width: ${pct}%;"></div>
-            </div>
-          </div>
-
-          <h3 style="margin: 1.25rem 0 0.5rem 0;">🌍 Select Language (Exact 8)</h3>
-          <div class="lang-grid">
-            ${Object.values(LANGUAGES).map(l => {
-              const info = this.state.languages[l.id];
-              const isSel = this.state.activeLanguage === l.id;
-              return `
-                <div class="card lang-card ${isSel ? 'selected' : ''}" onclick="App.switchLang('${l.id}')">
-                  <div style="display:flex; align-items:center; gap:0.6rem;">
-                    <span style="font-size:1.8rem;">${l.flag}</span>
-                    <div>
-                      <strong>${l.name}</strong>
-                      <div style="font-size:0.75rem; color:var(--text-muted);">${info.level} • ${info.xp} XP</div>
-                    </div>
-                  </div>
-                </div>
-              `;
-            }).join('')}
-          </div>
-        `;
-      },
-
-      switchLang(langId) {
-        this.state.activeLanguage = langId;
-        StorageManager.save(this.state);
-        this.navigate('learn');
-      },
-
       renderLearn(main) {
-        const lang = LANGUAGES[this.state.activeLanguage];
-        const lp = this.state.languages[this.state.activeLanguage];
-        const curLevel = lp.level;
-        const curriculum = LESSON_DATABASE[this.state.activeLanguage]?.[curLevel] || LESSON_DATABASE.english.A1;
+        const lang = this.state.uiLang;
+        const t = I18N[lang];
+        const chapters = window.THAI_A1_CHAPTERS || [];
 
         main.innerHTML = `
-          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem;">
-            <h2>${lang.flag} ${lang.name} Curriculum</h2>
-            <select class="secondary-btn" onchange="App.setLevel(this.value)">
-              ${CEFR_LEVELS.map(lvl => {
-                const unlocked = ProgressTracker.isLevelUnlocked(this.state, this.state.activeLanguage, lvl.id);
-                return `<option value="${lvl.id}" ${lvl.id === curLevel ? 'selected' : ''} ${!unlocked ? 'disabled' : ''}>${lvl.name} ${!unlocked ? '🔒' : ''}</option>`;
-              }).join('')}
-            </select>
-          </div>
-
-          ${curriculum.units.map(unit => `
-            <div class="card">
-              <h3>${unit.title}</h3>
-              <p style="color:var(--text-muted); margin-bottom:1rem; font-size:0.9rem;">${unit.description}</p>
-              <div style="display:flex; flex-direction:column; gap:0.75rem;">
-                ${unit.lessons.map(ls => {
-                  const done = lp.completedLessons.includes(ls.id);
-                  return `
-                    <div style="display:flex; justify-content:space-between; align-items:center; padding:0.75rem; background:var(--bg-main); border-radius:var(--radius-md);">
-                      <div>
-                        <strong>${ls.title}</strong>
-                        <div style="font-size:0.8rem; color:var(--text-muted);">${ls.description}</div>
-                      </div>
-                      <button class="primary-btn" onclick="App.launchLesson('${this.state.activeLanguage}', '${curLevel}', '${unit.id}', '${ls.id}')">
-                        ${done ? 'Review ✓' : 'Start'}
-                      </button>
-                    </div>
-                  `;
-                }).join('')}
-              </div>
-            </div>
-          `).join('')}
-        `;
-      },
-
-      setLevel(lvl) {
-        if (!ProgressTracker.isLevelUnlocked(this.state, this.state.activeLanguage, lvl)) {
-          alert('Complete previous level first!');
-          return;
-        }
-        this.state.languages[this.state.activeLanguage].level = lvl;
-        StorageManager.save(this.state);
-        this.navigate('learn');
-      },
-
-      launchLesson(langId, levelId, unitId, lessonId) {
-        const data = getLessonData(langId, levelId, unitId, lessonId);
-        LessonEngine.start(data, langId, this.state);
-      },
-
-      renderVocab(main) {
-        const lang = LANGUAGES[this.state.activeLanguage];
-        const items = (this.state.srsItems || []).filter(i => i.langId === this.state.activeLanguage);
-
-        main.innerHTML = `
-          <h2>📖 Vocabulary Bank — ${lang.flag} ${lang.name}</h2>
-          ${items.length === 0 ? `<div class="card" style="text-align:center; padding:2rem;"><p>No words mastered yet.</p></div>` : `
-            <div style="display:grid; grid-template-columns:repeat(auto-fill, minmax(220px, 1fr)); gap:0.75rem; margin-top:1rem;">
-              ${items.map(v => `
-                <div class="card">
-                  <div style="display:flex; justify-content:space-between; align-items:center;">
-                    <strong>${v.word}</strong>
-                    <button class="audio-btn" onclick="AudioManager.speak('${v.word}', '${this.state.activeLanguage}')">🔊</button>
-                  </div>
-                  <div style="font-size:0.85rem; color:var(--text-muted); margin-top:0.4rem;">${v.meaning}</div>
-                </div>
-              `).join('')}
-            </div>
-          `}
-        `;
-      },
-
-      renderReview(main) {
-        const lang = LANGUAGES[this.state.activeLanguage];
-        const items = (this.state.srsItems || []).filter(i => i.langId === this.state.activeLanguage);
-        main.innerHTML = `
-          <h2>🔄 Spaced Repetition Review</h2>
-          <div class="card" style="text-align:center; padding:2.5rem 1rem; margin-top:1rem;">
-            <span style="font-size:3rem;">🧠</span>
-            <h3 style="margin:1rem 0;">${items.length} Words in Review Deck</h3>
-            <p style="color:var(--text-muted); margin-bottom:1.5rem;">Target: ${lang.flag} ${lang.name}</p>
-            <button class="primary-btn" ${items.length === 0 ? 'disabled' : ''} onclick="alert('Review session launched!')">
-              ${items.length === 0 ? 'All Caught Up!' : 'Begin Review Deck'}
-            </button>
-          </div>
-        `;
-      },
-
-      renderProgress(main) {
-        main.innerHTML = `
-          <h2>📊 Progress & Mastery</h2>
-          <div class="card" style="margin-top:1rem;">
-            <div style="display:flex; justify-content:space-around; text-align:center;">
-              <div><h3 style="color:var(--primary); font-size:1.5rem;">${this.state.totalXP}</h3><small>Total XP</small></div>
-              <div><h3 style="color:var(--warning); font-size:1.5rem;">${this.state.streak.current}</h3><small>Streak</small></div>
-            </div>
-          </div>
-          <h3 style="margin:1rem 0 0.5rem 0;">All 8 Languages Mastery</h3>
-          ${Object.values(LANGUAGES).map(l => {
-            const lp = this.state.languages[l.id];
+          <h2 style="margin-bottom:1rem;">🇹🇭 Thai A1 Course</h2>
+          ${chapters.map(ch => {
+            const chTitle = typeof ch.title === 'object' ? (ch.title[lang] || ch.title.en) : ch.title;
             return `
-              <div class="card" style="margin-bottom:0.75rem;">
-                <div style="display:flex; justify-content:space-between; font-size:0.9rem;">
-                  <strong>${l.flag} ${l.name} (${lp.level})</strong>
-                  <span>${lp.xp} XP • ${lp.completedLessons.length} Lessons</span>
+              <div class="card">
+                ${ch.coverImage ? `<img src="${ch.coverImage}" class="chapter-banner" alt="${chTitle}">` : ''}
+                <h3>${chTitle}</h3>
+                <div style="display:flex; flex-direction:column; gap:0.75rem; margin-top:0.85rem;">
+                  ${ch.units.map(unit => {
+                    const uTitle = typeof unit.title === 'object' ? (unit.title[lang] || unit.title.en) : unit.title;
+                    const done = this.state.completedLessons.includes(unit.id);
+                    return `
+                      <div style="display:flex; justify-content:space-between; align-items:center; padding:0.75rem; background:var(--bg-main); border-radius:var(--radius-md);">
+                        <div>
+                          <strong>${uTitle}</strong>
+                          <div style="font-size:0.8rem; color:var(--text-muted);">${unit.vocabulary?.length || 0} ${t.words_count} • Grammar</div>
+                        </div>
+                        <button class="primary-btn" onclick="App.launchLesson('${unit.id}')">
+                          ${done ? t.review : t.start}
+                        </button>
+                      </div>
+                    `;
+                  }).join('')}
                 </div>
               </div>
             `;
@@ -864,17 +476,63 @@
         `;
       },
 
-      renderSettings(main) {
+      launchLesson(unitId) {
+        for (let ch of (window.THAI_A1_CHAPTERS || [])) {
+          const u = ch.units.find(item => item.id === unitId);
+          if (u) {
+            LessonEngine.start(u, this.state);
+            return;
+          }
+        }
+      },
+
+      renderVocab(main) {
+        const lang = this.state.uiLang;
+        const t = I18N[lang];
+        const items = this.state.masteredVocab;
+
         main.innerHTML = `
-          <h2>⚙️ Settings & Backup</h2>
-          <div class="card" style="margin-top:1rem;">
-            <h3>Data Management</h3>
-            <p style="color:var(--text-muted); margin-bottom:1rem; font-size:0.85rem;">Export or restore your progress data (JSON format).</p>
-            <div style="display:flex; gap:0.75rem;">
-              <button class="primary-btn" onclick="App.exportData()">💾 Export JSON</button>
-              <button class="secondary-btn" onclick="document.getElementById('fileInp').click()">📥 Import JSON</button>
-              <input type="file" id="fileInp" style="display:none;" accept=".json" onchange="App.importData(event)">
+          <h2>📖 Vocabulary Bank</h2>
+          ${items.length === 0 ? `<div class="card" style="text-align:center; padding:2rem; margin-top:1rem;"><p>${t.vocab_empty}</p></div>` : `
+            <div style="display:grid; grid-template-columns:repeat(auto-fill, minmax(220px, 1fr)); gap:0.75rem; margin-top:1rem;">
+              ${items.map(v => `
+                <div class="card">
+                  <div style="display:flex; justify-content:space-between; align-items:center;">
+                    <strong>${v.word}</strong>
+                    <button class="audio-btn" onclick="AudioManager.speak('${v.word}')">🔊</button>
+                  </div>
+                  <small style="color:var(--primary); font-weight:700;">[${v.roman}]</small>
+                  <div style="font-size:0.85rem; color:var(--text-muted); margin-top:0.3rem;">
+                    ${typeof v.meaning === 'object' ? (v.meaning[lang] || v.meaning.en) : v.meaning}
+                  </div>
+                </div>
+              `).join('')}
             </div>
+          `}
+        `;
+      },
+
+      renderProgress(main) {
+        const lang = this.state.uiLang;
+        const t = I18N[lang];
+        main.innerHTML = `
+          <h2>📊 Progress</h2>
+          <div class="card" style="margin-top:1rem;">
+            <div style="display:flex; justify-content:space-around; text-align:center;">
+              <div><h3 style="color:var(--primary); font-size:1.5rem;">${this.state.totalXP}</h3><small>${t.total_xp}</small></div>
+              <div><h3 style="color:#F59E0B; font-size:1.5rem;">${this.state.streak}</h3><small>${t.streak}</small></div>
+            </div>
+          </div>
+        `;
+      },
+
+      renderSettings(main) {
+        const lang = this.state.uiLang;
+        const t = I18N[lang];
+        main.innerHTML = `
+          <h2>⚙️ Settings</h2>
+          <div class="card" style="margin-top:1rem;">
+            <button class="primary-btn" onclick="App.exportData()">${t.export_btn}</button>
           </div>
         `;
       },
@@ -885,26 +543,6 @@
         a.href = URL.createObjectURL(blob);
         a.download = `lingomaster_backup_${Date.now()}.json`;
         a.click();
-      },
-
-      importData(e) {
-        const file = e.target.files[0];
-        if (!file) return;
-        const reader = new FileReader();
-        reader.onload = (evt) => {
-          try {
-            const data = JSON.parse(evt.target.result);
-            if (data.languages) {
-              this.state = data;
-              StorageManager.save(this.state);
-              alert('Restored successfully!');
-              location.reload();
-            }
-          } catch(err) {
-            alert('Invalid JSON file.');
-          }
-        };
-        reader.readAsText(file);
       }
     };
 
