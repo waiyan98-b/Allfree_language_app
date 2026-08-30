@@ -3,17 +3,17 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
-  <title>LingoMaster — Thai Master 240</title>
+  <title>LingoMaster — Thai Master Course</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Sarabun:wght@400;600;700;800&family=Noto+Serif+Thai:wght@400;700;900&family=Padauk:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Noto+Sans+Thai:wght@400;600;700&family=Padauk:wght@400;700&display=swap" rel="stylesheet">
   <style>
     :root {
       --primary: #4F46E5; --primary-hover: #4338CA; --primary-light: #EEF2FF;
       --success: #10B981; --success-light: #ECFDF5; --error: #EF4444; --error-light: #FEF2F2;
       --bg-main: #F8FAFC; --bg-card: #FFFFFF; --text-main: #0F172A; --text-muted: #64748B;
-      --border-color: #E2E8F0; --radius-md: 14px; --radius-lg: 20px; --radius-full: 9999px;
-      --font-base: 'Plus Jakarta Sans', 'Padauk', 'Sarabun', sans-serif;
+      --border-color: #E2E8F0; --radius-md: 12px; --radius-lg: 16px; --radius-full: 9999px;
+      --font-base: 'Plus Jakarta Sans', 'Padauk', 'Noto Sans Thai', sans-serif;
       --transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
     }
     [data-theme="dark"] {
@@ -22,66 +22,70 @@
     }
     * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
     body { font-family: var(--font-base); background-color: var(--bg-main); color: var(--text-main); min-height: 100vh; line-height: 1.5; }
-    .thai-txt { font-family: 'Sarabun', 'Noto Serif Thai', sans-serif !important; }
+    .thai-txt { font-family: 'Noto Sans Thai', sans-serif !important; }
     .app-layout { display: flex; flex-direction: column; min-height: 100vh; }
-    .app-header { position: sticky; top: 0; z-index: 40; display: flex; justify-content: space-between; align-items: center; padding: 0.75rem 1.25rem; background-color: var(--bg-card); border-bottom: 1px solid var(--border-color); }
+    .app-header { position: sticky; top: 0; z-index: 40; display: flex; justify-content: space-between; align-items: center; padding: 0.75rem 1rem; background-color: var(--bg-card); border-bottom: 1px solid var(--border-color); }
     .brand { display: flex; align-items: center; gap: 0.5rem; font-weight: 800; font-size: 1.15rem; color: var(--primary); }
-    .header-actions { display: flex; align-items: center; gap: 0.5rem; }
-    .stat-pill { display: flex; align-items: center; gap: 0.35rem; background: var(--bg-main); padding: 0.35rem 0.65rem; border-radius: var(--radius-full); font-weight: 700; font-size: 0.85rem; border: 1px solid var(--border-color); }
-    .icon-btn { background: transparent; border: none; font-size: 1.1rem; cursor: pointer; padding: 0.4rem; border-radius: 8px; color: var(--text-main); }
-    .lang-switcher-btn { font-weight: 700; font-size: 0.8rem; padding: 0.35rem 0.65rem; border-radius: var(--radius-full); border: 1px solid var(--border-color); background: var(--bg-main); cursor: pointer; color: var(--text-main); }
-    .main-content { flex: 1; padding: 1.25rem 1rem 5.5rem 1rem; max-width: 900px; width: 100%; margin: 0 auto; }
-    .bottom-nav { position: fixed; bottom: 0; left: 0; right: 0; height: 62px; background: var(--bg-card); border-top: 1px solid var(--border-color); display: flex; justify-content: space-around; align-items: center; z-index: 50; }
-    .nav-item { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; background: transparent; border: none; color: var(--text-muted); font-size: 0.75rem; font-weight: 600; gap: 0.2rem; height: 100%; cursor: pointer; transition: var(--transition); }
+    .header-actions { display: flex; align-items: center; gap: 0.4rem; }
+    .stat-pill { display: flex; align-items: center; gap: 0.3rem; background: var(--bg-main); padding: 0.3rem 0.6rem; border-radius: var(--radius-full); font-weight: 700; font-size: 0.8rem; border: 1px solid var(--border-color); }
+    .icon-btn { background: transparent; border: none; font-size: 1.1rem; cursor: pointer; padding: 0.35rem; border-radius: 8px; color: var(--text-main); }
+    .lang-switcher-btn { font-weight: 700; font-size: 0.75rem; padding: 0.3rem 0.6rem; border-radius: var(--radius-full); border: 1px solid var(--border-color); background: var(--bg-main); cursor: pointer; color: var(--text-main); }
+    .main-content { flex: 1; padding: 1rem 0.85rem 5.5rem 0.85rem; max-width: 860px; width: 100%; margin: 0 auto; }
+    .bottom-nav { position: fixed; bottom: 0; left: 0; right: 0; height: 60px; background: var(--bg-card); border-top: 1px solid var(--border-color); display: flex; justify-content: space-around; align-items: center; z-index: 50; }
+    .nav-item { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; background: transparent; border: none; color: var(--text-muted); font-size: 0.72rem; font-weight: 600; gap: 0.2rem; height: 100%; cursor: pointer; transition: var(--transition); }
     .nav-item.active { color: var(--primary); }
-    .card { background: var(--bg-card); border-radius: var(--radius-lg); padding: 1.25rem; border: 1px solid var(--border-color); margin-bottom: 1.25rem; }
-    .primary-btn { background: var(--primary); color: #fff; border: none; padding: 0.75rem 1.25rem; border-radius: var(--radius-md); font-weight: 700; font-size: 1rem; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem; transition: var(--transition); min-height: 44px; }
+    .card { background: var(--bg-card); border-radius: var(--radius-lg); padding: 1.1rem; border: 1px solid var(--border-color); margin-bottom: 1rem; }
+    .primary-btn { background: var(--primary); color: #fff; border: none; padding: 0.7rem 1.1rem; border-radius: var(--radius-md); font-weight: 700; font-size: 0.95rem; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem; transition: var(--transition); min-height: 42px; }
     .primary-btn:hover:not(:disabled) { background: var(--primary-hover); }
     .primary-btn:disabled { opacity: 0.5; cursor: not-allowed; }
-    .btn-large { width: 100%; font-size: 1.05rem; padding: 0.85rem; }
-    .secondary-btn { background: var(--bg-card); color: var(--text-main); border: 1px solid var(--border-color); padding: 0.5rem 0.85rem; border-radius: var(--radius-md); font-weight: 600; cursor: pointer; font-size: 0.85rem; }
-    .progress-bar-container { width: 100%; height: 8px; background: var(--border-color); border-radius: var(--radius-full); overflow: hidden; }
+    .btn-large { width: 100%; font-size: 1rem; padding: 0.8rem; }
+    .secondary-btn { background: var(--bg-card); color: var(--text-main); border: 1px solid var(--border-color); padding: 0.45rem 0.75rem; border-radius: var(--radius-md); font-weight: 600; cursor: pointer; font-size: 0.8rem; }
+    .progress-bar-container { width: 100%; height: 7px; background: var(--border-color); border-radius: var(--radius-full); overflow: hidden; }
     .progress-bar-fill { height: 100%; background: linear-gradient(90deg, var(--primary), #818CF8); border-radius: var(--radius-full); transition: width 0.4s ease; }
-    .chapter-banner { width: 100%; height: 130px; border-radius: var(--radius-md); object-fit: cover; margin-bottom: 0.85rem; }
+    .chapter-banner { width: 100%; height: 120px; border-radius: var(--radius-md); object-fit: cover; margin-bottom: 0.75rem; }
     
-    /* Matching Pairs Layout */
-    .matching-container { display: grid; grid-template-columns: 1fr 1fr; gap: 0.85rem; margin-top: 1rem; }
-    .matching-col { display: flex; flex-direction: column; gap: 0.85rem; }
-    .match-item { background: var(--bg-card); border: 2px solid var(--border-color); padding: 0.75rem 0.5rem; border-radius: var(--radius-md); display: flex; flex-direction: column; align-items: center; justify-content: center; cursor: pointer; min-height: 72px; height: 72px; text-align: center; transition: var(--transition); }
+    /* Matching Pairs */
+    .matching-container { display: grid; grid-template-columns: 1fr 1fr; gap: 0.65rem; margin-top: 0.85rem; }
+    .matching-col { display: flex; flex-direction: column; gap: 0.65rem; }
+    .match-item { background: var(--bg-card); border: 1.5px solid var(--border-color); padding: 0.6rem 0.4rem; border-radius: var(--radius-md); display: flex; flex-direction: column; align-items: center; justify-content: center; cursor: pointer; min-height: 64px; height: 64px; text-align: center; transition: var(--transition); }
     .match-item.selected { border-color: var(--primary); background: var(--primary-light); color: var(--primary); }
-    .match-item.matched { opacity: 0.3; border-color: var(--success); pointer-events: none; }
+    .match-item.matched { opacity: 0.25; border-color: var(--success); pointer-events: none; }
     
-    .options-grid { display: grid; grid-template-columns: 1fr; gap: 0.75rem; }
-    .option-btn { background: var(--bg-card); border: 2px solid var(--border-color); padding: 1rem; border-radius: var(--radius-md); font-size: 1.05rem; font-weight: 600; text-align: left; cursor: pointer; color: var(--text-main); display: flex; justify-content: space-between; align-items: center; transition: var(--transition); }
+    .options-grid { display: grid; grid-template-columns: 1fr; gap: 0.65rem; }
+    .option-btn { background: var(--bg-card); border: 1.5px solid var(--border-color); padding: 0.85rem; border-radius: var(--radius-md); font-size: 1rem; font-weight: 600; text-align: left; cursor: pointer; color: var(--text-main); display: flex; justify-content: space-between; align-items: center; transition: var(--transition); }
     .option-btn.selected { border-color: var(--primary); background: var(--primary-light); color: var(--primary); }
-    .sentence-construction-zone { background: var(--bg-main); border: 2px dashed var(--border-color); margin-bottom: 1.25rem; min-height: 55px; display: flex; flex-wrap: wrap; gap: 0.5rem; padding: 0.75rem; border-radius: var(--radius-md); align-items: center; }
-    .word-bank { display: flex; flex-wrap: wrap; gap: 0.5rem; }
-    .word-chip { padding: 0.6rem 0.95rem; background: var(--bg-card); border: 1.5px solid var(--border-color); border-radius: 10px; font-weight: 600; cursor: pointer; color: var(--text-main); font-size: 1rem; }
+    .sentence-construction-zone { background: var(--bg-main); border: 2px dashed var(--border-color); margin-bottom: 1rem; min-height: 50px; display: flex; flex-wrap: wrap; gap: 0.4rem; padding: 0.6rem; border-radius: var(--radius-md); align-items: center; }
+    .word-bank { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+    .word-chip { padding: 0.5rem 0.8rem; background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 8px; font-weight: 600; cursor: pointer; color: var(--text-main); font-size: 0.95rem; }
     .word-chip.used { opacity: 0.3; pointer-events: none; }
     
-    /* AI Chat & Bubbles */
-    .chat-bubble { max-width: 85%; padding: 0.85rem 1rem; border-radius: 16px; margin-bottom: 0.75rem; display: flex; flex-direction: column; gap: 0.25rem; }
+    .chat-bubble { max-width: 85%; padding: 0.75rem 0.9rem; border-radius: 14px; margin-bottom: 0.65rem; display: flex; flex-direction: column; gap: 0.2rem; }
     .chat-bubble.left { align-self: flex-start; background: var(--bg-main); border-bottom-left-radius: 4px; border: 1px solid var(--border-color); }
     .chat-bubble.right { align-self: flex-end; background: var(--primary-light); color: var(--primary); border-bottom-right-radius: 4px; border: 1px solid rgba(79, 70, 229, 0.2); }
     
-    .drawing-pad-box { border: 2px solid var(--border-color); border-radius: var(--radius-md); background: #fff; touch-action: none; width: 100%; max-width: 320px; height: 230px; margin: 1rem auto; display: block; }
+    .drawing-pad-box { border: 1.5px solid var(--border-color); border-radius: var(--radius-md); background: #fff; touch-action: none; width: 100%; max-width: 300px; height: 200px; margin: 0.75rem auto; display: block; }
     .modal-overlay { position: fixed; inset: 0; background: rgba(15, 23, 42, 0.6); backdrop-filter: blur(4px); z-index: 100; display: flex; justify-content: center; align-items: center; }
     .modal-overlay.hidden { display: none; }
-    .lesson-dialog { background: var(--bg-card); width: 100%; height: 100%; max-width: 680px; display: flex; flex-direction: column; }
-    @media (min-width: 768px) { .lesson-dialog { height: 90vh; border-radius: var(--radius-lg); overflow: hidden; } }
-    .lesson-header { display: flex; align-items: center; padding: 0.85rem 1.25rem; gap: 0.85rem; border-bottom: 1px solid var(--border-color); }
-    .lesson-body { flex: 1; padding: 1.25rem; overflow-y: auto; display: flex; flex-direction: column; }
-    .feedback-banner { padding: 0.85rem 1.25rem; border-top: 1px solid var(--border-color); }
+    .lesson-dialog { background: var(--bg-card); width: 100%; height: 100%; max-width: 650px; display: flex; flex-direction: column; }
+    @media (min-width: 768px) { .lesson-dialog { height: 88vh; border-radius: var(--radius-lg); overflow: hidden; } }
+    .lesson-header { display: flex; align-items: center; padding: 0.75rem 1rem; gap: 0.75rem; border-bottom: 1px solid var(--border-color); }
+    .lesson-body { flex: 1; padding: 1.1rem; overflow-y: auto; display: flex; flex-direction: column; }
+    .feedback-banner { padding: 0.75rem 1rem; border-top: 1px solid var(--border-color); }
     .feedback-banner.correct { background: var(--success-light); color: #065F46; }
     .feedback-banner.incorrect { background: var(--error-light); color: #991B1B; }
-    .audio-btn { background: var(--primary-light); border: none; color: var(--primary); width: 44px; height: 44px; border-radius: var(--radius-full); display: inline-flex; align-items: center; justify-content: center; cursor: pointer; font-size: 1.2rem; }
+    .audio-btn { background: var(--primary-light); border: none; color: var(--primary); width: 40px; height: 40px; border-radius: var(--radius-full); display: inline-flex; align-items: center; justify-content: center; cursor: pointer; font-size: 1.1rem; }
     
-    /* Thai Letters Traditional Grid */
-    .grid-thai-letters { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.75rem; }
-    .thai-letter-card { background: var(--bg-card); border: 2px solid var(--border-color); padding: 1.1rem 0.5rem; text-align: center; border-radius: var(--radius-md); cursor: pointer; transition: var(--transition); display: flex; flex-direction: column; align-items: center; justify-content: center; }
-    .thai-letter-card:active { transform: scale(0.95); background: var(--primary-light); }
-    .thai-letter-char { font-family: 'Noto Serif Thai', 'Sarabun', serif; font-size: 2.6rem; font-weight: 900; color: var(--primary); line-height: 1.1; margin-bottom: 4px; }
-    .mic-btn { width: 70px; height: 70px; border-radius: var(--radius-full); background: var(--primary); color: #fff; border: none; font-size: 2rem; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; margin: 1rem auto; box-shadow: 0 4px 14px rgba(79, 70, 229, 0.4); }
+    /* Script Compact Grid */
+    .script-tabs { display: flex; gap: 0.4rem; overflow-x: auto; padding-bottom: 0.5rem; margin-bottom: 0.85rem; }
+    .script-tab-btn { padding: 0.4rem 0.75rem; border-radius: var(--radius-full); border: 1px solid var(--border-color); background: var(--bg-card); font-size: 0.8rem; font-weight: 700; cursor: pointer; white-space: nowrap; color: var(--text-main); }
+    .script-tab-btn.active { background: var(--primary); color: #fff; border-color: var(--primary); }
+    .grid-thai-compact { display: grid; grid-template-columns: repeat(auto-fill, minmax(75px, 1fr)); gap: 0.5rem; }
+    .thai-compact-card { background: var(--bg-card); border: 1.5px solid var(--border-color); padding: 0.55rem 0.35rem; text-align: center; border-radius: 10px; cursor: pointer; transition: var(--transition); }
+    .thai-compact-card:active { transform: scale(0.96); background: var(--primary-light); }
+    .thai-compact-char { font-size: 1.45rem; font-weight: 700; color: var(--primary); line-height: 1.15; }
+    .thai-compact-sub { font-size: 0.75rem; font-weight: 600; color: var(--text-main); margin-top: 2px; }
+    
+    .mic-btn { width: 64px; height: 64px; border-radius: var(--radius-full); background: var(--primary); color: #fff; border: none; font-size: 1.8rem; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; margin: 0.85rem auto; box-shadow: 0 4px 12px rgba(79, 70, 229, 0.35); }
     .mic-btn.listening { background: var(--error); animation: pulse 1.2s infinite; }
     @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.08); } 100% { transform: scale(1); } }
   </style>
@@ -89,7 +93,7 @@
 <body>
   <div id="app" class="app-layout">
     <header class="app-header">
-      <div class="brand"><span>🇹🇭</span><span>Thai Master 240</span></div>
+      <div class="brand"><span>🇹🇭</span><span>Thai Master</span></div>
       <div class="header-actions">
         <button id="uiLangToggleBtn" class="lang-switcher-btn">🇲🇲 မြန်မာ</button>
         <div class="stat-pill">🔥 <span id="streakCount">1</span></div>
@@ -101,11 +105,11 @@
     <main id="mainContainer" class="main-content"></main>
 
     <nav class="bottom-nav">
-      <button class="nav-item active" data-view="learn"><span style="font-size:1.2rem;">📚</span><span data-i18n="nav_learn">Learn</span></button>
-      <button class="nav-item" data-view="script"><span style="font-size:1.2rem;">✍️</span><span data-i18n="nav_script">Script & Reading</span></button>
-      <button class="nav-item" data-view="vocab"><span style="font-size:1.2rem;">📖</span><span data-i18n="nav_vocab">Vocab</span></button>
-      <button class="nav-item" data-view="progress"><span style="font-size:1.2rem;">📊</span><span data-i18n="nav_progress">Progress</span></button>
-      <button class="nav-item" data-view="settings"><span style="font-size:1.2rem;">⚙️</span><span data-i18n="nav_settings">Settings</span></button>
+      <button class="nav-item active" data-view="learn"><span style="font-size:1.15rem;">📚</span><span data-i18n="nav_learn">Learn</span></button>
+      <button class="nav-item" data-view="script"><span style="font-size:1.15rem;">✍️</span><span data-i18n="nav_script">Script & Reading</span></button>
+      <button class="nav-item" data-view="vocab"><span style="font-size:1.15rem;">📖</span><span data-i18n="nav_vocab">Vocab</span></button>
+      <button class="nav-item" data-view="progress"><span style="font-size:1.15rem;">📊</span><span data-i18n="nav_progress">Progress</span></button>
+      <button class="nav-item" data-view="settings"><span style="font-size:1.15rem;">⚙️</span><span data-i18n="nav_settings">Settings</span></button>
     </nav>
   </div>
 
@@ -116,22 +120,22 @@
         <div class="progress-bar-container" style="flex:1;">
           <div id="lessonProgressBar" class="progress-bar-fill" style="width: 0%;"></div>
         </div>
-        <div id="lessonStepIndicator" style="font-size: 0.85rem; font-weight: 700; color: var(--text-muted);">Step 1/15</div>
+        <div id="lessonStepIndicator" style="font-size: 0.8rem; font-weight: 700; color: var(--text-muted);">Step 1/15</div>
       </header>
       
       <div id="lessonContainer" class="lesson-body"></div>
       
       <footer class="lesson-footer">
         <div id="feedbackBanner" class="feedback-banner hidden">
-          <div style="display:flex; align-items:flex-start; gap:0.6rem;">
-            <span id="feedbackIcon" style="font-size:1.3rem;">✓</span>
+          <div style="display:flex; align-items:flex-start; gap:0.5rem;">
+            <span id="feedbackIcon" style="font-size:1.2rem;">✓</span>
             <div>
               <strong id="feedbackTitle">Correct!</strong>
-              <p id="feedbackExplanation" style="font-size:0.85rem;"></p>
+              <p id="feedbackExplanation" style="font-size:0.8rem;"></p>
             </div>
           </div>
         </div>
-        <div style="padding: 0.85rem 1.25rem;">
+        <div style="padding: 0.75rem 1rem;">
           <button id="lessonActionBtn" class="primary-btn btn-large" disabled>Check</button>
         </div>
       </footer>
@@ -139,72 +143,182 @@
   </div>
 
   <script>
-    // 240 Units Complete Roadmap
-    const CHAPTER_METADATA = [
-      { title: { my: "Chapter 1: အခြေခံနှုတ်ဆက်ခြင်းနှင့် ယဉ်ကျေးစကား (A1)", en: "Chapter 1: Greetings & Politeness (A1)" }, img: "https://images.unsplash.com/photo-1528181304800-259b08848526?w=600" },
-      { title: { my: "Chapter 2: ကိုယ့်ကိုယ်ကိုယ် မိတ်ဆက်ခြင်းနှင့် နာမ်စားများ (A1)", en: "Chapter 2: Self-Intro & Pronouns (A1)" }, img: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=600" },
-      { title: { my: "Chapter 3: ဂဏန်းများ၊ ဈေးနှုန်းနှင့် အချိန် (A1)", en: "Chapter 3: Numbers, Prices & Time (A1)" }, img: "https://images.unsplash.com/photo-1580519542036-c47de6196ba5?w=600" },
-      { title: { my: "Chapter 4: အစားအသောက်နှင့် စားသောက်ဆိုင် (A1)", en: "Chapter 4: Food & Restaurant (A1)" }, img: "https://images.unsplash.com/photo-1559314809-0d155014e29e?w=600" },
-      { title: { my: "Chapter 5: ဈေးဝယ်ခြင်းနှင့် အဝတ်အထည် (A2)", en: "Chapter 5: Shopping & Clothes (A2)" }, img: "https://images.unsplash.com/photo-1513151233558-d860c5398176?w=600" },
-      { title: { my: "Chapter 6: လမ်းမေးခြင်းနှင့် မြို့တွင်း သွားလာရေး (A2)", en: "Chapter 6: Directions & Transport (A2)" }, img: "https://images.unsplash.com/photo-1508009603885-50cf7c579365?w=600" },
-      { title: { my: "Chapter 7: မိသားစု၊ နေအိမ်နှင့် နေ့စဉ်ဘဝ (B1)", en: "Chapter 7: Family, Home & Routine (B1)" }, img: "https://images.unsplash.com/photo-1511895426328-dc8714191300?w=600" },
-      { title: { my: "Chapter 8: ရာသီဥတု၊ ခန္ဓာကိုယ်နှင့် ကျန်းမာရေး (B1)", en: "Chapter 8: Weather & Health (B1)" }, img: "https://images.unsplash.com/photo-1516574187841-cb9cc2ca948b?w=600" },
-      { title: { my: "Chapter 9: ခံစားချက်နှင့် လူမှုဆက်ဆံရေး (B2)", en: "Chapter 9: Feelings & Socializing (B2)" }, img: "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=600" },
-      { title: { my: "Chapter 10: စီးပွားရေးနှင့် ရုံးသုံး ထိုင်းစကား (B2)", en: "Chapter 10: Business & Office Thai (B2)" }, img: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=600" },
-      { title: { my: "Chapter 11: ယဉ်ကျေးမှု၊ ဥပဒေနှင့် သတင်းမီဒီယာ (C1)", en: "Chapter 11: Culture, Law & Media (C1)" }, img: "https://images.unsplash.com/photo-1541872703-74c5e44368f9?w=600" },
-      { title: { my: "Chapter 12: စကားပုံများ၊ ဗန်းစကားနှင့် Native အသုံးများ (C2)", en: "Chapter 12: Idioms, Slang & Native (C2)" }, img: "https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=600" }
+    // Chapter-specific Vocabularies
+    const CHAPTER_TOPICS = [
+      {
+        id: "th-c1",
+        title: { my: "Chapter 1: အခြေခံနှုတ်ဆက်ခြင်းနှင့် ယဉ်ကျေးစကား (A1)", en: "Chapter 1: Greetings & Politeness (A1)" },
+        img: "https://images.unsplash.com/photo-1528181304800-259b08848526?w=600",
+        vocab: [
+          { word: "สวัสดี", roman: "sà-wàt-dii", meaning: { my: "မင်္ဂလာပါ", en: "Hello" } },
+          { word: "ขอบคุณ", roman: "khɔ̀ɔp-khun", meaning: { my: "ကျေးဇူးတင်ပါတယ်", en: "Thank you" } },
+          { word: "ขอโทษ", roman: "khɔ̌ɔ-thôot", meaning: { my: "တောင်းပန်ပါတယ်", en: "Sorry" } },
+          { word: "สบายดี", roman: "sà-baai-dii", meaning: { my: "နေကောင်းပါတယ်", en: "I'm fine" } },
+          { word: "ไม่เป็นไร", roman: "mâi-pen-rai", meaning: { my: "ရပါတယ်", en: "No problem" } }
+        ]
+      },
+      {
+        id: "th-c2",
+        title: { my: "Chapter 2: ကိုယ့်ကိုယ်ကိုယ် မိတ်ဆက်ခြင်းနှင့် နာမ်စားများ (A1)", en: "Chapter 2: Self-Introduction (A1)" },
+        img: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=600",
+        vocab: [
+          { word: "ผม", roman: "phǒm", meaning: { my: "ကျွန်တော်", en: "I (male)" } },
+          { word: "ฉัน", roman: "chǎn", meaning: { my: "ကျွန်မ", en: "I (female)" } },
+          { word: "ชื่อ", roman: "chʉ̂ʉ", meaning: { my: "နာမည်", en: "Name" } },
+          { word: "คนพม่า", roman: "khon-phá-mâa", meaning: { my: "မြန်မာလူမျိုး", en: "Myanmar person" } },
+          { word: "ยินดีที่ได้รู้จัก", roman: "yin-dii-thîi-dâi-rúu-jàk", meaning: { my: "တွေ့ရတာ ဝမ်းသာပါတယ်", en: "Nice to meet you" } }
+        ]
+      },
+      {
+        id: "th-c3",
+        title: { my: "Chapter 3: ဂဏန်းများ၊ ဈေးနှုန်းနှင့် အချိန် (A1)", en: "Chapter 3: Numbers & Time (A1)" },
+        img: "https://images.unsplash.com/photo-1580519542036-c47de6196ba5?w=600",
+        vocab: [
+          { word: "หนึ่ง", roman: "nùeng", meaning: { my: "တစ် (၁)", en: "One" } },
+          { word: "สิบ", roman: "sìp", meaning: { my: "ဆယ် (၁၀)", en: "Ten" } },
+          { word: "บาท", roman: "bàat", meaning: { my: "ဘတ် (ငွေ)", en: "Baht" } },
+          { word: "เท่าไหร่", roman: "thâo-rài", meaning: { my: "ဘယ်လောက်လဲ", en: "How much" } },
+          { word: "กี่โมง", roman: "gìi-moong", meaning: { my: "ဘယ်နှစ်နာရီလဲ", en: "What time" } }
+        ]
+      },
+      {
+        id: "th-c4",
+        title: { my: "Chapter 4: အစားအသောက်နှင့် စားသောက်ဆိုင် (A1)", en: "Chapter 4: Food & Restaurant (A1)" },
+        img: "https://images.unsplash.com/photo-1559314809-0d155014e29e?w=600",
+        vocab: [
+          { word: "ข้าว", roman: "khâao", meaning: { my: "ထမင်း", en: "Rice" } },
+          { word: "ก๋วยเตี๋ยว", roman: "gǔai-dtǐao", meaning: { my: "ခေါက်ဆွဲ", en: "Noodles" } },
+          { word: "อร่อย", roman: "à-rɔ̀y", meaning: { my: "အရသာရှိသည်", en: "Delicious" } },
+          { word: "เผ็ด", roman: "phèt", meaning: { my: "စပ်သည်", en: "Spicy" } },
+          { word: "เช็คบิล", roman: "chék-bin", meaning: { my: "ဘေလ်ရှင်းမည်", en: "Bill please" } }
+        ]
+      },
+      {
+        id: "th-c5",
+        title: { my: "Chapter 5: ဈေးဝယ်ခြင်းနှင့် အဝတ်အထည် (A2)", en: "Chapter 5: Shopping & Clothes (A2)" },
+        img: "https://images.unsplash.com/photo-1513151233558-d860c5398176?w=600",
+        vocab: [
+          { word: "เสื้อ", roman: "sʉ̂a", meaning: { my: "အင်္ကျီ", en: "Shirt" } },
+          { word: "กางเกง", roman: "gaang-geeng", meaning: { my: "ဘောင်းဘီ", en: "Pants" } },
+          { word: "ลอง", roman: "lɔɔng", meaning: { my: "စမ်းဝတ်ကြည့်သည်", en: "Try on" } },
+          { word: "แพง", roman: "phɛɛng", meaning: { my: "ဈေးကြီးသည်", en: "Expensive" } },
+          { word: "ลดได้ไหม", roman: "lót-dâi-mǎi", meaning: { my: "ဈေးလျှော့လို့ရမလား", en: "Discount please" } }
+        ]
+      },
+      {
+        id: "th-c6",
+        title: { my: "Chapter 6: လမ်းမေးခြင်းနှင့် မြို့တွင်း သွားလာရေး (A2)", en: "Chapter 6: Directions & Transport (A2)" },
+        img: "https://images.unsplash.com/photo-1508009603885-50cf7c579365?w=600",
+        vocab: [
+          { word: "แท็กซี่", roman: "thɛ́k-sîi", meaning: { my: "တက္ကစီ", en: "Taxi" } },
+          { word: "เลี้ยวซ้าย", roman: "líao-sáai", meaning: { my: "ဘယ်ကွေ့ပါ", en: "Turn left" } },
+          { word: "เลี้ยวขวา", roman: "líao-khwǎa", meaning: { my: "ညာကွေ့ပါ", en: "Turn right" } },
+          { word: "ตรงไป", roman: "drong-bpai", meaning: { my: "တည့်တည့်သွားပါ", en: "Go straight" } },
+          { word: "สนามบิน", roman: "sà-nǎam-bin", meaning: { my: "လေဆိပ်", en: "Airport" } }
+        ]
+      },
+      {
+        id: "th-c7",
+        title: { my: "Chapter 7: မိသားစု၊ နေအိမ်နှင့် နေ့စဉ်ဘဝ (B1)", en: "Chapter 7: Family & Home (B1)" },
+        img: "https://images.unsplash.com/photo-1511895426328-dc8714191300?w=600",
+        vocab: [
+          { word: "พ่อ", roman: "phɔ̂ɔ", meaning: { my: "ဖေဖေ", en: "Father" } },
+          { word: "แม่", roman: "mɛ̂ɛ", meaning: { my: "မေမေ", en: "Mother" } },
+          { word: "บ้าน", roman: "bâan", meaning: { my: "အိမ်", en: "House" } },
+          { word: "ห้องนอน", roman: "hɔ̂ng-nɔɔn", meaning: { my: "အိပ်ခန်း", en: "Bedroom" } },
+          { word: "ตื่นนอน", roman: "dtʉ̀ʉn-nɔɔn", meaning: { my: "အိပ်ရာထသည်", en: "Wake up" } }
+        ]
+      },
+      {
+        id: "th-c8",
+        title: { my: "Chapter 8: ရာသီဥတု၊ ခန္ဓာကိုယ်နှင့် ကျန်းမာရေး (B1)", en: "Chapter 8: Weather & Health (B1)" },
+        img: "https://images.unsplash.com/photo-1516574187841-cb9cc2ca948b?w=600",
+        vocab: [
+          { word: "ร้อน", roman: "rɔ́ɔn", meaning: { my: "ပူသည်", en: "Hot" } },
+          { word: "หนาว", roman: "nǎao", meaning: { my: "အေးသည်", en: "Cold" } },
+          { word: "ปวดหัว", roman: "bpùat-hǔa", meaning: { my: "ခေါင်းကိုက်သည်", en: "Headache" } },
+          { word: "ไม่สบาย", roman: "mâi-sà-baai", meaning: { my: "နေမကောင်းပါ", en: "Sick" } },
+          { word: "โรงพยาบาล", roman: "roong-pha-yaa-baan", meaning: { my: "ဆေးရုံ", en: "Hospital" } }
+        ]
+      },
+      {
+        id: "th-c9",
+        title: { my: "Chapter 9: ခံစားချက်နှင့် လူမှုဆက်ဆံရေး (B2)", en: "Chapter 9: Feelings & Socializing (B2)" },
+        img: "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=600",
+        vocab: [
+          { word: "ดีใจ", roman: "dii-jai", meaning: { my: "ဝမ်းသာသည်", en: "Glad" } },
+          { word: "เสียใจ", roman: "sǐa-jai", meaning: { my: "စိတ်မကောင်းဖြစ်သည်", en: "Sad" } },
+          { word: "กังวล", roman: "gang-won", meaning: { my: "စိတ်ပူသည်", en: "Worried" } },
+          { word: "เห็นด้วย", roman: "hěn-dûay", meaning: { my: "သဘောတူသည်", en: "Agree" } },
+          { word: "สู้ๆ", roman: "sûu-sûu", meaning: { my: "ကြိုးစားပါ/Fighting", en: "Keep fighting" } }
+        ]
+      },
+      {
+        id: "th-c10",
+        title: { my: "Chapter 10: စီးပွားရေးနှင့် ရုံးသုံး ထိုင်းစကား (B2)", en: "Chapter 10: Business & Workplace (B2)" },
+        img: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=600",
+        vocab: [
+          { word: "บริษัท", roman: "bɔɔ-rí-sàt", meaning: { my: "ကုမ္ပဏီ", en: "Company" } },
+          { word: "ประชุม", roman: "bprà-chum", meaning: { my: "အစည်းအဝေး", en: "Meeting" } },
+          { word: "ผู้จัดการ", roman: "phûu-jàt-gaan", meaning: { my: "မန်နေဂျာ", en: "Manager" } },
+          { word: "สัญญา", roman: "sǎn-yaa", meaning: { my: "စာချုပ်", en: "Contract" } },
+          { word: "ลูกค้า", roman: "lûuk-kháa", meaning: { my: "ဖောက်သည်", en: "Client" } }
+        ]
+      },
+      {
+        id: "th-c11",
+        title: { my: "Chapter 11: ယဉ်ကျေးမှု၊ ဥပဒေနှင့် သတင်းမီဒီယာ (C1)", en: "Chapter 11: Culture, Law & News (C1)" },
+        img: "https://images.unsplash.com/photo-1541872703-74c5e44368f9?w=600",
+        vocab: [
+          { word: "ข่าว", roman: "khàao", meaning: { my: "သတင်း", en: "News" } },
+          { word: "รัฐบาล", roman: "rát-thà-baan", meaning: { my: "အစိုးရ", en: "Government" } },
+          { word: "กฎหมาย", roman: "gòt-mǎai", meaning: { my: "ဥပဒေ", en: "Law" } },
+          { word: "สงกรานต์", roman: "sǒng-graan", meaning: { my: "သင်္ကြန်ပွဲတော်", en: "Songkran" } },
+          { word: "วัฒนธรรม", roman: "wát-thá-ná-tham", meaning: { my: "ယဉ်ကျေးမှု", en: "Culture" } }
+        ]
+      },
+      {
+        id: "th-c12",
+        title: { my: "Chapter 12: စကားပုံများ၊ ဗန်းစကားနှင့် Native အသုံးများ (C2)", en: "Chapter 12: Idioms, Slang & Native (C2)" },
+        img: "https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=600",
+        vocab: [
+          { word: "สุภาษิต", roman: "sù-phaa-sìt", meaning: { my: "စကားပုံ", en: "Proverb" } },
+          { word: "ปังมาก", roman: "bpang-mâak", meaning: { my: "အရမ်းလန်းတယ်", en: "Slaying/Fabulous" } },
+          { word: "แกง", roman: "gɛɛng", meaning: { my: "စနောက်လှည့်စားသည်", en: "Prank/Tease" } },
+          { word: "ตลก", roman: "dtà-lòk", meaning: { my: "ရယ်ရသည်/ဟာသ", en: "Funny" } },
+          { word: "เชี่ยวชาญ", roman: "chîao-chaan", meaning: { my: "ကျွမ်းကျင်နှံ့စပ်သည်", en: "Expert/Fluent" } }
+        ]
+      }
     ];
 
-    const CORE_VOCAB_BANK = [
-      { word: "สวัสดี", roman: "sà-wàt-dii", meaning: { my: "မင်္ဂလာပါ", en: "Hello" } },
-      { word: "ขอบคุณ", roman: "khɔ̀ɔp-khun", meaning: { my: "ကျေးဇူးတင်ပါတယ်", en: "Thank you" } },
-      { word: "ขอโทษ", roman: "khɔ̌ɔ-thôot", meaning: { my: "တောင်းပန်ပါတယ်", en: "Sorry" } },
-      { word: "สบายดี", roman: "sà-baai-dii", meaning: { my: "နေကောင်းပါတယ်", en: "I'm fine" } },
-      { word: "ไม่เป็นไร", roman: "mâi-pen-rai", meaning: { my: "ရပါတယ်", en: "No problem" } },
-      { word: "อรุณสวัสดิ์", roman: "à-run-sà-wàt", meaning: { my: "မင်္ဂလာနံနက်ခင်းပါ", en: "Good morning" } },
-      { word: "ราตรีสวัสดิ์", roman: "raa-trii-sà-wàt", meaning: { my: "ကောင်းသောညပါ", en: "Good night" } },
-      { word: "ลาก่อน", roman: "laa-gòn", meaning: { my: "နှုတ်ဆက်ပါတယ်", en: "Goodbye" } },
-      { word: "ครับ", roman: "khráp", meaning: { my: "ခင်ဗျာ (ကျား)", en: "Male polite" } },
-      { word: "ค่ะ", roman: "khâ", meaning: { my: "ရှင့် (မ)", en: "Female polite" } },
-      { word: "กินข้าว", roman: "gin-khâao", meaning: { my: "ထမင်းစားသည်", en: "Eat meal" } },
-      { word: "ดื่มน้ำ", roman: "dʉ̀ʉm-nám", meaning: { my: "ရေသောက်သည်", en: "Drink water" } },
-      { word: "อร่อย", roman: "à-rɔ̀y", meaning: { my: "အရသာရှိသည်", en: "Delicious" } },
-      { word: "เท่าไหร่", roman: "thâo-rài", meaning: { my: "ဘယ်လောက်လဲ", en: "How much" } },
-      { word: "ที่ไหน", roman: "thîi-nǎi", meaning: { my: "ဘယ်မှာလဲ", en: "Where" } },
-      { word: "ยินดีที่ได้รู้จัก", roman: "yin-dii-thîi-dâi-rúu-jàk", meaning: { my: "တွေ့ရတာ ဝမ်းသာပါတယ်", en: "Nice to meet you" } },
-      { word: "ทำงาน", roman: "tham-ngaan", meaning: { my: "အလုပ်လုပ်သည်", en: "Work" } },
-      { word: "พักผ่อน", roman: "phák-phɔ̀ɔn", meaning: { my: "အနားယူသည်", en: "Rest" } },
-      { word: "ไปเที่ยว", roman: "bpai-thîao", meaning: { my: "ခရီးသွားသည်", en: "Travel" } },
-      { word: "เข้าใจ", roman: "khâo-jai", meaning: { my: "နားလည်သည်", en: "Understand" } }
-    ];
-
-    window.THAI_A1_CHAPTERS = [];
-    for (let c = 1; c <= 12; c++) {
-      const meta = CHAPTER_METADATA[c - 1];
+    window.THAI_A1_CHAPTERS = CHAPTER_TOPICS.map((topic, cIdx) => {
+      const cNum = cIdx + 1;
+      const vList = topic.vocab;
       const units = [];
+
       for (let u = 1; u <= 20; u++) {
-        const v1 = CORE_VOCAB_BANK[(u - 1) % CORE_VOCAB_BANK.length];
-        const v2 = CORE_VOCAB_BANK[u % CORE_VOCAB_BANK.length];
-        const v3 = CORE_VOCAB_BANK[(u + 1) % CORE_VOCAB_BANK.length];
-        const v4 = CORE_VOCAB_BANK[(u + 2) % CORE_VOCAB_BANK.length];
+        const v1 = vList[(u - 1) % vList.length];
+        const v2 = vList[u % vList.length];
+        const v3 = vList[(u + 1) % vList.length];
+        const v4 = vList[(u + 2) % vList.length];
 
         units.push({
-          id: `th-c${c}-u${u}`,
+          id: `th-c${cNum}-u${u}`,
           title: {
-            my: `Unit ${c}.${u}: အဆင့်မြင့် လေ့ကျင့်ခန်း ${u}`,
-            en: `Unit ${c}.${u}: Mastery Practice ${u}`
+            my: `Unit ${cNum}.${u}: ${v1.meaning.my} နှင့် ${v2.meaning.my}`,
+            en: `Unit ${cNum}.${u}: ${v1.meaning.en} & ${v2.meaning.en}`
           },
           vocabulary: [
-            { id: `v-${c}-${u}-1`, word: v1.word, roman: v1.roman, meaning: v1.meaning },
-            { id: `v-${c}-${u}-2`, word: v2.word, roman: v2.roman, meaning: v2.meaning }
+            { id: `v-${cNum}-${u}-1`, word: v1.word, roman: v1.roman, meaning: v1.meaning },
+            { id: `v-${cNum}-${u}-2`, word: v2.word, roman: v2.roman, meaning: v2.meaning }
           ],
           grammar: {
-            title: { my: `သဒ္ဒါအသုံးချမှု ${c}.${u}`, en: `Grammar Rule ${c}.${u}` },
-            rule: { my: `${v1.word} ကို ဝါကျတွင် ယဉ်ကျေးစွာ ပေါင်းစပ်အသုံးပြုပုံ။`, en: `Natural collocation and usage of '${v1.word}'.` },
-            explanation: { my: `အခြေအနေအလိုက် အသံထွက်နှင့် အဓိပ္ပာယ်ကို သတိပြုလေ့လာပါ။`, en: `Focus on tonal accuracy and contextual nuance.` }
+            title: { my: `သဒ္ဒါအသုံးချမှု ${cNum}.${u}`, en: `Grammar Point ${cNum}.${u}` },
+            rule: { my: `"${v1.word}" စကားလုံးကို ဝါကျအတွင်း သဘာဝကျကျ အသုံးပြုပုံ။`, en: `Natural usage of "${v1.word}" in context.` },
+            explanation: { my: `အသံထွက်နှင့် အဓိပ္ပာယ်ကို သတိပြုလေ့ကျင့်ပါ။`, en: `Pay attention to tone and accurate meaning.` }
           },
           dialogue: {
-            title: { my: "အပြန်အလှန် စကားပြောခန်း (Dialogue)", en: "Conversation Drill" },
+            title: { my: "အပြန်အလှန် စကားပြောခန်း (Dialogue)", en: "Dialogue Practice" },
             lines: [
               { speaker: "A", thai: `${v1.word}ครับ`, roman: `${v1.roman} khráp`, trans: { my: `${v1.meaning.my} ခင်ဗျာ`, en: `${v1.meaning.en} sir` } },
               { speaker: "B", thai: `${v2.word}ค่ะ`, roman: `${v2.roman} khâ`, trans: { my: `${v2.meaning.my} ရှင့်`, en: `${v2.meaning.en} ma'am` } }
@@ -212,9 +326,9 @@
           },
           aiRoleplay: {
             prompt: { my: "🤖 AI Partner နှင့် စကားပြော လေ့ကျင့်ပါ:", en: "🤖 AI Roleplay Practice:" },
-            aiLine: `${v1.word}ครับ สบายดีไหมครับ`,
-            aiRoman: `${v1.roman} khráp, sà-baai-dii mǎi khráp`,
-            aiMeaning: { my: `${v1.meaning.my} ခင်ဗျာ၊ နေကောင်းလားခင်ဗျာ`, en: `${v1.meaning.en} sir, how are you?` },
+            aiLine: `${v1.word}ครับ`,
+            aiRoman: `${v1.roman} khráp`,
+            aiMeaning: { my: `${v1.meaning.my} ခင်ဗျာ`, en: `${v1.meaning.en} sir` },
             expectedReply: `${v2.word}ค่ะ`,
             expectedRoman: `${v2.roman} khâ`,
             replyMeaning: { my: `${v2.meaning.my} ရှင့်`, en: `${v2.meaning.en} ma'am` }
@@ -232,7 +346,7 @@
             },
             {
               type: "duolingo_listen",
-              prompt: { my: "🎧 အသံနားထောင်ပြီး စကားလုံးများကို အစီအစဉ်တကျ ရွေးပါ:", en: "🎧 Listen and select the correct words:" },
+              prompt: { my: "🎧 အသံနားထောင်ပြီး စကားလုံးများကို အစီအစဉ်တကျ ရွေးပါ:", en: "🎧 Listen and build the sentence:" },
               sentence: `${v1.word} ${v2.word}`,
               words: [v2.word, "ไม่", v1.word, "ดี"],
               correctSequence: [v1.word, v2.word]
@@ -275,7 +389,7 @@
           quiz: [
             {
               type: "mcq",
-              prompt: { my: `Final Unit Check: "${v1.word}" ၏ မှန်ကန်သော အသံမှာ?`, en: `Final Unit Check: Correct match for "${v1.word}"?` },
+              prompt: { my: `Final Unit Check: "${v1.word}" ၏ မှန်ကန်သော အသံမှာ?`, en: `Final Unit Check: Correct sound for "${v1.word}"?` },
               promptTargetAudio: v1.word,
               options: [v1.word, v2.word, v3.word],
               audioTargets: [v1.word, v2.word, v3.word],
@@ -284,13 +398,95 @@
           ]
         });
       }
-      window.THAI_A1_CHAPTERS.push({
-        id: `th-c${c}`,
-        title: meta.title,
-        coverImage: meta.img,
+
+      return {
+        id: topic.id,
+        title: topic.title,
+        coverImage: topic.img,
         units: units
-      });
-    }
+      };
+    });
+
+    const SCRIPT_DATA = {
+      consonants: [
+        { char: "ก", name: "ก ไก่", roman: "Gor Gai", class: "Mid" },
+        { char: "ข", name: "ข ไข่", roman: "Khor Khai", class: "High" },
+        { char: "ฃ", name: "ฃ ขวด", roman: "Khor Khuat", class: "High" },
+        { char: "ค", name: "ค ควาย", roman: "Khor Khwai", class: "Low" },
+        { char: "ฅ", name: "ฅ คน", roman: "Khor Khon", class: "Low" },
+        { char: "ฆ", name: "ฆ ระฆัง", roman: "Khor Rakhang", class: "Low" },
+        { char: "ง", name: "ง งู", roman: "Ngor Nguu", class: "Low" },
+        { char: "จ", name: "จ จาน", roman: "Jor Jaan", class: "Mid" },
+        { char: "ฉ", name: "ฉ ฉิ่ง", roman: "Chor Ching", class: "High" },
+        { char: "ช", name: "ช ช้าง", roman: "Chor Chaang", class: "Low" },
+        { char: "ซ", name: "ซ โซ่", roman: "Sor Soo", class: "Low" },
+        { char: "ฌ", name: "ฌ เฌอ", roman: "Chor Choe", class: "Low" },
+        { char: "ญ", name: "ญ หญิง", roman: "Yor Ying", class: "Low" },
+        { char: "ฎ", name: "ฎ ชฎา", roman: "Dor Chada", class: "Mid" },
+        { char: "ฏ", name: "ฏ ปฏัก", roman: "Tor Patak", class: "Mid" },
+        { char: "ฐ", name: "ฐ ฐาน", roman: "Thor Thaan", class: "High" },
+        { char: "ฑ", name: "ฑ มณโฑ", roman: "Thor Montho", class: "Low" },
+        { char: "ฒ", name: "ฒ ผู้เฒ่า", roman: "Thor Phuthao", class: "Low" },
+        { char: "ณ", name: "ณ เณร", roman: "Nor Nen", class: "Low" },
+        { char: "ด", name: "ด เด็ก", roman: "Dor Dek", class: "Mid" },
+        { char: "ต", name: "ต เต่า", roman: "Tor Tao", class: "Mid" },
+        { char: "ถ", name: "ถ ถุง", roman: "Thor Thung", class: "High" },
+        { char: "ท", name: "ท ทหาร", roman: "Thor Thahan", class: "Low" },
+        { char: "ธ", name: "ธ ธง", roman: "Thor Thong", class: "Low" },
+        { char: "น", name: "น หนู", roman: "Nor Nuu", class: "Low" },
+        { char: "บ", name: "บ ใบไม้", roman: "Bor Baimai", class: "Mid" },
+        { char: "ป", name: "ป ปลา", roman: "Por Bplaa", class: "Mid" },
+        { char: "ผ", name: "ผ ผึ้ง", roman: "Phor Phueng", class: "High" },
+        { char: "ฝ", name: "ฝ ฝา", roman: "For Faa", class: "High" },
+        { char: "พ", name: "พ พาน", roman: "Phor Phaan", class: "Low" },
+        { char: "ฟ", name: "ฟ ฟัน", roman: "For Fan", class: "Low" },
+        { char: "ภ", name: "ภ สำเภา", roman: "Phor Samphao", class: "Low" },
+        { char: "ม", name: "ม ม้า", roman: "Mor Maa", class: "Low" },
+        { char: "ย", name: "ย ยักษ์", roman: "Yor Yak", class: "Low" },
+        { char: "ร", name: "ร เรือ", roman: "Ror Ruea", class: "Low" },
+        { char: "ล", name: "ล ลิง", roman: "Lor Ling", class: "Low" },
+        { char: "ว", name: "ว แหวน", roman: "Wor Waen", class: "Low" },
+        { char: "ศ", name: "ศ ศาลา", roman: "Sor Sala", class: "High" },
+        { char: "ษ", name: "ษ ฤๅษี", roman: "Sor Ruesi", class: "High" },
+        { char: "ส", name: "ส เสือ", roman: "Sor Suea", class: "High" },
+        { char: "ห", name: "ห หีบ", roman: "Hor Heep", class: "High" },
+        { char: "ฬ", name: "ฬ จุฬา", roman: "Lor Chula", class: "Low" },
+        { char: "อ", name: "อ อ่าง", roman: "Or Aang", class: "Mid" },
+        { char: "ฮ", name: "ฮ นกฮูก", roman: "Hor Nokhuk", class: "Low" }
+      ],
+      vowels: [
+        { char: "-ะ", name: "สระอะ", roman: "Sara Ah", class: "Short" },
+        { char: "-า", name: "สระอา", roman: "Sara Aa", class: "Long" },
+        { char: "ิ", name: "สระอิ", roman: "Sara I", class: "Short" },
+        { char: "ီ", name: "สระอี", roman: "Sara Ii", class: "Long" },
+        { char: "ึ", name: "สระอึ", roman: "Sara Ue", class: "Short" },
+        { char: "ื", name: "สระอือ", roman: "Sara Uee", class: "Long" },
+        { char: "ุ", name: "สระอุ", roman: "Sara U", class: "Short" },
+        { char: "ူ", name: "สระอู", roman: "Sara Uu", class: "Long" },
+        { char: "เ-", name: "สระเอ", roman: "Sara E", class: "Long" },
+        { char: "แ-", name: "สระแอ", roman: "Sara Ae", class: "Long" },
+        { char: "โ-", name: "สระโอ", roman: "Sara O", class: "Long" },
+        { char: "ใ-", name: "สระใอ ไม้ม้วน", roman: "Sara Ai", class: "Special" },
+        { char: "ไ-", name: "สระไอ ไม้มลาย", roman: "Sara Ai", class: "Special" },
+        { char: "เ-า", name: "สระเอา", roman: "Sara Ao", class: "Special" }
+      ],
+      tones: [
+        { char: "่", name: "ไม้เอก (mái èek)", roman: "Tone 1", class: "Low Tone" },
+        { char: "้", name: "ไม้โท (mái thoo)", roman: "Tone 2", class: "Falling Tone" },
+        { char: "๊", name: "ไม้ตรี (mái dt замы)", roman: "Tone 3", class: "High Tone" },
+        { char: "๋", name: "ไม้จัตวา (mái jàt-dtà-waa)", roman: "Tone 4", class: "Rising Tone" }
+      ],
+      finals: [
+        { char: "แม่ กก", name: "Ending -k (ก, ข, ค, ฆ)", roman: "Mae Kok", class: "Stop" },
+        { char: "แม่ กง", name: "Ending -ng (ง)", roman: "Mae Kong", class: "Live" },
+        { char: "แม่ กด", name: "Ending -t (ด, จ, ช, ซ, ฎ...)", roman: "Mae Kot", class: "Stop" },
+        { char: "แม่ กน", name: "Ending -n (น, ณ, ญ, ร, ล, ฬ)", roman: "Mae Kon", class: "Live" },
+        { char: "แม่ กบ", name: "Ending -p (บ, ป, พ, ฟ, ภ)", roman: "Mae Kop", class: "Stop" },
+        { char: "แม่ กม", name: "Ending -m (ม)", roman: "Mae Kom", class: "Live" },
+        { char: "แม่ เกย", name: "Ending -y (ย)", roman: "Mae Koei", class: "Live" },
+        { char: "แม่ เกอว", name: "Ending -w (ว)", roman: "Mae Kwoeo", class: "Live" }
+      ]
+    };
 
     const I18N = {
       my: {
@@ -305,7 +501,6 @@
         script_canvas_title: "🎨 Letter Drawing & Stroke Practice",
         script_canvas_sub: "အောက်ပါ Canvas ပေါ်တွင် လက်ဖြင့် စာလုံး ရေးဆွဲလေ့ကျင့်ပါ-",
         script_clear: "🗑️ Canvas ဖျက်မည်",
-        script_consonants: "🔤 Thai Consonants (ထိုင်းဗျည်း မူရင်းဖောင့်ဖြင့် နှိပ်၍ နားထောင်ပါ)",
         speak_tap_mic: "မိုက်ခွက်ကို နှိပ်ပြီး အသံထွက်ဖတ်ပါ:",
         speak_listening: "နားထောင်နေပါသည်... အသံထွက်ပြောပါ",
         accuracy_label: "အသံထွက် မှန်ကန်မှု ရာခိုင်နှုန်း:"
@@ -322,60 +517,11 @@
         script_canvas_title: "🎨 Letter Drawing & Stroke Practice",
         script_canvas_sub: "Practice handwriting strokes on the canvas below:",
         script_clear: "🗑️ Clear Canvas",
-        script_consonants: "🔤 Thai Consonants (Traditional Loop-head Font)",
         speak_tap_mic: "Tap the mic and speak clearly:",
         speak_listening: "Listening... speak now",
         accuracy_label: "Pronunciation Accuracy:"
       }
     };
-
-    // Traditional Thai 44 Consonants (Standard loop-head representations)
-    const THAI_ALPHABET = [
-      { char: "ก", name: "ก ไก่", roman: "Gor Gai", class: "Mid" },
-      { char: "ข", name: "ข ไข่", roman: "Khor Khai", class: "High" },
-      { char: "ฃ", name: "ฃ ขวด", roman: "Khor Khuat", class: "High" },
-      { char: "ค", name: "ค ควาย", roman: "Khor Khwai", class: "Low" },
-      { char: "ฅ", name: "ฅ คน", roman: "Khor Khon", class: "Low" },
-      { char: "ฆ", name: "ฆ ระฆัง", roman: "Khor Rakhang", class: "Low" },
-      { char: "ง", name: "ง งู", roman: "Ngor Nguu", class: "Low" },
-      { char: "จ", name: "จ จาน", roman: "Jor Jaan", class: "Mid" },
-      { char: "ฉ", name: "ฉ ฉิ่ง", roman: "Chor Ching", class: "High" },
-      { char: "ช", name: "ช ช้าง", roman: "Chor Chaang", class: "Low" },
-      { char: "ซ", name: "ซ โซ่", roman: "Sor Soo", class: "Low" },
-      { char: "ฌ", name: "ฌ เฌอ", roman: "Chor Choe", class: "Low" },
-      { char: "ญ", name: "ญ หญิง", roman: "Yor Ying", class: "Low" },
-      { char: "ฎ", name: "ฎ ชฎา", roman: "Dor Chada", class: "Mid" },
-      { char: "ฏ", name: "ฏ ปฏัก", roman: "Tor Patak", class: "Mid" },
-      { char: "ฐ", name: "ฐ ฐาน", roman: "Thor Thaan", class: "High" },
-      { char: "ฑ", name: "ฑ มณโฑ", roman: "Thor Montho", class: "Low" },
-      { char: "ฒ", name: "ฒ ผู้เฒ่า", roman: "Thor Phuthao", class: "Low" },
-      { char: "ณ", name: "ณ เณร", roman: "Nor Nen", class: "Low" },
-      { char: "ด", name: "ด เด็ก", roman: "Dor Dek", class: "Mid" },
-      { char: "ต", name: "ต เต่า", roman: "Tor Tao", class: "Mid" },
-      { char: "ถ", name: "ถ ถุง", roman: "Thor Thung", class: "High" },
-      { char: "ท", name: "ท ทหาร", roman: "Thor Thahan", class: "Low" },
-      { char: "ธ", name: "ธ ธง", roman: "Thor Thong", class: "Low" },
-      { char: "น", name: "น หนู", roman: "Nor Nuu", class: "Low" },
-      { char: "บ", name: "บ ใบไม้", roman: "Bor Baimai", class: "Mid" },
-      { char: "ป", name: "ป ปลา", roman: "Por Bplaa", class: "Mid" },
-      { char: "ผ", name: "ผ ผึ้ง", roman: "Phor Phueng", class: "High" },
-      { char: "ฝ", name: "ฝ ฝา", roman: "For Faa", class: "High" },
-      { char: "พ", name: "พ พาน", roman: "Phor Phaan", class: "Low" },
-      { char: "ฟ", name: "ฟ ฟัน", roman: "For Fan", class: "Low" },
-      { char: "ภ", name: "ภ สำเภา", roman: "Phor Samphao", class: "Low" },
-      { char: "ม", name: "ม ม้า", roman: "Mor Maa", class: "Low" },
-      { char: "ย", name: "ย ยักษ์", roman: "Yor Yak", class: "Low" },
-      { char: "ร", name: "ร เรือ", roman: "Ror Ruea", class: "Low" },
-      { char: "ล", name: "ล ลิง", roman: "Lor Ling", class: "Low" },
-      { char: "ว", name: "ว แหวน", roman: "Wor Waen", class: "Low" },
-      { char: "ศ", name: "ศ ศาลา", roman: "Sor Sala", class: "High" },
-      { char: "ษ", name: "ษ ฤๅษี", roman: "Sor Ruesi", class: "High" },
-      { char: "ส", name: "ส เสือ", roman: "Sor Suea", class: "High" },
-      { char: "ห", name: "ห หีบ", roman: "Hor Heep", class: "High" },
-      { char: "ฬ", name: "ฬ จุฬา", roman: "Lor Chula", class: "Low" },
-      { char: "อ", name: "อ อ่าง", roman: "Or Aang", class: "Mid" },
-      { char: "ฮ", name: "ฮ นกฮูก", roman: "Hor Nokhuk", class: "Low" }
-    ];
 
     const STORAGE_KEY = 'lingomaster_thai_edition_v1';
     const DEFAULT_STATE = {
@@ -458,13 +604,13 @@
         if (step.type === 'vocab_overview') {
           html = `
             <h3>📖 ${typeof this.lesson.title === 'object' ? (this.lesson.title[lang] || this.lesson.title.en) : this.lesson.title}</h3>
-            <div style="display:flex; flex-direction:column; gap:0.75rem; margin-top:1rem;">
+            <div style="display:flex; flex-direction:column; gap:0.65rem; margin-top:0.85rem;">
               ${(this.lesson.vocabulary || []).map(v => `
-                <div class="card" style="display:flex; justify-content:space-between; align-items:center; gap:0.75rem;">
+                <div class="card" style="display:flex; justify-content:space-between; align-items:center; gap:0.65rem; padding:0.85rem 1rem;">
                   <div style="flex:1;">
-                    <h4 class="thai-txt" style="font-size:1.4rem; cursor:pointer;" onclick="AudioManager.speak('${v.word}')">${v.word} 🔊</h4>
+                    <h4 class="thai-txt" style="font-size:1.3rem; cursor:pointer;" onclick="AudioManager.speak('${v.word}')">${v.word} 🔊</h4>
                     <small style="color:var(--primary); font-weight:700;">[${v.roman}]</small>
-                    <p style="color:var(--text-muted); font-size:0.9rem;">${typeof v.meaning === 'object' ? (v.meaning[lang] || v.meaning.en) : v.meaning}</p>
+                    <p style="color:var(--text-muted); font-size:0.85rem;">${typeof v.meaning === 'object' ? (v.meaning[lang] || v.meaning.en) : v.meaning}</p>
                   </div>
                   <button class="audio-btn" onclick="AudioManager.speak('${v.word}')">🔊</button>
                 </div>
@@ -480,17 +626,17 @@
           html = `
             <div class="card">
               <h3>📐 ${gTitle}</h3>
-              <div style="margin: 1rem 0; padding:1rem; background:var(--bg-main); border-radius:var(--radius-md);">
+              <div style="margin: 0.85rem 0; padding:0.85rem; background:var(--bg-main); border-radius:var(--radius-md);">
                 <strong>Rule:</strong> ${gRule}
               </div>
-              <p style="color:var(--text-muted);">${gExp}</p>
+              <p style="color:var(--text-muted); font-size:0.9rem;">${gExp}</p>
             </div>
           `;
         } else if (step.type === 'dialogue') {
           const d = step.data;
           html = `
             <h3>💬 ${d.title[lang] || d.title.en}</h3>
-            <div style="display:flex; flex-direction:column; margin-top:1rem;">
+            <div style="display:flex; flex-direction:column; margin-top:0.85rem;">
               ${d.lines.map((l, idx) => `
                 <div class="chat-bubble ${idx % 2 === 0 ? 'left' : 'right'}">
                   <div style="display:flex; justify-content:space-between; align-items:center;">
@@ -498,7 +644,7 @@
                     <button class="icon-btn" onclick="AudioManager.speak('${l.thai}')">🔊</button>
                   </div>
                   <small style="color:var(--primary); font-weight:600;">[${l.roman}]</small>
-                  <span style="font-size:0.85rem; color:var(--text-muted);">${l.trans[lang] || l.trans.en}</span>
+                  <span style="font-size:0.8rem; color:var(--text-muted);">${l.trans[lang] || l.trans.en}</span>
                 </div>
               `).join('')}
             </div>
@@ -512,25 +658,25 @@
 
           html = `
             <h3>${rp.prompt[lang] || rp.prompt.en}</h3>
-            <div class="card" style="margin-top:1rem; background:var(--bg-main);">
-              <div style="display:flex; align-items:center; gap:0.5rem; margin-bottom:0.4rem;">
-                <span style="font-size:1.4rem;">🤖</span>
+            <div class="card" style="margin-top:0.85rem; background:var(--bg-main);">
+              <div style="display:flex; align-items:center; gap:0.4rem; margin-bottom:0.3rem;">
+                <span style="font-size:1.2rem;">🤖</span>
                 <strong>AI Partner:</strong>
                 <button class="icon-btn" onclick="AudioManager.speak('${rp.aiLine}')">🔊</button>
               </div>
-              <h3 class="thai-txt" style="color:var(--primary); font-size:1.3rem;">"${rp.aiLine}"</h3>
+              <h3 class="thai-txt" style="color:var(--primary); font-size:1.25rem;">"${rp.aiLine}"</h3>
               <small style="color:var(--text-muted);">[${rp.aiRoman}]</small>
-              <p style="font-size:0.85rem; color:var(--text-muted); margin-top:0.2rem;">${rp.aiMeaning[lang] || rp.aiMeaning.en}</p>
+              <p style="font-size:0.8rem; color:var(--text-muted); margin-top:0.2rem;">${rp.aiMeaning[lang] || rp.aiMeaning.en}</p>
             </div>
 
-            <div class="card" style="text-align:center; padding:1.2rem;">
-              <p style="font-size:0.9rem; margin-bottom:0.5rem;">👇 သင် ပြန်လည်ဖြေကြားရမည့် စကားလုံး:</p>
-              <h3 class="thai-txt" style="color:var(--primary); font-size:1.4rem;">"${rp.expectedReply}"</h3>
+            <div class="card" style="text-align:center; padding:1rem;">
+              <p style="font-size:0.85rem; margin-bottom:0.4rem;">👇 သင် ပြန်လည်ပြောဆိုရမည့် စကားလုံး:</p>
+              <h3 class="thai-txt" style="color:var(--primary); font-size:1.3rem;">"${rp.expectedReply}"</h3>
               <small style="color:var(--text-muted);">[${rp.expectedRoman}] • ${rp.replyMeaning[lang] || rp.replyMeaning.en}</small>
 
-              <div style="margin-top:1rem;">
+              <div style="margin-top:0.85rem;">
                 <button id="aiMicBtn" class="mic-btn" onclick="LessonEngine.recordAIRoleplay('${rp.expectedReply}')">🎙️</button>
-                <div id="aiVoiceStatus" style="font-size:0.85rem; color:var(--text-muted);">Tap mic and speak your reply</div>
+                <div id="aiVoiceStatus" style="font-size:0.8rem; color:var(--text-muted);">Tap mic to speak your reply</div>
               </div>
             </div>
           `;
@@ -606,7 +752,7 @@
 
         banner.className = `feedback-banner ${isCorrect ? 'correct' : 'incorrect'}`;
         title.textContent = isCorrect ? t.correct : t.incorrect;
-        exp.textContent = isCorrect ? "AI conversation partner understood you perfectly!" : "Try speaking closer to the microphone.";
+        exp.textContent = isCorrect ? "AI conversation partner understood you perfectly!" : "Try speaking clearly closer to the mic.";
 
         actionBtn.textContent = t.continue_btn;
         actionBtn.onclick = () => this.handleNext();
@@ -626,13 +772,13 @@
         let headerAudioHtml = '';
         if (ex.promptTargetAudio) {
           headerAudioHtml = `
-            <div style="display:flex; align-items:center; gap:0.5rem; margin-bottom:1.2rem; cursor:pointer;" onclick="AudioManager.speak('${ex.promptTargetAudio}')">
-              <span class="thai-txt" style="font-weight:700; font-size:1.3rem; color:var(--primary);">${promptText}</span>
-              <button class="audio-btn" style="width:36px; height:36px; font-size:1rem;">🔊</button>
+            <div style="display:flex; align-items:center; gap:0.4rem; margin-bottom:1rem; cursor:pointer;" onclick="AudioManager.speak('${ex.promptTargetAudio}')">
+              <span class="thai-txt" style="font-weight:700; font-size:1.2rem; color:var(--primary);">${promptText}</span>
+              <button class="audio-btn" style="width:34px; height:34px; font-size:0.95rem;">🔊</button>
             </div>
           `;
         } else {
-          headerAudioHtml = `<div style="font-weight:700; font-size:1.15rem; margin-bottom:1.2rem;">${promptText}</div>`;
+          headerAudioHtml = `<div style="font-weight:700; font-size:1.05rem; margin-bottom:1rem;">${promptText}</div>`;
         }
 
         let html = headerAudioHtml;
@@ -654,9 +800,9 @@
               <div class="matching-col">
                 ${ex.pairs.map(p => `
                   <div class="match-item" data-left-id="${p.id}" onclick="LessonEngine.clickLeftMatch(this, '${p.id}', '${p.audio}')">
-                    <div style="display:flex; align-items:center; gap:0.4rem; color:var(--primary);">
-                      <span style="font-size:1.3rem;">🔊</span>
-                      <span style="letter-spacing:2px; font-weight:800;">ılılıllli</span>
+                    <div style="display:flex; align-items:center; gap:0.35rem; color:var(--primary);">
+                      <span style="font-size:1.2rem;">🔊</span>
+                      <span style="letter-spacing:2px; font-weight:800; font-size:0.85rem;">ılılıllli</span>
                     </div>
                   </div>
                 `).join('')}
@@ -664,7 +810,7 @@
               <div class="matching-col">
                 ${shuffledRight.map(r => `
                   <div class="match-item" data-right-id="${r.id}" onclick="LessonEngine.clickRightMatch(this, '${r.id}')">
-                    <span class="thai-txt" style="font-size:1.15rem; font-weight:700;">${r.thai}</span>
+                    <span class="thai-txt" style="font-size:1.1rem; font-weight:700;">${r.thai}</span>
                     <small style="color:var(--text-muted); font-size:0.75rem; margin-top:2px;">${r.meaning}</small>
                   </div>
                 `).join('')}
@@ -673,9 +819,9 @@
           `;
         } else if (ex.type === 'duolingo_listen') {
           html += `
-            <div style="display:flex; justify-content:center; align-items:center; gap:1rem; margin-bottom:1.5rem;">
-              <button class="audio-btn" style="width:65px; height:65px; font-size:1.8rem;" onclick="AudioManager.speak('${ex.sentence}', 0.85)">🔊</button>
-              <button class="audio-btn" style="width:50px; height:50px; font-size:1.4rem; background:var(--bg-main); border:1px solid var(--border-color);" onclick="AudioManager.speak('${ex.sentence}', 0.5)" title="Slow Audio">🐢</button>
+            <div style="display:flex; justify-content:center; align-items:center; gap:0.85rem; margin-bottom:1.2rem;">
+              <button class="audio-btn" style="width:56px; height:56px; font-size:1.6rem;" onclick="AudioManager.speak('${ex.sentence}', 0.85)">🔊</button>
+              <button class="audio-btn" style="width:44px; height:44px; font-size:1.2rem; background:var(--bg-main); border:1px solid var(--border-color);" onclick="AudioManager.speak('${ex.sentence}', 0.5)" title="Slow Audio">🐢</button>
             </div>
             <div id="constructionZone" class="sentence-construction-zone"></div>
             <div id="wordBank" class="word-bank">
@@ -693,38 +839,38 @@
               return `
                 <button class="option-btn thai-txt" onclick="LessonEngine.selectOpt(this, ${i}, '${speakText.replace(/'/g, "\\'")}')">
                   <span>${opt}</span>
-                  <span style="font-size:1.1rem; opacity:0.6;">🔊</span>
+                  <span style="font-size:1rem; opacity:0.6;">🔊</span>
                 </button>
               `;
             }).join('')}
           </div>`;
         } else if (ex.type === 'speaking') {
           html += `
-            <div class="card" style="text-align:center; padding:1.5rem 1rem;">
-              <h2 class="thai-txt" style="font-size:2.2rem; color:var(--primary);">${ex.targetText}</h2>
-              <p style="color:var(--text-muted); font-weight:700; margin:0.3rem 0;">[${ex.roman}]</p>
-              <button class="audio-btn" style="margin:0.5rem 0;" onclick="AudioManager.speak('${ex.targetText}')">🔊 Listen First</button>
-              <p style="font-size:0.9rem; margin-top:0.8rem;">${t.speak_tap_mic}</p>
+            <div class="card" style="text-align:center; padding:1.2rem 0.85rem;">
+              <h2 class="thai-txt" style="font-size:1.9rem; color:var(--primary);">${ex.targetText}</h2>
+              <p style="color:var(--text-muted); font-weight:700; margin:0.25rem 0;">[${ex.roman}]</p>
+              <button class="audio-btn" style="margin:0.4rem 0;" onclick="AudioManager.speak('${ex.targetText}')">🔊 Listen First</button>
+              <p style="font-size:0.85rem; margin-top:0.6rem;">${t.speak_tap_mic}</p>
               
               <button id="micRecordBtn" class="mic-btn" onclick="LessonEngine.recordVoice('${ex.targetText}')">🎙️</button>
-              <div id="speechStatusText" style="font-size:0.85rem; color:var(--text-muted);">Ready to speak</div>
+              <div id="speechStatusText" style="font-size:0.8rem; color:var(--text-muted);">Ready to speak</div>
               
-              <div id="accuracyContainer" style="margin-top:1rem; display:none;">
+              <div id="accuracyContainer" style="margin-top:0.85rem; display:none;">
                 <strong>${t.accuracy_label}</strong>
-                <h3 id="accuracyScore" style="color:var(--success); font-size:1.5rem;">0%</h3>
+                <h3 id="accuracyScore" style="color:var(--success); font-size:1.35rem;">0%</h3>
               </div>
             </div>
           `;
         } else if (ex.type === 'listening') {
           html += `
-            <div style="text-align:center; margin-bottom:1.5rem;">
-              <button class="audio-btn" style="width:64px; height:64px; font-size:1.8rem;" onclick="AudioManager.speak('${ex.targetText}')">🔊</button>
+            <div style="text-align:center; margin-bottom:1.2rem;">
+              <button class="audio-btn" style="width:58px; height:58px; font-size:1.6rem;" onclick="AudioManager.speak('${ex.targetText}')">🔊</button>
             </div>
             <div class="options-grid">
               ${ex.options.map((opt, i) => `
                 <button class="option-btn thai-txt" onclick="LessonEngine.selectOpt(this, ${i}, '${opt}')">
                   <span>${opt}</span>
-                  <span style="font-size:1.1rem; opacity:0.6;">🔊</span>
+                  <span style="font-size:1rem; opacity:0.6;">🔊</span>
                 </button>
               `).join('')}
             </div>
@@ -781,7 +927,7 @@
             r.style.borderColor = 'var(--border-color)';
             l.classList.remove('selected');
             r.classList.remove('selected');
-          }, 400);
+          }, 350);
           this.selectedLeftMatch = null;
           this.selectedRightMatch = null;
         }
@@ -918,10 +1064,10 @@
         App.updateUI();
 
         container.innerHTML = `
-          <div style="text-align:center; padding: 2rem 0;">
-            <span style="font-size: 3.5rem;">🎉</span>
-            <h2 style="margin: 1rem 0;">Unit Complete!</h2>
-            <div class="card" style="max-width: 280px; margin: auto; text-align: left;">
+          <div style="text-align:center; padding: 1.8rem 0;">
+            <span style="font-size: 3.2rem;">🎉</span>
+            <h2 style="margin: 0.85rem 0;">Unit Complete!</h2>
+            <div class="card" style="max-width: 270px; margin: auto; text-align: left;">
               <p>${t.score}: <strong>${this.correctCount}</strong></p>
               <p>${t.xp_earned}: <strong>+${xp} XP</strong></p>
             </div>
@@ -939,6 +1085,7 @@
 
     const App = {
       state: StorageManager.load(),
+      currentScriptTab: 'consonants',
 
       init() {
         this.applyLanguage();
@@ -1007,25 +1154,25 @@
         const chapters = window.THAI_A1_CHAPTERS || [];
 
         main.innerHTML = `
-          <h2 style="margin-bottom:1rem;">🇹🇭 Thai Master (Chapter 1–12 • 240 Units)</h2>
+          <h2 style="margin-bottom:0.85rem;">🇹🇭 Thai Master (Chapter 1–12 • 240 Units)</h2>
           ${chapters.map(ch => {
             const chTitle = typeof ch.title === 'object' ? (ch.title[lang] || ch.title.en) : ch.title;
             return `
               <div class="card">
                 ${ch.coverImage ? `<img src="${ch.coverImage}" class="chapter-banner" alt="${chTitle}">` : ''}
                 <h3>${chTitle}</h3>
-                <div style="display:flex; flex-direction:column; gap:0.75rem; margin-top:0.85rem;">
+                <div style="display:flex; flex-direction:column; gap:0.65rem; margin-top:0.75rem;">
                   ${ch.units.map(unit => {
                     const uTitle = typeof unit.title === 'object' ? (unit.title[lang] || unit.title.en) : unit.title;
                     const done = this.state.completedLessons.includes(unit.id);
                     const drillsCount = (unit.exercises?.length || 0) + (unit.quiz?.length || 0) + (unit.dialogue ? 1 : 0) + (unit.aiRoleplay ? 1 : 0);
                     return `
-                      <div style="display:flex; justify-content:space-between; align-items:center; padding:0.75rem; background:var(--bg-main); border-radius:var(--radius-md);">
+                      <div style="display:flex; justify-content:space-between; align-items:center; padding:0.65rem 0.85rem; background:var(--bg-main); border-radius:var(--radius-md);">
                         <div>
-                          <strong>${uTitle}</strong>
-                          <div style="font-size:0.8rem; color:var(--text-muted);">${unit.vocabulary?.length || 0} ${t.words_count} • ${drillsCount} Drills & AI Roleplay</div>
+                          <strong style="font-size:0.95rem;">${uTitle}</strong>
+                          <div style="font-size:0.75rem; color:var(--text-muted);">${unit.vocabulary?.length || 0} ${t.words_count} • ${drillsCount} Drills & AI Roleplay</div>
                         </div>
-                        <button class="primary-btn" onclick="App.launchLesson('${unit.id}')">
+                        <button class="primary-btn" style="padding:0.45rem 0.85rem; font-size:0.85rem; min-height:36px;" onclick="App.launchLesson('${unit.id}')">
                           ${done ? t.review : t.start}
                         </button>
                       </div>
@@ -1041,25 +1188,33 @@
       renderScript(main) {
         const lang = this.state.uiLang;
         const t = I18N[lang];
+        const activeTab = this.currentScriptTab;
+        const currentData = SCRIPT_DATA[activeTab] || [];
 
         main.innerHTML = `
           <h2>${t.script_title}</h2>
-          <div class="card" style="margin-top:1rem;">
+          <div class="card" style="margin-top:0.85rem;">
             <h3>${t.script_canvas_title}</h3>
-            <p style="color:var(--text-muted); font-size:0.9rem;">${t.script_canvas_sub}</p>
-            <canvas id="paintCanvas" class="drawing-pad-box" width="320" height="230"></canvas>
+            <p style="color:var(--text-muted); font-size:0.85rem;">${t.script_canvas_sub}</p>
+            <canvas id="paintCanvas" class="drawing-pad-box" width="300" height="200"></canvas>
             <div style="text-align:center;">
               <button class="secondary-btn" onclick="App.clearCanvas()">${t.script_clear}</button>
             </div>
           </div>
 
-          <h3 style="margin: 1.5rem 0 0.75rem 0;">${t.script_consonants}</h3>
-          <div class="grid-thai-letters">
-            ${THAI_ALPHABET.map(item => `
-              <div class="thai-letter-card" onclick="AudioManager.speak('${item.name}')">
-                <span class="thai-letter-char">${item.char}</span>
-                <div class="thai-txt" style="font-size:0.85rem; font-weight:700;">${item.name}</div>
-                <small style="color:var(--text-muted); font-size:0.75rem;">[${item.class}]</small>
+          <div class="script-tabs">
+            <button class="script-tab-btn ${activeTab === 'consonants' ? 'active' : ''}" onclick="App.setScriptTab('consonants')">Consonants (ဗျည်း)</button>
+            <button class="script-tab-btn ${activeTab === 'vowels' ? 'active' : ''}" onclick="App.setScriptTab('vowels')">Vowels (သရ)</button>
+            <button class="script-tab-btn ${activeTab === 'tones' ? 'active' : ''}" onclick="App.setScriptTab('tones')">Tone Marks (အသံအမှတ်)</button>
+            <button class="script-tab-btn ${activeTab === 'finals' ? 'active' : ''}" onclick="App.setScriptTab('finals')">Final Consonants (အသတ်သံ)</button>
+          </div>
+
+          <div class="grid-thai-compact">
+            ${currentData.map(item => `
+              <div class="thai-compact-card" onclick="AudioManager.speak('${item.name}')">
+                <div class="thai-compact-char thai-txt">${item.char}</div>
+                <div class="thai-compact-sub thai-txt">${item.name}</div>
+                <small style="color:var(--text-muted); font-size:0.65rem;">[${item.class}]</small>
               </div>
             `).join('')}
           </div>
@@ -1068,11 +1223,16 @@
         this.initCanvas();
       },
 
+      setScriptTab(tab) {
+        this.currentScriptTab = tab;
+        this.renderScript(document.getElementById('mainContainer'));
+      },
+
       initCanvas() {
         const canvas = document.getElementById('paintCanvas');
         if (!canvas) return;
         const ctx = canvas.getContext('2d');
-        ctx.lineWidth = 4;
+        ctx.lineWidth = 3.5;
         ctx.lineCap = 'round';
         ctx.strokeStyle = '#4F46E5';
 
@@ -1123,16 +1283,16 @@
 
         main.innerHTML = `
           <h2>📖 Vocabulary Bank</h2>
-          ${items.length === 0 ? `<div class="card" style="text-align:center; padding:2rem; margin-top:1rem;"><p>${t.vocab_empty}</p></div>` : `
-            <div style="display:grid; grid-template-columns:repeat(auto-fill, minmax(220px, 1fr)); gap:0.75rem; margin-top:1rem;">
+          ${items.length === 0 ? `<div class="card" style="text-align:center; padding:1.8rem; margin-top:0.85rem;"><p>${t.vocab_empty}</p></div>` : `
+            <div style="display:grid; grid-template-columns:repeat(auto-fill, minmax(200px, 1fr)); gap:0.65rem; margin-top:0.85rem;">
               ${items.map(v => `
-                <div class="card">
+                <div class="card" style="padding:0.85rem;">
                   <div style="display:flex; justify-content:space-between; align-items:center;">
-                    <strong class="thai-txt" style="font-size:1.2rem;">${v.word}</strong>
+                    <strong class="thai-txt" style="font-size:1.15rem;">${v.word}</strong>
                     <button class="audio-btn" onclick="AudioManager.speak('${v.word}')">🔊</button>
                   </div>
                   <small style="color:var(--primary); font-weight:700;">[${v.roman}]</small>
-                  <div style="font-size:0.85rem; color:var(--text-muted); margin-top:0.3rem;">
+                  <div style="font-size:0.8rem; color:var(--text-muted); margin-top:0.25rem;">
                     ${typeof v.meaning === 'object' ? (v.meaning[lang] || v.meaning.en) : v.meaning}
                   </div>
                 </div>
@@ -1147,10 +1307,10 @@
         const t = I18N[lang];
         main.innerHTML = `
           <h2>📊 Progress</h2>
-          <div class="card" style="margin-top:1rem;">
+          <div class="card" style="margin-top:0.85rem;">
             <div style="display:flex; justify-content:space-around; text-align:center;">
-              <div><h3 style="color:var(--primary); font-size:1.5rem;">${this.state.totalXP}</h3><small>${t.total_xp}</small></div>
-              <div><h3 style="color:#F59E0B; font-size:1.5rem;">${this.state.streak}</h3><small>${t.streak}</small></div>
+              <div><h3 style="color:var(--primary); font-size:1.4rem;">${this.state.totalXP}</h3><small>${t.total_xp}</small></div>
+              <div><h3 style="color:#F59E0B; font-size:1.4rem;">${this.state.streak}</h3><small>${t.streak}</small></div>
             </div>
           </div>
         `;
@@ -1161,7 +1321,7 @@
         const t = I18N[lang];
         main.innerHTML = `
           <h2>⚙️ Settings</h2>
-          <div class="card" style="margin-top:1rem;">
+          <div class="card" style="margin-top:0.85rem;">
             <button class="primary-btn" onclick="App.exportData()">${t.export_btn}</button>
           </div>
         `;
