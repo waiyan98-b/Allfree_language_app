@@ -6,7 +6,7 @@ window.THAI_A1_CHAPTERS = [
     units: [
       {
         id: "th-u1-1",
-        title: { my: "Unit 1.1: နေ့စဉ်နှုတ်ဆက်ခြင်းနှင့် မိတ်ဆက်စကား", en: "Unit 1.1: Daily Greetings & Conversation" },
+        title: { my: "Unit 1.1: နေ့စဉ်နှုတ်ဆက်ခြင်းနှင့် စကားပြောလေ့ကျင့်ခန်း", en: "Unit 1.1: Daily Greetings & Speaking AI" },
         vocabulary: [
           { id: "th-v101", word: "สวัสดี", roman: "sà-wàt-dii", meaning: { my: "မင်္ဂလာပါ", en: "Hello" }, example: "สวัสดีครับ" },
           { id: "th-v102", word: "อรุณสวัสดิ์", roman: "à-run-sà-wàt", meaning: { my: "မင်္ဂလာနံနက်ခင်းပါ", en: "Good morning" }, example: "อรุณสวัสดิ์ครับ" },
@@ -19,7 +19,7 @@ window.THAI_A1_CHAPTERS = [
           explanation: { my: "အမျိုးသားက ครับ သုံးပြီး၊ အမျိုးသမီးက ค่ะ သုံးရပါမည်။", en: "Men say ครับ, women say ค่ะ." }
         },
         dialogue: {
-          title: { my: "အပြန်အလှန် စကားပြောခန်း (Dialogue Practice)", en: "Conversation Drill" },
+          title: { my: "အပြန်အလှန် စကားပြောခန်း (Dialogue Drill)", en: "Conversation Drill" },
           lines: [
             { speaker: "Somchai (ကျား)", thai: "สวัสดีครับ", roman: "sà-wàt-dii khráp", trans: { my: "မင်္ဂလာပါခင်ဗျာ", en: "Hello sir" } },
             { speaker: "Lin (မ)", thai: "สวัสดีค่ะ สบายดีไหมคะ", roman: "sà-wàt-dii khâ, sà-baai-dii mǎi khá", trans: { my: "မင်္ဂလာပါရှင့်၊ နေကောင်းလားရှင့်", en: "Hello, how are you?" } },
@@ -30,17 +30,30 @@ window.THAI_A1_CHAPTERS = [
           {
             type: "mcq",
             prompt: { my: "\"สวัสดี\" ၏ အဓိပ္ပာယ်ကို ရွေးပါ:", en: "Meaning of \"สวัสดี\":" },
+            promptTargetAudio: "สวัสดี",
             options: { my: ["မင်္ဂလာပါ", "ကျေးဇူးတင်ပါတယ်", "တောင်းပန်ပါတယ်"], en: ["Hello", "Thank you", "Sorry"] },
             audioTargets: ["สวัสดี", "ขอบคุณ", "ขอโทษ"],
             correct: 0,
             explanation: { my: "สวัสดี ဆိုသည်မှာ မင်္ဂလာပါ ဖြစ်ပါသည်။", en: "สวัสดี means Hello." }
           },
           {
+            type: "speaking",
+            prompt: { my: "🎙️ အသံထွက်ဖတ်ပါ: \"สวัสดี\" (မင်္ဂလာပါ)", en: "🎙️ Speak: \"สวัสดี\" (Hello)" },
+            targetText: "สวัสดี",
+            roman: "sà-wàt-dii"
+          },
+          {
             type: "listening",
             prompt: { my: "ကြားရသည့် အသံနှင့် ကိုက်ညီသော စာလုံးကို ရွေးပါ:", en: "Listen and choose:" },
             targetText: "สวัสดี",
-            options: ["สวัสดี", "อรุณสวัสดิ်", "ขอบคุณ"],
+            options: ["สวัสดี", "อรุณสวัสดิ์", "ขอบคุณ"],
             correct: 0
+          },
+          {
+            type: "speaking",
+            prompt: { my: "🎙️ အသံထွက်ဖတ်ပါ: \"อรุณสวัสดิ์\" (မင်္ဂလာနံနက်ခင်းပါ)", en: "🎙️ Speak: \"อรุณสวัสดิ์\" (Good morning)" },
+            targetText: "อรุณสวัสดิ์",
+            roman: "à-run-sà-wàt"
           },
           {
             type: "word_order",
@@ -51,23 +64,23 @@ window.THAI_A1_CHAPTERS = [
           },
           {
             type: "mcq",
-            prompt: { my: "အမျိုးသမီးများ သုံးရမည့် ယဉ်ကျေးစကားလုံးမှာ?", en: "Female polite ending:" },
-            options: { my: ["ค่ะ", "ครับ", "นะ"], en: ["ค่ะ", "ครับ", "นะ"] },
-            audioTargets: ["ค่ะ", "ครับ", "นะ"],
+            prompt: { my: "\"อรุณสวัสดิ์\" ၏ အဓိပ္ပာယ်မှာ?", en: "Meaning of \"อรุณสวัสดิ์\":" },
+            promptTargetAudio: "อรุณสวัสดิ์",
+            options: { my: ["မင်္ဂလာနံနက်ခင်းပါ", "မင်္ဂလာညချမ်းပါ"], en: ["Good morning", "Good evening"] },
+            audioTargets: ["อรุณสวัสดิ์", "ราตรีสวัสดิ์"],
             correct: 0
+          },
+          {
+            type: "speaking",
+            prompt: { my: "🎙️ အသံထွက်ဖတ်ပါ: \"ขอบคุณครับ\" (ကျေးဇူးတင်ပါတယ်ခင်ဗျာ)", en: "🎙️ Speak: \"ขอบคุณครับ\"" },
+            targetText: "ขอบคุณครับ",
+            roman: "khɔ̀ɔp-khun khráp"
           },
           {
             type: "listening",
             prompt: { my: "ကြားရသည့် အသံကို ရွေးပါ:", en: "Listen and choose:" },
-            targetText: "อรุณสวัสดิ์",
-            options: ["อรุณสวัสดิ์", "ราตรีสวัสดิ์", "สวัสดี"],
-            correct: 0
-          },
-          {
-            type: "mcq",
-            prompt: { my: "\"Good morning\" ၏ ထိုင်းဘာသာစကားမှာ?", en: "Good morning in Thai:" },
-            options: { my: ["မင်္ဂလာနံနက်ခင်းပါ (อรุณสวัสดิ์)", "မင်္ဂလာပါ (สวัสดี)"], en: ["Good morning (อรุณสวัสดิ์)", "Hello (สวัสดี)"] },
-            audioTargets: ["อรุณสวัสดิ์", "สวัสดี"],
+            targetText: "ขอบคุณค่ะ",
+            options: ["ขอบคุณค่ะ", "ขอบคุณครับ", "ขอโทษค่ะ"],
             correct: 0
           },
           {
@@ -77,32 +90,19 @@ window.THAI_A1_CHAPTERS = [
             correctSequence: ["อรุณสวัสดิ์", "ค่ะ"]
           },
           {
-            type: "listening",
-            prompt: { my: "အမျိုးသားသုံး ယဉ်ကျေးစကားလုံး အသံကို ရွေးပါ:", en: "Select male particle sound:" },
-            targetText: "ครับ",
-            options: ["ครับ", "ค่ะ", "ไม่"],
-            correct: 0
-          },
-          {
-            type: "mcq",
-            prompt: { my: "\"ขอบคุณ\" ၏ အဓိပ္ပာယ်မှာ?", en: "Meaning of \"ขอบคุณ\":" },
-            options: { my: ["ကျေးဇူးတင်ပါတယ်", "တောင်းပန်ပါတယ်", "နှုတ်ဆက်ပါတယ်"], en: ["Thank you", "Sorry", "Goodbye"] },
-            audioTargets: ["ขอบคุณ", "ขอโทษ", "ลาก่อน"],
-            correct: 0
-          },
-          {
-            type: "word_order",
-            prompt: { my: "ဝါကျစီပါ: \"ကျေးဇူးတင်ပါတယ်ခင်ဗျာ\"", en: "Arrange: \"Thank you (Male)\"" },
-            words: ["ครับ", "ขอบคุณ"],
-            correctSequence: ["ขอบคุณ", "ครับ"]
+            type: "speaking",
+            prompt: { my: "🎙️ အသံထွက်ဖတ်ပါ: \"สบายดีไหม\" (နေကောင်းလား)", en: "🎙️ Speak: \"สบายดีไหม\" (How are you?)" },
+            targetText: "สบายดีไหม",
+            roman: "sà-baai-dii mǎi"
           }
         ],
         quiz: [
           {
             type: "mcq",
             prompt: { my: "Final Quiz: မင်္ဂလာပါခင်ဗျာ ဟု နှုတ်ဆက်ရာတွင် မှန်ကန်သော အသုံးမှာ?", en: "Final Quiz: Correct Hello (Male):" },
+            promptTargetAudio: "สวัสดีครับ",
             options: ["สวัสดีครับ", "สวัสดีค่ะ", "อรุณสวัสดิ์ค่ะ"],
-            audioTargets: ["สวัสดีครับ", "สวัสดีค่ะ", "อรุณสวัสดิ์ค่ะ"],
+            audioTargets: ["สวัสดีครับ", "สวัสดีค่ะ", "อรุณสวัสดิ်ค่ะ"],
             correct: 0
           }
         ]
