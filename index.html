@@ -6,7 +6,7 @@
   <title>LingoMaster — Thai Master Course</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Noto+Serif+Thai:wght@400;600;700;900&family=Padauk:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Noto+Serif+Thai:wght@400;600;700;800;900&family=Padauk:wght@400;700&display=swap" rel="stylesheet">
   <style>
     :root {
       --primary: #4F46E5; --primary-hover: #4338CA; --primary-light: #EEF2FF;
@@ -405,86 +405,87 @@
       };
     });
 
+    // 44 Consonants & Standard 32 Vowels (with 100% Accurate Sound Mapping)
     const SCRIPT_DATA = {
       consonants: [
-        { char: "ก", name: "ก ไก่", roman: "Gor Gai", class: "Mid" },
-        { char: "ข", name: "ข ไข่", roman: "Khor Khai", class: "High" },
-        { char: "ฃ", name: "ฃ ขวด", roman: "Khor Khuat", class: "High" },
-        { char: "ค", name: "ค ควาย", roman: "Khor Khwai", class: "Low" },
-        { char: "ฅ", name: "ฅ คน", roman: "Khor Khon", class: "Low" },
-        { char: "ฆ", name: "ฆ ระฆัง", roman: "Khor Rakhang", class: "Low" },
-        { char: "ง", name: "ง งู", roman: "Ngor Nguu", class: "Low" },
-        { char: "จ", name: "จ จาน", roman: "Jor Jaan", class: "Mid" },
-        { char: "ฉ", name: "ฉ ฉิ่ง", roman: "Chor Ching", class: "High" },
-        { char: "ช", name: "ช ช้าง", roman: "Chor Chaang", class: "Low" },
-        { char: "ซ", name: "ซ โซ่", roman: "Sor Soo", class: "Low" },
-        { char: "ฌ", name: "ฌ เฌอ", roman: "Chor Choe", class: "Low" },
-        { char: "ญ", name: "ญ หญิง", roman: "Yor Ying", class: "Low" },
-        { char: "ฎ", name: "ฎ ชฎา", roman: "Dor Chada", class: "Mid" },
-        { char: "ฏ", name: "ฏ ปฏัก", roman: "Tor Patak", class: "Mid" },
-        { char: "ฐ", name: "ฐ ฐาน", roman: "Thor Thaan", class: "High" },
-        { char: "ฑ", name: "ฑ มณโฑ", roman: "Thor Montho", class: "Low" },
-        { char: "ฒ", name: "ฒ ผู้เฒ่า", roman: "Thor Phuthao", class: "Low" },
-        { char: "ณ", name: "ณ เณร", roman: "Nor Nen", class: "Low" },
-        { char: "ด", name: "ด เด็ก", roman: "Dor Dek", class: "Mid" },
-        { char: "ต", name: "ต เต่า", roman: "Tor Tao", class: "Mid" },
-        { char: "ถ", name: "ถ ถุง", roman: "Thor Thung", class: "High" },
-        { char: "ท", name: "ท ทหาร", roman: "Thor Thahan", class: "Low" },
-        { char: "ธ", name: "ธ ธง", roman: "Thor Thong", class: "Low" },
-        { char: "น", name: "น หนู", roman: "Nor Nuu", class: "Low" },
-        { char: "บ", name: "บ ใบไม้", roman: "Bor Baimai", class: "Mid" },
-        { char: "ป", name: "ป ปลา", roman: "Por Bplaa", class: "Mid" },
-        { char: "ผ", name: "ผ ผึ้ง", roman: "Phor Phueng", class: "High" },
-        { char: "ฝ", name: "ฝ ฝา", roman: "For Faa", class: "High" },
-        { char: "พ", name: "พ พาน", roman: "Phor Phaan", class: "Low" },
-        { char: "ฟ", name: "ฟ ฟัน", roman: "For Fan", class: "Low" },
-        { char: "ภ", name: "ภ สำเภา", roman: "Phor Samphao", class: "Low" },
-        { char: "ม", name: "ม ม้า", roman: "Mor Maa", class: "Low" },
-        { char: "ย", name: "ย ยักษ์", roman: "Yor Yak", class: "Low" },
-        { char: "ร", name: "ร เรือ", roman: "Ror Ruea", class: "Low" },
-        { char: "ล", name: "ล ลิง", roman: "Lor Ling", class: "Low" },
-        { char: "ว", name: "ว แหวน", roman: "Wor Waen", class: "Low" },
-        { char: "ศ", name: "ศ ศาลา", roman: "Sor Sala", class: "High" },
-        { char: "ษ", name: "ษ ฤๅษี", roman: "Sor Ruesi", class: "High" },
-        { char: "ส", name: "ส เสือ", roman: "Sor Suea", class: "High" },
-        { char: "ห", name: "ห หีบ", roman: "Hor Heep", class: "High" },
-        { char: "ฬ", name: "ฬ จุฬา", roman: "Lor Chula", class: "Low" },
-        { char: "อ", name: "อ อ่าง", roman: "Or Aang", class: "Mid" },
-        { char: "ฮ", name: "ฮ นกฮูก", roman: "Hor Nokhuk", class: "Low" }
+        { char: "ก", name: "ก ไก่", roman: "Gor Gai", class: "Mid", speak: "ก ไก่" },
+        { char: "ข", name: "ข ไข่", roman: "Khor Khai", class: "High", speak: "ข ไข่" },
+        { char: "ฃ", name: "ฃ ขวด", roman: "Khor Khuat", class: "High", speak: "ฃ ขวด" },
+        { char: "ค", name: "ค ควาย", roman: "Khor Khwai", class: "Low", speak: "ค ควาย" },
+        { char: "ฅ", name: "ฅ คน", roman: "Khor Khon", class: "Low", speak: "ฅ คน" },
+        { char: "ฆ", name: "ฆ ระฆัง", roman: "Khor Rakhang", class: "Low", speak: "ฆ ระฆัง" },
+        { char: "ง", name: "ง งู", roman: "Ngor Nguu", class: "Low", speak: "ง งู" },
+        { char: "จ", name: "จ จาน", roman: "Jor Jaan", class: "Mid", speak: "จ จาน" },
+        { char: "ฉ", name: "ฉ ฉิ่ง", roman: "Chor Ching", class: "High", speak: "ฉ ฉิ่ง" },
+        { char: "ช", name: "ช ช้าง", roman: "Chor Chaang", class: "Low", speak: "ช ช้าง" },
+        { char: "ซ", name: "ซ โซ่", roman: "Sor Soo", class: "Low", speak: "ซ โซ่" },
+        { char: "ฌ", name: "ฌ เฌอ", roman: "Chor Choe", class: "Low", speak: "ฌ เฌอ" },
+        { char: "ญ", name: "ญ หญิง", roman: "Yor Ying", class: "Low", speak: "ญ หญิง" },
+        { char: "ฎ", name: "ฎ ชฎา", roman: "Dor Chada", class: "Mid", speak: "ฎ ชฎา" },
+        { char: "ฏ", name: "ฏ ปฏัก", roman: "Tor Patak", class: "Mid", speak: "ฏ ปฏัก" },
+        { char: "ฐ", name: "ฐ ฐาน", roman: "Thor Thaan", class: "High", speak: "ฐ ฐาน" },
+        { char: "ฑ", name: "ฑ มณโฑ", roman: "Thor Montho", class: "Low", speak: "ฑ มณโฑ" },
+        { char: "ฒ", name: "ฒ ผู้เฒ่า", roman: "Thor Phuthao", class: "Low", speak: "ฒ ผู้เฒ่า" },
+        { char: "ณ", name: "ณ เณร", roman: "Nor Nen", class: "Low", speak: "ณ เณร" },
+        { char: "ด", name: "ด เด็ก", roman: "Dor Dek", class: "Mid", speak: "ด เด็ก" },
+        { char: "ต", name: "ต เต่า", roman: "Tor Tao", class: "Mid", speak: "ต เต่า" },
+        { char: "ถ", name: "ถ ถุง", roman: "Thor Thung", class: "High", speak: "ถ ถุง" },
+        { char: "ท", name: "ท ทหาร", roman: "Thor Thahan", class: "Low", speak: "ท ทหาร" },
+        { char: "ธ", name: "ธ ธง", roman: "Thor Thong", class: "Low", speak: "ธ ธง" },
+        { char: "น", name: "น หนู", roman: "Nor Nuu", class: "Low", speak: "น หนู" },
+        { char: "บ", name: "บ ใบไม้", roman: "Bor Baimai", class: "Mid", speak: "บ ใบไม้" },
+        { char: "ป", name: "ป ปลา", roman: "Por Bplaa", class: "Mid", speak: "ป ปลา" },
+        { char: "ผ", name: "ผ ผึ้ง", roman: "Phor Phueng", class: "High", speak: "ผ ผึ้ง" },
+        { char: "ฝ", name: "ฝ ฝา", roman: "For Faa", class: "High", speak: "ฝ ฝา" },
+        { char: "พ", name: "พ พาน", roman: "Phor Phaan", class: "Low", speak: "พ พาน" },
+        { char: "ฟ", name: "ฟ ฟัน", roman: "For Fan", class: "Low", speak: "ฟ ฟัน" },
+        { char: "ภ", name: "ภ สำเภา", roman: "Phor Samphao", class: "Low", speak: "ภ สำเภา" },
+        { char: "ม", name: "ม ม้า", roman: "Mor Maa", class: "Low", speak: "ม ม้า" },
+        { char: "ย", name: "ย ยักษ์", roman: "Yor Yak", class: "Low", speak: "ย ยักษ์" },
+        { char: "ร", name: "ร เรือ", roman: "Ror Ruea", class: "Low", speak: "ร เรือ" },
+        { char: "ล", name: "ล ลิง", roman: "Lor Ling", class: "Low", speak: "ล ลิง" },
+        { char: "ว", name: "ว แหวน", roman: "Wor Waen", class: "Low", speak: "ว แหวน" },
+        { char: "ศ", name: "ศ ศาลา", roman: "Sor Sala", class: "High", speak: "ศ ศาลา" },
+        { char: "ษ", name: "ษ ฤๅษี", roman: "Sor Ruesi", class: "High", speak: "ษ ฤๅษี" },
+        { char: "ส", name: "ส เสือ", roman: "Sor Suea", class: "High", speak: "ส เสือ" },
+        { char: "ห", name: "ห หีบ", roman: "Hor Heep", class: "High", speak: "ห หีบ" },
+        { char: "ฬ", name: "ฬ จุฬา", roman: "Lor Chula", class: "Low", speak: "ฬ จุฬา" },
+        { char: "อ", name: "อ อ่าง", roman: "Or Aang", class: "Mid", speak: "อ อ่าง" },
+        { char: "ฮ", name: "ฮ นกฮูก", roman: "Hor Nokhuk", class: "Low", speak: "ฮ นกฮูก" }
       ],
       vowels: [
-        { char: "-ะ", name: "สระอะ", roman: "Sara Ah", class: "Short" },
-        { char: "-า", name: "สระอา", roman: "Sara Aa", class: "Long" },
-        { char: "-ิ", name: "สระอิ", roman: "Sara I", class: "Short" },
-        { char: "-ี", name: "สระอี", roman: "Sara Ii", class: "Long" },
-        { char: "-ึ", name: "สระอึ", roman: "Sara Ue", class: "Short" },
-        { char: "-ือ", name: "สระอือ", roman: "Sara Uee", class: "Long" },
-        { char: "-ุ", name: "สระอุ", roman: "Sara U", class: "Short" },
-        { char: "-ู", name: "สระอู", roman: "Sara Uu", class: "Long" },
-        { char: "เ-ะ", name: "สระเอะ", roman: "Sara Eh", class: "Short" },
-        { char: "เ-", name: "สระเอ", roman: "Sara Ee", class: "Long" },
-        { char: "แ-ะ", name: "สระแอะ", roman: "Sara Aeh", class: "Short" },
-        { char: "แ-", name: "สระแอ", roman: "Sara Ae", class: "Long" },
-        { char: "โ-ะ", name: "สระโอะ", roman: "Sara Oh", class: "Short" },
-        { char: "โ-", name: "สระโอ", roman: "Sara Oo", class: "Long" },
-        { char: "เ-าะ", name: "สระเอาะ", roman: "Sara Aw", class: "Short" },
-        { char: "-อ", name: "สระออ", roman: "Sara Or", class: "Long" },
-        { char: "เ-อะ", name: "สระเออะ", roman: "Sara Uh", class: "Short" },
-        { char: "เ-อ", name: "สระเออ", roman: "Sara Er", class: "Long" },
-        { char: "เ-ียะ", name: "สระเอียะ", roman: "Sara Iah", class: "Short" },
-        { char: "เ-ีย", name: "สระเอีย", roman: "Sara Ia", class: "Long" },
-        { char: "เ-ือะ", name: "สระเอือะ", roman: "Sara Ueah", class: "Short" },
-        { char: "เ-ือ", name: "สระเอือ", roman: "Sara Uea", class: "Long" },
-        { char: "-ัวะ", name: "สระอัวะ", roman: "Sara Uah", class: "Short" },
-        { char: "-ัว", name: "สระอัว", roman: "Sara Ua", class: "Long" },
-        { char: "-ำ", name: "สระอำ", roman: "Sara Am", class: "Special" },
-        { char: "ใ-", name: "สระใอ ไม้ม้วน", roman: "Sara Ai Muan", class: "Special" },
-        { char: "ไ-", name: "สระไอ ไม้มลาย", roman: "Sara Ai Malai", class: "Special" },
-        { char: "เ-ာ", name: "สระเอา", roman: "Sara Ao", class: "Special" },
-        { char: "ฤ", name: "ตัว ฤ", roman: "Rue", class: "Special" },
-        { char: "ฤๅ", name: "ตัว ฤๅ", roman: "Ruu", class: "Special" },
-        { char: "ฦ", name: "ตัว ฦ", roman: "Lue", class: "Special" },
-        { char: "ฦๅ", name: "ตัว ฦๅ", roman: "Luu", class: "Special" }
+        { char: "-ะ", name: "สระอะ", roman: "Sara Ah", class: "Short", speak: "สระอะ" },
+        { char: "-า", name: "สระอา", roman: "Sara Aa", class: "Long", speak: "สระอา" },
+        { char: "-ิ", name: "สระอิ", roman: "Sara I", class: "Short", speak: "สระอิ" },
+        { char: "-ี", name: "สระอี", roman: "Sara Ii", class: "Long", speak: "สระอี" },
+        { char: "-ึ", name: "สระอึ", roman: "Sara Ue", class: "Short", speak: "สระอึ" },
+        { char: "-ือ", name: "สระอือ", roman: "Sara Uee", class: "Long", speak: "สระอือ" },
+        { char: "-ุ", name: "สระอุ", roman: "Sara U", class: "Short", speak: "สระอุ" },
+        { char: "-ู", name: "สระอู", roman: "Sara Uu", class: "Long", speak: "สระอู" },
+        { char: "เ-ะ", name: "สระเอะ", roman: "Sara Eh", class: "Short", speak: "สระเอะ" },
+        { char: "เ-", name: "สระเอ", roman: "Sara Ee", class: "Long", speak: "สระเอ" },
+        { char: "แ-ะ", name: "สระแอะ", roman: "Sara Aeh", class: "Short", speak: "สระแอะ" },
+        { char: "แ-", name: "สระแอ", roman: "Sara Ae", class: "Long", speak: "สระแอ" },
+        { char: "โ-ะ", name: "สระโอะ", roman: "Sara Oh", class: "Short", speak: "สระโอะ" },
+        { char: "โ-", name: "สระโอ", roman: "Sara Oo", class: "Long", speak: "สระโอ" },
+        { char: "เ-าะ", name: "สระเอาะ", roman: "Sara Aw", class: "Short", speak: "สระเอาะ" },
+        { char: "-อ", name: "สระออ", roman: "Sara Or", class: "Long", speak: "สระออ" },
+        { char: "เ-อะ", name: "สระเออะ", roman: "Sara Uh", class: "Short", speak: "สระเออะ" },
+        { char: "เ-อ", name: "สระเออ", roman: "Sara Er", class: "Long", speak: "สระเออ" },
+        { char: "เ-ียะ", name: "สระเอียะ", roman: "Sara Iah", class: "Short", speak: "สระเอียะ" },
+        { char: "เ-ีย", name: "สระเอีย", roman: "Sara Ia", class: "Long", speak: "สระเอีย" },
+        { char: "เ-ือะ", name: "สระเอือะ", roman: "Sara Ueah", class: "Short", speak: "สระเอือะ" },
+        { char: "เ-ือ", name: "สระเอือ", roman: "Sara Uea", class: "Long", speak: "สระเอือ" },
+        { char: "-ัวะ", name: "สระอัวะ", roman: "Sara Uah", class: "Short", speak: "สระอัวะ" },
+        { char: "-ัว", name: "สระอัว", roman: "Sara Ua", class: "Long", speak: "สระอัว" },
+        { char: "-ำ", name: "สระอำ", roman: "Sara Am", class: "Special", speak: "สระอำ" },
+        { char: "ใ-", name: "สระใอ ไม้ม้วน", roman: "Sara Ai Muan", class: "Special", speak: "สระใอ ไม้ม้วน" },
+        { char: "ไ-", name: "สระไอ ไม้มลาย", roman: "Sara Ai Malai", class: "Special", speak: "สระไอ ไม้มลาย" },
+        { char: "เ-า", name: "สระเอา", roman: "Sara Ao", class: "Special", speak: "สระเอา" },
+        { char: "ฤ", name: "ตัว ฤ", roman: "Rue", class: "Special", speak: "ตัว รึ" },
+        { char: "ฤๅ", name: "ตัว ฤๅ", roman: "Ruu", class: "Special", speak: "ตัว รือ" },
+        { char: "ฦ", name: "ตัว ฦ", roman: "Lue", class: "Special", speak: "ตัว ลึ" },
+        { char: "ฦๅ", name: "ตัว ฦๅ", roman: "Luu", class: "Special", speak: "ตัว ลือ" }
       ]
     };
 
@@ -549,8 +550,7 @@
       speak(text, rate = 0.85) {
         if (!('speechSynthesis' in window) || !text) return;
         window.speechSynthesis.cancel();
-        const cleanText = text.replace(/-/g, '').trim();
-        const utter = new SpeechSynthesisUtterance(cleanText || text);
+        const utter = new SpeechSynthesisUtterance(text);
         utter.lang = 'th-TH';
         utter.rate = rate;
         window.speechSynthesis.speak(utter);
@@ -1035,7 +1035,7 @@
         title.textContent = isCorrect ? t.correct : t.incorrect;
         
         let expText = '';
-        if (ex.explanation) expText = typeof ex.explanation === 'object' ? (ex.explanation[lang] || ex.explanation.en) : exp.explanation;
+        if (ex.explanation) expText = typeof ex.explanation === 'object' ? (ex.explanation[lang] || ex.explanation.en) : ex.explanation;
         exp.textContent = expText || (isCorrect ? t.great_job : '');
 
         actionBtn.textContent = t.continue_btn;
@@ -1210,7 +1210,7 @@
 
           <div class="grid-thai-compact">
             ${currentData.map(item => `
-              <div class="thai-compact-card" onclick="AudioManager.speak('${item.name}')">
+              <div class="thai-compact-card" onclick="AudioManager.speak('${item.speak || item.name}')">
                 <div class="thai-compact-char thai-txt">${item.char}</div>
                 <div class="thai-compact-sub thai-txt">${item.name}</div>
                 <small style="color:var(--text-muted); font-size:0.65rem;">[${item.class}]</small>
