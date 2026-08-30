@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
-  <title>LingoMaster — Thai Interactive Edition</title>
+  <title>LingoMaster — Thai Master Edition</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Noto+Sans+Thai:wght@400;600;700&family=Padauk:wght@400;700&display=swap" rel="stylesheet">
@@ -24,7 +24,7 @@
     body { font-family: var(--font-base); background-color: var(--bg-main); color: var(--text-main); min-height: 100vh; line-height: 1.5; }
     .app-layout { display: flex; flex-direction: column; min-height: 100vh; }
     .app-header { position: sticky; top: 0; z-index: 40; display: flex; justify-content: space-between; align-items: center; padding: 0.75rem 1.25rem; background-color: var(--bg-card); border-bottom: 1px solid var(--border-color); }
-    .brand { display: flex; align-items: center; gap: 0.5rem; font-weight: 800; font-size: 1.25rem; color: var(--primary); }
+    .brand { display: flex; align-items: center; gap: 0.5rem; font-weight: 800; font-size: 1.2rem; color: var(--primary); }
     .header-actions { display: flex; align-items: center; gap: 0.5rem; }
     .stat-pill { display: flex; align-items: center; gap: 0.35rem; background: var(--bg-main); padding: 0.35rem 0.65rem; border-radius: var(--radius-full); font-weight: 700; font-size: 0.85rem; border: 1px solid var(--border-color); }
     .icon-btn { background: transparent; border: none; font-size: 1.1rem; cursor: pointer; padding: 0.4rem; border-radius: 8px; color: var(--text-main); }
@@ -43,28 +43,34 @@
     .chapter-banner { width: 100%; height: 120px; border-radius: var(--radius-md); object-fit: cover; margin-bottom: 0.75rem; }
     .vocab-img { width: 65px; height: 65px; border-radius: 10px; object-fit: cover; }
     .options-grid { display: grid; grid-template-columns: 1fr; gap: 0.75rem; }
-    .option-btn { background: var(--bg-card); border: 2px solid var(--border-color); padding: 1rem; border-radius: var(--radius-md); font-size: 1.1rem; font-weight: 600; text-align: left; cursor: pointer; color: var(--text-main); display: flex; justify-content: space-between; align-items: center; transition: var(--transition); }
+    .option-btn { background: var(--bg-card); border: 2px solid var(--border-color); padding: 1rem; border-radius: var(--radius-md); font-size: 1.05rem; font-weight: 600; text-align: left; cursor: pointer; color: var(--text-main); display: flex; justify-content: space-between; align-items: center; transition: var(--transition); }
     .option-btn.selected { border-color: var(--primary); background: var(--primary-light); color: var(--primary); }
     .sentence-construction-zone { background: var(--bg-main); border: 2px dashed var(--border-color); margin-bottom: 1.25rem; min-height: 55px; display: flex; flex-wrap: wrap; gap: 0.5rem; padding: 0.75rem; border-radius: var(--radius-md); align-items: center; }
     .word-bank { display: flex; flex-wrap: wrap; gap: 0.5rem; }
     .word-chip { padding: 0.6rem 0.95rem; background: var(--bg-card); border: 1.5px solid var(--border-color); border-radius: 10px; font-weight: 600; cursor: pointer; color: var(--text-main); font-size: 1rem; display: inline-flex; align-items: center; gap: 0.35rem; }
     .word-chip.used { opacity: 0.3; pointer-events: none; }
+    .chat-bubble { max-width: 80%; padding: 0.85rem 1rem; border-radius: 16px; margin-bottom: 0.75rem; display: flex; flex-direction: column; gap: 0.25rem; }
+    .chat-bubble.left { align-self: flex-start; background: var(--bg-main); border-bottom-left-radius: 4px; border: 1px solid var(--border-color); }
+    .chat-bubble.right { align-self: flex-end; background: var(--primary-light); color: var(--primary); border-bottom-right-radius: 4px; border: 1px solid rgba(79, 70, 229, 0.2); }
+    .drawing-pad-box { border: 2px solid var(--border-color); border-radius: var(--radius-md); background: #fff; touch-action: none; width: 100%; max-width: 320px; height: 260px; margin: 1rem auto; display: block; }
     .modal-overlay { position: fixed; inset: 0; background: rgba(15, 23, 42, 0.6); backdrop-filter: blur(4px); z-index: 100; display: flex; justify-content: center; align-items: center; }
     .modal-overlay.hidden { display: none; }
     .lesson-dialog { background: var(--bg-card); width: 100%; height: 100%; max-width: 680px; display: flex; flex-direction: column; }
     @media (min-width: 768px) { .lesson-dialog { height: 90vh; border-radius: var(--radius-lg); overflow: hidden; } }
     .lesson-header { display: flex; align-items: center; padding: 0.85rem 1.25rem; gap: 0.85rem; border-bottom: 1px solid var(--border-color); }
-    .lesson-body { flex: 1; padding: 1.25rem; overflow-y: auto; }
+    .lesson-body { flex: 1; padding: 1.25rem; overflow-y: auto; display: flex; flex-direction: column; }
     .feedback-banner { padding: 0.85rem 1.25rem; border-top: 1px solid var(--border-color); }
     .feedback-banner.correct { background: var(--success-light); color: #065F46; }
     .feedback-banner.incorrect { background: var(--error-light); color: #991B1B; }
     .audio-btn { background: var(--primary-light); border: none; color: var(--primary); width: 44px; height: 44px; border-radius: var(--radius-full); display: inline-flex; align-items: center; justify-content: center; cursor: pointer; font-size: 1.2rem; }
+    .grid-thai-letters { display: grid; grid-template-columns: repeat(auto-fill, minmax(80px, 1fr)); gap: 0.6rem; }
+    .thai-letter-card { background: var(--bg-main); border: 1px solid var(--border-color); padding: 0.75rem 0.5rem; text-align: center; border-radius: var(--radius-md); cursor: pointer; }
   </style>
 </head>
 <body>
   <div id="app" class="app-layout">
     <header class="app-header">
-      <div class="brand"><span>🇹🇭</span><span>Thai Master</span></div>
+      <div class="brand"><span>🇹🇭</span><span>Thai Master Pro</span></div>
       <div class="header-actions">
         <button id="uiLangToggleBtn" class="lang-switcher-btn">🇲🇲 မြန်မာ</button>
         <div class="stat-pill">🔥 <span id="streakCount">1</span></div>
@@ -77,6 +83,7 @@
 
     <nav class="bottom-nav">
       <button class="nav-item active" data-view="learn"><span style="font-size:1.2rem;">📚</span><span data-i18n="nav_learn">Learn</span></button>
+      <button class="nav-item" data-view="script"><span style="font-size:1.2rem;">✍️</span><span data-i18n="nav_script">Script & Reading</span></button>
       <button class="nav-item" data-view="vocab"><span style="font-size:1.2rem;">📖</span><span data-i18n="nav_vocab">Vocab</span></button>
       <button class="nav-item" data-view="progress"><span style="font-size:1.2rem;">📊</span><span data-i18n="nav_progress">Progress</span></button>
       <button class="nav-item" data-view="settings"><span style="font-size:1.2rem;">⚙️</span><span data-i18n="nav_settings">Settings</span></button>
@@ -90,7 +97,7 @@
         <div class="progress-bar-container" style="flex:1;">
           <div id="lessonProgressBar" class="progress-bar-fill" style="width: 0%;"></div>
         </div>
-        <div id="lessonStepIndicator" style="font-size: 0.85rem; font-weight: 700; color: var(--text-muted);">Step 1/8</div>
+        <div id="lessonStepIndicator" style="font-size: 0.85rem; font-weight: 700; color: var(--text-muted);">Step 1/14</div>
       </header>
       
       <div id="lessonContainer" class="lesson-body"></div>
@@ -117,7 +124,7 @@
   <script>
     const I18N = {
       my: {
-        nav_learn: "သင်ယူရန်", nav_vocab: "ဝေါဟာရ", nav_progress: "တိုးတက်မှု", nav_settings: "ဆက်တင်များ",
+        nav_learn: "သင်ယူရန်", nav_script: "စာရေး/ဖတ်နည်း", nav_vocab: "ဝေါဟာရ", nav_progress: "တိုးတက်မှု", nav_settings: "ဆက်တင်များ",
         continue_btn: "ဆက်လုပ်ရန်", check_btn: "စစ်ဆေးမည်", finish_btn: "ပြီးပါပြီ",
         correct: "✓ မှန်ကန်ပါသည်!", incorrect: "✕ မမှန်သေးပါ", great_job: "တော်လိုက်တာ!",
         start: "စတင်မည်", review: "ပြန်လေ့ကျင့်မည် ✓", words_count: "လုံး",
@@ -126,7 +133,7 @@
         export_btn: "💾 Data သိမ်းဆည်းရန် (Backup)"
       },
       en: {
-        nav_learn: "Learn", nav_vocab: "Vocab", nav_progress: "Progress", nav_settings: "Settings",
+        nav_learn: "Learn", nav_script: "Script & Reading", nav_vocab: "Vocab", nav_progress: "Progress", nav_settings: "Settings",
         continue_btn: "Continue", check_btn: "Check", finish_btn: "Finish",
         correct: "✓ Correct!", incorrect: "✕ Not quite", great_job: "Great job!",
         start: "Start", review: "Review ✓", words_count: "Words",
@@ -135,6 +142,30 @@
         export_btn: "💾 Export Progress (Backup)"
       }
     };
+
+    const THAI_ALPHABET = [
+      { char: "ก", name: "ก ไก่", roman: "Gor Gai", class: "Mid", sound: "g/k" },
+      { char: "ข", name: "ข ไข่", roman: "Khor Khai", class: "High", sound: "kh" },
+      { char: "ค", name: "ค ควาย", roman: "Khor Khwai", class: "Low", sound: "kh" },
+      { char: "ง", name: "ง งู", roman: "Ngor Nguu", class: "Low", sound: "ng" },
+      { char: "จ", name: "จ จาน", roman: "Jor Jaan", class: "Mid", sound: "j" },
+      { char: "ช", name: "ช ช้าง", roman: "Chor Chaang", class: "Low", sound: "ch" },
+      { char: "ด", name: "ด เด็ก", roman: "Dor Dek", class: "Mid", sound: "d" },
+      { char: "ต", name: "ต เต่า", roman: "Tor Tao", class: "Mid", sound: "dt" },
+      { char: "น", name: "น หนู", roman: "Nor Nuu", class: "Low", sound: "n" },
+      { char: "บ", name: "บ ใบไม้", roman: "Bor Baimai", class: "Mid", sound: "b" },
+      { char: "ป", name: "ป ปลา", roman: "Por Bplaa", class: "Mid", sound: "bp" },
+      { char: "ผ", name: "ผ ผึ้ง", roman: "Phor Phueng", class: "High", sound: "ph" },
+      { char: "ม", name: "ม ม้า", roman: "Mor Maa", class: "Low", sound: "m" },
+      { char: "ย", name: "ย ยักษ์", roman: "Yor Yak", class: "Low", sound: "y" },
+      { char: "ร", name: "ร เรือ", roman: "Ror Ruea", class: "Low", sound: "r" },
+      { char: "ล", name: "ล ลิง", roman: "Lor Ling", class: "Low", sound: "l" },
+      { char: "ว", name: "ว แหวน", roman: "Wor Waen", class: "Low", sound: "w" },
+      { char: "ส", name: "ส เสือ", roman: "Sor Suea", class: "High", sound: "s" },
+      { char: "ห", name: "ห หีบ", roman: "Hor Heep", class: "High", sound: "h" },
+      { char: "อ", name: "อ อ่าง", roman: "Or Aang", class: "Mid", sound: "o" },
+      { char: "ฮ", name: "ฮ นกฮูก", roman: "Hor Nokhuk", class: "Low", sound: "h" }
+    ];
 
     const STORAGE_KEY = 'lingomaster_thai_edition_v1';
     const DEFAULT_STATE = {
@@ -181,6 +212,7 @@
         this.steps = [
           { type: 'vocab_overview' },
           { type: 'grammar_concept' },
+          ...(lessonData.dialogue ? [{ type: 'dialogue', data: lessonData.dialogue }] : []),
           ...(lessonData.exercises || []).map(ex => ({ type: 'exercise', data: ex })),
           ...(lessonData.quiz || []).map(q => ({ type: 'quiz', data: q })),
           { type: 'completion' }
@@ -243,6 +275,23 @@
               <p style="color:var(--text-muted);">${gExp}</p>
             </div>
           `;
+        } else if (step.type === 'dialogue') {
+          const d = step.data;
+          html = `
+            <h3>💬 ${d.title[lang] || d.title.en}</h3>
+            <div style="display:flex; flex-direction:column; margin-top:1rem;">
+              ${d.lines.map((l, idx) => `
+                <div class="chat-bubble ${idx % 2 === 0 ? 'left' : 'right'}">
+                  <div style="display:flex; justify-content:space-between; align-items:center;">
+                    <strong>${l.speaker}: ${l.thai}</strong>
+                    <button class="icon-btn" onclick="AudioManager.speak('${l.thai}')">🔊</button>
+                  </div>
+                  <small style="color:var(--primary); font-weight:600;">[${l.roman}]</small>
+                  <span style="font-size:0.85rem; color:var(--text-muted);">${l.trans[lang] || l.trans.en}</span>
+                </div>
+              `).join('')}
+            </div>
+          `;
         } else if (step.type === 'exercise' || step.type === 'quiz') {
           this.renderInteractiveExercise(step.data, container, actionBtn);
           return;
@@ -269,13 +318,17 @@
         if (ex.type === 'mcq') {
           const rawOpts = ex.options;
           const optsList = (rawOpts && typeof rawOpts === 'object' && !Array.isArray(rawOpts)) ? (rawOpts[lang] || rawOpts.en) : rawOpts;
+          const audioTargets = ex.audioTargets || [];
           html += `<div class="options-grid">
-            ${optsList.map((opt, i) => `
-              <button class="option-btn" onclick="LessonEngine.selectOpt(this, ${i}, '${opt.replace(/'/g, "\\'")}')">
-                <span>${opt}</span>
-                <span style="font-size:1.1rem; opacity:0.6;">🔊</span>
-              </button>
-            `).join('')}
+            ${optsList.map((opt, i) => {
+              const speakText = audioTargets[i] || opt;
+              return `
+                <button class="option-btn" onclick="LessonEngine.selectOpt(this, ${i}, '${speakText.replace(/'/g, "\\'")}')">
+                  <span>${opt}</span>
+                  <span style="font-size:1.1rem; opacity:0.6;">🔊</span>
+                </button>
+              `;
+            }).join('')}
           </div>`;
         } else if (ex.type === 'listening') {
           html += `
@@ -310,7 +363,6 @@
         this.userAnswer = idx;
         document.getElementById('lessonActionBtn').disabled = false;
 
-        // Option နှိပ်လိုက်သည်နှင့် အသံထွက်ပေးခြင်း
         if (textToSpeak) {
           const cleanText = textToSpeak.replace(/\(.*?\)/g, '').trim();
           AudioManager.speak(cleanText);
@@ -369,7 +421,7 @@
         const lang = this.stateRef.uiLang;
         const t = I18N[lang];
         const isDone = this.stateRef.completedLessons.includes(this.lesson.id);
-        const xp = isDone ? 15 : 30;
+        const xp = isDone ? 20 : 40;
         this.stateRef.totalXP += xp;
 
         if (!isDone) this.stateRef.completedLessons.push(this.lesson.id);
@@ -460,6 +512,7 @@
         const main = document.getElementById('mainContainer');
         main.innerHTML = '';
         if (view === 'learn') this.renderLearn(main);
+        else if (view === 'script') this.renderScript(main);
         else if (view === 'vocab') this.renderVocab(main);
         else if (view === 'progress') this.renderProgress(main);
         else if (view === 'settings') this.renderSettings(main);
@@ -471,7 +524,7 @@
         const chapters = window.THAI_A1_CHAPTERS || [];
 
         main.innerHTML = `
-          <h2 style="margin-bottom:1rem;">🇹🇭 Thai Comprehensive Course</h2>
+          <h2 style="margin-bottom:1rem;">🇹🇭 Thai Comprehensive Master</h2>
           ${chapters.map(ch => {
             const chTitle = typeof ch.title === 'object' ? (ch.title[lang] || ch.title.en) : ch.title;
             return `
@@ -482,11 +535,12 @@
                   ${ch.units.map(unit => {
                     const uTitle = typeof unit.title === 'object' ? (unit.title[lang] || unit.title.en) : unit.title;
                     const done = this.state.completedLessons.includes(unit.id);
+                    const drillsCount = (unit.exercises?.length || 0) + (unit.quiz?.length || 0) + (unit.dialogue ? 1 : 0);
                     return `
                       <div style="display:flex; justify-content:space-between; align-items:center; padding:0.75rem; background:var(--bg-main); border-radius:var(--radius-md);">
                         <div>
                           <strong>${uTitle}</strong>
-                          <div style="font-size:0.8rem; color:var(--text-muted);">${unit.vocabulary?.length || 0} ${t.words_count} • Drills & Quiz</div>
+                          <div style="font-size:0.8rem; color:var(--text-muted);">${unit.vocabulary?.length || 0} ${t.words_count} • ${drillsCount} Interactive Drills & Dialogue</div>
                         </div>
                         <button class="primary-btn" onclick="App.launchLesson('${unit.id}')">
                           ${done ? t.review : t.start}
@@ -499,6 +553,76 @@
             `;
           }).join('')}
         `;
+      },
+
+      renderScript(main) {
+        main.innerHTML = `
+          <h2>✍️ Thai Script & Reading Master (ထိုင်းစာ ရေးနည်း/ဖတ်နည်း)</h2>
+          <div class="card" style="margin-top:1rem;">
+            <h3>🎨 Letter Drawing & Stroke Practice</h3>
+            <p style="color:var(--text-muted); font-size:0.9rem;">အောက်ပါ Canvas ပေါ်တွင် လက်ဖြင့် စာလုံး ရေးဆွဲလေ့ကျင့်ပါ-</p>
+            <canvas id="paintCanvas" class="drawing-pad-box" width="320" height="260"></canvas>
+            <div style="text-align:center;">
+              <button class="secondary-btn" onclick="App.clearCanvas()">🗑️ Clear Canvas</button>
+            </div>
+          </div>
+
+          <h3 style="margin: 1.5rem 0 0.75rem 0;">🔤 Thai Consonants (ဗျည်းများ အသံထွက်နှင့် အတန်းအစား)</h3>
+          <div class="grid-thai-letters">
+            ${THAI_ALPHABET.map(item => `
+              <div class="thai-letter-card" onclick="App.selectLetter('${item.char}', '${item.name}', '${item.roman}', '${item.class}', '${item.sound}')">
+                <span style="font-size:1.8rem; font-weight:700; color:var(--primary);">${item.char}</span>
+                <div style="font-size:0.75rem; font-weight:700;">${item.name}</div>
+                <small style="color:var(--text-muted); font-size:0.7rem;">[${item.class}]</small>
+              </div>
+            `).join('')}
+          </div>
+        `;
+
+        this.initCanvas();
+      },
+
+      initCanvas() {
+        const canvas = document.getElementById('paintCanvas');
+        if (!canvas) return;
+        const ctx = canvas.getContext('2d');
+        ctx.lineWidth = 4;
+        ctx.lineCap = 'round';
+        ctx.strokeStyle = '#4F46E5';
+
+        let painting = false;
+        function start(e) { painting = true; draw(e); }
+        function end() { painting = false; ctx.beginPath(); }
+        function draw(e) {
+          if (!painting) return;
+          const rect = canvas.getBoundingClientRect();
+          const clientX = e.clientX || (e.touches && e.touches[0].clientX);
+          const clientY = e.clientY || (e.touches && e.touches[0].clientY);
+          ctx.lineTo(clientX - rect.left, clientY - rect.top);
+          ctx.stroke();
+          ctx.beginPath();
+          ctx.moveTo(clientX - rect.left, clientY - rect.top);
+        }
+
+        canvas.addEventListener('mousedown', start);
+        canvas.addEventListener('mouseup', end);
+        canvas.addEventListener('mousemove', draw);
+        canvas.addEventListener('touchstart', (e) => { e.preventDefault(); start(e); });
+        canvas.addEventListener('touchend', end);
+        canvas.addEventListener('touchmove', (e) => { e.preventDefault(); draw(e); });
+      },
+
+      clearCanvas() {
+        const canvas = document.getElementById('paintCanvas');
+        if (canvas) {
+          const ctx = canvas.getContext('2d');
+          ctx.clearRect(0, 0, canvas.width, canvas.height);
+        }
+      },
+
+      selectLetter(char, name, roman, cls, sound) {
+        AudioManager.speak(name);
+        alert(`ဗျည်း: ${char}\nနာမည်: ${name} [${roman}]\nအတန်းအစား: ${cls} Class\nအသံထွက်: ${sound}`);
       },
 
       launchLesson(unitId) {
