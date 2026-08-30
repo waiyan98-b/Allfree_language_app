@@ -6,14 +6,14 @@
   <title>LingoMaster — Thai Master Course</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Kanit:wght@400;500;600;700;800&family=Noto+Sans+Thai+Looped:wght@400;600;700;800&family=Padauk:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Noto+Serif+Thai:wght@400;600;700;800;900&family=Padauk:wght@400;700&display=swap" rel="stylesheet">
   <style>
     :root {
       --primary: #4F46E5; --primary-hover: #4338CA; --primary-light: #EEF2FF;
       --success: #10B981; --success-light: #ECFDF5; --error: #EF4444; --error-light: #FEF2F2;
       --bg-main: #F8FAFC; --bg-card: #FFFFFF; --text-main: #0F172A; --text-muted: #64748B;
       --border-color: #E2E8F0; --radius-md: 12px; --radius-lg: 16px; --radius-full: 9999px;
-      --font-base: 'Plus Jakarta Sans', 'Padauk', 'Noto Sans Thai Looped', 'Kanit', sans-serif;
+      --font-base: 'Plus Jakarta Sans', 'Padauk', 'Noto Serif Thai', sans-serif;
       --transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
     }
     [data-theme="dark"] {
@@ -22,7 +22,7 @@
     }
     * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
     body { font-family: var(--font-base); background-color: var(--bg-main); color: var(--text-main); min-height: 100vh; line-height: 1.5; }
-    .thai-txt { font-family: 'Noto Sans Thai Looped', 'Kanit', sans-serif !important; }
+    .thai-txt { font-family: 'Noto Serif Thai', serif !important; }
     .app-layout { display: flex; flex-direction: column; min-height: 100vh; }
     .app-header { position: sticky; top: 0; z-index: 40; display: flex; justify-content: space-between; align-items: center; padding: 0.75rem 1rem; background-color: var(--bg-card); border-bottom: 1px solid var(--border-color); }
     .brand { display: flex; align-items: center; gap: 0.5rem; font-weight: 800; font-size: 1.15rem; color: var(--primary); }
@@ -81,8 +81,8 @@
     .grid-thai-compact { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.5rem; }
     .thai-compact-card { background: var(--bg-card); border: 1.5px solid var(--border-color); padding: 0.65rem 0.25rem; text-align: center; border-radius: 10px; cursor: pointer; transition: var(--transition); }
     .thai-compact-card:active { transform: scale(0.96); background: var(--primary-light); }
-    .thai-compact-char { font-family: 'Noto Sans Thai Looped', 'Kanit', sans-serif !important; font-size: 1.55rem; font-weight: 800; color: var(--primary); line-height: 1.15; }
-    .thai-compact-sub { font-family: 'Noto Sans Thai Looped', 'Kanit', sans-serif !important; font-size: 0.75rem; font-weight: 600; color: var(--text-main); margin-top: 3px; }
+    .thai-compact-char { font-family: 'Noto Serif Thai', serif !important; font-size: 1.5rem; font-weight: 700; color: var(--primary); line-height: 1.2; }
+    .thai-compact-sub { font-family: 'Noto Serif Thai', serif !important; font-size: 0.75rem; font-weight: 600; color: var(--text-main); margin-top: 3px; }
     
     .mic-btn { width: 64px; height: 64px; border-radius: var(--radius-full); background: var(--primary); color: #fff; border: none; font-size: 1.8rem; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; margin: 0.85rem auto; box-shadow: 0 4px 12px rgba(79, 70, 229, 0.35); }
     .mic-btn.listening { background: var(--error); animation: pulse 1.2s infinite; }
@@ -405,6 +405,7 @@
       };
     });
 
+    // 44 Consonants & 32 Vowels
     const SCRIPT_DATA = {
       consonants: [
         { char: "ก", name: "ก ไก่", roman: "Gor Gai", class: "Mid" },
@@ -453,36 +454,38 @@
         { char: "ฮ", name: "ฮ นกฮูก", roman: "Hor Nokhuk", class: "Low" }
       ],
       vowels: [
-        { char: "-ะ", name: "สระอะ", roman: "Sara Ah", class: "Short" },
-        { char: "-า", name: "สระอา", roman: "Sara Aa", class: "Long" },
-        { char: "ิ", name: "สระอิ", roman: "Sara I", class: "Short" },
-        { char: "ီ", name: "สระอี", roman: "Sara Ii", class: "Long" },
-        { char: "ึ", name: "สระอึ", roman: "Sara Ue", class: "Short" },
-        { char: "ื", name: "สระอือ", roman: "Sara Uee", class: "Long" },
-        { char: "ุ", name: "สระอุ", roman: "Sara U", class: "Short" },
-        { char: "ူ", name: "สระอู", roman: "Sara Uu", class: "Long" },
-        { char: "เ-", name: "สระเอ", roman: "Sara E", class: "Long" },
-        { char: "แ-", name: "สระแอ", roman: "Sara Ae", class: "Long" },
-        { char: "โ-", name: "สระโอ", roman: "Sara O", class: "Long" },
-        { char: "ใ-", name: "สระใอ ไม้ม้วน", roman: "Sara Ai", class: "Special" },
-        { char: "ไ-", name: "สระไอ ไม้มลาย", roman: "Sara Ai", class: "Special" },
-        { char: "เ-า", name: "สระเอา", roman: "Sara Ao", class: "Special" }
-      ],
-      tones: [
-        { char: "่", name: "ไม้เอก (mái èek)", roman: "Tone 1", class: "Low Tone" },
-        { char: "้", name: "ไม้โท (mái thoo)", roman: "Tone 2", class: "Falling Tone" },
-        { char: "๊", name: "ไม้ตรี (mái dt замы)", roman: "Tone 3", class: "High Tone" },
-        { char: "๋", name: "ไม้จัตวา (mái jàt-dtà-waa)", roman: "Tone 4", class: "Rising Tone" }
-      ],
-      finals: [
-        { char: "แม่ กก", name: "Ending -k (ก, ข, ค, ฆ)", roman: "Mae Kok", class: "Stop" },
-        { char: "แม่ กง", name: "Ending -ng (ง)", roman: "Mae Kong", class: "Live" },
-        { char: "แม่ กด", name: "Ending -t (ด, จ, ช, ซ, ฎ...)", roman: "Mae Kot", class: "Stop" },
-        { char: "แม่ กน", name: "Ending -n (น, ณ, ญ, ร, ล, ฬ)", roman: "Mae Kon", class: "Live" },
-        { char: "แม่ กบ", name: "Ending -p (บ, ป, พ, ฟ, ภ)", roman: "Mae Kop", class: "Stop" },
-        { char: "แม่ กม", name: "Ending -m (ม)", roman: "Mae Kom", class: "Live" },
-        { char: "แม่ เกย", name: "Ending -y (ย)", roman: "Mae Koei", class: "Live" },
-        { char: "แม่ เกอว", name: "Ending -w (ว)", roman: "Mae Kwoeo", class: "Live" }
+        { char: "◌ะ", name: "สระอะ", roman: "Sara Ah", class: "Short" },
+        { char: "◌า", name: "สระอา", roman: "Sara Aa", class: "Long" },
+        { char: "◌ิ", name: "สระอิ", roman: "Sara I", class: "Short" },
+        { char: "◌ี", name: "สระอี", roman: "Sara Ii", class: "Long" },
+        { char: "◌ึ", name: "สระอึ", roman: "Sara Ue", class: "Short" },
+        { char: "◌ือ", name: "สระอือ", roman: "Sara Uee", class: "Long" },
+        { char: "◌ุ", name: "สระอุ", roman: "Sara U", class: "Short" },
+        { char: "◌ู", name: "สระอู", roman: "Sara Uu", class: "Long" },
+        { char: "เ◌ะ", name: "สระเอะ", roman: "Sara Eh", class: "Short" },
+        { char: "เ◌", name: "สระเอ", roman: "Sara E", class: "Long" },
+        { char: "แ◌ะ", name: "สระแอะ", roman: "Sara Aeh", class: "Short" },
+        { char: "แ◌", name: "สระแอ", roman: "Sara Ae", class: "Long" },
+        { char: "โ◌ะ", name: "สระโอะ", roman: "Sara Oh", class: "Short" },
+        { char: "โ◌", name: "สระโอ", roman: "Sara O", class: "Long" },
+        { char: "เ◌าะ", name: "สระเอาะ", roman: "Sara Or-h", class: "Short" },
+        { char: "◌อ", name: "สระออ", roman: "Sara Or", class: "Long" },
+        { char: "เ◌อะ", name: "สระเออะ", roman: "Sara Uh", class: "Short" },
+        { char: "เ◌อ", name: "สระเออ", roman: "Sara Uu-er", class: "Long" },
+        { char: "เ◌ียะ", name: "สระเอียะ", roman: "Sara Iah", class: "Short" },
+        { char: "เ◌ีย", name: "สระเอีย", roman: "Sara Ia", class: "Long" },
+        { char: "เ◌ือะ", name: "สระเอือะ", roman: "Sara Ueah", class: "Short" },
+        { char: "เ◌ือ", name: "สระเอือ", roman: "Sara Uea", class: "Long" },
+        { char: "◌ัวะ", name: "สระอัวะ", roman: "Sara Uah", class: "Short" },
+        { char: "◌ัว", name: "สระอัว", roman: "Sara Ua", class: "Long" },
+        { char: "อำ", name: "สระอำ", roman: "Sara Am", class: "Special" },
+        { char: "ใ◌", name: "สระใอ ไม้ม้วน", roman: "Sara Ai Muan", class: "Special" },
+        { char: "ไ◌", name: "สระไอ ไม้มลาย", roman: "Sara Ai Malai", class: "Special" },
+        { char: "เ◌า", name: "สระเอา", roman: "Sara Ao", class: "Special" },
+        { char: "ฤ", name: "ตัว ฤ", roman: "Rue", class: "Special" },
+        { char: "ฤๅ", name: "ตัว ฤๅ", roman: "Ruu", class: "Special" },
+        { char: "ฦ", name: "ตัว ฦ", roman: "Lue", class: "Special" },
+        { char: "ฦๅ", name: "ตัว ฦๅ", roman: "Luu", class: "Special" }
       ]
     };
 
@@ -547,7 +550,8 @@
       speak(text, rate = 0.85) {
         if (!('speechSynthesis' in window) || !text) return;
         window.speechSynthesis.cancel();
-        const utter = new SpeechSynthesisUtterance(text);
+        const cleanText = text.replace(/◌/g, '').trim();
+        const utter = new SpeechSynthesisUtterance(cleanText || text);
         utter.lang = 'th-TH';
         utter.rate = rate;
         window.speechSynthesis.speak(utter);
@@ -1032,7 +1036,7 @@
         title.textContent = isCorrect ? t.correct : t.incorrect;
         
         let expText = '';
-        if (ex.explanation) expText = typeof ex.explanation === 'object' ? (ex.explanation[lang] || ex.explanation.en) : exp.explanation;
+        if (ex.explanation) expText = typeof ex.explanation === 'object' ? (ex.explanation[lang] || ex.explanation.en) : ex.explanation;
         exp.textContent = expText || (isCorrect ? t.great_job : '');
 
         actionBtn.textContent = t.continue_btn;
@@ -1201,10 +1205,8 @@
           </div>
 
           <div class="script-tabs">
-            <button class="script-tab-btn ${activeTab === 'consonants' ? 'active' : ''}" onclick="App.setScriptTab('consonants')">Consonants (ဗျည်း)</button>
-            <button class="script-tab-btn ${activeTab === 'vowels' ? 'active' : ''}" onclick="App.setScriptTab('vowels')">Vowels (သရ)</button>
-            <button class="script-tab-btn ${activeTab === 'tones' ? 'active' : ''}" onclick="App.setScriptTab('tones')">Tone Marks (အသံအမှတ်)</button>
-            <button class="script-tab-btn ${activeTab === 'finals' ? 'active' : ''}" onclick="App.setScriptTab('finals')">Final Consonants (အသတ်သံ)</button>
+            <button class="script-tab-btn ${activeTab === 'consonants' ? 'active' : ''}" onclick="App.setScriptTab('consonants')">Consonants (ဗျည်း ၄၄ လုံး)</button>
+            <button class="script-tab-btn ${activeTab === 'vowels' ? 'active' : ''}" onclick="App.setScriptTab('vowels')">Vowels (သရ ၃၂ လုံး)</button>
           </div>
 
           <div class="grid-thai-compact">
