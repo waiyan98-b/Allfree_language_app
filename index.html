@@ -6,14 +6,14 @@
   <title>LingoMaster — Thai Master Course</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Noto+Sans+Thai:wght@400;600;700&family=Padauk:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Kanit:wght@400;500;600;700;800&family=Noto+Sans+Thai+Looped:wght@400;600;700;800&family=Padauk:wght@400;700&display=swap" rel="stylesheet">
   <style>
     :root {
       --primary: #4F46E5; --primary-hover: #4338CA; --primary-light: #EEF2FF;
       --success: #10B981; --success-light: #ECFDF5; --error: #EF4444; --error-light: #FEF2F2;
       --bg-main: #F8FAFC; --bg-card: #FFFFFF; --text-main: #0F172A; --text-muted: #64748B;
       --border-color: #E2E8F0; --radius-md: 12px; --radius-lg: 16px; --radius-full: 9999px;
-      --font-base: 'Plus Jakarta Sans', 'Padauk', 'Noto Sans Thai', sans-serif;
+      --font-base: 'Plus Jakarta Sans', 'Padauk', 'Noto Sans Thai Looped', 'Kanit', sans-serif;
       --transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
     }
     [data-theme="dark"] {
@@ -22,7 +22,7 @@
     }
     * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
     body { font-family: var(--font-base); background-color: var(--bg-main); color: var(--text-main); min-height: 100vh; line-height: 1.5; }
-    .thai-txt { font-family: 'Noto Sans Thai', sans-serif !important; }
+    .thai-txt { font-family: 'Noto Sans Thai Looped', 'Kanit', sans-serif !important; }
     .app-layout { display: flex; flex-direction: column; min-height: 100vh; }
     .app-header { position: sticky; top: 0; z-index: 40; display: flex; justify-content: space-between; align-items: center; padding: 0.75rem 1rem; background-color: var(--bg-card); border-bottom: 1px solid var(--border-color); }
     .brand { display: flex; align-items: center; gap: 0.5rem; font-weight: 800; font-size: 1.15rem; color: var(--primary); }
@@ -44,7 +44,6 @@
     .progress-bar-fill { height: 100%; background: linear-gradient(90deg, var(--primary), #818CF8); border-radius: var(--radius-full); transition: width 0.4s ease; }
     .chapter-banner { width: 100%; height: 120px; border-radius: var(--radius-md); object-fit: cover; margin-bottom: 0.75rem; }
     
-    /* Matching Pairs */
     .matching-container { display: grid; grid-template-columns: 1fr 1fr; gap: 0.65rem; margin-top: 0.85rem; }
     .matching-col { display: flex; flex-direction: column; gap: 0.65rem; }
     .match-item { background: var(--bg-card); border: 1.5px solid var(--border-color); padding: 0.6rem 0.4rem; border-radius: var(--radius-md); display: flex; flex-direction: column; align-items: center; justify-content: center; cursor: pointer; min-height: 64px; height: 64px; text-align: center; transition: var(--transition); }
@@ -75,15 +74,15 @@
     .feedback-banner.incorrect { background: var(--error-light); color: #991B1B; }
     .audio-btn { background: var(--primary-light); border: none; color: var(--primary); width: 40px; height: 40px; border-radius: var(--radius-full); display: inline-flex; align-items: center; justify-content: center; cursor: pointer; font-size: 1.1rem; }
     
-    /* Script Compact Grid */
+    /* Script Compact Looped Grid */
     .script-tabs { display: flex; gap: 0.4rem; overflow-x: auto; padding-bottom: 0.5rem; margin-bottom: 0.85rem; }
     .script-tab-btn { padding: 0.4rem 0.75rem; border-radius: var(--radius-full); border: 1px solid var(--border-color); background: var(--bg-card); font-size: 0.8rem; font-weight: 700; cursor: pointer; white-space: nowrap; color: var(--text-main); }
     .script-tab-btn.active { background: var(--primary); color: #fff; border-color: var(--primary); }
-    .grid-thai-compact { display: grid; grid-template-columns: repeat(auto-fill, minmax(75px, 1fr)); gap: 0.5rem; }
-    .thai-compact-card { background: var(--bg-card); border: 1.5px solid var(--border-color); padding: 0.55rem 0.35rem; text-align: center; border-radius: 10px; cursor: pointer; transition: var(--transition); }
+    .grid-thai-compact { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.5rem; }
+    .thai-compact-card { background: var(--bg-card); border: 1.5px solid var(--border-color); padding: 0.65rem 0.25rem; text-align: center; border-radius: 10px; cursor: pointer; transition: var(--transition); }
     .thai-compact-card:active { transform: scale(0.96); background: var(--primary-light); }
-    .thai-compact-char { font-size: 1.45rem; font-weight: 700; color: var(--primary); line-height: 1.15; }
-    .thai-compact-sub { font-size: 0.75rem; font-weight: 600; color: var(--text-main); margin-top: 2px; }
+    .thai-compact-char { font-family: 'Noto Sans Thai Looped', 'Kanit', sans-serif !important; font-size: 1.55rem; font-weight: 800; color: var(--primary); line-height: 1.15; }
+    .thai-compact-sub { font-family: 'Noto Sans Thai Looped', 'Kanit', sans-serif !important; font-size: 0.75rem; font-weight: 600; color: var(--text-main); margin-top: 3px; }
     
     .mic-btn { width: 64px; height: 64px; border-radius: var(--radius-full); background: var(--primary); color: #fff; border: none; font-size: 1.8rem; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; margin: 0.85rem auto; box-shadow: 0 4px 12px rgba(79, 70, 229, 0.35); }
     .mic-btn.listening { background: var(--error); animation: pulse 1.2s infinite; }
@@ -143,7 +142,6 @@
   </div>
 
   <script>
-    // Chapter-specific Vocabularies
     const CHAPTER_TOPICS = [
       {
         id: "th-c1",
@@ -1034,7 +1032,7 @@
         title.textContent = isCorrect ? t.correct : t.incorrect;
         
         let expText = '';
-        if (ex.explanation) expText = typeof ex.explanation === 'object' ? (ex.explanation[lang] || ex.explanation.en) : ex.explanation;
+        if (ex.explanation) expText = typeof ex.explanation === 'object' ? (ex.explanation[lang] || ex.explanation.en) : exp.explanation;
         exp.textContent = expText || (isCorrect ? t.great_job : '');
 
         actionBtn.textContent = t.continue_btn;
@@ -1212,8 +1210,8 @@
           <div class="grid-thai-compact">
             ${currentData.map(item => `
               <div class="thai-compact-card" onclick="AudioManager.speak('${item.name}')">
-                <div class="thai-compact-char thai-txt">${item.char}</div>
-                <div class="thai-compact-sub thai-txt">${item.name}</div>
+                <div class="thai-compact-char">${item.char}</div>
+                <div class="thai-compact-sub">${item.name}</div>
                 <small style="color:var(--text-muted); font-size:0.65rem;">[${item.class}]</small>
               </div>
             `).join('')}
