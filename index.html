@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
-  <title>LingoMaster — Thai Edition (Bilingual)</title>
+  <title>LingoMaster — Thai Interactive Edition</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Noto+Sans+Thai:wght@400;600;700&family=Padauk:wght@400;700&display=swap" rel="stylesheet">
@@ -38,17 +38,16 @@
     .primary-btn:hover:not(:disabled) { background: var(--primary-hover); }
     .primary-btn:disabled { opacity: 0.5; cursor: not-allowed; }
     .btn-large { width: 100%; font-size: 1.05rem; padding: 0.85rem; }
-    .secondary-btn { background: var(--bg-card); color: var(--text-main); border: 1px solid var(--border-color); padding: 0.5rem 0.85rem; border-radius: var(--radius-md); font-weight: 600; cursor: pointer; font-size: 0.85rem; }
     .progress-bar-container { width: 100%; height: 8px; background: var(--border-color); border-radius: var(--radius-full); overflow: hidden; }
     .progress-bar-fill { height: 100%; background: linear-gradient(90deg, var(--primary), #818CF8); border-radius: var(--radius-full); transition: width 0.4s ease; }
     .chapter-banner { width: 100%; height: 120px; border-radius: var(--radius-md); object-fit: cover; margin-bottom: 0.75rem; }
     .vocab-img { width: 65px; height: 65px; border-radius: 10px; object-fit: cover; }
-    .options-grid { display: grid; grid-template-columns: 1fr; gap: 0.6rem; }
-    .option-btn { background: var(--bg-card); border: 2px solid var(--border-color); padding: 0.85rem; border-radius: var(--radius-md); font-size: 1rem; font-weight: 600; text-align: left; cursor: pointer; color: var(--text-main); }
+    .options-grid { display: grid; grid-template-columns: 1fr; gap: 0.75rem; }
+    .option-btn { background: var(--bg-card); border: 2px solid var(--border-color); padding: 1rem; border-radius: var(--radius-md); font-size: 1.1rem; font-weight: 600; text-align: left; cursor: pointer; color: var(--text-main); display: flex; justify-content: space-between; align-items: center; transition: var(--transition); }
     .option-btn.selected { border-color: var(--primary); background: var(--primary-light); color: var(--primary); }
-    .sentence-construction-zone { background: var(--bg-main); border: 2px dashed var(--border-color); margin-bottom: 1.25rem; min-height: 50px; display: flex; flex-wrap: wrap; gap: 0.5rem; padding: 0.75rem; border-radius: var(--radius-md); }
+    .sentence-construction-zone { background: var(--bg-main); border: 2px dashed var(--border-color); margin-bottom: 1.25rem; min-height: 55px; display: flex; flex-wrap: wrap; gap: 0.5rem; padding: 0.75rem; border-radius: var(--radius-md); align-items: center; }
     .word-bank { display: flex; flex-wrap: wrap; gap: 0.5rem; }
-    .word-chip { padding: 0.5rem 0.85rem; background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 8px; font-weight: 600; cursor: pointer; color: var(--text-main); }
+    .word-chip { padding: 0.6rem 0.95rem; background: var(--bg-card); border: 1.5px solid var(--border-color); border-radius: 10px; font-weight: 600; cursor: pointer; color: var(--text-main); font-size: 1rem; display: inline-flex; align-items: center; gap: 0.35rem; }
     .word-chip.used { opacity: 0.3; pointer-events: none; }
     .modal-overlay { position: fixed; inset: 0; background: rgba(15, 23, 42, 0.6); backdrop-filter: blur(4px); z-index: 100; display: flex; justify-content: center; align-items: center; }
     .modal-overlay.hidden { display: none; }
@@ -59,7 +58,7 @@
     .feedback-banner { padding: 0.85rem 1.25rem; border-top: 1px solid var(--border-color); }
     .feedback-banner.correct { background: var(--success-light); color: #065F46; }
     .feedback-banner.incorrect { background: var(--error-light); color: #991B1B; }
-    .audio-btn { background: var(--primary-light); border: none; color: var(--primary); width: 40px; height: 40px; border-radius: var(--radius-full); display: inline-flex; align-items: center; justify-content: center; cursor: pointer; font-size: 1.1rem; }
+    .audio-btn { background: var(--primary-light); border: none; color: var(--primary); width: 44px; height: 44px; border-radius: var(--radius-full); display: inline-flex; align-items: center; justify-content: center; cursor: pointer; font-size: 1.2rem; }
   </style>
 </head>
 <body>
@@ -67,7 +66,7 @@
     <header class="app-header">
       <div class="brand"><span>🇹🇭</span><span>Thai Master</span></div>
       <div class="header-actions">
-        <button id="uiLangToggleBtn" class="lang-switcher-btn" title="Switch UI Language">🇲🇲 မြန်မာ</button>
+        <button id="uiLangToggleBtn" class="lang-switcher-btn">🇲🇲 မြန်မာ</button>
         <div class="stat-pill">🔥 <span id="streakCount">1</span></div>
         <div class="stat-pill">⭐ <span id="totalXpCount">0</span></div>
         <button id="themeToggleBtn" class="icon-btn">🌙</button>
@@ -91,7 +90,7 @@
         <div class="progress-bar-container" style="flex:1;">
           <div id="lessonProgressBar" class="progress-bar-fill" style="width: 0%;"></div>
         </div>
-        <div id="lessonStepIndicator" style="font-size: 0.85rem; font-weight: 700; color: var(--text-muted);">Step 1/6</div>
+        <div id="lessonStepIndicator" style="font-size: 0.85rem; font-weight: 700; color: var(--text-muted);">Step 1/8</div>
       </header>
       
       <div id="lessonContainer" class="lesson-body"></div>
@@ -113,7 +112,6 @@
     </div>
   </div>
 
-  <!-- External Thai Data File -->
   <script src="data/thai.js"></script>
 
   <script>
@@ -166,7 +164,7 @@
         window.speechSynthesis.cancel();
         const utter = new SpeechSynthesisUtterance(text);
         utter.lang = 'th-TH';
-        utter.rate = 0.9;
+        utter.rate = 0.85;
         window.speechSynthesis.speak(utter);
       }
     };
@@ -266,19 +264,39 @@
         this.orderedWords = [];
 
         const promptText = typeof ex.prompt === 'object' ? (ex.prompt[lang] || ex.prompt.en) : ex.prompt;
-        let html = `<div style="font-weight:700; font-size:1.1rem; margin-bottom:1rem;">${promptText}</div>`;
+        let html = `<div style="font-weight:700; font-size:1.15rem; margin-bottom:1.2rem;">${promptText}</div>`;
 
         if (ex.type === 'mcq') {
           const rawOpts = ex.options;
           const optsList = (rawOpts && typeof rawOpts === 'object' && !Array.isArray(rawOpts)) ? (rawOpts[lang] || rawOpts.en) : rawOpts;
           html += `<div class="options-grid">
-            ${optsList.map((opt, i) => `<button class="option-btn" onclick="LessonEngine.selectOpt(this, ${i})">${opt}</button>`).join('')}
+            ${optsList.map((opt, i) => `
+              <button class="option-btn" onclick="LessonEngine.selectOpt(this, ${i}, '${opt.replace(/'/g, "\\'")}')">
+                <span>${opt}</span>
+                <span style="font-size:1.1rem; opacity:0.6;">🔊</span>
+              </button>
+            `).join('')}
           </div>`;
+        } else if (ex.type === 'listening') {
+          html += `
+            <div style="text-align:center; margin-bottom:1.5rem;">
+              <button class="audio-btn" style="width:60px; height:60px; font-size:1.8rem;" onclick="AudioManager.speak('${ex.targetText}')">🔊</button>
+            </div>
+            <div class="options-grid">
+              ${ex.options.map((opt, i) => `
+                <button class="option-btn" onclick="LessonEngine.selectOpt(this, ${i}, '${opt}')">
+                  <span>${opt}</span>
+                  <span style="font-size:1.1rem; opacity:0.6;">🔊</span>
+                </button>
+              `).join('')}
+            </div>
+          `;
+          setTimeout(() => AudioManager.speak(ex.targetText), 250);
         } else if (ex.type === 'word_order') {
           html += `
             <div id="constructionZone" class="sentence-construction-zone"></div>
             <div id="wordBank" class="word-bank">
-              ${ex.words.map(w => `<div class="word-chip" onclick="LessonEngine.pickWord(this, '${w}')">${w}</div>`).join('')}
+              ${ex.words.map(w => `<div class="word-chip" onclick="LessonEngine.pickWord(this, '${w}')">${w} 🔊</div>`).join('')}
             </div>
           `;
         }
@@ -286,14 +304,21 @@
         container.innerHTML = html;
       },
 
-      selectOpt(el, idx) {
+      selectOpt(el, idx, textToSpeak) {
         document.querySelectorAll('.option-btn').forEach(b => b.classList.remove('selected'));
         el.classList.add('selected');
         this.userAnswer = idx;
         document.getElementById('lessonActionBtn').disabled = false;
+
+        // Option နှိပ်လိုက်သည်နှင့် အသံထွက်ပေးခြင်း
+        if (textToSpeak) {
+          const cleanText = textToSpeak.replace(/\(.*?\)/g, '').trim();
+          AudioManager.speak(cleanText);
+        }
       },
 
       pickWord(el, word) {
+        AudioManager.speak(word);
         const zone = document.getElementById('constructionZone');
         const chip = document.createElement('div');
         chip.className = 'word-chip';
@@ -314,7 +339,7 @@
         const lang = this.stateRef.uiLang;
         const t = I18N[lang];
         let isCorrect = false;
-        if (ex.type === 'mcq') isCorrect = (this.userAnswer === ex.correct);
+        if (ex.type === 'mcq' || ex.type === 'listening') isCorrect = (this.userAnswer === ex.correct);
         else if (ex.type === 'word_order') isCorrect = (JSON.stringify(this.orderedWords) === JSON.stringify(ex.correctSequence));
 
         if (isCorrect) this.correctCount++;
@@ -344,7 +369,7 @@
         const lang = this.stateRef.uiLang;
         const t = I18N[lang];
         const isDone = this.stateRef.completedLessons.includes(this.lesson.id);
-        const xp = isDone ? 10 : 25;
+        const xp = isDone ? 15 : 30;
         this.stateRef.totalXP += xp;
 
         if (!isDone) this.stateRef.completedLessons.push(this.lesson.id);
@@ -446,7 +471,7 @@
         const chapters = window.THAI_A1_CHAPTERS || [];
 
         main.innerHTML = `
-          <h2 style="margin-bottom:1rem;">🇹🇭 Thai A1 Course</h2>
+          <h2 style="margin-bottom:1rem;">🇹🇭 Thai Comprehensive Course</h2>
           ${chapters.map(ch => {
             const chTitle = typeof ch.title === 'object' ? (ch.title[lang] || ch.title.en) : ch.title;
             return `
@@ -461,7 +486,7 @@
                       <div style="display:flex; justify-content:space-between; align-items:center; padding:0.75rem; background:var(--bg-main); border-radius:var(--radius-md);">
                         <div>
                           <strong>${uTitle}</strong>
-                          <div style="font-size:0.8rem; color:var(--text-muted);">${unit.vocabulary?.length || 0} ${t.words_count} • Grammar</div>
+                          <div style="font-size:0.8rem; color:var(--text-muted);">${unit.vocabulary?.length || 0} ${t.words_count} • Drills & Quiz</div>
                         </div>
                         <button class="primary-btn" onclick="App.launchLesson('${unit.id}')">
                           ${done ? t.review : t.start}
