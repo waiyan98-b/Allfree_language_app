@@ -38,6 +38,7 @@
     .primary-btn:hover:not(:disabled) { background: var(--primary-hover); }
     .primary-btn:disabled { opacity: 0.5; cursor: not-allowed; }
     .btn-large { width: 100%; font-size: 1.05rem; padding: 0.85rem; }
+    .secondary-btn { background: var(--bg-card); color: var(--text-main); border: 1px solid var(--border-color); padding: 0.5rem 0.85rem; border-radius: var(--radius-md); font-weight: 600; cursor: pointer; font-size: 0.85rem; }
     .progress-bar-container { width: 100%; height: 8px; background: var(--border-color); border-radius: var(--radius-full); overflow: hidden; }
     .progress-bar-fill { height: 100%; background: linear-gradient(90deg, var(--primary), #818CF8); border-radius: var(--radius-full); transition: width 0.4s ease; }
     .chapter-banner { width: 100%; height: 120px; border-radius: var(--radius-md); object-fit: cover; margin-bottom: 0.75rem; }
@@ -49,10 +50,10 @@
     .word-bank { display: flex; flex-wrap: wrap; gap: 0.5rem; }
     .word-chip { padding: 0.6rem 0.95rem; background: var(--bg-card); border: 1.5px solid var(--border-color); border-radius: 10px; font-weight: 600; cursor: pointer; color: var(--text-main); font-size: 1rem; display: inline-flex; align-items: center; gap: 0.35rem; }
     .word-chip.used { opacity: 0.3; pointer-events: none; }
-    .chat-bubble { max-width: 80%; padding: 0.85rem 1rem; border-radius: 16px; margin-bottom: 0.75rem; display: flex; flex-direction: column; gap: 0.25rem; }
+    .chat-bubble { max-width: 85%; padding: 0.85rem 1rem; border-radius: 16px; margin-bottom: 0.75rem; display: flex; flex-direction: column; gap: 0.25rem; }
     .chat-bubble.left { align-self: flex-start; background: var(--bg-main); border-bottom-left-radius: 4px; border: 1px solid var(--border-color); }
     .chat-bubble.right { align-self: flex-end; background: var(--primary-light); color: var(--primary); border-bottom-right-radius: 4px; border: 1px solid rgba(79, 70, 229, 0.2); }
-    .drawing-pad-box { border: 2px solid var(--border-color); border-radius: var(--radius-md); background: #fff; touch-action: none; width: 100%; max-width: 320px; height: 260px; margin: 1rem auto; display: block; }
+    .drawing-pad-box { border: 2px solid var(--border-color); border-radius: var(--radius-md); background: #fff; touch-action: none; width: 100%; max-width: 320px; height: 240px; margin: 1rem auto; display: block; }
     .modal-overlay { position: fixed; inset: 0; background: rgba(15, 23, 42, 0.6); backdrop-filter: blur(4px); z-index: 100; display: flex; justify-content: center; align-items: center; }
     .modal-overlay.hidden { display: none; }
     .lesson-dialog { background: var(--bg-card); width: 100%; height: 100%; max-width: 680px; display: flex; flex-direction: column; }
@@ -64,7 +65,11 @@
     .feedback-banner.incorrect { background: var(--error-light); color: #991B1B; }
     .audio-btn { background: var(--primary-light); border: none; color: var(--primary); width: 44px; height: 44px; border-radius: var(--radius-full); display: inline-flex; align-items: center; justify-content: center; cursor: pointer; font-size: 1.2rem; }
     .grid-thai-letters { display: grid; grid-template-columns: repeat(auto-fill, minmax(80px, 1fr)); gap: 0.6rem; }
-    .thai-letter-card { background: var(--bg-main); border: 1px solid var(--border-color); padding: 0.75rem 0.5rem; text-align: center; border-radius: var(--radius-md); cursor: pointer; }
+    .thai-letter-card { background: var(--bg-main); border: 1px solid var(--border-color); padding: 0.75rem 0.5rem; text-align: center; border-radius: var(--radius-md); cursor: pointer; transition: var(--transition); }
+    .thai-letter-card:active { transform: scale(0.95); background: var(--primary-light); }
+    .mic-btn { width: 70px; height: 70px; border-radius: var(--radius-full); background: var(--primary); color: #fff; border: none; font-size: 2rem; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; margin: 1rem auto; box-shadow: 0 4px 14px rgba(79, 70, 229, 0.4); }
+    .mic-btn.listening { background: var(--error); animation: pulse 1.2s infinite; }
+    @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.08); } 100% { transform: scale(1); } }
   </style>
 </head>
 <body>
@@ -130,7 +135,15 @@
         start: "စတင်မည်", review: "ပြန်လေ့ကျင့်မည် ✓", words_count: "လုံး",
         score: "ရမှတ်", xp_earned: "ရရှိသော XP", total_xp: "စုစုပေါင်း XP", streak: "ရက်ဆက်လေ့လာမှု",
         vocab_empty: "စကားလုံးများ မကျက်ရသေးပါ။ သင်ခန်းစာများ စတင်လေ့လာပါ!",
-        export_btn: "💾 Data သိမ်းဆည်းရန် (Backup)"
+        export_btn: "💾 Data သိမ်းဆည်းရန် (Backup)",
+        script_title: "✍️ Thai Script & Reading Master (ထိုင်းစာ ရေးနည်း/ဖတ်နည်း)",
+        script_canvas_title: "🎨 Letter Drawing & Stroke Practice",
+        script_canvas_sub: "အောက်ပါ Canvas ပေါ်တွင် လက်ဖြင့် စာလုံး ရေးဆွဲလေ့ကျင့်ပါ-",
+        script_clear: "🗑️ Canvas ဖျက်မည်",
+        script_consonants: "🔤 Thai Consonants (ဗျည်းများ နှိပ်၍ အသံနားထောင်ပါ)",
+        speak_tap_mic: "မိုက်ခွက်ကို နှိပ်ပြီး အသံထွက်ဖတ်ပါ:",
+        speak_listening: "နားထောင်နေပါသည်... အသံထွက်ပြောပါ",
+        accuracy_label: "အသံထွက် မှန်ကန်မှု ရာခိုင်နှုန်း:"
       },
       en: {
         nav_learn: "Learn", nav_script: "Script & Reading", nav_vocab: "Vocab", nav_progress: "Progress", nav_settings: "Settings",
@@ -139,7 +152,15 @@
         start: "Start", review: "Review ✓", words_count: "Words",
         score: "Score", xp_earned: "XP Earned", total_xp: "Total XP", streak: "Streak",
         vocab_empty: "No words mastered yet. Start learning Thai units!",
-        export_btn: "💾 Export Progress (Backup)"
+        export_btn: "💾 Export Progress (Backup)",
+        script_title: "✍️ Thai Script & Reading Master",
+        script_canvas_title: "🎨 Letter Drawing & Stroke Practice",
+        script_canvas_sub: "Practice handwriting strokes on the canvas below:",
+        script_clear: "🗑️ Clear Canvas",
+        script_consonants: "🔤 Thai Consonants (Tap any letter to listen)",
+        speak_tap_mic: "Tap the mic and speak clearly:",
+        speak_listening: "Listening... speak now",
+        accuracy_label: "Pronunciation Accuracy:"
       }
     };
 
@@ -251,7 +272,7 @@
                 <div class="card" style="display:flex; justify-content:space-between; align-items:center; gap:0.75rem;">
                   ${v.image ? `<img src="${v.image}" class="vocab-img" alt="${v.word}">` : ''}
                   <div style="flex:1;">
-                    <h4 style="font-size:1.3rem;">${v.word}</h4>
+                    <h4 style="font-size:1.3rem; cursor:pointer;" onclick="AudioManager.speak('${v.word}')">${v.word} 🔊</h4>
                     <small style="color:var(--primary); font-weight:700;">[${v.roman}]</small>
                     <p style="color:var(--text-muted); font-size:0.9rem;">${typeof v.meaning === 'object' ? (v.meaning[lang] || v.meaning.en) : v.meaning}</p>
                   </div>
@@ -313,7 +334,20 @@
         this.orderedWords = [];
 
         const promptText = typeof ex.prompt === 'object' ? (ex.prompt[lang] || ex.prompt.en) : ex.prompt;
-        let html = `<div style="font-weight:700; font-size:1.15rem; margin-bottom:1.2rem;">${promptText}</div>`;
+        
+        let headerAudioHtml = '';
+        if (ex.promptTargetAudio) {
+          headerAudioHtml = `
+            <div style="display:flex; align-items:center; gap:0.5rem; margin-bottom:1.2rem; cursor:pointer;" onclick="AudioManager.speak('${ex.promptTargetAudio}')">
+              <span style="font-weight:700; font-size:1.2rem; color:var(--primary);">${promptText}</span>
+              <button class="audio-btn" style="width:36px; height:36px; font-size:1rem;">🔊</button>
+            </div>
+          `;
+        } else {
+          headerAudioHtml = `<div style="font-weight:700; font-size:1.15rem; margin-bottom:1.2rem;">${promptText}</div>`;
+        }
+
+        let html = headerAudioHtml;
 
         if (ex.type === 'mcq') {
           const rawOpts = ex.options;
@@ -333,7 +367,7 @@
         } else if (ex.type === 'listening') {
           html += `
             <div style="text-align:center; margin-bottom:1.5rem;">
-              <button class="audio-btn" style="width:60px; height:60px; font-size:1.8rem;" onclick="AudioManager.speak('${ex.targetText}')">🔊</button>
+              <button class="audio-btn" style="width:64px; height:64px; font-size:1.8rem;" onclick="AudioManager.speak('${ex.targetText}')">🔊</button>
             </div>
             <div class="options-grid">
               ${ex.options.map((opt, i) => `
@@ -350,6 +384,23 @@
             <div id="constructionZone" class="sentence-construction-zone"></div>
             <div id="wordBank" class="word-bank">
               ${ex.words.map(w => `<div class="word-chip" onclick="LessonEngine.pickWord(this, '${w}')">${w} 🔊</div>`).join('')}
+            </div>
+          `;
+        } else if (ex.type === 'speaking') {
+          html += `
+            <div class="card" style="text-align:center; padding:1.5rem 1rem;">
+              <h2 style="font-size:1.8rem; color:var(--primary);">${ex.targetText}</h2>
+              <p style="color:var(--text-muted); font-weight:700; margin:0.3rem 0;">[${ex.roman}]</p>
+              <button class="audio-btn" style="margin:0.5rem 0;" onclick="AudioManager.speak('${ex.targetText}')">🔊 Listen First</button>
+              <p style="font-size:0.9rem; margin-top:0.8rem;">${t.speak_tap_mic}</p>
+              
+              <button id="micRecordBtn" class="mic-btn" onclick="LessonEngine.recordVoice('${ex.targetText}')">🎙️</button>
+              <div id="speechStatusText" style="font-size:0.85rem; color:var(--text-muted);">Ready to speak</div>
+              
+              <div id="accuracyContainer" style="margin-top:1rem; display:none;">
+                <strong>${t.accuracy_label}</strong>
+                <h3 id="accuracyScore" style="color:var(--success); font-size:1.5rem;">0%</h3>
+              </div>
             </div>
           `;
         }
@@ -387,12 +438,65 @@
         document.getElementById('lessonActionBtn').disabled = false;
       },
 
+      recordVoice(targetText) {
+        const SpeechRec = window.SpeechRecognition || window.webkitSpeechRecognition;
+        const statusText = document.getElementById('speechStatusText');
+        const micBtn = document.getElementById('micRecordBtn');
+        const actionBtn = document.getElementById('lessonActionBtn');
+        const lang = this.stateRef.uiLang;
+
+        if (!SpeechRec) {
+          alert("Speech recognition not supported on this browser. Voice practice simulation will award credit.");
+          this.userAnswer = 95;
+          document.getElementById('accuracyContainer').style.display = 'block';
+          document.getElementById('accuracyScore').textContent = '95% (Excellent)';
+          actionBtn.disabled = false;
+          return;
+        }
+
+        const recognition = new SpeechRec();
+        recognition.lang = 'th-TH';
+        recognition.interimResults = false;
+
+        micBtn.classList.add('listening');
+        statusText.textContent = I18N[lang].speak_listening;
+
+        recognition.onresult = (event) => {
+          const spoken = event.results[0][0].transcript.trim();
+          micBtn.classList.remove('listening');
+          statusText.textContent = `You said: "${spoken}"`;
+
+          let score = 0;
+          if (spoken.includes(targetText) || targetText.includes(spoken)) {
+            score = 100;
+          } else {
+            let match = 0;
+            for (let c of spoken) { if (targetText.includes(c)) match++; }
+            score = Math.min(100, Math.round((match / Math.max(targetText.length, 1)) * 100));
+          }
+
+          this.userAnswer = score;
+          document.getElementById('accuracyContainer').style.display = 'block';
+          document.getElementById('accuracyScore').textContent = `${score}%`;
+          actionBtn.disabled = false;
+        };
+
+        recognition.onerror = () => {
+          micBtn.classList.remove('listening');
+          statusText.textContent = "Could not detect sound. Tap mic to retry.";
+        };
+
+        recognition.start();
+      },
+
       checkCurrentExercise(ex) {
         const lang = this.stateRef.uiLang;
         const t = I18N[lang];
         let isCorrect = false;
+
         if (ex.type === 'mcq' || ex.type === 'listening') isCorrect = (this.userAnswer === ex.correct);
         else if (ex.type === 'word_order') isCorrect = (JSON.stringify(this.orderedWords) === JSON.stringify(ex.correctSequence));
+        else if (ex.type === 'speaking') isCorrect = (this.userAnswer >= 60);
 
         if (isCorrect) this.correctCount++;
 
@@ -421,7 +525,7 @@
         const lang = this.stateRef.uiLang;
         const t = I18N[lang];
         const isDone = this.stateRef.completedLessons.includes(this.lesson.id);
-        const xp = isDone ? 20 : 40;
+        const xp = isDone ? 25 : 50;
         this.stateRef.totalXP += xp;
 
         if (!isDone) this.stateRef.completedLessons.push(this.lesson.id);
@@ -524,7 +628,7 @@
         const chapters = window.THAI_A1_CHAPTERS || [];
 
         main.innerHTML = `
-          <h2 style="margin-bottom:1rem;">🇹🇭 Thai Comprehensive Master</h2>
+          <h2 style="margin-bottom:1rem;">🇹🇭 Thai Master Course</h2>
           ${chapters.map(ch => {
             const chTitle = typeof ch.title === 'object' ? (ch.title[lang] || ch.title.en) : ch.title;
             return `
@@ -540,7 +644,7 @@
                       <div style="display:flex; justify-content:space-between; align-items:center; padding:0.75rem; background:var(--bg-main); border-radius:var(--radius-md);">
                         <div>
                           <strong>${uTitle}</strong>
-                          <div style="font-size:0.8rem; color:var(--text-muted);">${unit.vocabulary?.length || 0} ${t.words_count} • ${drillsCount} Interactive Drills & Dialogue</div>
+                          <div style="font-size:0.8rem; color:var(--text-muted);">${unit.vocabulary?.length || 0} ${t.words_count} • ${drillsCount} Drills & Voice AI</div>
                         </div>
                         <button class="primary-btn" onclick="App.launchLesson('${unit.id}')">
                           ${done ? t.review : t.start}
@@ -556,21 +660,24 @@
       },
 
       renderScript(main) {
+        const lang = this.state.uiLang;
+        const t = I18N[lang];
+
         main.innerHTML = `
-          <h2>✍️ Thai Script & Reading Master (ထိုင်းစာ ရေးနည်း/ဖတ်နည်း)</h2>
+          <h2>${t.script_title}</h2>
           <div class="card" style="margin-top:1rem;">
-            <h3>🎨 Letter Drawing & Stroke Practice</h3>
-            <p style="color:var(--text-muted); font-size:0.9rem;">အောက်ပါ Canvas ပေါ်တွင် လက်ဖြင့် စာလုံး ရေးဆွဲလေ့ကျင့်ပါ-</p>
-            <canvas id="paintCanvas" class="drawing-pad-box" width="320" height="260"></canvas>
+            <h3>${t.script_canvas_title}</h3>
+            <p style="color:var(--text-muted); font-size:0.9rem;">${t.script_canvas_sub}</p>
+            <canvas id="paintCanvas" class="drawing-pad-box" width="320" height="240"></canvas>
             <div style="text-align:center;">
-              <button class="secondary-btn" onclick="App.clearCanvas()">🗑️ Clear Canvas</button>
+              <button class="secondary-btn" onclick="App.clearCanvas()">${t.script_clear}</button>
             </div>
           </div>
 
-          <h3 style="margin: 1.5rem 0 0.75rem 0;">🔤 Thai Consonants (ဗျည်းများ အသံထွက်နှင့် အတန်းအစား)</h3>
+          <h3 style="margin: 1.5rem 0 0.75rem 0;">${t.script_consonants}</h3>
           <div class="grid-thai-letters">
             ${THAI_ALPHABET.map(item => `
-              <div class="thai-letter-card" onclick="App.selectLetter('${item.char}', '${item.name}', '${item.roman}', '${item.class}', '${item.sound}')">
+              <div class="thai-letter-card" onclick="AudioManager.speak('${item.name}')">
                 <span style="font-size:1.8rem; font-weight:700; color:var(--primary);">${item.char}</span>
                 <div style="font-size:0.75rem; font-weight:700;">${item.name}</div>
                 <small style="color:var(--text-muted); font-size:0.7rem;">[${item.class}]</small>
@@ -618,11 +725,6 @@
           const ctx = canvas.getContext('2d');
           ctx.clearRect(0, 0, canvas.width, canvas.height);
         }
-      },
-
-      selectLetter(char, name, roman, cls, sound) {
-        AudioManager.speak(name);
-        alert(`ဗျည်း: ${char}\nနာမည်: ${name} [${roman}]\nအတန်းအစား: ${cls} Class\nအသံထွက်: ${sound}`);
       },
 
       launchLesson(unitId) {
