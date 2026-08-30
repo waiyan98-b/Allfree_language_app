@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
-  <title>LingoMaster — Thai Master Edition</title>
+  <title>LingoMaster — Thai Master 240 Units</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Noto+Sans+Thai:wght@400;600;700&family=Padauk:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Noto+Sans+Thai:wght@400;600;700;800&family=Padauk:wght@400;700&display=swap" rel="stylesheet">
   <style>
     :root {
       --primary: #4F46E5; --primary-hover: #4338CA; --primary-light: #EEF2FF;
@@ -22,6 +22,7 @@
     }
     * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
     body { font-family: var(--font-base); background-color: var(--bg-main); color: var(--text-main); min-height: 100vh; line-height: 1.5; }
+    .thai-font { font-family: 'Noto Sans Thai', sans-serif; }
     .app-layout { display: flex; flex-direction: column; min-height: 100vh; }
     .app-header { position: sticky; top: 0; z-index: 40; display: flex; justify-content: space-between; align-items: center; padding: 0.75rem 1.25rem; background-color: var(--bg-card); border-bottom: 1px solid var(--border-color); }
     .brand { display: flex; align-items: center; gap: 0.5rem; font-weight: 800; font-size: 1.2rem; color: var(--primary); }
@@ -42,13 +43,16 @@
     .progress-bar-container { width: 100%; height: 8px; background: var(--border-color); border-radius: var(--radius-full); overflow: hidden; }
     .progress-bar-fill { height: 100%; background: linear-gradient(90deg, var(--primary), #818CF8); border-radius: var(--radius-full); transition: width 0.4s ease; }
     .chapter-banner { width: 100%; height: 120px; border-radius: var(--radius-md); object-fit: cover; margin-bottom: 0.75rem; }
-    .vocab-img { width: 65px; height: 65px; border-radius: 10px; object-fit: cover; }
     .options-grid { display: grid; grid-template-columns: 1fr; gap: 0.75rem; }
     .option-btn { background: var(--bg-card); border: 2px solid var(--border-color); padding: 1rem; border-radius: var(--radius-md); font-size: 1.05rem; font-weight: 600; text-align: left; cursor: pointer; color: var(--text-main); display: flex; justify-content: space-between; align-items: center; transition: var(--transition); }
     .option-btn.selected { border-color: var(--primary); background: var(--primary-light); color: var(--primary); }
+    .matching-container { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; margin-top: 1rem; }
+    .match-item { background: var(--bg-card); border: 2px solid var(--border-color); padding: 0.85rem; border-radius: var(--radius-md); display: flex; align-items: center; justify-content: center; cursor: pointer; min-height: 55px; font-weight: 600; text-align: center; transition: var(--transition); }
+    .match-item.selected { border-color: var(--primary); background: var(--primary-light); color: var(--primary); }
+    .match-item.matched { opacity: 0.3; border-color: var(--success); pointer-events: none; }
     .sentence-construction-zone { background: var(--bg-main); border: 2px dashed var(--border-color); margin-bottom: 1.25rem; min-height: 55px; display: flex; flex-wrap: wrap; gap: 0.5rem; padding: 0.75rem; border-radius: var(--radius-md); align-items: center; }
     .word-bank { display: flex; flex-wrap: wrap; gap: 0.5rem; }
-    .word-chip { padding: 0.6rem 0.95rem; background: var(--bg-card); border: 1.5px solid var(--border-color); border-radius: 10px; font-weight: 600; cursor: pointer; color: var(--text-main); font-size: 1rem; display: inline-flex; align-items: center; gap: 0.35rem; }
+    .word-chip { padding: 0.6rem 0.95rem; background: var(--bg-card); border: 1.5px solid var(--border-color); border-radius: 10px; font-weight: 600; cursor: pointer; color: var(--text-main); font-size: 1rem; }
     .word-chip.used { opacity: 0.3; pointer-events: none; }
     .chat-bubble { max-width: 85%; padding: 0.85rem 1rem; border-radius: 16px; margin-bottom: 0.75rem; display: flex; flex-direction: column; gap: 0.25rem; }
     .chat-bubble.left { align-self: flex-start; background: var(--bg-main); border-bottom-left-radius: 4px; border: 1px solid var(--border-color); }
@@ -64,8 +68,8 @@
     .feedback-banner.correct { background: var(--success-light); color: #065F46; }
     .feedback-banner.incorrect { background: var(--error-light); color: #991B1B; }
     .audio-btn { background: var(--primary-light); border: none; color: var(--primary); width: 44px; height: 44px; border-radius: var(--radius-full); display: inline-flex; align-items: center; justify-content: center; cursor: pointer; font-size: 1.2rem; }
-    .grid-thai-letters { display: grid; grid-template-columns: repeat(auto-fill, minmax(80px, 1fr)); gap: 0.6rem; }
-    .thai-letter-card { background: var(--bg-main); border: 1px solid var(--border-color); padding: 0.75rem 0.5rem; text-align: center; border-radius: var(--radius-md); cursor: pointer; transition: var(--transition); }
+    .grid-thai-letters { display: grid; grid-template-columns: repeat(auto-fill, minmax(85px, 1fr)); gap: 0.65rem; }
+    .thai-letter-card { background: var(--bg-main); border: 1px solid var(--border-color); padding: 0.85rem 0.5rem; text-align: center; border-radius: var(--radius-md); cursor: pointer; transition: var(--transition); }
     .thai-letter-card:active { transform: scale(0.95); background: var(--primary-light); }
     .mic-btn { width: 70px; height: 70px; border-radius: var(--radius-full); background: var(--primary); color: #fff; border: none; font-size: 2rem; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; margin: 1rem auto; box-shadow: 0 4px 14px rgba(79, 70, 229, 0.4); }
     .mic-btn.listening { background: var(--error); animation: pulse 1.2s infinite; }
@@ -75,7 +79,7 @@
 <body>
   <div id="app" class="app-layout">
     <header class="app-header">
-      <div class="brand"><span>🇹🇭</span><span>Thai Master Pro</span></div>
+      <div class="brand"><span>🇹🇭</span><span>Thai Master 240</span></div>
       <div class="header-actions">
         <button id="uiLangToggleBtn" class="lang-switcher-btn">🇲🇲 မြန်မာ</button>
         <div class="stat-pill">🔥 <span id="streakCount">1</span></div>
@@ -165,27 +169,27 @@
     };
 
     const THAI_ALPHABET = [
-      { char: "ก", name: "ก ไก่", roman: "Gor Gai", class: "Mid", sound: "g/k" },
-      { char: "ข", name: "ข ไข่", roman: "Khor Khai", class: "High", sound: "kh" },
-      { char: "ค", name: "ค ควาย", roman: "Khor Khwai", class: "Low", sound: "kh" },
-      { char: "ง", name: "ง งู", roman: "Ngor Nguu", class: "Low", sound: "ng" },
-      { char: "จ", name: "จ จาน", roman: "Jor Jaan", class: "Mid", sound: "j" },
-      { char: "ช", name: "ช ช้าง", roman: "Chor Chaang", class: "Low", sound: "ch" },
-      { char: "ด", name: "ด เด็ก", roman: "Dor Dek", class: "Mid", sound: "d" },
-      { char: "ต", name: "ต เต่า", roman: "Tor Tao", class: "Mid", sound: "dt" },
-      { char: "น", name: "น หนู", roman: "Nor Nuu", class: "Low", sound: "n" },
-      { char: "บ", name: "บ ใบไม้", roman: "Bor Baimai", class: "Mid", sound: "b" },
-      { char: "ป", name: "ป ปลา", roman: "Por Bplaa", class: "Mid", sound: "bp" },
-      { char: "ผ", name: "ผ ผึ้ง", roman: "Phor Phueng", class: "High", sound: "ph" },
-      { char: "ม", name: "ม ม้า", roman: "Mor Maa", class: "Low", sound: "m" },
-      { char: "ย", name: "ย ยักษ์", roman: "Yor Yak", class: "Low", sound: "y" },
-      { char: "ร", name: "ร เรือ", roman: "Ror Ruea", class: "Low", sound: "r" },
-      { char: "ล", name: "ล ลิง", roman: "Lor Ling", class: "Low", sound: "l" },
-      { char: "ว", name: "ว แหวน", roman: "Wor Waen", class: "Low", sound: "w" },
-      { char: "ส", name: "ส เสือ", roman: "Sor Suea", class: "High", sound: "s" },
-      { char: "ห", name: "ห หีบ", roman: "Hor Heep", class: "High", sound: "h" },
-      { char: "อ", name: "อ อ่าง", roman: "Or Aang", class: "Mid", sound: "o" },
-      { char: "ฮ", name: "ฮ นกฮูก", roman: "Hor Nokhuk", class: "Low", sound: "h" }
+      { char: "ก", name: "ก ไก่", roman: "Gor Gai", class: "Mid" },
+      { char: "ข", name: "ข ไข่", roman: "Khor Khai", class: "High" },
+      { char: "ค", name: "ค ควาย", roman: "Khor Khwai", class: "Low" },
+      { char: "ง", name: "ง งู", roman: "Ngor Nguu", class: "Low" },
+      { char: "จ", name: "จ จาน", roman: "Jor Jaan", class: "Mid" },
+      { char: "ช", name: "ช ช้าง", roman: "Chor Chaang", class: "Low" },
+      { char: "ด", name: "ด เด็ก", roman: "Dor Dek", class: "Mid" },
+      { char: "ต", name: "ต เต่า", roman: "Tor Tao", class: "Mid" },
+      { char: "น", name: "น หนู", roman: "Nor Nuu", class: "Low" },
+      { char: "บ", name: "บ ใบไม้", roman: "Bor Baimai", class: "Mid" },
+      { char: "ป", name: "ป ปลา", roman: "Por Bplaa", class: "Mid" },
+      { char: "ผ", name: "ผ ผึ้ง", roman: "Phor Phueng", class: "High" },
+      { char: "ม", name: "ม ม้า", roman: "Mor Maa", class: "Low" },
+      { char: "ย", name: "ย ยักษ์", roman: "Yor Yak", class: "Low" },
+      { char: "ร", name: "ร เรือ", roman: "Ror Ruea", class: "Low" },
+      { char: "ล", name: "ล ลิง", roman: "Lor Ling", class: "Low" },
+      { char: "ว", name: "ว แหวน", roman: "Wor Waen", class: "Low" },
+      { char: "ส", name: "ส เสือ", roman: "Sor Suea", class: "High" },
+      { char: "ห", name: "ห หีบ", roman: "Hor Heep", class: "High" },
+      { char: "อ", name: "อ อ่าง", roman: "Or Aang", class: "Mid" },
+      { char: "ฮ", name: "ฮ นกฮูก", roman: "Hor Nokhuk", class: "Low" }
     ];
 
     const STORAGE_KEY = 'lingomaster_thai_edition_v1';
@@ -223,6 +227,7 @@
 
     const LessonEngine = {
       lesson: null, stepIndex: 0, steps: [], correctCount: 0, userAnswer: null, orderedWords: [], stateRef: null,
+      selectedLeftMatch: null, selectedRightMatch: null, matchPairsCount: 0, currentMatchedPairs: 0,
 
       start(lessonData, appState) {
         this.lesson = lessonData;
@@ -270,9 +275,8 @@
             <div style="display:flex; flex-direction:column; gap:0.75rem; margin-top:1rem;">
               ${(this.lesson.vocabulary || []).map(v => `
                 <div class="card" style="display:flex; justify-content:space-between; align-items:center; gap:0.75rem;">
-                  ${v.image ? `<img src="${v.image}" class="vocab-img" alt="${v.word}">` : ''}
                   <div style="flex:1;">
-                    <h4 style="font-size:1.3rem; cursor:pointer;" onclick="AudioManager.speak('${v.word}')">${v.word} 🔊</h4>
+                    <h4 class="thai-font" style="font-size:1.35rem; cursor:pointer;" onclick="AudioManager.speak('${v.word}')">${v.word} 🔊</h4>
                     <small style="color:var(--primary); font-weight:700;">[${v.roman}]</small>
                     <p style="color:var(--text-muted); font-size:0.9rem;">${typeof v.meaning === 'object' ? (v.meaning[lang] || v.meaning.en) : v.meaning}</p>
                   </div>
@@ -304,7 +308,7 @@
               ${d.lines.map((l, idx) => `
                 <div class="chat-bubble ${idx % 2 === 0 ? 'left' : 'right'}">
                   <div style="display:flex; justify-content:space-between; align-items:center;">
-                    <strong>${l.speaker}: ${l.thai}</strong>
+                    <strong class="thai-font">${l.speaker}: ${l.thai}</strong>
                     <button class="icon-btn" onclick="AudioManager.speak('${l.thai}')">🔊</button>
                   </div>
                   <small style="color:var(--primary); font-weight:600;">[${l.roman}]</small>
@@ -339,7 +343,7 @@
         if (ex.promptTargetAudio) {
           headerAudioHtml = `
             <div style="display:flex; align-items:center; gap:0.5rem; margin-bottom:1.2rem; cursor:pointer;" onclick="AudioManager.speak('${ex.promptTargetAudio}')">
-              <span style="font-weight:700; font-size:1.2rem; color:var(--primary);">${promptText}</span>
+              <span class="thai-font" style="font-weight:700; font-size:1.25rem; color:var(--primary);">${promptText}</span>
               <button class="audio-btn" style="width:36px; height:36px; font-size:1rem;">🔊</button>
             </div>
           `;
@@ -349,7 +353,34 @@
 
         let html = headerAudioHtml;
 
-        if (ex.type === 'mcq') {
+        if (ex.type === 'matching_pairs') {
+          this.matchPairsCount = ex.pairs.length;
+          this.currentMatchedPairs = 0;
+          this.selectedLeftMatch = null;
+          this.selectedRightMatch = null;
+
+          const shuffledRight = [...ex.pairs].map(p => ({ id: p.id, text: p.text[lang] || p.text.en })).sort(() => Math.random() - 0.5);
+
+          html += `
+            <div class="matching-container">
+              <div style="display:flex; flex-direction:column; gap:0.75rem;">
+                ${ex.pairs.map(p => `
+                  <div class="match-item" data-left-id="${p.id}" onclick="LessonEngine.clickLeftMatch(this, '${p.id}', '${p.audio}')">
+                    <span style="font-size:1.4rem;">🔊</span>
+                    <span style="letter-spacing:1px; margin-left:6px;">ılılıllli</span>
+                  </div>
+                `).join('')}
+              </div>
+              <div style="display:flex; flex-direction:column; gap:0.75rem;">
+                ${shuffledRight.map(r => `
+                  <div class="match-item" data-right-id="${r.id}" onclick="LessonEngine.clickRightMatch(this, '${r.id}')">
+                    <span>${r.text}</span>
+                  </div>
+                `).join('')}
+              </div>
+            </div>
+          `;
+        } else if (ex.type === 'mcq') {
           const rawOpts = ex.options;
           const optsList = (rawOpts && typeof rawOpts === 'object' && !Array.isArray(rawOpts)) ? (rawOpts[lang] || rawOpts.en) : rawOpts;
           const audioTargets = ex.audioTargets || [];
@@ -358,38 +389,16 @@
               const speakText = audioTargets[i] || opt;
               return `
                 <button class="option-btn" onclick="LessonEngine.selectOpt(this, ${i}, '${speakText.replace(/'/g, "\\'")}')">
-                  <span>${opt}</span>
+                  <span class="thai-font">${opt}</span>
                   <span style="font-size:1.1rem; opacity:0.6;">🔊</span>
                 </button>
               `;
             }).join('')}
           </div>`;
-        } else if (ex.type === 'listening') {
-          html += `
-            <div style="text-align:center; margin-bottom:1.5rem;">
-              <button class="audio-btn" style="width:64px; height:64px; font-size:1.8rem;" onclick="AudioManager.speak('${ex.targetText}')">🔊</button>
-            </div>
-            <div class="options-grid">
-              ${ex.options.map((opt, i) => `
-                <button class="option-btn" onclick="LessonEngine.selectOpt(this, ${i}, '${opt}')">
-                  <span>${opt}</span>
-                  <span style="font-size:1.1rem; opacity:0.6;">🔊</span>
-                </button>
-              `).join('')}
-            </div>
-          `;
-          setTimeout(() => AudioManager.speak(ex.targetText), 250);
-        } else if (ex.type === 'word_order') {
-          html += `
-            <div id="constructionZone" class="sentence-construction-zone"></div>
-            <div id="wordBank" class="word-bank">
-              ${ex.words.map(w => `<div class="word-chip" onclick="LessonEngine.pickWord(this, '${w}')">${w} 🔊</div>`).join('')}
-            </div>
-          `;
         } else if (ex.type === 'speaking') {
           html += `
             <div class="card" style="text-align:center; padding:1.5rem 1rem;">
-              <h2 style="font-size:1.8rem; color:var(--primary);">${ex.targetText}</h2>
+              <h2 class="thai-font" style="font-size:2rem; color:var(--primary);">${ex.targetText}</h2>
               <p style="color:var(--text-muted); font-weight:700; margin:0.3rem 0;">[${ex.roman}]</p>
               <button class="audio-btn" style="margin:0.5rem 0;" onclick="AudioManager.speak('${ex.targetText}')">🔊 Listen First</button>
               <p style="font-size:0.9rem; margin-top:0.8rem;">${t.speak_tap_mic}</p>
@@ -403,9 +412,76 @@
               </div>
             </div>
           `;
+        } else if (ex.type === 'listening') {
+          html += `
+            <div style="text-align:center; margin-bottom:1.5rem;">
+              <button class="audio-btn" style="width:64px; height:64px; font-size:1.8rem;" onclick="AudioManager.speak('${ex.targetText}')">🔊</button>
+            </div>
+            <div class="options-grid">
+              ${ex.options.map((opt, i) => `
+                <button class="option-btn" onclick="LessonEngine.selectOpt(this, ${i}, '${opt}')">
+                  <span class="thai-font">${opt}</span>
+                  <span style="font-size:1.1rem; opacity:0.6;">🔊</span>
+                </button>
+              `).join('')}
+            </div>
+          `;
+          setTimeout(() => AudioManager.speak(ex.targetText), 250);
+        } else if (ex.type === 'word_order') {
+          html += `
+            <div id="constructionZone" class="sentence-construction-zone"></div>
+            <div id="wordBank" class="word-bank">
+              ${ex.words.map(w => `<div class="word-chip thai-font" onclick="LessonEngine.pickWord(this, '${w}')">${w} 🔊</div>`).join('')}
+            </div>
+          `;
         }
 
         container.innerHTML = html;
+      },
+
+      clickLeftMatch(el, id, audio) {
+        AudioManager.speak(audio);
+        document.querySelectorAll('[data-left-id]').forEach(b => b.classList.remove('selected'));
+        el.classList.add('selected');
+        this.selectedLeftMatch = { id, el };
+        this.evaluateMatching();
+      },
+
+      clickRightMatch(el, id) {
+        document.querySelectorAll('[data-right-id]').forEach(b => b.classList.remove('selected'));
+        el.classList.add('selected');
+        this.selectedRightMatch = { id, el };
+        this.evaluateMatching();
+      },
+
+      evaluateMatching() {
+        if (!this.selectedLeftMatch || !this.selectedRightMatch) return;
+
+        if (this.selectedLeftMatch.id === this.selectedRightMatch.id) {
+          this.selectedLeftMatch.el.className = 'match-item matched';
+          this.selectedRightMatch.el.className = 'match-item matched';
+          this.currentMatchedPairs++;
+          this.selectedLeftMatch = null;
+          this.selectedRightMatch = null;
+
+          if (this.currentMatchedPairs === this.matchPairsCount) {
+            this.userAnswer = true;
+            document.getElementById('lessonActionBtn').disabled = false;
+          }
+        } else {
+          const l = this.selectedLeftMatch.el;
+          const r = this.selectedRightMatch.el;
+          l.style.borderColor = 'var(--error)';
+          r.style.borderColor = 'var(--error)';
+          setTimeout(() => {
+            l.style.borderColor = 'var(--border-color)';
+            r.style.borderColor = 'var(--border-color)';
+            l.classList.remove('selected');
+            r.classList.remove('selected');
+          }, 400);
+          this.selectedLeftMatch = null;
+          this.selectedRightMatch = null;
+        }
       },
 
       selectOpt(el, idx, textToSpeak) {
@@ -424,7 +500,7 @@
         AudioManager.speak(word);
         const zone = document.getElementById('constructionZone');
         const chip = document.createElement('div');
-        chip.className = 'word-chip';
+        chip.className = 'word-chip thai-font';
         chip.textContent = word;
         chip.onclick = () => {
           chip.remove();
@@ -446,7 +522,6 @@
         const lang = this.stateRef.uiLang;
 
         if (!SpeechRec) {
-          alert("Speech recognition not supported on this browser. Voice practice simulation will award credit.");
           this.userAnswer = 95;
           document.getElementById('accuracyContainer').style.display = 'block';
           document.getElementById('accuracyScore').textContent = '95% (Excellent)';
@@ -494,7 +569,8 @@
         const t = I18N[lang];
         let isCorrect = false;
 
-        if (ex.type === 'mcq' || ex.type === 'listening') isCorrect = (this.userAnswer === ex.correct);
+        if (ex.type === 'matching_pairs') isCorrect = (this.userAnswer === true);
+        else if (ex.type === 'mcq' || ex.type === 'listening') isCorrect = (this.userAnswer === ex.correct);
         else if (ex.type === 'word_order') isCorrect = (JSON.stringify(this.orderedWords) === JSON.stringify(ex.correctSequence));
         else if (ex.type === 'speaking') isCorrect = (this.userAnswer >= 60);
 
@@ -628,7 +704,7 @@
         const chapters = window.THAI_A1_CHAPTERS || [];
 
         main.innerHTML = `
-          <h2 style="margin-bottom:1rem;">🇹🇭 Thai Master Course</h2>
+          <h2 style="margin-bottom:1rem;">🇹🇭 Thai Master (Chapter 1–12 • 240 Units)</h2>
           ${chapters.map(ch => {
             const chTitle = typeof ch.title === 'object' ? (ch.title[lang] || ch.title.en) : ch.title;
             return `
@@ -644,7 +720,7 @@
                       <div style="display:flex; justify-content:space-between; align-items:center; padding:0.75rem; background:var(--bg-main); border-radius:var(--radius-md);">
                         <div>
                           <strong>${uTitle}</strong>
-                          <div style="font-size:0.8rem; color:var(--text-muted);">${unit.vocabulary?.length || 0} ${t.words_count} • ${drillsCount} Drills & Voice AI</div>
+                          <div style="font-size:0.8rem; color:var(--text-muted);">${unit.vocabulary?.length || 0} ${t.words_count} • ${drillsCount} Drills & Match Pairs</div>
                         </div>
                         <button class="primary-btn" onclick="App.launchLesson('${unit.id}')">
                           ${done ? t.review : t.start}
@@ -678,8 +754,8 @@
           <div class="grid-thai-letters">
             ${THAI_ALPHABET.map(item => `
               <div class="thai-letter-card" onclick="AudioManager.speak('${item.name}')">
-                <span style="font-size:1.8rem; font-weight:700; color:var(--primary);">${item.char}</span>
-                <div style="font-size:0.75rem; font-weight:700;">${item.name}</div>
+                <span class="thai-font" style="font-size:2rem; font-weight:800; color:var(--primary);">${item.char}</span>
+                <div class="thai-font" style="font-size:0.8rem; font-weight:700; margin-top:2px;">${item.name}</div>
                 <small style="color:var(--text-muted); font-size:0.7rem;">[${item.class}]</small>
               </div>
             `).join('')}
@@ -749,7 +825,7 @@
               ${items.map(v => `
                 <div class="card">
                   <div style="display:flex; justify-content:space-between; align-items:center;">
-                    <strong>${v.word}</strong>
+                    <strong class="thai-font">${v.word}</strong>
                     <button class="audio-btn" onclick="AudioManager.speak('${v.word}')">🔊</button>
                   </div>
                   <small style="color:var(--primary); font-weight:700;">[${v.roman}]</small>
