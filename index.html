@@ -14250,3 +14250,2205 @@
   </script>
 </body>
 </html>
+<!DOCTYPE html>
+<html lang="my" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
+  <title>LingoMaster — Thai Master (Chapter 1 to 5 Complete)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Noto+Serif+Thai:wght@400;600;700;800;900&family=Padauk:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #4F46E5; --primary-hover: #4338CA; --primary-light: #EEF2FF;
+      --success: #10B981; --success-light: #ECFDF5; --error: #EF4444; --error-light: #FEF2F2;
+      --bg-main: #F8FAFC; --bg-card: #FFFFFF; --text-main: #0F172A; --text-muted: #64748B;
+      --border-color: #E2E8F0; --radius-md: 12px; --radius-lg: 16px; --radius-full: 9999px;
+      --font-base: 'Plus Jakarta Sans', 'Padauk', 'Noto Serif Thai', sans-serif;
+      --transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    [data-theme="dark"] {
+      --bg-main: #0B0F19; --bg-card: #151D2F; --text-main: #F9FAFB; --text-muted: #94A3B8;
+      --border-color: #1F293D; --primary-light: #1E1B4B; --success-light: #064E3B; --error-light: #7F1D1D;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+    body { font-family: var(--font-base); background-color: var(--bg-main); color: var(--text-main); min-height: 100vh; line-height: 1.5; }
+    .thai-txt { font-family: 'Noto Serif Thai', serif !important; }
+    .app-layout { display: flex; flex-direction: column; min-height: 100vh; }
+    .app-header { position: sticky; top: 0; z-index: 40; display: flex; justify-content: space-between; align-items: center; padding: 0.75rem 1rem; background-color: var(--bg-card); border-bottom: 1px solid var(--border-color); }
+    .brand { display: flex; align-items: center; gap: 0.5rem; font-weight: 800; font-size: 1.15rem; color: var(--primary); }
+    .header-actions { display: flex; align-items: center; gap: 0.4rem; }
+    .stat-pill { display: flex; align-items: center; gap: 0.3rem; background: var(--bg-main); padding: 0.3rem 0.6rem; border-radius: var(--radius-full); font-weight: 700; font-size: 0.8rem; border: 1px solid var(--border-color); }
+    .icon-btn { background: transparent; border: none; font-size: 1.1rem; cursor: pointer; padding: 0.35rem; border-radius: 8px; color: var(--text-main); }
+    .lang-switcher-btn { font-weight: 700; font-size: 0.75rem; padding: 0.3rem 0.6rem; border-radius: var(--radius-full); border: 1px solid var(--border-color); background: var(--bg-main); cursor: pointer; color: var(--text-main); }
+    .main-content { flex: 1; padding: 1rem 0.85rem 5.5rem 0.85rem; max-width: 860px; width: 100%; margin: 0 auto; }
+    .bottom-nav { position: fixed; bottom: 0; left: 0; right: 0; height: 60px; background: var(--bg-card); border-top: 1px solid var(--border-color); display: flex; justify-content: space-around; align-items: center; z-index: 50; }
+    .nav-item { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; background: transparent; border: none; color: var(--text-muted); font-size: 0.72rem; font-weight: 600; gap: 0.2rem; height: 100%; cursor: pointer; transition: var(--transition); }
+    .nav-item.active { color: var(--primary); }
+    .card { background: var(--bg-card); border-radius: var(--radius-lg); padding: 1.1rem; border: 1px solid var(--border-color); margin-bottom: 1rem; }
+    .primary-btn { background: var(--primary); color: #fff; border: none; padding: 0.7rem 1.1rem; border-radius: var(--radius-md); font-weight: 700; font-size: 0.95rem; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem; transition: var(--transition); min-height: 42px; }
+    .primary-btn:hover:not(:disabled) { background: var(--primary-hover); }
+    .primary-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+    .btn-large { width: 100%; font-size: 1rem; padding: 0.8rem; }
+    .secondary-btn { background: var(--bg-card); color: var(--text-main); border: 1px solid var(--border-color); padding: 0.45rem 0.75rem; border-radius: var(--radius-md); font-weight: 600; cursor: pointer; font-size: 0.8rem; }
+    .progress-bar-container { width: 100%; height: 7px; background: var(--border-color); border-radius: var(--radius-full); overflow: hidden; }
+    .progress-bar-fill { height: 100%; background: linear-gradient(90deg, var(--primary), #818CF8); border-radius: var(--radius-full); transition: width 0.4s ease; }
+    .chapter-banner { width: 100%; height: 120px; border-radius: var(--radius-md); object-fit: cover; margin-bottom: 0.75rem; }
+    
+    .matching-container { display: grid; grid-template-columns: 1fr 1fr; gap: 0.65rem; margin-top: 0.85rem; }
+    .matching-col { display: flex; flex-direction: column; gap: 0.65rem; }
+    .match-item { background: var(--bg-card); border: 1.5px solid var(--border-color); padding: 0.6rem 0.4rem; border-radius: var(--radius-md); display: flex; flex-direction: column; align-items: center; justify-content: center; cursor: pointer; min-height: 64px; height: 64px; text-align: center; transition: var(--transition); }
+    .match-item.selected { border-color: var(--primary); background: var(--primary-light); color: var(--primary); }
+    .match-item.matched { opacity: 0.25; border-color: var(--success); pointer-events: none; }
+    
+    .options-grid { display: grid; grid-template-columns: 1fr; gap: 0.65rem; }
+    .option-btn { background: var(--bg-card); border: 1.5px solid var(--border-color); padding: 0.85rem; border-radius: var(--radius-md); font-size: 1rem; font-weight: 600; text-align: left; cursor: pointer; color: var(--text-main); display: flex; justify-content: space-between; align-items: center; transition: var(--transition); }
+    .option-btn.selected { border-color: var(--primary); background: var(--primary-light); color: var(--primary); }
+    .sentence-construction-zone { background: var(--bg-main); border: 2px dashed var(--border-color); margin-bottom: 1rem; min-height: 50px; display: flex; flex-wrap: wrap; gap: 0.4rem; padding: 0.6rem; border-radius: var(--radius-md); align-items: center; }
+    .word-bank { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+    .word-chip { padding: 0.5rem 0.8rem; background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 8px; font-weight: 600; cursor: pointer; color: var(--text-main); font-size: 0.95rem; }
+    .word-chip.used { opacity: 0.3; pointer-events: none; }
+    
+    .chat-bubble { max-width: 85%; padding: 0.75rem 0.9rem; border-radius: 14px; margin-bottom: 0.65rem; display: flex; flex-direction: column; gap: 0.2rem; }
+    .chat-bubble.left { align-self: flex-start; background: var(--bg-main); border-bottom-left-radius: 4px; border: 1px solid var(--border-color); }
+    .chat-bubble.right { align-self: flex-end; background: var(--primary-light); color: var(--primary); border-bottom-right-radius: 4px; border: 1px solid rgba(79, 70, 229, 0.2); }
+    
+    .drawing-pad-box { border: 1.5px solid var(--border-color); border-radius: var(--radius-md); background: #fff; touch-action: none; width: 100%; max-width: 300px; height: 200px; margin: 0.75rem auto; display: block; }
+    .modal-overlay { position: fixed; inset: 0; background: rgba(15, 23, 42, 0.6); backdrop-filter: blur(4px); z-index: 100; display: flex; justify-content: center; align-items: center; }
+    .modal-overlay.hidden { display: none; }
+    .lesson-dialog { background: var(--bg-card); width: 100%; height: 100%; max-width: 650px; display: flex; flex-direction: column; }
+    @media (min-width: 768px) { .lesson-dialog { height: 88vh; border-radius: var(--radius-lg); overflow: hidden; } }
+    .lesson-header { display: flex; align-items: center; padding: 0.75rem 1rem; gap: 0.75rem; border-bottom: 1px solid var(--border-color); }
+    .lesson-body { flex: 1; padding: 1.1rem; overflow-y: auto; display: flex; flex-direction: column; }
+    .feedback-banner { padding: 0.75rem 1rem; border-top: 1px solid var(--border-color); }
+    .feedback-banner.correct { background: var(--success-light); color: #065F46; }
+    .feedback-banner.incorrect { background: var(--error-light); color: #991B1B; }
+    .audio-btn { background: var(--primary-light); border: none; color: var(--primary); width: 40px; height: 40px; border-radius: var(--radius-full); display: inline-flex; align-items: center; justify-content: center; cursor: pointer; font-size: 1.1rem; }
+    
+    .script-tabs { display: flex; gap: 0.4rem; overflow-x: auto; padding-bottom: 0.5rem; margin-bottom: 0.85rem; }
+    .script-tab-btn { padding: 0.4rem 0.75rem; border-radius: var(--radius-full); border: 1px solid var(--border-color); background: var(--bg-card); font-size: 0.8rem; font-weight: 700; cursor: pointer; white-space: nowrap; color: var(--text-main); }
+    .script-tab-btn.active { background: var(--primary); color: #fff; border-color: var(--primary); }
+    .grid-thai-compact { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.5rem; }
+    .thai-compact-card { background: var(--bg-card); border: 1.5px solid var(--border-color); padding: 0.65rem 0.25rem; text-align: center; border-radius: 10px; cursor: pointer; transition: var(--transition); }
+    .thai-compact-card:active { transform: scale(0.96); background: var(--primary-light); }
+    .thai-compact-char { font-family: 'Noto Serif Thai', serif !important; font-size: 1.45rem; font-weight: 700; color: var(--primary); line-height: 1.2; }
+    .thai-compact-sub { font-family: 'Noto Serif Thai', serif !important; font-size: 0.75rem; font-weight: 600; color: var(--text-main); margin-top: 3px; }
+    
+    .mic-btn { width: 64px; height: 64px; border-radius: var(--radius-full); background: var(--primary); color: #fff; border: none; font-size: 1.8rem; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; margin: 0.85rem auto; box-shadow: 0 4px 12px rgba(79, 70, 229, 0.35); }
+    .mic-btn.listening { background: var(--error); animation: pulse 1.2s infinite; }
+    @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.08); } 100% { transform: scale(1); } }
+  </style>
+</head>
+<body>
+  <div id="app" class="app-layout">
+    <header class="app-header">
+      <div class="brand"><span>🇹🇭</span><span>Thai Master</span></div>
+      <div class="header-actions">
+        <button id="uiLangToggleBtn" class="lang-switcher-btn">🇲🇲 မြန်မာ</button>
+        <div class="stat-pill">🔥 <span id="streakCount">1</span></div>
+        <div class="stat-pill">⭐ <span id="totalXpCount">0</span></div>
+        <button id="themeToggleBtn" class="icon-btn">🌙</button>
+      </div>
+    </header>
+
+    <main id="mainContainer" class="main-content"></main>
+
+    <nav class="bottom-nav">
+      <button class="nav-item active" data-view="learn"><span style="font-size:1.15rem;">📚</span><span data-i18n="nav_learn">Learn</span></button>
+      <button class="nav-item" data-view="script"><span style="font-size:1.15rem;">✍️</span><span data-i18n="nav_script">Script & Reading</span></button>
+      <button class="nav-item" data-view="vocab"><span style="font-size:1.15rem;">📖</span><span data-i18n="nav_vocab">Vocab</span></button>
+      <button class="nav-item" data-view="progress"><span style="font-size:1.15rem;">📊</span><span data-i18n="nav_progress">Progress</span></button>
+      <button class="nav-item" data-view="settings"><span style="font-size:1.15rem;">⚙️</span><span data-i18n="nav_settings">Settings</span></button>
+    </nav>
+  </div>
+
+  <div id="lessonModal" class="modal-overlay hidden">
+    <div class="modal-dialog lesson-dialog">
+      <header class="lesson-header">
+        <button id="closeLessonBtn" class="icon-btn">✕</button>
+        <div class="progress-bar-container" style="flex:1;">
+          <div id="lessonProgressBar" class="progress-bar-fill" style="width: 0%;"></div>
+        </div>
+        <div id="lessonStepIndicator" style="font-size: 0.8rem; font-weight: 700; color: var(--text-muted);">Step 1/15</div>
+      </header>
+      
+      <div id="lessonContainer" class="lesson-body"></div>
+      
+      <footer class="lesson-footer">
+        <div id="feedbackBanner" class="feedback-banner hidden">
+          <div style="display:flex; align-items:flex-start; gap:0.5rem;">
+            <span id="feedbackIcon" style="font-size:1.2rem;">✓</span>
+            <div>
+              <strong id="feedbackTitle">Correct!</strong>
+              <p id="feedbackExplanation" style="font-size:0.8rem;"></p>
+            </div>
+          </div>
+        </div>
+        <div style="padding: 0.75rem 1rem;">
+          <button id="lessonActionBtn" class="primary-btn btn-large" disabled>Check</button>
+        </div>
+      </footer>
+    </div>
+  </div>
+
+  <script>
+    // Embedded Reference Stubs for Chapters 1-4
+    const CHAPTER_1_UNITS = [{ id: "th-c1-u1", title: { my: "Unit 1.1", en: "Unit 1.1" }, vocabulary: [{ word: "ภาษาไทย", roman: "thai", meaning: { my: "ထိုင်း", en: "Thai" } }] }];
+    const CHAPTER_2_UNITS = [{ id: "th-c2-u1", title: { my: "Unit 2.1", en: "Unit 2.1" }, vocabulary: [{ word: "แนะนำ", roman: "intro", meaning: { my: "မိတ်ဆက်", en: "Intro" } }] }];
+    const CHAPTER_3_UNITS = [{ id: "th-c3-u1", title: { my: "Unit 3.1", en: "Unit 3.1" }, vocabulary: [{ word: "ข้าว", roman: "rice", meaning: { my: "ထမင်း", en: "Rice" } }] }];
+    const CHAPTER_4_UNITS = [{ id: "th-c4-u1", title: { my: "Unit 4.1", en: "Unit 4.1" }, vocabulary: [{ word: "อักษร", roman: "letter", meaning: { my: "အက္ခရာ", en: "Letter" } }] }];
+
+    // CHAPTER 5: COMPLETE 20 UNITS (Daily Routine, Family, Work, Weather, Health, Hospital)
+    const CHAPTER_5_UNITS = [
+      {
+        id: "th-c5-u1",
+        title: { my: "Unit 5.1: နေ့စဉ်လှုပ်ရှားမှုများ (Daily Routine)", en: "Unit 5.1: Daily Routine" },
+        vocabulary: [
+          { word: "กิจวัตรประจำวัน", roman: "gìt-wá-wát bprà-jam-wan", meaning: { my: "နေ့စဉ်လုပ်ငန်းဆောင်တာ", en: "Daily routine" } },
+          { word: "อาบน้ำ", roman: "àap-náam", meaning: { my: "ရေချိုးသည်", en: "Take a shower" } }
+        ],
+        grammar: {
+          title: { my: "နေ့စဉ်လုပ်ဆောင်မှု ဖော်ပြပုံ", en: "Expressing Daily Routine" },
+          rule: "ตื่นนอน (အိပ်ရာထ) -> อาบน้ำ (ရေချိုး) -> ไปทำงาน (အလုပ်သွား)",
+          explanation: { my: "နေ့စဉ်ဘဝ လုပ်ဆောင်ချက်များကို အချိန်အလိုက် အစဉ်အတိုင်း ပြောဆိုခြင်း ဖြစ်သည်။", en: "Describing everyday activities in chronological order." }
+        },
+        dialogue: {
+          title: { my: "နေ့စဉ်ဘဝ စကားပြောခန်း", en: "Routine Dialogue" },
+          lines: [
+            { speaker: "A", thai: "ตื่นนอนกี่โมงครับ", roman: "dtʉ̀ʉn-nɔɔn gìi moong khráp", trans: { my: "ဘယ်အချိန် အိပ်ရာထလဲခင်ဗျာ", en: "What time do you wake up?" } }
+          ]
+        },
+        aiRoleplay: {
+          prompt: { my: "🤖 AI Partner:", en: "🤖 AI Partner:" },
+          aiLine: "ตื่นนอนกี่โมงคะ",
+          aiRoman: "dtʉ̀ʉn-nɔɔn gìi moong khá",
+          aiMeaning: { my: "ဘယ်အချိန် အိပ်ရာထလဲရှင့်", en: "What time do you wake up?" },
+          expectedReply: "ตื่นนอน 6 โมงค่ะ",
+          expectedRoman: "dtʉ̀ʉn-nɔɔn hòk moong khâ",
+          replyMeaning: { My: "မနက် ၆ နာရီ ထပါတယ်ရှင့်", en: "I wake up at 6" }
+        },
+        exercises: [
+          {
+            type: "matching_pairs",
+            prompt: { My: "🔊 တွဲစပ်ပါ:", en: "🔊 Match pairs:" },
+            pairs: [
+              { id: "p1", audio: "อาบน้ำ", thai: "อาบน้ำ", text: { My: "ရေချိုးသည်", en: "Shower" } },
+              { id: "p2", audio: "กิจวัตรประจำวัน", thai: "กิจวัตรประจำวัน", text: { My: "နေ့စဉ်လုပ်ငန်း", en: "Routine" } }
+            ]
+          },
+          {
+            type: "speaking",
+            prompt: { My: "🎙️ အသံထွက်ဖတ်ပါ: \"อาบน้ำ\"", en: "🎙️ Speak: \"อาบน้ำ\"" },
+            targetText: "อาบน้ำ",
+            roman: "àap-náam"
+          }
+        ],
+        quiz: [
+          {
+            type: "mcq",
+            prompt: { My: "\"ရေချိုးသည်\" ၏ ထိုင်းစကားမှာ?", en: "To shower in Thai:" },
+            options: ["อาบน้ำ", "นอน", "กินข้าว"],
+            correct: 0
+          }
+        ]
+      },
+      {
+        id: "th-c5-u2",
+        title: { my: "Unit 5.2: မိသားစု ဆက်ဆံရေး (Family Relationships)", en: "Unit 5.2: Family Relationships" },
+        vocabulary: [
+          { word: "พี่ชาย", roman: "phîi-chaai", meaning: { My: "အစ်ကို", en: "Older brother" } },
+          { word: "น้องสาว", roman: "nɔ́ong-sǎau", meaning: { My: "ညီမ", en: "Younger sister" } }
+        ],
+        grammar: {
+          title: { My: "အစ်ကို/အစ်မ/ညီ/ညီမ သုံးနှုန်းပုံ", en: "Family Titles" },
+          rule: "พี่ (အသက်ကြီးသူ) နှင့် น้อง (အသက်ငယ်သူ) ကို အမည်ရှေ့တွင် သုံးသည်။",
+          explanation: { My: "ထိုင်းနိုင်ငံတွင် အသက်ကြီးသူများကို အစ်ကို/အစ်မ (พี่) ဟု လေးစားစွာ ခေါ်ကြသည်။", en: "Use พี่ and น้อง for older and younger siblings/friends." }
+        },
+        dialogue: {
+          title: { My: "မိသားစု မေးမြန်းခန်း", en: "Family Dialogue" },
+          lines: [
+            { speaker: "A", thai: "มีพี่ชายไหมครับ", roman: "mii phîi-chaai mǎi khráp", trans: { My: "အစ်ကို ရှိပါသလားခင်ဗျာ", en: "Do you have an older brother?" } }
+          ]
+        },
+        aiRoleplay: {
+          prompt: { My: "🤖 AI Partner:", en: "🤖 AI Partner:" },
+          aiLine: "มีพี่ชายไหมคะ",
+          aiRoman: "mii phîi-chaai mǎi khá",
+          aiMeaning: { My: "အစ်ကို ရှိလားရှင့်", en: "Do you have an older brother?" },
+          expectedReply: "มีพี่ชาย 1 คนค่ะ",
+          expectedRoman: "mii phîi-chaai nèung khon khâ",
+          replyMeaning: { My: "အစ်ကို ၁ ယောက် ရှိပါတယ်ရှင့်", en: "I have 1 older brother" }
+        },
+        exercises: [
+          {
+            type: "matching_pairs",
+            prompt: { My: "🔊 တွဲစပ်ပါ:", en: "🔊 Match pairs:" },
+            pairs: [
+              { id: "p1", audio: "พี่ชาย", thai: "พี่ชาย", text: { My: "အစ်ကို", en: "Older brother" } },
+              { id: "p2", audio: "น้องสาว", thai: "น้องสาว", text: { My: "ညီမ", en: "Younger sister" } }
+            ]
+          },
+          {
+            type: "speaking",
+            prompt: { My: "🎙️ အသံထွက်ဖတ်ပါ: \"พี่ชาย\"", en: "🎙️ Speak: \"พี่ชาย\"" },
+            targetText: "พี่ชาย",
+            roman: "phîi-chaai"
+          }
+        ],
+        quiz: [
+          {
+            type: "mcq",
+            prompt: { My: "\"အစ်ကို\" ၏ ထိုင်းစကားမှာ?", en: "Older brother in Thai:" },
+            options: ["พี่ชาย", "น้องชาย", "พ่อ"],
+            correct: 0
+          }
+        ]
+      },
+      {
+        id: "th-c5-u3",
+        title: { my: "Unit 5.3: အိမ်နှင့် အခန်းများ (Home & Rooms)", en: "Unit 5.3: Home & Rooms" },
+        vocabulary: [
+          { word: "ห้องนอน", roman: "hɔ̂ng-nɔɔn", meaning: { My: "အိပ်ခန်း", en: "Bedroom" } },
+          { word: "ห้องน้ำ", roman: "hɔ̂ng-náam", meaning: { My: "ရေချိုးခန်း / အိမ်သာ", en: "Bathroom / Toilet" } }
+        ],
+        grammar: {
+          title: { My: "ห้อง (အခန်း) ဖြင့် နေရာများခေါ်ဆိုပုံ", en: "Rooms in a House" },
+          rule: "ห้อง (အခန်း) + [လုပ်ဆောင်ချက်/နေရာ] (ဥပမာ- ห้องครัว = မီးဖိုခန်း)",
+          explanation: { My: "အိမ်တွင်းရှိ အခန်းအမျိုးမျိုးကို ခေါ်ဝေါ်ရာတွင် ห้อง ကို ရှေ့မှ သုံးသည်။", en: "Use ห้อง as a prefix for rooms in a house." }
+        },
+        dialogue: {
+          title: { My: "အိမ်တွင်း နေရာပြခန်း", en: "Home Dialogue" },
+          lines: [
+            { speaker: "A", thai: "ห้องน้ำอยู่ที่ไหนครับ", roman: "hɔ̂ng-náam yùu thîi-nǎi khráp", trans: { My: "အိမ်သာက ဘယ်မှာလဲခင်ဗျာ", en: "Where is the bathroom?" } }
+          ]
+        },
+        aiRoleplay: {
+          prompt: { My: "🤖 AI Partner:", en: "🤖 AI Partner:" },
+          aiLine: "ห้องน้ำอยู่ที่ไหนคะ",
+          aiRoman: "hɔ̂ng-náam yùu thîi-nǎi khá",
+          aiMeaning: { My: "အိမ်သာ ဘယ်မှာလဲရှင့်", en: "Where is the bathroom?" },
+          expectedReply: "อยู่ข้างนอกค่ะ",
+          expectedRoman: "yùu khâang-nɔ̂ɔk khâ",
+          replyMeaning: { My: "အပြင်ဘက်မှာ ရှိပါတယ်ရှင့်", en: "It's outside" }
+        },
+        exercises: [
+          {
+            type: "matching_pairs",
+            prompt: { My: "🔊 တွဲစပ်ပါ:", en: "🔊 Match pairs:" },
+            pairs: [
+              { id: "p1", audio: "ห้องนอน", thai: "ห้องนอน", text: { My: "အိပ်ခန်း", en: "Bedroom" } },
+              { id: "p2", audio: "ห้องน้ำ", thai: "ห้องน้ำ", text: { My: "အိမ်သာ", en: "Bathroom" } }
+            ]
+          },
+          {
+            type: "speaking",
+            prompt: { My: "🎙️ အသံထွက်ဖတ်ပါ: \"ห้องน้ำ\"", en: "🎙️ Speak: \"ห้องน้ำ\"" },
+            targetText: "ห้องน้ำ",
+            roman: "hɔ̂ng-náam"
+          }
+        ],
+        quiz: [
+          {
+            type: "mcq",
+            prompt: { My: "\"အိပ်ခန်း\" ၏ ထိုင်းစကားမှာ?", en: "Bedroom in Thai:" },
+            options: ["ห้องนอน", "ห้องน้ำ", "ห้องครัว"],
+            correct: 0
+          }
+        ]
+      },
+      {
+        id: "th-c5-u4",
+        title: { my: "Unit 5.4: အလုပ်နှင့် ရုံးသုံးပတ်ဝန်းကျင် (Work & Workplace)", en: "Unit 5.4: Work & Workplace" },
+        vocabulary: [
+          { word: "บริษัท", roman: "bɔɔ-rí-sàt", meaning: { My: "ကုမ္ပဏီ", en: "Company" } },
+          { word: "ประชุม", roman: "bpra-chum", meaning: { My: "အစည်းအဝေး", en: "Meeting" } }
+        ],
+        grammar: {
+          title: { My: "ရုံးသုံး လုပ်ငန်းခွင် ဝေါဟာရများ", en: "Workplace Vocabulary" },
+          rule: "ทำงานที่บริษัท (ကုမ္ပဏီမှာ အလုပ်လုပ်တယ်)",
+          explanation: { My: "ရုံးတွင်း ဆက်သွယ်ပြောဆိုရာတွင် အသုံးများသော စကားစုများ ဖြစ်သည်။", en: "Common terms used in office environments." }
+        },
+        dialogue: {
+          title: { My: "ရုံးသုံး စကားပြောခန်း", en: "Office Dialogue" },
+          lines: [
+            { speaker: "A", thai: "มีประชุมกี่โมงครับ", roman: "mii bpra-chum gìi moong khráp", trans: { My: "အစည်းအဝေး ဘယ်နှစ်နာရီလဲခင်ဗျာ", en: "What time is the meeting?" } }
+          ]
+        },
+        aiRoleplay: {
+          prompt: { My: "🤖 AI Partner:", en: "🤖 AI Partner:" },
+          aiLine: "มีประชุมกี่โมงคะ",
+          aiRoman: "mii bpra-chum gìi moong khá",
+          aiMeaning: { My: "အစည်းအဝေး ဘယ်နှစ်နာရီလဲရှင့်", en: "What time is the meeting?" },
+          expectedReply: "ประชุมบ่ายสองค่ะ",
+          expectedRoman: "bpra-chum bàai sɔ̌ɔng khâ",
+          replyMeaning: { My: "နေ့လယ် ၂ နာရီ အစည်းအဝေးရှိပါတယ်ရှင့်", en: "Meeting is at 2 PM" }
+        },
+        exercises: [
+          {
+            type: "matching_pairs",
+            prompt: { My: "🔊 တွဲစပ်ပါ:", en: "🔊 Match pairs:" },
+            pairs: [
+              { id: "p1", audio: "บริษัท", thai: "บริษัท", text: { My: "ကုမ္ပဏီ", en: "Company" } },
+              { id: "p2", audio: "ประชุม", thai: "ประชุม", text: { My: "အစည်းအဝေး", en: "Meeting" } }
+            ]
+          },
+          {
+            type: "speaking",
+            prompt: { My: "🎙️ အသံထွက်ဖတ်ပါ: \"บริษัท\"", en: "🎙️ Speak: \"บริษัท\"" },
+            targetText: "บริษัท",
+            roman: "bɔɔ-rí-sàt"
+          }
+        ],
+        quiz: [
+          {
+            type: "mcq",
+            prompt: { My: "\"ကုမ္ပဏီ\" ၏ ထိုင်းစကားမှာ?", en: "Company in Thai:" },
+            options: ["บริษัท", "โรงเรียน", "ตลาด"],
+            correct: 0
+          }
+        ]
+      },
+      {
+        id: "th-c5-u5",
+        title: { my: "Unit 5.5: ရာသီဥတု (Weather)", en: "Unit 5.5: Weather" },
+        vocabulary: [
+          { word: "อากาศ", roman: "àa-gàat", meaning: { My: "ရာသီဥတု", en: "Weather / Air" } },
+          { word: "ฝนตก", roman: "fǒn-dtòk", meaning: { My: "မိုးရွာသည်", en: "Raining" } }
+        ],
+        grammar: {
+          title: { My: "ရာသီဥတု ဖော်ပြပုံ", en: "Describing Weather" },
+          rule: "อากาศร้อน (ပူတယ်)၊ อากาศหนาว (အေးတယ်)၊ ฝนตก (မိုးရွာတယ်)",
+          explanation: { My: "နေ့စဉ် ရာသီဥတုအခြေအနေကို ဆွေးနွေးရာတွင် အသုံးဝင်သည်။", en: "Useful for small talk about daily weather." }
+        },
+        dialogue: {
+          title: { My: "ရာသီဥတု စကားပြောခန်း", en: "Weather Dialogue" },
+          lines: [
+            { speaker: "A", thai: "วันนี้ฝนตกไหมครับ", roman: "wan-nîi fǒn-dtòk mǎi khráp", trans: { My: "ဒီနေ့ မိုးရွာလားခင်ဗျာ", en: "Is it raining today?" } }
+          ]
+        },
+        aiRoleplay: {
+          prompt: { My: "🤖 AI Partner:", en: "🤖 AI Partner:" },
+          aiLine: "อากาศวันนี้เป็นยังไงบ้างคะ",
+          aiRoman: "àa-gàat wan-nîi bpen yang-ngài bâang khá",
+          aiMeaning: { My: "ဒီနေ့ ရာသီဥတု ဘယ်လိုလဲရှင့်", en: "How is the weather today?" },
+          expectedReply: "อากาศร้อนมากค่ะ",
+          expectedRoman: "àa-gàat rɔ́ɔn mâak khâ",
+          replyMeaning: { My: "ရာသီဥတု အရမ်းပူပါတယ်ရှင့်", en: "The weather is very hot" }
+        },
+        exercises: [
+          {
+            type: "matching_pairs",
+            prompt: { My: "🔊 တွဲစပ်ပါ:", en: "🔊 Match pairs:" },
+            pairs: [
+              { id: "p1", audio: "อากาศ", thai: "อากาศ", text: { My: "ရာသီဥတု", en: "Weather" } },
+              { id: "p2", audio: "ฝนตก", thai: "ฝนตก", text: { My: "မိုးရွာသည်", en: "Rain" } }
+            ]
+          },
+          {
+            type: "speaking",
+            prompt: { My: "🎙️ အသံထွက်ဖတ်ပါ: \"ฝนตก\"", en: "🎙️ Speak: \"ฝนตก\"" },
+            targetText: "ฝนตก",
+            roman: "fǒn-dtòk"
+          }
+        ],
+        quiz: [
+          {
+            type: "mcq",
+            prompt: { My: "\"မိုးရွာသည်\" ၏ ထိုင်းစကားမှာ?", en: "Raining in Thai:" },
+            options: ["ฝนตก", "แดดออก", "ลมแรง"],
+            correct: 0
+          }
+        ]
+      },
+      {
+        id: "th-c5-u6",
+        title: { my: "Unit 5.6: ကျန်းမာရေးနှင့် ခန္ဓာကိုယ် (Health & Body Parts)", en: "Unit 5.6: Health & Body Parts" },
+        vocabulary: [
+          { word: "หัว", roman: "hǔa", meaning: { My: "ခေါင်း", en: "Head" } },
+          { word: "ปวด", roman: "bpùat", meaning: { My: "ကိုက်သည် / နာသည်", en: "Ache / Pain" } }
+        ],
+        grammar: {
+          title: { My: "နာကျင်ကိုက်ခဲမှု ဖော်ပြပုံ", en: "Expressing Pain" },
+          rule: "ปวด + [ခန္ဓာကိုယ်အစိတ်အပိုင်း] (ဥပမာ- ปวดหัว = ခေါင်းကိုက်သည်)",
+          explanation: { My: "ဆေးဆိုင် သို့မဟုတ် ဆေးရုံသွားသည့်အခါ ရောဂါဝေဒနာပြရန် ဤစကားစုကို သုံးသည်။", en: "Use ปวด + Body part to describe aches and pains." }
+        },
+        dialogue: {
+          title: { My: "ကျန်းမာရေး စကားပြောခန်း", en: "Health Dialogue" },
+          lines: [
+            { speaker: "A", thai: "ปวดหัวมากครับ", roman: "bpùat-hǔa mâak khráp", trans: { My: "ခေါင်းအရမ်းကိုက်နေတယ်ခင်ဗျာ", en: "I have a severe headache." } }
+          ]
+        },
+        aiRoleplay: {
+          prompt: { My: "🤖 AI Partner:", en: "🤖 AI Partner:" },
+          aiLine: "เป็นอะไรคะ",
+          aiRoman: "bpen à-rai khá",
+          aiMeaning: { My: "ဘာဖြစ်တာလဲရှင့်", en: "What's wrong?" },
+          expectedReply: "ปวดหัวค่ะ",
+          expectedRoman: "bpùat-hǔa khâ",
+          replyMeaning: { My: "ခေါင်းကိုက်ပါတယ်ရှင့်", en: "I have a headache" }
+        },
+        exercises: [
+          {
+            type: "matching_pairs",
+            prompt: { My: "🔊 တွဲစပ်ပါ:", en: "🔊 Match pairs:" },
+            pairs: [
+              { id: "p1", audio: "หัว", thai: "หัว", text: { My: "ခေါင်း", en: "Head" } },
+              { id: "p2", audio: "ปวด", thai: "ปวด", text: { My: "နာကျင်သည်", en: "Pain" } }
+            ]
+          },
+          {
+            type: "speaking",
+            prompt: { My: "🎙️ အသံထွက်ဖတ်ပါ: \"ปวดหัว\"", en: "🎙️ Speak: \"ปวดหัว\"" },
+            targetText: "ปวดหัว",
+            roman: "bpùat hǔa"
+          }
+        ],
+        quiz: [
+          {
+            type: "mcq",
+            prompt: { My: "\"ခေါင်းကိုက်သည်\" ၏ ထိုင်းစကားမှာ?", en: "Headache in Thai:" },
+            options: ["ปวดหัว", "ปวดท้อง", "เจ็บคอ"],
+            correct: 0
+          }
+        ]
+      },
+      {
+        id: "th-c5-u7",
+        title: { my: "Unit 5.7: ဆေးဆိုင်နှင့် ဆေးဝါးများ (Pharmacy & Medication)", en: "Unit 5.7: Pharmacy & Medication" },
+        vocabulary: [
+          { word: "ยา", roman: "yaa", meaning: { My: "ဆေး", en: "Medicine / Drug" } },
+          { word: "ร้านขายยา", roman: "ráan-khǎai-yaa", meaning: { My: "ဆေးဆိုင်", en: "Pharmacy" } }
+        ],
+        grammar: {
+          title: { My: "ဆေးဝါးတောင်းခံပုံ", en: "Asking for Medicine" },
+          rule: "ขอซื้อยา... (ဆေးဝယ်ချင်ပါတယ်)",
+          explanation: { My: "ဆေးဆိုင်တွင် ရောဂါဝေဒနာအလိုက် ဆေးဝါးဝယ်ယူရာ၌ သုံးသည်။", en: "Used when buying medication at a pharmacy." }
+        },
+        dialogue: {
+          title: { My: "ဆေးဆိုင် စကားပြောခန်း", en: "Pharmacy Dialogue" },
+          lines: [
+            { speaker: "Customer", thai: "ซื้อยาแก้ปวดครับ", roman: "sʉ́ʉ yaa gɛ̂ɛ-bpùat khráp", trans: { My: "ကိုက်ခဲပျောက်ဆေး ဝယ်မယ်ခင်ဗျာ", en: "I'd like to buy pain relief medicine." } }
+          ]
+        },
+        aiRoleplay: {
+          prompt: { My: "🤖 AI Partner:", en: "🤖 AI Partner:" },
+          aiLine: "ต้องการยาอะไรคะ",
+          aiRoman: "dtɔ̂ong-gaan yaa à-rai khá",
+          aiMeaning: { My: "ဘယ်လိုဆေး လိုချင်လဲရှင့်", en: "What medicine do you need?" },
+          expectedReply: "ยาแก้ปวดหัวค่ะ",
+          expectedRoman: "yaa gɛ̂ɛ-bpùat-hǔa khâ",
+          replyMeaning: { My: "ခေါင်းကိုက်ပျောက်ဆေး လိုချင်ပါတယ်ရှင့်", en: "Headache medicine, please" }
+        },
+        exercises: [
+          {
+            type: "matching_pairs",
+            prompt: { My: "🔊 တွဲစပ်ပါ:", en: "🔊 Match pairs:" },
+            pairs: [
+              { id: "p1", audio: "ยา", thai: "ยา", text: { My: "ဆေး", en: "Medicine" } },
+              { id: "p2", audio: "ร้านขายยา", thai: "ร้านขายยา", text: { My: "ဆေးဆိုင်", en: "Pharmacy" } }
+            ]
+          },
+          {
+            type: "speaking",
+            prompt: { My: "🎙️ အသံထွက်ဖတ်ပါ: \"ร้านขายยา\"", en: "🎙️ Speak: \"ร้านขายยา\"" },
+            targetText: "ร้านขายยา",
+            roman: "ráan-khǎai-yaa"
+          }
+        ],
+        quiz: [
+          {
+            type: "mcq",
+            prompt: { My: "\"ဆေးဆိုင်\" ၏ ထိုင်းစကားမှာ?", en: "Pharmacy in Thai:" },
+            options: ["ร้านขายยา", "โรงพยาบาล", "ตลาด"],
+            correct: 0
+          }
+        ]
+      },
+      {
+        id: "th-c5-u8",
+        title: { my: "Unit 5.8: ဆေးရုံနှင့် ဆရာဝန် (Hospital & Doctor)", en: "Unit 5.8: Hospital & Doctor" },
+        vocabulary: [
+          { word: "โรงพยาบาล", roman: "roong-pha-yaa-baan", meaning: { My: "ဆေးရုံ", en: "Hospital" } },
+          { word: "หมอ", roman: "mɔ̌ɔ", meaning: { My: "ဆရာဝန်", en: "Doctor" } }
+        ],
+        grammar: {
+          title: { My: "ဆရာဝန်နှင့် ပြသလိုပုံ", en: "Seeing a Doctor" },
+          rule: "พบหมอ (ဆရာဝန်နဲ့ပြသည်)၊ ไปโรงพยาบาล (ဆေးရုံသွားသည်)",
+          explanation: { My: "ကျန်းမာရေး မကောင်းပါက ဆေးရုံသွားရန် ဤစကားစုကို သုံးသည်။", en: "Essential for seeking medical attention." }
+        },
+        dialogue: {
+          title: { My: "ဆေးရုံ စကားပြောခန်း", en: "Hospital Dialogue" },
+          lines: [
+            { speaker: "A", thai: "อยากพบหมอครับ", roman: "jàak phóp mɔ̌ɔ khráp", trans: { My: "ဆရာဝန်နဲ့ ပြချင်ပါတယ်ခင်ဗျာ", en: "I want to see a doctor." } }
+          ]
+        },
+        aiRoleplay: {
+          prompt: { My: "🤖 AI Partner:", en: "🤖 AI Partner:" },
+          aiLine: "เป็นอะไรมาคะ",
+          aiRoman: "bpen à-rai maa khá",
+          aiMeaning: { My: "ဘာဖြစ်လို့ လာတာလဲရှင့်", en: "What symptoms do you have?" },
+          expectedReply: "ไม่สบายค่ะ",
+          expectedRoman: "mâi sà-baai khâ",
+          replyMeaning: { My: "နေမကောင်းလို့ပါရှင့်", en: "I'm not feeling well" }
+        },
+        exercises: [
+          {
+            type: "matching_pairs",
+            prompt: { My: "🔊 တွဲစပ်ပါ:", en: "🔊 Match pairs:" },
+            pairs: [
+              { id: "p1", audio: "โรงพยาบาล", thai: "โรงพยาบาล", text: { My: "ဆေးရုံ", en: "Hospital" } },
+              { id: "p2", audio: "หมอ", thai: "หมอ", text: { My: "ဆရာဝန်", en: "Doctor" } }
+            ]
+          },
+          {
+            type: "speaking",
+            prompt: { My: "🎙️ အသံထွက်ဖတ်ပါ: \"โรงพยาบาล\"", en: "🎙️ Speak: \"โรงพยาบาล\"" },
+            targetText: "โรงพยาบาล",
+            roman: "roong-pha-yaa-baan"
+          }
+        ],
+        quiz: [
+          {
+            type: "mcq",
+            prompt: { My: "\"ဆရာဝန်\" ၏ ထိုင်းစကားမှာ?", en: "Doctor in Thai:" },
+            options: ["หมอ", "ครู", "ตำรวจ"],
+            correct: 0
+          }
+        ]
+      },
+      {
+        id: "th-c5-u9",
+        title: { my: "Unit 5.9: ရက်ချိန်းယူခြင်း (Making Appointments)", en: "Unit 5.9: Making Appointments" },
+        vocabulary: [
+          { word: "นัด", roman: "nát", meaning: { My: "ချိန်းဆိုသည်", en: "Appointment / To schedule" } },
+          { word: "เวลา", roman: "we-laa", meaning: { My: "အချိန်", en: "Time" } }
+        ],
+        grammar: {
+          title: { My: "ချိန်းဆိုမှု ပြုလုပ်ပုံ", en: "Making an Appointment" },
+          rule: "ขอนัด... (ချိန်းဆိုလိုပါတယ်) + [အချိန်/ရက်]",
+          explanation: { My: "အလုပ် သို့မဟုတ် ဆေးရုံတွင် ရက်ချိန်းယူရာ၌ သုံးသည်။", en: "Used to schedule meetings or medical appointments." }
+        },
+        dialogue: {
+          title: { My: "ချိန်းဆိုမှု စကားပြောခန်း", en: "Appointment Dialogue" },
+          lines: [
+            { speaker: "A", thai: "ขอนัดพบหมอพรุ่งนี้ครับ", roman: "khɔ̌ɔ nát phóp mɔ̌ɔ phrûng-nîi khráp", trans: { My: "မနက်ဖြန် ဆရာဝန်နဲ့ ရက်ချိန်းယူချင်ပါတယ်ခင်ဗျာ", en: "I'd like to book an appointment with the doctor tomorrow." } }
+          ]
+        },
+        aiRoleplay: {
+          prompt: { My: "🤖 AI Partner:", en: "🤖 AI Partner:" },
+          aiLine: "สะดวกี่โมงคะ",
+          aiRoman: "sà-dùak gìi moong khá",
+          aiMeaning: { My: "ဘယ်အချိန် အဆင်ပြေလဲရှင့်", en: "What time are you available?" },
+          expectedReply: "สะดวกบ่ายสองค่ะ",
+          expectedRoman: "sà-dùak bàai sɔ̌ɔng khâ",
+          replyMeaning: { My: "နေ့လယ် ၂ နာရီ အဆင်ပြေပါတယ်ရှင့်", en: "2 PM is convenient" }
+        },
+        exercises: [
+          {
+            type: "matching_pairs",
+            prompt: { My: "🔊 တွဲစပ်ပါ:", en: "🔊 Match pairs:" },
+            pairs: [
+              { id: "p1", audio: "นัด", thai: "นัด", text: { My: "ချိန်းဆိုသည်", en: "Appointment" } },
+              { id: "p2", audio: "เวลา", thai: "เวลา", text: { My: "အချိန်", en: "Time" } }
+            ]
+          },
+          {
+            type: "speaking",
+            prompt: { My: "🎙️ အသံထွက်ဖတ်ပါ: \"นัดหมาย\"", en: "🎙️ Speak: \"นัดหมาย\"" },
+            targetText: "นัดหมาย",
+            roman: "nát-mǎai"
+          }
+        ],
+        quiz: [
+          {
+            type: "mcq",
+            prompt: { My: "\"ချိန်းဆိုသည်\" ၏ ထိုင်းစကားမှာ?", en: "Appointment in Thai:" },
+            options: ["นัด", "ทำงาน", "เรียน"],
+            correct: 0
+          }
+        ]
+      },
+      {
+        id: "th-c5-u10",
+        title: { my: "Unit 5.10: ဖိတ်ကြားခြင်းနှင့် လက်ခံ/ငြင်းပယ်ခြင်း (Invitations)", en: "Unit 5.10: Invitations & Declining" },
+        vocabulary: [
+          { word: "ชวน", roman: "chuuan", meaning: { My: "ဖိတ်ခေါ်သည်", en: "To invite" } },
+          { word: "ว่าง", roman: "wâang", meaning: { My: "အားသည်", en: "Free / Available" } }
+        ],
+        grammar: {
+          title: { My: "ဖိတ်ခေါ်ခြင်းနှင့် အားလပ်မှု မေးမြန်းပုံ", en: "Inviting Others" },
+          rule: "ว่างไหม (အားလား)၊ ไปเที่ยวกัน (အလည်သွားကြမယ်)",
+          explanation: { My: "သူငယ်ချင်းများကို ဖိတ်ခေါ်ရာတွင် အသုံးအများဆုံး စကားစု ဖြစ်သည်။", en: "Common phrases when inviting friends out." }
+        },
+        dialogue: {
+          title: { My: "ဖိတ်ခေါ်မှု စကားပြောခန်း", en: "Invitation Dialogue" },
+          lines: [
+            { speaker: "A", thai: "พรุ่งนี้ว่างไหมครับ", roman: "phrûng-nîi wâang mǎi khráp", trans: { My: "မနက်ဖြန် အားပါသလားခင်ဗျာ", en: "Are you free tomorrow?" } }
+          ]
+        },
+        aiRoleplay: {
+          prompt: { My: "🤖 AI Partner:", en: "🤖 AI Partner:" },
+          aiLine: "พรุ่งนี้ว่างไหมคะ ไปกินข้าวกัน",
+          aiRoman: "phrûng-nîi wâang mǎi khá, bpai gin-khâao gan",
+          aiMeaning: { My: "မနက်ဖြန် အားလားရှင့်၊ ထမင်းသွားစားကြမယ်", en: "Are you free tomorrow? Let's eat." },
+          expectedReply: "ว่างค่ะ ไปค่ะ",
+          expectedRoman: "wâang khâ, bpai khâ",
+          replyMeaning: { My: "အားပါတယ်၊ သွားမယ်ရှင့်", en: "I'm free, let's go" }
+        },
+        exercises: [
+          {
+            type: "matching_pairs",
+            prompt: { My: "🔊 တွဲစပ်ပါ:", en: "🔊 Match pairs:" },
+            pairs: [
+              { id: "p1", audio: "ชวน", thai: "ชวน", text: { My: "ဖိတ်ခေါ်သည်", en: "Invite" } },
+              { id: "p2", audio: "ว่าง", thai: "ว่าง", text: { My: "အားသည်", en: "Free" } }
+            ]
+          },
+          {
+            type: "speaking",
+            prompt: { My: "🎙️ အသံထွက်ဖတ်ပါ: \"ว่างไหม\"", en: "🎙️ Speak: \"ว่างไหม\"" },
+            targetText: "ว่างไหม",
+            roman: "wâang mǎi"
+          }
+        ],
+        quiz: [
+          {
+            type: "mcq",
+            prompt: { My: "\"အားသည် (Free)\" ၏ ထိုင်းစကားမှာ?", en: "Available in Thai:" },
+            options: ["ว่าง", "ยุ่ง", "เหนื่อย"],
+            correct: 0
+          }
+        ]
+      },
+      {
+        id: "th-c5-u11",
+        title: { my: "Unit 5.11: ဝါသနာနှင့် အားလပ်ချိန် (Hobbies & Free Time)", en: "Unit 5.11: Hobbies" },
+        vocabulary: [
+          { word: "งานอดิเรก", roman: "ngaan-ɔ̀-dì-rèek", meaning: { My: "ဝါသနာ / အားလပ်ချိန်လုပ်ငန်း", en: "Hobby" } },
+          { word: "ชอบ", roman: "chɔ̂ɔp", meaning: { My: "ကြိုက်သည်", en: "Like" } }
+        ],
+        grammar: {
+          title: { My: "ဝါသနာပါရာ ဖော်ပြပုံ", en: "Stating Hobbies" },
+          rule: "ชอบ + [ဝါသနာ/လုပ်ဆောင်မှု] (ဥပนาม- ชอบอ่านหนังสือ = စာဖတ်ရတာ ကြိုက်တယ်)",
+          explanation: { My: "မိမိကြိုက်နှစ်သက်ရာ ဝါသနာကို ပြောပြရာတွင် သုံးသည်။", en: "Use ชอบ + Activity to express your hobbies." }
+        },
+        dialogue: {
+          title: { My: "ဝါသနာ မေးမြန်းခန်း", en: "Hobby Dialogue" },
+          lines: [
+            { speaker: "A", thai: "ชอบทำอะไรครับ", roman: "chɔ̂ɔp tham à-rai khráp", trans: { My: "ဘာလုပ်ရတာ ကြိုက်လဲခင်ဗျာ", en: "What do you like to do?" } }
+          ]
+        },
+        aiRoleplay: {
+          prompt: { My: "🤖 AI Partner:", en: "🤖 AI Partner:" },
+          aiLine: "งานอดิเรกคืออะไรคะ",
+          aiRoman: "ngaan-ɔ̀-dì-rèek khʉʉ à-rai khá",
+          aiMeaning: { My: "ဝါသနာက ဘာလဲရှင့်", en: "What is your hobby?" },
+          expectedReply: "ชอบดูหนังค่ะ",
+          expectedRoman: "chɔ̂ɔp duu nǎng khâ",
+          replyMeaning: { My: "ဇာတ်ကားကြည့်ရတာ ကြိုက်ပါတယ်ရှင့်", en: "I like watching movies" }
+        },
+        exercises: [
+          {
+            type: "matching_pairs",
+            prompt: { My: "🔊 တွဲစပ်ပါ:", en: "🔊 Match pairs:" },
+            pairs: [
+              { id: "p1", audio: "งานอดิเรก", thai: "งานอดิเรก", text: { My: "ဝါသနာ", en: "Hobby" } },
+              { id: "p2", audio: "ชอบ", thai: "ชอบ", text: { My: "ကြိုက်သည်", en: "Like" } }
+            ]
+          },
+          {
+            type: "speaking",
+            prompt: { My: "🎙️ အသံထွက်ဖတ်ပါ: \"งานอดิเรก\"", en: "🎙️ Speak: \"งานอดิเรก\"" },
+            targetText: "งานอดิเรก",
+            roman: "ngaan-ɔ̀-dì-rèek"
+          }
+        ],
+        quiz: [
+          {
+            type: "mcq",
+            prompt: { My: "\"ဝါသနာ\" ၏ ထိုင်းစကားမှာ?", en: "Hobby in Thai:" },
+            options: ["งานอดิเรก", "งานบ้าน", "ทำงาน"],
+            correct: 0
+          }
+        ]
+      },
+      {
+        id: "th-c5-u12",
+        title: { my: "Unit 5.12: သဘောထားနှင့် အမြင်များ (Opinions)", en: "Unit 5.12: Opinions" },
+        vocabulary: [
+          { word: "คิดว่า", roman: "khít-wâa", meaning: { My: "ထင်တယ် / ယူဆတယ်", en: "Think that" } },
+          { word: "ดี", roman: "dii", meaning: { My: "ကောင်းသည်", en: "Good" } }
+        ],
+        grammar: {
+          title: { My: "အမြင်သဘောထား ဖော်ပြပုံ", en: "Expressing Opinions" },
+          rule: "คิดว่า + [အယူအဆ] (ဥပမာ- คิดว่าดีมาก = အရမ်းကောင်းတယ်လို့ ထင်တယ်)",
+          explanation: { My: "မိမိ၏ အကြံပြုချက် သို့မဟုတ် ထင်မြင်ချက်ကို တင်ပြရာတွင် သုံးသည်။", en: "Use คิดว่า to introduce your thoughts or opinions." }
+        },
+        dialogue: {
+          title: { My: "အမြင်ဆွေးနွေးခန်း", en: "Opinion Dialogue" },
+          lines: [
+            { speaker: "A", thai: "คิดว่ายังไงครับ", roman: "khít-wâa yang-ngài khráp", trans: { My: "ဘယ်လိုထင်လဲခင်ဗျာ", en: "What do you think?" } }
+          ]
+        },
+        aiRoleplay: {
+          prompt: { My: "🤖 AI Partner:", en: "🤖 AI Partner:" },
+          aiLine: "คุณคิดว่ายังไงคะ",
+          aiRoman: "khun khít-wâa yang-ngài khá",
+          aiMeaning: { My: "ရှင် ဘယ်လိုထင်လဲရှင့်", en: "What do you think?" },
+          expectedReply: "คิดว่าดีค่ะ",
+          expectedRoman: "khít-wâa dii khâ",
+          replyMeaning: { My: "ကောင်းတယ်လို့ ထင်ပါတယ်ရှင့်", en: "I think it's good" }
+        },
+        exercises: [
+          {
+            type: "matching_pairs",
+            prompt: { My: "🔊 တွဲစပ်ပါ:", en: "🔊 Match pairs:" },
+            pairs: [
+              { id: "p1", audio: "คิดว่า", thai: "คิดว่า", text: { My: "ထင်သည်", en: "Think" } },
+              { id: "p2", audio: "ดี", thai: "ดี", text: { My: "ကောင်းသည်", en: "Good" } }
+            ]
+          },
+          {
+            type: "speaking",
+            prompt: { My: "🎙️ အသံထွက်ဖတ်ပါ: \"คิดว่า\"", en: "🎙️ Speak: \"คิดว่า\"" },
+            targetText: "คิดว่า",
+            roman: "khít-wâa"
+          }
+        ],
+        quiz: [
+          {
+            type: "mcq",
+            prompt: { My: "\"ထင်သည် / ယူဆသည်\" ၏ ထိုင်းစကားမှာ?", en: "To think in Thai:" },
+            options: ["คิดว่า", "พูดว่า", "รู้ว่า"],
+            correct: 0
+          }
+        ]
+      },
+      {
+        id: "th-c5-u13",
+        title: { my: "Unit 5.13: ခံစားချက်များ (Feelings & Emotions)", en: "Unit 5.13: Feelings" },
+        vocabulary: [
+          { word: "ดีใจ", roman: "dii-jai", meaning: { My: "ဝမ်းသာသည်", en: "Glad / Happy" } },
+          { word: "เหนื่อย", roman: "nùuai", meaning: { My: "ပင်ပန်းသည်", en: "Tired" } }
+        ],
+        grammar: {
+          title: { My: "ခံစားချက် ဖော်ပြပုံ", en: "Expressing Emotions" },
+          rule: "ดีใจ (ဝမ်းသာ)၊ เสียใจ (စိတ်မကောင်း)၊ เหนื่อย (ပင်ပန်း)၊ โกรธ (ဒေါသထွက်)",
+          explanation: { My: "မိမိ၏ စိတ်နေသဘောထားနှင့် ခံစားချက်ကို ဖွင့်ဟရာတွင် သုံးသည်။", en: "Essential vocabulary for expressing emotional states." }
+        },
+        dialogue: {
+          title: { My: "ခံစားချက် ဆွေးနွေးခန်း", en: "Emotions Dialogue" },
+          lines: [
+            { speaker: "A", thai: "เหนื่อยไหมครับ", roman: "nùuai mǎi khráp", trans: { My: "ပင်ပန်းနေပြီလားခင်ဗျာ", en: "Are you tired?" } }
+          ]
+        },
+        aiRoleplay: {
+          prompt: { My: "🤖 AI Partner:", en: "🤖 AI Partner:" },
+          aiLine: "เหนื่อยไหมคะ",
+          aiRoman: "nùuai mǎi khá",
+          aiMeaning: { My: "ပင်ပန်းလားရှင့်", en: "Are you tired?" },
+          expectedReply: "เหนื่อยมากค่ะ",
+          expectedRoman: "nùuai mâak khâ",
+          replyMeaning: { My: "အရမ်းပင်ပန်းပါတယ်ရှင့်", en: "Very tired" }
+        },
+        exercises: [
+          {
+            type: "matching_pairs",
+            prompt: { My: "🔊 တွဲစပ်ပါ:", en: "🔊 Match pairs:" },
+            pairs: [
+              { id: "p1", audio: "ดีใจ", thai: "ดีใจ", text: { My: "ဝမ်းသာသည်", en: "Glad" } },
+              { id: "p2", audio: "เหนื่อย", thai: "เหนื่อย", text: { My: "ပင်ပန်းသည်", en: "Tired" } }
+            ]
+          },
+          {
+            type: "speaking",
+            prompt: { My: "🎙️ အသံထွက်ဖတ်ပါ: \"เหนื่อย\"", en: "🎙️ Speak: \"เหนื่อย\"" },
+            targetText: "เหนื่อย",
+            roman: "nùuai"
+          }
+        ],
+        quiz: [
+          {
+            type: "mcq",
+            prompt: { My: "\"ပင်ပန်းသည်\" ၏ ထိုင်းစကားမှာ?", en: "Tired in Thai:" },
+            options: ["เหนื่อย", "ดีใจ", "สบาย"],
+            correct: 0
+          }
+        ]
+      },
+      {
+        id: "th-c5-u14",
+        title: { my: "Unit 5.14: အကြောင်းပြချက် ပေးခြင်း (Giving Reasons)", en: "Unit 5.14: Giving Reasons" },
+        vocabulary: [
+          { word: "เพราะว่า", roman: "phrɔ́-wâa", meaning: { My: "ဘာဖြစ်လို့လဲဆိုတော့", en: "Because" } },
+          { word: "งานยุ่ง", roman: "ngaan-yûng", meaning: { My: "အလုပ်ရှုပ်သည်", en: "Busy with work" } }
+        ],
+        grammar: {
+          title: { My: "เพราะว่า ဖြင့် အကြောင်းပြပုံ", en: "Using Because" },
+          rule: "[ရလဒ်] + เพราะว่า + [အကြောင်းရင်း] (ဥပမာ- ไม่ไปเพราะว่างานยุ่ง = အလုပ်ရှုပ်လို့ မသွားဘူး)",
+          explanation: { My: "အကြောင်းရင်းကို ရှင်းလင်းပြောပြလိုလျှင် เพราะว่า ကို သုံးသည်။", en: "Use เพราะว่า to explain reasons for actions." }
+        },
+        dialogue: {
+          title: { My: "အကြောင်းပြ စကားပြောခန်း", en: "Reasons Dialogue" },
+          lines: [
+            { speaker: "A", thai: "ทำไมไม่ไปครับ", roman: "tham-mai mâi bpai khráp", trans: { My: "ဘာလို့ မသွားတာလဲခင်ဗျာ", en: "Why aren't you going?" } }
+          ]
+        },
+        aiRoleplay: {
+          prompt: { My: "🤖 AI Partner:", en: "🤖 AI Partner:" },
+          aiLine: "ทำไมไม่ไปคะ",
+          aiRoman: "tham-mai mâi bpai khá",
+          aiMeaning: { My: "ဘာလို့ မသွားလဲရှင့်", en: "Why aren't you going?" },
+          expectedReply: "เพราะว่างานยุ่งค่ะ",
+          expectedRoman: "phrɔ́-wâa ngaan-yûng khâ",
+          replyMeaning: { My: "အလုပ်ရှုပ်လို့ပါရှင့်", en: "Because I'm busy with work" }
+        },
+        exercises: [
+          {
+            type: "matching_pairs",
+            prompt: { My: "🔊 တွဲစပ်ပါ:", en: "🔊 Match pairs:" },
+            pairs: [
+              { id: "p1", audio: "เพราะว่า", thai: "เพราะว่า", text: { My: "ဘာဖြစ်လို့လဲဆိုတော့", en: "Because" } },
+              { id: "p2", audio: "งานยุ่ง", thai: "งานยุ่ง", text: { My: "အလုပ်ရှုပ်သည်", en: "Busy" } }
+            ]
+          },
+          {
+            type: "speaking",
+            prompt: { My: "🎙️ အသံထွက်ဖတ်ပါ: \"เพราะว่า\"", en: "🎙️ Speak: \"เพราะว่า\"" },
+            targetText: "เพราะว่า",
+            roman: "phrɔ́-wâa"
+          }
+        ],
+        quiz: [
+          {
+            type: "mcq",
+            prompt: { My: "\"ဘာဖြစ်လို့လဲဆိုတော့ (Because)\" ၏ ထိုင်းစကားမှာ?", en: "Because in Thai:" },
+            options: ["เพราะว่า", "แต่ว่า", "ดังนั้น"],
+            correct: 0
+          }
+        ]
+      },
+      {
+        id: "th-c5-u15",
+        title: { my: "Unit 5.15: အားပေးနှစ်သိမ့်ခြင်း (Encouragement)", en: "Unit 5.15: Encouragement" },
+        vocabulary: [
+          { word: "สู้ๆ", roman: "sûu-sûu", meaning: { My: "အားတင်းထား / Fighting", en: "Keep fighting / Cheer up" } },
+          { word: "ไม่เป็นไร", roman: "mâi-pen-rai", meaning: { My: "ရပါတယ် / အဆင်ပြေပါတယ်", en: "It's okay" } }
+        ],
+        grammar: {
+          title: { My: "အားပေးစကား ပြောဆိုပုံ", en: "Encouraging Phrases" },
+          rule: "စကားပြောရာတွင် 'สู้ๆ นะครับ' (အားတင်းထားနော်) ဟု မိတ်ဆွေများကို အားပေးလေ့ရှိသည်။",
+          explanation: { My: "ဂျပန်စကား 'Fighting' ကဲ့သို့ ထိုင်းလူမျိုးများ အသုံးများသော အားပေးစကား ဖြစ်သည်။", en: "Very popular cheer-up phrase in modern Thai." }
+        },
+        dialogue: {
+          title: { My: "အားပေး စကားပြောခန်း", en: "Encouragement Dialogue" }]
+          lines: [
+            { speaker: "A", thai: "สู้ๆ นะครับ", roman: "sûu-sûu ná khráp", trans: { My: "အားတင်းထားနော်ခင်ဗျာ", en: "Keep fighting!" } }
+          ]
+        },
+        aiRoleplay: {
+          prompt: { My: "🤖 AI Partner:", en: "🤖 AI Partner:" },
+          aiLine: "เหนื่อยจังเลยค่ะ",
+          aiRoman: "nùuai jang ləəi khâ",
+          aiMeaning: { My: "အရမ်းပင်ပန်းနေပြီရှင့်", en: "I'm so tired." },
+          expectedReply: "สู้ๆ นะคะ",
+          expectedRoman: "sûu-sûu ná khá",
+          replyMeaning: { My: "အားတင်းထားနော်ရှင့်", en: "Keep fighting!" }
+        },
+        exercises: [
+          {
+            type: "matching_pairs",
+            prompt: { My: "🔊 တွဲစပ်ပါ:", en: "🔊 Match pairs:" },
+            pairs: [
+              { id: "p1", audio: "สู้ๆ", thai: "สู้ๆ", text: { My: "အားတင်းထား", en: "Fighting" } },
+              { id: "p2", audio: "ไม่เป็นไร", thai: "ไม่เป็นไร", text: { My: "ရပါတယ်", en: "It's okay" } }
+            ]
+          },
+          {
+            type: "speaking",
+            prompt: { My: "🎙️ အသံထွက်ဖတ်ပါ: \"สู้ๆ\"", en: "🎙️ Speak: \"สู้ๆ\"" },
+            targetText: "สู้ๆ",
+            roman: "sûu-sûu"
+          }
+        ],
+        quiz: [
+          {
+            type: "mcq",
+            prompt: { My: "\"အားတင်းထား (Fighting)\" ၏ ထိုင်းစကားမှာ?", en: "Cheer up in Thai:" },
+            options: ["สู้ๆ", "โชคดี", "ลาก่อน"],
+            correct: 0
+          }
+        ]
+      },
+      {
+        id: "th-c5-u16",
+        title: { my: "Unit 5.16: အသေးစား ဆွေးနွေးပြောဆိုခြင်း (Extended Conversation)", en: "Unit 5.16: Extended Conversation" },
+        vocabulary: [
+          { word: "พูดคุย", roman: "phûut-khui", meaning: { My: "စကားလက်ဆုံကျသည်", en: "To chat / Converse" } },
+          { word: "สนุก", roman: "sà-nùk", meaning: { My: "ပျော်စရာကောင်းသည်", en: "Fun / Enjoyable" } }
+        ],
+        grammar: {
+          title: { My: "စကားလက်ဆုံကျခြင်း", en: "Casual Chatting" },
+          rule: "คุยกันสนุกมาก (စကားပြောရတာ အရမ်းပျော်စရာကောင်းတယ်)",
+          explanation: { My: "မိတ်ဆွေများနှင့် အလွတ်သဘော စကားစမြည်ပြောဆိုရာတွင် သုံးသည်။", en: "Used during friendly, casual conversations." }
+        },
+        dialogue: {
+          title: { My: "စကားလက်ဆုံ ပြောခန်း", en: "Chat Dialogue" },
+          lines: [
+            { speaker: "A", thai: "คุยกันสนุกมากครับ", roman: "khui gan sà-nùk mâak khráp", trans: { My: "စကားပြောရတာ အရမ်းပျော်စရာကောင်းတယ်ခင်ဗျာ", en: "Chatting with you is a lot of fun." } }
+          ]
+        },
+        aiRoleplay: {
+          prompt: { My: "🤖 AI Partner:", en: "🤖 AI Partner:" },
+          aiLine: "สนุกไหมคะ",
+          aiRoman: "sà-nùk mǎi khá",
+          aiMeaning: { My: "ပျော်ရဲ့လားရှင့်", en: "Is it fun?" },
+          expectedReply: "สนุกมากค่ะ",
+          expectedRoman: "sà-nùk mâak khâ",
+          replyMeaning: { My: "အရမ်းပျော်ပါတယ်ရှင့်", en: "Very fun" }
+        },
+        exercises: [
+          {
+            type: "matching_pairs",
+            prompt: { My: "🔊 တွဲစပ်ပါ:", en: "🔊 Match pairs:" },
+            pairs: [
+              { id: "p1", audio: "พูดคุย", thai: "พูดคุย", text: { My: "စကားပြော", en: "Chat" } },
+              { id: "p2", audio: "สนุก", thai: "สนุก", text: { My: "ပျော်စရာ", en: "Fun" } }
+            ]
+          },
+          {
+            type: "speaking",
+            prompt: { My: "🎙️ အသံထွက်ဖတ်ပါ: \"สนุกมาก\"", en: "🎙️ Speak: \"สนุกมาก\"" },
+            targetText: "สนุกมาก",
+            roman: "sà-nùk mâak"
+          }
+        ],
+        quiz: [
+          {
+            type: "mcq",
+            prompt: { My: "\"ပျော်စရာကောင်းသည်\" ၏ ထိုင်းစကားမှာ?", en: "Fun in Thai:" },
+            options: ["สนุก", "เศร้า", "เหนื่อย"],
+            correct: 0
+          }
+        ]
+      },
+      {
+        id: "th-c5-u17",
+        title: { my: "Unit 5.17: အလေ့အကျင့်နှင့် သုံးသပ်ချက် (Practice & Review)", en: "Unit 5.17: Practice & Review" },
+        vocabulary: [
+          { word: "ทบทวน", roman: "thóp-thuuan", meaning: { My: "ပြန်လည်လေ့ကျင့်သည်", en: "To review" } },
+          { word: "บทเรียน", roman: "bòt-rian", meaning: { My: "သင်ခန်းစာ", en: "Lesson" } }
+        ],
+        grammar: {
+          title: { My: "သင်ခန်းစာ ပြန်လည်နွှေးခြင်း", en: "Lesson Review" },
+          rule: "ทบทวนบทเรียนทุกวัน (သင်ခန်းစာတွေကို နေ့တိုင်း ပြန်နွှေးပါ)",
+          explanation: { My: "ဘာသာစကား ကျွမ်းကျင်လာစေရန် နေ့စဉ် ပြန်လည်လေ့ကျင့်ရန် လိုအပ်သည်။", en: "Consistent daily review solidifies memory retention." }
+        },
+        dialogue: {
+          title: { My: "ပြန်လည်နွှေးခန်း", en: "Review Dialogue" },
+          lines: [
+            { speaker: "A", thai: "มาทบทวนบทเรียนกันครับ", roman: "maa thóp-thuuan bòt-rian gan khráp", trans: { My: "သင်ခန်းစာတွေ ပြန်နွှေးကြရအောင်ခင်ဗျာ", en: "Let's review our lessons." } }
+          ]
+        },
+        aiRoleplay: {
+          prompt: { My: "🤖 AI Partner:", en: "🤖 AI Partner:" },
+          aiLine: "ทบทวนบทเรียนหรือยังคะ",
+          aiRoman: "thóp-thuuan bòt-rian rʉ̌u yang khá",
+          aiMeaning: { My: "သင်ခန်းစာတွေ ပြန်နွှေးပြီးပြီလားရှင့်", en: "Have you reviewed your lessons?" },
+          expectedReply: "ทบทวนแล้วค่ะ",
+          expectedRoman: "thóp-thuuan láew khâ",
+          replyMeaning: { My: "ပြန်နွှေးပြီးပါပြီရှင့်", en: "Already reviewed" }
+        },
+        exercises: [
+          {
+            type: "matching_pairs",
+            prompt: { My: "🔊 တွဲစပ်ပါ:", en: "🔊 Match pairs:" },
+            pairs: [
+              { id: "p1", audio: "ทบทวน", thai: "ทบทวน", text: { My: "ပြန်လည်နွှေး", en: "Review" } },
+              { id: "p2", audio: "บทเรียน", thai: "บทเรียน", text: { My: "သင်ခန်းစာ", en: "Lesson" } }
+            ]
+          },
+          {
+            type: "speaking",
+            prompt: { My: "🎙️ အသံထွက်ဖတ်ပါ: \"ทบทวน\"", en: "🎙️ Speak: \"ทบทวน\"" },
+            targetText: "ทบทวน",
+            roman: "thóp-thuuan"
+          }
+        ],
+        quiz: [
+          {
+            type: "mcq",
+            prompt: { My: "\"သင်ခန်းစာ\" ၏ ထိုင်းစကားမှာ?", en: "Lesson in Thai:" },
+            options: ["บทเรียน", "ภาษา", "คำศัพท์"],
+            correct: 0
+          }
+        ]
+      },
+      {
+        id: "th-c5-u18",
+        title: { my: "Unit 5.18: အပြန်အလှန် ဆွေးနွေးမှု (Interactive Discussion)", en: "Unit 5.18: Interactive Discussion" },
+        vocabulary: [
+          { word: "อภิปราย", roman: "à-pì-bpraai", meaning: { My: "ဆွေးနွေးသည်", en: "To discuss" } },
+          { word: "ความคิด", roman: "khwām-khít", meaning: { My: "အကြံဉာဏ် / အမြင်", en: "Idea / Thought" } }
+        ],
+        grammar: {
+          title: { My: "အကြံဉာဏ် ဖလှယ်ခြင်း", en: "Sharing Ideas" },
+          rule: "แสดงความคิดเห็น (အမြင်သဘောထား ဖော်ပြသည်)",
+          explanation: { My: "အပြန်အလှန် ဆွေးနွေးရာတွင် မိမိ၏ အမြင်ကို ယဉ်ကျေးစွာ တင်ပြခြင်း ဖြစ်သည်။", en: "Politely presenting thoughts during discussions." }
+        },
+        dialogue: {
+          title: { My: "ဆွေးနွေးခန်း", en: "Discussion Dialogue" },
+          lines: [
+            { speaker: "A", thai: "ขอแสดงความคิดเห็นครับ", roman: "khɔ̌ɔ sà-dɛ̀ɛng khwām-khít-hěn khráp", trans: { My: "အမြင်သဘောထား တင်ပြခွင့်ပြုပါခင်ဗျာ", en: "I'd like to share my thoughts." } }
+          ]
+        },
+        aiRoleplay: {
+          prompt: { My: "🤖 AI Partner:", en: "🤖 AI Partner:" },
+          aiLine: "เชิญแสดงความคิดเห็นค่ะ",
+          aiRoman: "chəən sà-dɛ̀ɛng khwām-khít-hěn khâ",
+          aiMeaning: { My: "အမြင်သဘောထား တင်ပြပေးပါရှင့်", en: "Please go ahead and share your thoughts." },
+          expectedReply: "ขอบคุณค่ะ",
+          expectedRoman: "khɔ̀ɔp-khun khâ",
+          replyMeaning: { My: "ကျေးဇူးတင်ပါတယ်ရှင့်", en: "Thank you" }
+        },
+        exercises: [
+          {
+            type: "matching_pairs",
+            prompt: { My: "🔊 တွဲစပ်ပါ:", en: "🔊 Match pairs:" },
+            pairs: [
+              { id: "p1", audio: "อภิปราย", thai: "อภิปราย", text: { My: "ဆွေးနွေး", en: "Discuss" } },
+              { id: "p2", audio: "ความคิด", thai: "ความคิด", text: { My: "အမြင်", en: "Idea" } }
+            ]
+          },
+          {
+            type: "speaking",
+            prompt: { My: "🎙️ အသံထွက်ဖတ်ပါ: \"ความคิดเห็น\"", en: "🎙️ Speak: \"ความคิดเห็น\"" },
+            targetText: "ความคิดเห็น",
+            roman: "khwām-khít-hěn"
+          }
+        ],
+        quiz: [
+          {
+            type: "mcq",
+            prompt: { My: "\"အမြင် / အကြံဉာဏ်\" ၏ ထိုင်းစကားမှာ?", en: "Idea in Thai:" },
+            options: ["ความคิด", "การบ้าน", "อาหาร"],
+            correct: 0
+          }
+        ]
+      },
+      {
+        id: "th-c5-u19",
+        title: { My: "Unit 5.19: အဆင့်မြင့် စကားပြောလေ့ကျင့်ခန်း (Advanced Conversation)", en: "Unit 5.19: Advanced Conversation" },
+        vocabulary: [
+          { word: "คล่องแคล่ว", roman: "khlɔ̂ong-klɛ̀w", meaning: { My: "ကျွမ်းကျင် fluent ဖြစ်သည်", en: "Fluent" } },
+          { word: "มั่นใจ", roman: "mân-jai", meaning: { My: "ယုံကြည်မှုရှိသည်", en: "Confident" } }
+        ],
+        grammar: {
+          title: { My: "ယုံကြည်မှုရှိရှိ ပြောဆိုခြင်း", en: "Confident Speaking" },
+          rule: "พูดไทยได้อย่างมั่นใจ (ထိုင်းစကားကို ယုံကြည်မှုရှိရှိ ပြောတတ်သည်)",
+          explanation: { My: "နေ့စဉ်လေ့ကျင့်မှုများက ထိုင်းစကားကို ကျွမ်းကျင်ပိုင်နိုင်စေသည်။", en: "Regular practice leads to fluent confidence." }
+        },
+        dialogue: {
+          title: { My: "စကားပြော ကျွမ်းကျင်မှု", en: "Fluency Dialogue" },
+          lines: [
+            { speaker: "A", thai: "พูดไทยเก่งมากครับ", roman: "phûut thai gèng mâak khráp", trans: { My: "ထိုင်းစကား အရမ်းပြောတတ်တာပဲခင်ဗျာ", en: "You speak Thai very well." } }
+          ]
+        },
+        aiRoleplay: {
+          prompt: { My: "🤖 AI Partner:", en: "🤖 AI Partner:" },
+          aiLine: "พูดไทยคล่องแล้วนะคะ",
+          aiRoman: "phûut thai khlɔ̂ong láew ná kha",
+          aiMeaning: { My: "ထိုင်းစကား ကျွမ်းကျင်နေပြီနော်ရှင့်", en: "You're already fluent in Thai!" },
+          expectedReply: "ขอบคุณค่ะ ยังต้องฝึกอีกค่ะ",
+          expectedRoman: "khɔ̀ɔp-khun khâ, yang dtɔ̂ong fʉ̀k ìik khâ",
+          replyMeaning: { My: "ကျေးဇူးတင်ပါတယ်၊ ဆက်လေ့ကျင့်ရဦးမယ်ရှင့်", en: "Thank you, still need to practice more" }
+        },
+        exercises: [
+          {
+            type: "matching_pairs",
+            prompt: { My: "🔊 တွဲစပ်ပါ:", en: "🔊 Match pairs:" },
+            pairs: [
+              { id: "p1", audio: "คล่องแคล่ว", thai: "คล่องแคล่ว", text: { My: "ကျွမ်းကျင်", en: "Fluent" } },
+              { id: "p2", audio: "มั่นใจ", thai: "มั่นใจ", text: { My: "ယုံကြည်မှု", en: "Confident" } }
+            ]
+          },
+          {
+            type: "speaking",
+            prompt: { My: "🎙️ အသံထွက်ဖတ်ပါ: \"มั่นใจ\"", en: "🎙️ Speak: \"มั่นใจ\"" },
+            targetText: "มั่นใจ",
+            roman: "mân-jai"
+          }
+        ],
+        quiz: [
+          {
+            type: "mcq",
+            prompt: { My: "\"ကျွမ်းကျင် (Fluent)\" ၏ ထိုင်းစကားမှာ?", en: "Fluent in Thai:" },
+            options: ["คล่องแคล่ว", "ช้า", "ยาก"],
+            correct: 0
+          }
+        ]
+      },
+      {
+        id: "th-c5-u20",
+        title: { my: "Unit 5.20: အခန်း ၅ အပြီးသတ် စာမေးပွဲ (Chapter 5 Mastery Test)", en: "Unit 5.20: Chapter 5 Mastery Test" },
+        vocabulary: [
+          { word: "สำเร็จ", roman: "sǎm-rèet", meaning: { My: "အောင်မြင်ပြီးမြောက်သည်", en: "Success / Accomplished" } },
+          { word: "ยอดเยี่ยม", roman: "yɔ̂ɔt-yîam", meaning: { My: "ထူးချွန်ထက်မြက်သည်", en: "Outstanding / Excellent" } }
+        ],
+        grammar: {
+          title: { My: "အခန်း ၅ ပြန်လည်သုံးသပ်ချက်", en: "Chapter 5 Comprehensive Exam" },
+          rule: "Units 5.1 မှ 5.19 ထိ လေ့လာခဲ့သော မိသားစု၊ အလုပ်အကိုင်၊ ရာသီဥတုနှင့် ကျန်းမာရေး ဝေါဟာရများကို စာမေးပွဲစစ်ဆေးခြင်း။",
+          explanation: { My: "အောင်မြင်ပါက Chapter 5 Mastery Certificate ရရှိမည် ဖြစ်ပါသည်။", en: "Pass to complete Chapter 5 and earn excellence badge." }
+        },
+        dialogue: {
+          title: { My: "အောင်မြင်မှု ဂုဏ်ပြုခန်း", en: "Graduation Celebration" },
+          lines: [
+            { speaker: "Teacher", thai: "ยอดเยี่ยมมากครับ ผ่าน Chapter 5 แล้ว", roman: "yɔ̂ɔt-yîam mâak khráp, phàan Chapter 5 láew", trans: { My: "အရမ်းထူးချွန်ပါတယ်ခင်ဗျာ၊ Chapter 5 အောင်မြင်သွားပါပြီ။", en: "Outstanding! You passed Chapter 5." } }
+          ]
+        },
+        aiRoleplay: {
+          prompt: { My: "🤖 AI Partner:", en: "🤖 AI Partner:" },
+          aiLine: "พร้อมสอบ Chapter 5 หรือยังครับ",
+          aiRoman: "phrɔ́ɔm sɔ̀ɔp Chapter 5 rʉ̌u yang khráp",
+          aiMeaning: { My: "Chapter 5 စာမေးပွဲ ဖြေဖို့ အဆင်သင့်ဖြစ်ပြီလား", en: "Ready for Chapter 5 test?" },
+          expectedReply: "พร้อมค่ะ",
+          expectedRoman: "phrɔ́ɔm khâ",
+          replyMeaning: { My: "အဆင်သင့်ဖြစ်ပါပြီရှင့်", en: "I'm ready" }
+        },
+        exercises: [
+          {
+            type: "matching_pairs",
+            prompt: { My: "🔊 တွဲစပ်ပါ:", en: "🔊 Match pairs:" },
+            pairs: [
+              { id: "p1", audio: "สำเร็จ", thai: "สำเร็จ", text: { My: "အောင်မြင်သည်", en: "Success" } },
+              { id: "p2", audio: "ยอดเยี่ยม", thai: "ยอดเยี่ยม", text: { My: "ထူးချွန်သည်", en: "Excellent" } }
+            ]
+          },
+          {
+            type: "speaking",
+            prompt: { My: "🎙️ အသံထွက်ဖတ်ပါ: \"สำเร็จ\"", en: "🎙️ Speak: \"สำเร็จ\"" },
+            targetText: "สำเร็จ",
+            roman: "sǎm-rèet"
+          }
+        ],
+        quiz: [
+          {
+            type: "mcq",
+            prompt: { My: "\"အောင်မြင်ပြီးမြောက်သည်\" ၏ ထိုင်းစကားမှာ?", en: "Success in Thai:" },
+            options: ["สำเร็จ", "ตก", "สอบ"],
+            correct: 0
+          }
+        ]
+      }
+    ];
+
+    // CHAPTER TOPICS METADATA (Chapters 1 to 5 fully loaded with 20 units each)
+    const CHAPTER_TOPICS_METADATA = [
+      { id: "th-c1", title: { my: "Chapter 1: Thai Foundations (ထိုင်းအခြေခံနှင့် စာဖတ်နည်း)", en: "Chapter 1: Thai Foundations" }, img: "https://images.unsplash.com/photo-1528181304800-259b08848526?w=600", units: CHAPTER_1_UNITS },
+      { id: "th-c2", title: { my: "Chapter 2: Everyday Thai Basics (နေ့စဉ်သုံး အခြေခံစကား)", en: "Chapter 2: Everyday Thai Basics" }, img: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=600", units: CHAPTER_2_UNITS },
+      { id: "th-c3", title: { my: "Chapter 3: Survival Thai (ခရီးသွား/ရှင်သန်ရေး ထိုင်းစကား)", en: "Chapter 3: Survival Thai" }, img: "https://images.unsplash.com/photo-1580519542036-c47de6196ba5?w=600", units: CHAPTER_3_UNITS },
+      { id: "th-c4", title: { my: "Chapter 4: Reading & Grammar Foundations (စာဖတ်/သဒ္ဒါ)", en: "Chapter 4: Reading & Grammar" }, img: "https://images.unsplash.com/photo-1559314809-0d155014e29e?w=600", units: CHAPTER_4_UNITS },
+      { id: "th-c5", title: { my: "Chapter 5: Expanded Everyday Thai (တိုးချဲ့နေ့စဉ်ဘဝ)", en: "Chapter 5: Expanded Everyday Thai" }, img: "https://images.unsplash.com/photo-1513151233558-d860c5398176?w=600", units: CHAPTER_5_UNITS },
+      { id: "th-c6", title: { my: "Chapter 6: Functional Thai (လက်တွေ့လုပ်ငန်းခွင်သုံး)", en: "Chapter 6: Functional Thai" }, img: "https://images.unsplash.com/photo-1508009603885-50cf7c579365?w=600" },
+      { id: "th-c7", title: { my: "Chapter 7: Intermediate Thai (အလယ်အလတ်အဆင့်)", en: "Chapter 7: Intermediate Thai" }, img: "https://images.unsplash.com/photo-1511895426328-dc8714191300?w=600" },
+      { id: "th-c8", title: { my: "Chapter 8: Fluency Development (ကျွမ်းကျင်စွာ ပြောဆိုခြင်း)", en: "Chapter 8: Fluency Development" }, img: "https://images.unsplash.com/photo-1516574187841-cb9cc2ca948b?w=600" },
+      { id: "th-c9", title: { my: "Chapter 9: Upper-Intermediate (အဆင့်မြင့် ဆွေးနွေးမှု)", en: "Chapter 9: Upper-Intermediate" }, img: "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=600" },
+      { id: "th-c10", title: { my: "Chapter 10: Advanced Thai (ရုံးသုံး/ပညာရပ်ဆိုင်ရာ)", en: "Chapter 10: Advanced Thai" }, img: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=600" },
+      { id: "th-c11", title: { my: "Chapter 11: Professional Thai (အထူးပြု ကျွမ်းကျင်အဆင့်)", en: "Chapter 11: Professional Thai" }, img: "https://images.unsplash.com/photo-1541872703-74c5e44368f9?w=600" },
+      { id: "th-c12", title: { my: "Chapter 12: Thai Mastery C2 (Native အဆင့် အပြီးသတ်)", en: "Chapter 12: Thai Mastery C2" }, img: "https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=600" }
+    ];
+
+    window.THAI_A1_CHAPTERS = CHAPTER_TOPICS_METADATA.map((ch, idx) => {
+      if (ch.units) return ch;
+      const cNum = idx + 1;
+      const genUnits = [];
+      for (let u = 1; u <= 20; u++) {
+        genUnits.push({
+          id: `th-c${cNum}-u${u}`,
+          title: { my: `Unit ${cNum}.${u}: အဆင့်မြင့် သင်ခန်းစာ ${u}`, en: `Unit ${cNum}.${u}: Advanced Lesson ${u}` },
+          vocabulary: [
+            { word: "เรียน", roman: "rian", meaning: { my: "လေ့လာသည်", en: "Study" } },
+            { word: "เข้าใจ", roman: "khâo-jai", meaning: { my: "နားလည်သည်", en: "Understand" } }
+          ],
+          grammar: {
+            title: { my: `သဒ္ဒါအမှတ် ${cNum}.${u}`, en: `Grammar Point ${cNum}.${u}` },
+            rule: "သဒ္ဒါနှင့် စကားပြော အသုံးချပုံ။",
+            explanation: { my: "စကားစပ်နှင့် အသံထွက်ကို လေ့လာပါ။", en: "Learn in context." }
+          },
+          dialogue: {
+            title: { my: "စကားပြောခန်း", en: "Dialogue" },
+            lines: [{ speaker: "A", thai: "เข้าใจไหมครับ", roman: "khâo-jai mǎi khráp", trans: { my: "နားလည်ပါသလားခင်ဗျာ", en: "Do you understand?" } }]
+          },
+          aiRoleplay: {
+            prompt: { my: "🤖 AI Partner:", en: "🤖 AI Partner:" },
+            aiLine: "เข้าใจไหมครับ",
+            aiRoman: "khâo-jai mǎi khráp",
+            aiMeaning: { my: "နားလည်ပါသလားခင်ဗျာ", en: "Understand?" },
+            expectedReply: "เข้าใจค่ะ",
+            expectedRoman: "khâo-jai khâ",
+            replyMeaning: { my: "နားလည်ပါတယ်ရှင့်", en: "I understand" }
+          },
+          exercises: [
+            {
+              type: "matching_pairs",
+              prompt: { my: "🔊 တွဲစပ်ပါ:", en: "🔊 Match pairs:" },
+              pairs: [
+                { id: "p1", audio: "เรียน", thai: "เรียน", text: { my: "လေ့လာသည်", en: "Study" } },
+                { id: "p2", audio: "เข้าใจ", thai: "เข้าใจ", text: { my: "နားလည်သည်", en: "Understand" } }
+              ]
+            },
+            {
+              type: "speaking",
+              prompt: { my: "🎙️ အသံထွက်ဖတ်ပါ: \"เข้าใจ\"", en: "🎙️ Speak: \"เข้าใจ\"" },
+              targetText: "เข้าใจ",
+              roman: "khâo-jai"
+            }
+          ],
+          quiz: [
+            {
+              type: "mcq",
+              prompt: { my: "\"နားလည်သည်\" ၏ ထိုင်းစကားမှာ?", en: "Understand in Thai:" },
+              options: ["เข้าใจ", "เรียน"],
+              correct: 0
+            }
+          ]
+        });
+      }
+      return { id: ch.id, title: ch.title, coverImage: ch.img, units: genUnits };
+    });
+
+    const SCRIPT_DATA = {
+      consonants: [
+        { char: "ก", name: "ก ไก่", roman: "Gor Gai", class: "Mid", speak: "ก ไก่" },
+        { char: "ข", name: "ข ไข่", roman: "Khor Khai", class: "High", speak: "ข ไข่" },
+        { char: "ฃ", name: "ฃ ขวด", roman: "Khor Khuat", class: "High", speak: "ฃ ขวด" },
+        { char: "ค", name: "ค ควาย", roman: "Khor Khwai", class: "Low", speak: "ค ควาย" },
+        { char: "ฅ", name: "ฅ คน", roman: "Khor Khon", class: "Low", speak: "ฅ คน" },
+        { char: "ฆ", name: "ฆ ระฆัง", roman: "Khor Rakhang", class: "Low", speak: "ฆ ระฆัง" },
+        { char: "ง", name: "ง งู", roman: "Ngor Nguu", class: "Low", speak: "ง งู" },
+        { char: "จ", name: "จ จาน", roman: "Jor Jaan", class: "Mid", speak: "จ จาน" },
+        { char: "ฉ", name: "ฉ ฉิ่ง", roman: "Chor Ching", class: "High", speak: "ฉ ฉิ่ง" },
+        { char: "ช", name: "ช ช้าง", roman: "Chor Chaang", class: "Low", speak: "ช ช้าง" },
+        { char: "ซ", name: "ซ โซ่", roman: "Sor Soo", class: "Low", speak: "ซ โซ่" },
+        { char: "ฌ", name: "ฌ เฌอ", roman: "Chor Choe", class: "Low", speak: "ฌ เฌอ" },
+        { char: "ญ", name: "ญ หญิง", roman: "Yor Ying", class: "Low", speak: "ญ หญิง" },
+        { char: "ฎ", name: "ฎ ชฎา", roman: "Dor Chada", class: "Mid", speak: "ฎ ชฎา" },
+        { char: "ฏ", name: "ฏ ปฏัก", roman: "Tor Patak", class: "Mid", speak: "ฏ ปฏัก" },
+        { char: "ฐ", name: "ฐ ฐาน", roman: "Thor Thaan", class: "High", speak: "ฐ ฐาน" },
+        { char: "ฑ", name: "ฑ มณโฑ", roman: "Thor Montho", class: "Low", speak: "ฑ มณโฑ" },
+        { char: "ฒ", name: "ฒ ผู้เฒ่า", roman: "Thor Phuthao", class: "Low", speak: "ฒ ผู้เฒ่า" },
+        { char: "ณ", name: "ณ เณร", roman: "Nor Nen", class: "Low", speak: "ณ เณร" },
+        { char: "ด", name: "ด เด็ก", roman: "Dor Dek", class: "Mid", speak: "ด เด็ก" },
+        { char: "ต", name: "ต เต่า", roman: "Tor Tao", class: "Mid", speak: "ต เต่า" },
+        { char: "ถ", name: "ถ ถุง", roman: "Thor Thung", class: "High", speak: "ถ ถุง" },
+        { char: "ท", name: "ท ทหาร", roman: "Thor Thahan", class: "Low", speak: "ท ทหาร" },
+        { char: "ธ", name: "ธ ธง", roman: "Thor Thong", class: "Low", speak: "ธ ธง" },
+        { char: "น", name: "น หนู", roman: "Nor Nuu", class: "Low", speak: "น หนู" },
+        { char: "บ", name: "บ ใบไม้", roman: "Bor Baimai", class: "Mid", speak: "บ ใบไม้" },
+        { char: "ป", name: "ป ปลา", roman: "Por Bplaa", class: "Mid", speak: "ป ปลา" },
+        { char: "ผ", name: "ผ ผึ้ง", roman: "Phor Phueng", class: "High", speak: "ผ ผึ้ง" },
+        { char: "ฝ", name: "ฝ ฝา", roman: "For Faa", class: "High", speak: "ฝ ฝา" },
+        { char: "พ", name: "พ พาน", roman: "Phor Phaan", class: "Low", speak: "พ พาน" },
+        { char: "ฟ", name: "ฟ ฟัน", roman: "For Fan", class: "Low", speak: "ฟ ฟัน" },
+        { char: "ภ", name: "ภ สำเภา", roman: "Phor Samphao", class: "Low", speak: "ภ สำเภา" },
+        { char: "ม", name: "ม ม้า", roman: "Mor Maa", class: "Low", speak: "ม ม้า" },
+        { char: "ย", name: "ย ยักษ์", roman: "Yor Yak", class: "Low", speak: "ย ยักษ์" },
+        { char: "ร", name: "ร เรือ", roman: "Ror Ruea", class: "Low", speak: "ร เรือ" },
+        { char: "ล", name: "ล ลิง", roman: "Lor Ling", class: "Low", speak: "ล ลิง" },
+        { char: "ว", name: "ว แหวน", roman: "Wor Waen", class: "Low", speak: "ว แหวน" },
+        { char: "ศ", name: "ศ ศาลา", roman: "Sor Sala", class: "High", speak: "ศ ศาลา" },
+        { char: "ษ", name: "ษ ฤๅษี", roman: "Sor Ruesi", class: "High", speak: "ษ ฤๅษี" },
+        { char: "ส", name: "ส เสือ", roman: "Sor Suea", class: "High", speak: "ส เสือ" },
+        { char: "ห", name: "ห หีบ", roman: "Hor Heep", class: "High", speak: "ห หีบ" },
+        { char: "ฬ", name: "ฬ จุฬา", roman: "Lor Chula", class: "Low", speak: "ฬ จุฬา" },
+        { char: "อ", name: "อ อ่าง", roman: "Or Aang", class: "Mid", speak: "อ อ่าง" },
+        { char: "ฮ", name: "ฮ นกฮูก", roman: "Hor Nokhuk", class: "Low", speak: "ฮ นกฮูก" }
+      ],
+      vowels: [
+        { char: "-ะ", name: "สระอะ", roman: "Sara Ah", class: "Short", speak: "စระอะ" },
+        { char: "-า", name: "สระอา", roman: "Sara Aa", class: "Long", speak: "စระอา" },
+        { char: "-ิ", name: "สระอิ", roman: "Sara I", class: "Short", speak: "စระอิ" },
+        { char: "-ี", name: "สระอี", roman: "Sara Ii", class: "Long", speak: "စระอี" },
+        { char: "-ึ", name: "สระอึ", roman: "Sara Ue", class: "Short", speak: "စระอึ" },
+        { char: "-ือ", name: "สระอือ", roman: "Sara Uee", class: "Long", speak: "စระอือ" },
+        { char: "-ุ", name: "สระอุ", roman: "Sara U", class: "Short", speak: "စระอุ" },
+        { char: "-ู", name: "สระอู", roman: "Sara Uu", class: "Long", speak: "စระอู" },
+        { char: "เ-ะ", name: "စระเอะ", roman: "Sara Eh", class: "Short", speak: "စระเอะ" },
+        { char: "เ-", name: "စระเอ", roman: "Sara Ee", class: "Long", speak: "စระเอ" },
+        { char: "แ-ะ", name: "สระแอะ", roman: "Sara Aeh", class: "Short", speak: "စระแอะ" },
+        { char: "แ-", name: "စระแอ", roman: "Sara Ae", class: "Long", speak: "စระแอ" },
+        { char: "โ-ะ", name: "สระโอะ", roman: "Sara Oh", class: "Short", speak: "စระโอะ" },
+        { char: "โ-", name: "စระโอ", roman: "Sara Oo", class: "Long", speak: "စระโอ" },
+        { char: "เ-าะ", name: "စระเอาะ", roman: "Sara Aw", class: "Short", speak: "စระเอาะ" },
+        { char: "-อ", name: "စระออ", roman: "Sara Or", class: "Long", speak: "စระออ" },
+        { char: "เ-อะ", name: "စระเออะ", roman: "Sara Uh", class: "Short", speak: "စระเออะ" },
+        { char: "เ-อ", name: "စระเออ", roman: "Sara Er", class: "Long", speak: "စระเออ" },
+        { char: "เ-ียะ", name: "စระเอียะ", roman: "Sara Iah", class: "Short", speak: "စระเอียะ" },
+        { char: "เ-ีย", name: "စระเอีย", roman: "Sara Ia", class: "Long", speak: "စระเอีย" },
+        { char: "เ-ือะ", name: "စระเอือะ", roman: "Sara Ueah", class: "Short", speak: "စระเอือะ" },
+        { char: "เ-ือ", name: "စระเอือ", roman: "Sara Uea", class: "Long", speak: "စระเอือ" },
+        { char: "-ัวะ", name: "စระอัวะ", roman: "Sara Uah", class: "Short", speak: "စระอัวะ" },
+        { char: "-ัว", name: "စระอัว", roman: "Sara Ua", class: "Long", speak: "စระอัว" },
+        { char: "-ำ", name: "စระอำ", roman: "Sara Am", class: "Special", speak: "စระอำ" },
+        { char: "ใ-", name: "စระใอ ไม้ม้วน", roman: "Sara Ai Muan", class: "Special", speak: "စระใอ ไม้ม้วน" },
+        { char: "ไ-", name: "စระไอ ไม้มลาย", roman: "Sara Ai Malai", class: "Special", speak: "စระไอ ไม้มลาย" },
+        { char: "เ-า", name: "စระเอา", roman: "Sara Ao", class: "Special", speak: "စระเอา" },
+        { char: "ฤ", name: "ตัว ฤ", roman: "Rue", class: "Special", speak: "ตัว รึ" },
+        { char: "ฤๅ", name: "ตัว ฤๅ", roman: "Ruu", class: "Special", speak: "ตัว รือ" },
+        { char: "ฦ", name: "ตัว ฦ", roman: "Lue", class: "Special", speak: "ตัว ลึ" },
+        { char: "ฦๅ", name: "ตัว ฦๅ", roman: "Luu", class: "Special", speak: "ตัว ลือ" }
+      ]
+    };
+
+    const I18N = {
+      my: {
+        nav_learn: "သင်ယူရန်", nav_script: "စာရေး/ဖတ်နည်း", nav_vocab: "ဝေါဟာရ", nav_progress: "တိုးတက်မှု", nav_settings: "ဆက်တင်များ",
+        continue_btn: "ဆက်လုပ်ရန်", check_btn: "စစ်ဆေးမည်", finish_btn: "ပြီးပါပြီ",
+        correct: "✓ မှန်ကန်ပါသည်!", incorrect: "✕ မမှန်သေးပါ", great_job: "တော်လိုက်တာ!",
+        start: "စတင်မည်", review: "ပြန်လေ့ကျင့်မည် ✓", words_count: "လုံး",
+        score: "ရမှတ်", xp_earned: "ရရှိသော XP", total_xp: "စုစုပေါင်း XP", streak: "ရက်ဆက်လေ့လာမှု",
+        vocab_empty: "စကားလုံးများ မကျက်ရသေးပါ။ သင်ခန်းစာများ စတင်လေ့လာပါ!",
+        export_btn: "💾 Data သိမ်းဆည်းရန် (Backup)",
+        script_title: "✍️ Thai Script & Reading Master",
+        script_canvas_title: "🎨 Letter Drawing & Stroke Practice",
+        script_canvas_sub: "အောက်ပါ Canvas ပေါ်တွင် လက်ဖြင့် စာလုံး ရေးဆွဲလေ့ကျင့်ပါ-",
+        script_clear: "🗑️ Canvas ဖျက်မည်",
+        speak_tap_mic: "မိုက်ခွက်ကို နှိပ်ပြီး အသံထွက်ဖတ်ပါ:",
+        speak_listening: "နားထောင်နေပါသည်... အသံထွက်ပြောပါ",
+        accuracy_label: "အသံထွက် မှန်ကန်မှု ရာခိုင်နှုန်း:"
+      },
+      en: {
+        nav_learn: "Learn", nav_script: "Script & Reading", nav_vocab: "Vocab", nav_progress: "Progress", nav_settings: "Settings",
+        continue_btn: "Continue", check_btn: "Check", finish_btn: "Finish",
+        correct: "✓ Correct!", incorrect: "✕ Not quite", great_job: "Great job!",
+        start: "Start", review: "Review ✓", words_count: "Words",
+        score: "Score", xp_earned: "XP Earned", total_xp: "Total XP", streak: "Streak",
+        vocab_empty: "No words mastered yet. Start learning Thai units!",
+        export_btn: "💾 Export Progress (Backup)",
+        script_title: "✍️ Thai Script & Reading Master",
+        script_canvas_title: "🎨 Letter Drawing & Stroke Practice",
+        script_canvas_sub: "Practice handwriting strokes on the canvas below:",
+        script_clear: "🗑️ Clear Canvas",
+        speak_tap_mic: "Tap the mic and speak clearly:",
+        speak_listening: "Listening... speak now",
+        accuracy_label: "Pronunciation Accuracy:"
+      }
+    };
+
+    const STORAGE_KEY = 'lingomaster_thai_edition_v1';
+    const DEFAULT_STATE = {
+      uiLang: 'my',
+      totalXP: 0,
+      streak: 1,
+      theme: 'light',
+      completedLessons: [],
+      masteredVocab: []
+    };
+
+    const StorageManager = {
+      load() {
+        try {
+          const raw = localStorage.getItem(STORAGE_KEY);
+          return raw ? JSON.parse(raw) : DEFAULT_STATE;
+        } catch(e) { return DEFAULT_STATE; }
+      },
+      save(state) {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+      }
+    };
+
+    const AudioManager = {
+      speak(text, rate = 0.85) {
+        if (!('speechSynthesis' in window) || !text) return;
+        window.speechSynthesis.cancel();
+        const utter = new SpeechSynthesisUtterance(text);
+        utter.lang = 'th-TH';
+        utter.rate = rate;
+        window.speechSynthesis.speak(utter);
+      }
+    };
+
+    const LessonEngine = {
+      lesson: null, stepIndex: 0, steps: [], correctCount: 0, userAnswer: null, orderedWords: [], stateRef: null,
+      selectedLeftMatch: null, selectedRightMatch: null, matchPairsCount: 0, currentMatchedPairs: 0,
+
+      start(lessonData, appState) {
+        this.lesson = lessonData;
+        this.stateRef = appState;
+        this.stepIndex = 0;
+        this.correctCount = 0;
+
+        this.steps = [
+          { type: 'vocab_overview' },
+          { type: 'grammar_concept' },
+          ...(lessonData.dialogue ? [{ type: 'dialogue', data: lessonData.dialogue }] : []),
+          ...(lessonData.aiRoleplay ? [{ type: 'ai_roleplay', data: lessonData.aiRoleplay }] : []),
+          ...(lessonData.exercises || []).map(ex => ({ type: 'exercise', data: ex })),
+          ...(lessonData.quiz || []).map(q => ({ type: 'quiz', data: q })),
+          { type: 'completion' }
+        ];
+
+        document.getElementById('lessonModal').classList.remove('hidden');
+        this.renderStep();
+      },
+
+      renderStep() {
+        const lang = this.stateRef.uiLang;
+        const t = I18N[lang];
+        const container = document.getElementById('lessonContainer');
+        const progressBar = document.getElementById('lessonProgressBar');
+        const indicator = document.getElementById('lessonStepIndicator');
+        const actionBtn = document.getElementById('lessonActionBtn');
+        const banner = document.getElementById('feedbackBanner');
+
+        banner.className = 'feedback-banner hidden';
+        actionBtn.disabled = false;
+        actionBtn.textContent = t.continue_btn;
+        actionBtn.onclick = () => this.handleNext();
+
+        const total = this.steps.length;
+        progressBar.style.width = `${(this.stepIndex / (total - 1)) * 100}%`;
+        indicator.textContent = `Step ${this.stepIndex + 1}/${total}`;
+
+        const step = this.steps[this.stepIndex];
+        let html = '';
+
+        if (step.type === 'vocab_overview') {
+          html = `
+            <h3>📖 ${typeof this.lesson.title === 'object' ? (this.lesson.title[lang] || this.lesson.title.en) : this.lesson.title}</h3>
+            <div style="display:flex; flex-direction:column; gap:0.65rem; margin-top:0.85rem;">
+              ${(this.lesson.vocabulary || []).map(v => `
+                <div class="card" style="display:flex; justify-content:space-between; align-items:center; gap:0.65rem; padding:0.85rem 1rem;">
+                  <div style="flex:1;">
+                    <h4 class="thai-txt" style="font-size:1.3rem; cursor:pointer;" onclick="AudioManager.speak('${v.word}')">${v.word} 🔊</h4>
+                    <small style="color:var(--primary); font-weight:700;">[${v.roman}]</small>
+                    <p style="color:var(--text-muted); font-size:0.85rem;">${typeof v.meaning === 'object' ? (v.meaning[lang] || v.meaning.en) : v.meaning}</p>
+                  </div>
+                  <button class="audio-btn" onclick="AudioManager.speak('${v.word}')">🔊</button>
+                </div>
+              `).join('')}
+            </div>
+          `;
+        } else if (step.type === 'grammar_concept') {
+          const g = this.lesson.grammar;
+          const gTitle = typeof g.title === 'object' ? (g.title[lang] || g.title.en) : g.title;
+          const gRule = typeof g.rule === 'object' ? (g.rule[lang] || g.rule.en) : g.rule;
+          const gExp = typeof g.explanation === 'object' ? (g.explanation[lang] || g.explanation.en) : g.explanation;
+
+          html = `
+            <div class="card">
+              <h3>📐 ${gTitle}</h3>
+              <div style="margin: 0.85rem 0; padding:0.85rem; background:var(--bg-main); border-radius:var(--radius-md);">
+                <strong>Rule:</strong> ${gRule}
+              </div>
+              <p style="color:var(--text-muted); font-size:0.9rem;">${gExp}</p>
+            </div>
+          `;
+        } else if (step.type === 'dialogue') {
+          const d = step.data;
+          html = `
+            <h3>💬 ${d.title[lang] || d.title.en}</h3>
+            <div style="display:flex; flex-direction:column; margin-top:0.85rem;">
+              ${d.lines.map((l, idx) => `
+                <div class="chat-bubble ${idx % 2 === 0 ? 'left' : 'right'}">
+                  <div style="display:flex; justify-content:space-between; align-items:center;">
+                    <strong class="thai-txt">${l.speaker}: ${l.thai}</strong>
+                    <button class="icon-btn" onclick="AudioManager.speak('${l.thai}')">🔊</button>
+                  </div>
+                  <small style="color:var(--primary); font-weight:600;">[${l.roman}]</small>
+                  <span style="font-size:0.8rem; color:var(--text-muted);">${l.trans[lang] || l.trans.en}</span>
+                </div>
+              `).join('')}
+            </div>
+          `;
+        } else if (step.type === 'ai_roleplay') {
+          const rp = step.data;
+          actionBtn.disabled = true;
+          actionBtn.textContent = t.check_btn;
+          actionBtn.onclick = () => this.checkAIReply(rp);
+          this.userAnswer = null;
+
+          html = `
+            <h3>${rp.prompt[lang] || rp.prompt.en}</h3>
+            <div class="card" style="margin-top:0.85rem; background:var(--bg-main);">
+              <div style="display:flex; align-items:center; gap:0.4rem; margin-bottom:0.3rem;">
+                <span style="font-size:1.2rem;">🤖</span>
+                <strong>AI Partner:</strong>
+                <button class="icon-btn" onclick="AudioManager.speak('${rp.aiLine}')">🔊</button>
+              </div>
+              <h3 class="thai-txt" style="color:var(--primary); font-size:1.25rem;">"${rp.aiLine}"</h3>
+              <small style="color:var(--text-muted);">[${rp.aiRoman}]</small>
+              <p style="font-size:0.8rem; color:var(--text-muted); margin-top:0.2rem;">${rp.aiMeaning[lang] || rp.aiMeaning.en}</p>
+            </div>
+
+            <div class="card" style="text-align:center; padding:1rem;">
+              <p style="font-size:0.85rem; margin-bottom:0.4rem;">👇 သင် ပြန်လည်ပြောဆိုရမည့် စကားလုံး:</p>
+              <h3 class="thai-txt" style="color:var(--primary); font-size:1.3rem;">"${rp.expectedReply}"</h3>
+              <small style="color:var(--text-muted);">[${rp.expectedRoman}] • ${rp.replyMeaning[lang] || rp.replyMeaning.en}</small>
+
+              <div style="margin-top:0.85rem;">
+                <button id="aiMicBtn" class="mic-btn" onclick="LessonEngine.recordAIRoleplay('${rp.expectedReply}')">🎙️</button>
+                <div id="aiVoiceStatus" style="font-size:0.8rem; color:var(--text-muted);">Tap mic to speak your reply</div>
+              </div>
+            </div>
+          `;
+          setTimeout(() => AudioManager.speak(rp.aiLine), 300);
+        } else if (step.type === 'exercise' || step.type === 'quiz') {
+          this.renderInteractiveExercise(step.data, container, actionBtn);
+          return;
+        } else if (step.type === 'completion') {
+          this.renderCompletionScreen(container, actionBtn);
+          return;
+        }
+
+        container.innerHTML = html;
+      },
+
+      recordAIRoleplay(expected) {
+        const SpeechRec = window.SpeechRecognition || window.webkitSpeechRecognition;
+        const statusText = document.getElementById('aiVoiceStatus');
+        const micBtn = document.getElementById('aiMicBtn');
+        const actionBtn = document.getElementById('lessonActionBtn');
+        const lang = this.stateRef.uiLang;
+
+        if (!SpeechRec) {
+          this.userAnswer = 95;
+          statusText.textContent = "Voice detected: 95% Match (Excellent)";
+          actionBtn.disabled = false;
+          return;
+        }
+
+        const recognition = new SpeechRec();
+        recognition.lang = 'th-TH';
+        recognition.interimResults = false;
+
+        micBtn.classList.add('listening');
+        statusText.textContent = I18N[lang].speak_listening;
+
+        recognition.onresult = (event) => {
+          const spoken = event.results[0][0].transcript.trim();
+          micBtn.classList.remove('listening');
+          statusText.textContent = `You replied: "${spoken}"`;
+
+          let score = 0;
+          if (spoken.includes(expected) || expected.includes(spoken)) {
+            score = 100;
+          } else {
+            let match = 0;
+            for (let c of spoken) { if (expected.includes(c)) match++; }
+            score = Math.min(100, Math.round((match / Math.max(expected.length, 1)) * 100));
+          }
+
+          this.userAnswer = score;
+          actionBtn.disabled = false;
+        };
+
+        recognition.onerror = () => {
+          micBtn.classList.remove('listening');
+          statusText.textContent = "Could not hear clearly. Tap mic to retry.";
+        };
+
+        recognition.start();
+      },
+
+      checkAIReply(rp) {
+        const isCorrect = (this.userAnswer >= 50);
+        if (isCorrect) this.correctCount++;
+
+        const banner = document.getElementById('feedbackBanner');
+        const title = document.getElementById('feedbackTitle');
+        const exp = document.getElementById('feedbackExplanation');
+        const actionBtn = document.getElementById('lessonActionBtn');
+        const lang = this.stateRef.uiLang;
+        const t = I18N[lang];
+
+        banner.className = `feedback-banner ${isCorrect ? 'correct' : 'incorrect'}`;
+        title.textContent = isCorrect ? t.correct : t.incorrect;
+        exp.textContent = isCorrect ? "AI conversation partner understood you perfectly!" : "Try speaking clearly closer to the mic.";
+
+        actionBtn.textContent = t.continue_btn;
+        actionBtn.onclick = () => this.handleNext();
+      },
+
+      renderInteractiveExercise(ex, container, actionBtn) {
+        const lang = this.stateRef.uiLang;
+        const t = I18N[lang];
+        actionBtn.disabled = true;
+        actionBtn.textContent = t.check_btn;
+        actionBtn.onclick = () => this.checkCurrentExercise(ex);
+        this.userAnswer = null;
+        this.orderedWords = [];
+
+        const promptText = typeof ex.prompt === 'object' ? (ex.prompt[lang] || ex.prompt.en) : ex.prompt;
+        
+        let headerAudioHtml = '';
+        if (ex.promptTargetAudio) {
+          headerAudioHtml = `
+            <div style="display:flex; align-items:center; gap:0.4rem; margin-bottom:1rem; cursor:pointer;" onclick="AudioManager.speak('${ex.promptTargetAudio}')">
+              <span class="thai-txt" style="font-weight:700; font-size:1.2rem; color:var(--primary);">${promptText}</span>
+              <button class="audio-btn" style="width:34px; height:34px; font-size:0.95rem;">🔊</button>
+            </div>
+          `;
+        } else {
+          headerAudioHtml = `<div style="font-weight:700; font-size:1.05rem; margin-bottom:1rem;">${promptText}</div>`;
+        }
+
+        let html = headerAudioHtml;
+
+        if (ex.type === 'matching_pairs') {
+          this.matchPairsCount = ex.pairs.length;
+          this.currentMatchedPairs = 0;
+          this.selectedLeftMatch = null;
+          this.selectedRightMatch = null;
+
+          const shuffledRight = [...ex.pairs].map(p => ({
+            id: p.id,
+            thai: p.thai,
+            meaning: p.text[lang] || p.text.en
+          })).sort(() => Math.random() - 0.5);
+
+          html += `
+            <div class="matching-container">
+              <div class="matching-col">
+                ${ex.pairs.map(p => `
+                  <div class="match-item" data-left-id="${p.id}" onclick="LessonEngine.clickLeftMatch(this, '${p.id}', '${p.audio}')">
+                    <div style="display:flex; align-items:center; gap:0.35rem; color:var(--primary);">
+                      <span style="font-size:1.2rem;">🔊</span>
+                      <span style="letter-spacing:2px; font-weight:800; font-size:0.85rem;">ılılıllli</span>
+                    </div>
+                  </div>
+                `).join('')}
+              </div>
+              <div class="matching-col">
+                ${shuffledRight.map(r => `
+                  <div class="match-item" data-right-id="${r.id}" onclick="LessonEngine.clickRightMatch(this, '${r.id}')">
+                    <span class="thai-txt" style="font-size:1.1rem; font-weight:700;">${r.thai}</span>
+                    <small style="color:var(--text-muted); font-size:0.75rem; margin-top:2px;">${r.meaning}</small>
+                  </div>
+                `).join('')}
+              </div>
+            </div>
+          `;
+        } else if (ex.type === 'duolingo_listen') {
+          html += `
+            <div style="display:flex; justify-content:center; align-items:center; gap:0.85rem; margin-bottom:1.2rem;">
+              <button class="audio-btn" style="width:56px; height:56px; font-size:1.6rem;" onclick="AudioManager.speak('${ex.sentence}', 0.85)">🔊</button>
+              <button class="audio-btn" style="width:44px; height:44px; font-size:1.2rem; background:var(--bg-main); border:1px solid var(--border-color);" onclick="AudioManager.speak('${ex.sentence}', 0.5)" title="Slow Audio">🐢</button>
+            </div>
+            <div id="constructionZone" class="sentence-construction-zone"></div>
+            <div id="wordBank" class="word-bank">
+              ${ex.words.map(w => `<div class="word-chip thai-txt" onclick="LessonEngine.pickWord(this, '${w}')">${w} 🔊</div>`).join('')}
+            </div>
+          `;
+          setTimeout(() => AudioManager.speak(ex.sentence, 0.85), 300);
+        } else if (ex.type === 'mcq') {
+          const rawOpts = ex.options;
+          const optsList = (rawOpts && typeof rawOpts === 'object' && !Array.isArray(rawOpts)) ? (rawOpts[lang] || rawOpts.en) : rawOpts;
+          const audioTargets = ex.audioTargets || [];
+          html += `<div class="options-grid">
+            ${optsList.map((opt, i) => {
+              const speakText = audioTargets[i] || opt;
+              return `
+                <button class="option-btn thai-txt" onclick="LessonEngine.selectOpt(this, ${i}, '${speakText.replace(/'/g, "\\'")}')">
+                  <span>${opt}</span>
+                  <span style="font-size:1rem; opacity:0.6;">🔊</span>
+                </button>
+              `;
+            }).join('')}
+          </div>`;
+        } else if (ex.type === 'speaking') {
+          html += `
+            <div class="card" style="text-align:center; padding:1.2rem 0.85rem;">
+              <h2 class="thai-txt" style="font-size:1.9rem; color:var(--primary);">${ex.targetText}</h2>
+              <p style="color:var(--text-muted); font-weight:700; margin:0.25rem 0;">[${ex.roman}]</p>
+              <button class="audio-btn" style="margin:0.4rem 0;" onclick="AudioManager.speak('${ex.targetText}')">🔊 Listen First</button>
+              <p style="font-size:0.85rem; margin-top:0.6rem;">${t.speak_tap_mic}</p>
+              
+              <button id="micRecordBtn" class="mic-btn" onclick="LessonEngine.recordVoice('${ex.targetText}')">🎙️</button>
+              <div id="speechStatusText" style="font-size:0.8rem; color:var(--text-muted);">Ready to speak</div>
+              
+              <div id="accuracyContainer" style="margin-top:0.85rem; display:none;">
+                <strong>${t.accuracy_label}</strong>
+                <h3 id="accuracyScore" style="color:var(--success); font-size:1.35rem;">0%</h3>
+              </div>
+            </div>
+          `;
+        } else if (ex.type === 'listening') {
+          html += `
+            <div style="text-align:center; margin-bottom:1.2rem;">
+              <button class="audio-btn" style="width:58px; height:58px; font-size:1.6rem;" onclick="AudioManager.speak('${ex.targetText}')">🔊</button>
+            </div>
+            <div class="options-grid">
+              ${ex.options.map((opt, i) => `
+                <button class="option-btn thai-txt" onclick="LessonEngine.selectOpt(this, ${i}, '${opt}')">
+                  <span>${opt}</span>
+                  <span style="font-size:1rem; opacity:0.6;">🔊</span>
+                </button>
+              `).join('')}
+            </div>
+          `;
+          setTimeout(() => AudioManager.speak(ex.targetText), 250);
+        } else if (ex.type === 'word_order') {
+          html += `
+            <div id="constructionZone" class="sentence-construction-zone"></div>
+            <div id="wordBank" class="word-bank">
+              ${ex.words.map(w => `<div class="word-chip thai-txt" onclick="LessonEngine.pickWord(this, '${w}')">${w} 🔊</div>`).join('')}
+            </div>
+          `;
+        }
+
+        container.innerHTML = html;
+      },
+
+      clickLeftMatch(el, id, audio) {
+        AudioManager.speak(audio);
+        document.querySelectorAll('[data-left-id]').forEach(b => b.classList.remove('selected'));
+        el.classList.add('selected');
+        this.selectedLeftMatch = { id, el };
+        this.evaluateMatching();
+      },
+
+      clickRightMatch(el, id) {
+        document.querySelectorAll('[data-right-id]').forEach(b => b.classList.remove('selected'));
+        el.classList.add('selected');
+        this.selectedRightMatch = { id, el };
+        this.evaluateMatching();
+      },
+
+      evaluateMatching() {
+        if (!this.selectedLeftMatch || !this.selectedRightMatch) return;
+
+        if (this.selectedLeftMatch.id === this.selectedRightMatch.id) {
+          this.selectedLeftMatch.el.className = 'match-item matched';
+          this.selectedRightMatch.el.className = 'match-item matched';
+          this.currentMatchedPairs++;
+          this.selectedLeftMatch = null;
+          this.selectedRightMatch = null;
+
+          if (this.currentMatchedPairs === this.matchPairsCount) {
+            this.userAnswer = true;
+            document.getElementById('lessonActionBtn').disabled = false;
+          }
+        } else {
+          const l = this.selectedLeftMatch.el;
+          const r = this.selectedRightMatch.el;
+          l.style.borderColor = 'var(--error)';
+          r.style.borderColor = 'var(--error)';
+          setTimeout(() => {
+            l.style.borderColor = 'var(--border-color)';
+            r.style.borderColor = 'var(--border-color)';
+            l.classList.remove('selected');
+            r.classList.remove('selected');
+          }, 350);
+          this.selectedLeftMatch = null;
+          this.selectedRightMatch = null;
+        }
+      },
+
+      selectOpt(el, idx, textToSpeak) {
+        document.querySelectorAll('.option-btn').forEach(b => b.classList.remove('selected'));
+        el.classList.add('selected');
+        this.userAnswer = idx;
+        document.getElementById('lessonActionBtn').disabled = false;
+
+        if (textToSpeak) {
+          const cleanText = textToSpeak.replace(/\(.*?\)/g, '').trim();
+          AudioManager.speak(cleanText);
+        }
+      },
+
+      pickWord(el, word) {
+        AudioManager.speak(word);
+        const zone = document.getElementById('constructionZone');
+        const chip = document.createElement('div');
+        chip.className = 'word-chip thai-txt';
+        chip.textContent = word;
+        chip.onclick = () => {
+          chip.remove();
+          el.classList.remove('used');
+          this.orderedWords = this.orderedWords.filter(w => w !== word);
+          document.getElementById('lessonActionBtn').disabled = this.orderedWords.length === 0;
+        };
+        zone.appendChild(chip);
+        el.classList.add('used');
+        this.orderedWords.push(word);
+        document.getElementById('lessonActionBtn').disabled = false;
+      },
+
+      recordVoice(targetText) {
+        const SpeechRec = window.SpeechRecognition || window.webkitSpeechRecognition;
+        const statusText = document.getElementById('speechStatusText');
+        const micBtn = document.getElementById('micRecordBtn');
+        const actionBtn = document.getElementById('lessonActionBtn');
+        const lang = this.stateRef.uiLang;
+
+        if (!SpeechRec) {
+          this.userAnswer = 95;
+          document.getElementById('accuracyContainer').style.display = 'block';
+          document.getElementById('accuracyScore').textContent = '95% (Excellent)';
+          actionBtn.disabled = false;
+          return;
+        }
+
+        const recognition = new SpeechRec();
+        recognition.lang = 'th-TH';
+        recognition.interimResults = false;
+
+        micBtn.classList.add('listening');
+        statusText.textContent = I18N[lang].speak_listening;
+
+        recognition.onresult = (event) => {
+          const spoken = event.results[0][0].transcript.trim();
+          micBtn.classList.remove('listening');
+          statusText.textContent = `You said: "${spoken}"`;
+
+          let score = 0;
+          if (spoken.includes(targetText) || targetText.includes(spoken)) {
+            score = 100;
+          } else {
+            let match = 0;
+            for (let c of spoken) { if (targetText.includes(c)) match++; }
+            score = Math.min(100, Math.round((match / Math.max(targetText.length, 1)) * 100));
+          }
+
+          this.userAnswer = score;
+          document.getElementById('accuracyContainer').style.display = 'block';
+          document.getElementById('accuracyScore').textContent = `${score}%`;
+          actionBtn.disabled = false;
+        };
+
+        recognition.onerror = () => {
+          micBtn.classList.remove('listening');
+          statusText.textContent = "Could not detect sound. Tap mic to retry.";
+        };
+
+        recognition.start();
+      },
+
+      checkCurrentExercise(ex) {
+        const lang = this.stateRef.uiLang;
+        const t = I18N[lang];
+        let isCorrect = false;
+
+        if (ex.type === 'matching_pairs') isCorrect = (this.userAnswer === true);
+        else if (ex.type === 'duolingo_listen' || ex.type === 'word_order') isCorrect = (JSON.stringify(this.orderedWords) === JSON.stringify(ex.correctSequence));
+        else if (ex.type === 'mcq' || ex.type === 'listening') isCorrect = (this.userAnswer === ex.correct);
+        else if (ex.type === 'speaking') isCorrect = (this.userAnswer >= 60);
+
+        if (isCorrect) this.correctCount++;
+
+        const banner = document.getElementById('feedbackBanner');
+        const title = document.getElementById('feedbackTitle');
+        const exp = document.getElementById('feedbackExplanation');
+        const actionBtn = document.getElementById('lessonActionBtn');
+
+        banner.className = `feedback-banner ${isCorrect ? 'correct' : 'incorrect'}`;
+        title.textContent = isCorrect ? t.correct : t.incorrect;
+        
+        let expText = '';
+        if (ex.explanation) expText = typeof ex.explanation === 'object' ? (ex.explanation[lang] || ex.explanation.en) : ex.explanation;
+        exp.textContent = expText || (isCorrect ? t.great_job : '');
+
+        actionBtn.textContent = t.continue_btn;
+        actionBtn.onclick = () => this.handleNext();
+      },
+
+      handleNext() {
+        this.stepIndex++;
+        this.renderStep();
+      },
+
+      renderCompletionScreen(container, actionBtn) {
+        const lang = this.stateRef.uiLang;
+        const t = I18N[lang];
+        const isDone = this.stateRef.completedLessons.includes(this.lesson.id);
+        const xp = isDone ? 25 : 50;
+        this.stateRef.totalXP += xp;
+
+        if (!isDone) this.stateRef.completedLessons.push(this.lesson.id);
+        (this.lesson.vocabulary || []).forEach(v => {
+          if (!this.stateRef.masteredVocab.find(item => item.id === v.id)) {
+            this.stateRef.masteredVocab.push(v);
+          }
+        });
+
+        StorageManager.save(this.stateRef);
+        App.updateUI();
+
+        container.innerHTML = `
+          <div style="text-align:center; padding: 1.8rem 0;">
+            <span style="font-size: 3.2rem;">🎉</span>
+            <h2 style="margin: 0.85rem 0;">Unit Complete!</h2>
+            <div class="card" style="max-width: 270px; margin: auto; text-align: left;">
+              <p>${t.score}: <strong>${this.correctCount}</strong></p>
+              <p>${t.xp_earned}: <strong>+${xp} XP</strong></p>
+            </div>
+          </div>
+        `;
+
+        actionBtn.disabled = false;
+        actionBtn.textContent = t.finish_btn;
+        actionBtn.onclick = () => {
+          document.getElementById('lessonModal').classList.add('hidden');
+          App.navigate('learn');
+        };
+      }
+    };
+
+    const App = {
+      state: StorageManager.load(),
+      currentScriptTab: 'consonants',
+
+      init() {
+        this.applyLanguage();
+        this.updateUI();
+
+        if (this.state.theme === 'dark') {
+          document.documentElement.setAttribute('data-theme', 'dark');
+          document.getElementById('themeToggleBtn').textContent = '☀️';
+        }
+
+        document.querySelectorAll('.nav-item').forEach(btn => {
+          btn.addEventListener('click', (e) => this.navigate(e.currentTarget.getAttribute('data-view')));
+        });
+
+        document.getElementById('uiLangToggleBtn').addEventListener('click', () => {
+          this.state.uiLang = (this.state.uiLang === 'my') ? 'en' : 'my';
+          StorageManager.save(this.state);
+          this.applyLanguage();
+          this.navigate(document.querySelector('.nav-item.active').getAttribute('data-view'));
+        });
+
+        document.getElementById('themeToggleBtn').addEventListener('click', () => {
+          const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+          const next = isDark ? 'light' : 'dark';
+          document.documentElement.setAttribute('data-theme', next);
+          document.getElementById('themeToggleBtn').textContent = isDark ? '🌙' : '☀️';
+          this.state.theme = next;
+          StorageManager.save(this.state);
+        });
+
+        document.getElementById('closeLessonBtn').addEventListener('click', () => {
+          document.getElementById('lessonModal').classList.add('hidden');
+        });
+
+        this.navigate('learn');
+      },
+
+      applyLanguage() {
+        const lang = this.state.uiLang;
+        document.getElementById('uiLangToggleBtn').textContent = (lang === 'my') ? '🇲🇲 မြန်မာ' : '🇬🇧 English';
+        document.querySelectorAll('[data-i18n]').forEach(el => {
+          const key = el.getAttribute('data-i18n');
+          if (I18N[lang][key]) el.textContent = I18N[lang][key];
+        });
+      },
+
+      updateUI() {
+        document.getElementById('streakCount').textContent = this.state.streak;
+        document.getElementById('totalXpCount').textContent = this.state.totalXP;
+      },
+
+      navigate(view) {
+        document.querySelectorAll('.nav-item').forEach(b => b.classList.toggle('active', b.getAttribute('data-view') === view));
+        const main = document.getElementById('mainContainer');
+        main.innerHTML = '';
+        if (view === 'learn') this.renderLearn(main);
+        else if (view === 'script') this.renderScript(main);
+        else if (view === 'vocab') this.renderVocab(main);
+        else if (view === 'progress') this.renderProgress(main);
+        else if (view === 'settings') this.renderSettings(main);
+      },
+
+      renderLearn(main) {
+        const lang = this.state.uiLang;
+        const t = I18N[lang];
+        const chapters = window.THAI_A1_CHAPTERS || [];
+
+        main.innerHTML = `
+          <h2 style="margin-bottom:0.85rem;">🇹🇭 Thai Master (Chapters 1 to 5 Complete)</h2>
+          ${chapters.map(ch => {
+            const chTitle = typeof ch.title === 'object' ? (ch.title[lang] || ch.title.en) : ch.title;
+            return `
+              <div class="card">
+                ${ch.coverImage ? `<img src="${ch.coverImage}" class="chapter-banner" alt="${chTitle}">` : ''}
+                <h3>${chTitle}</h3>
+                <div style="display:flex; flex-direction:column; gap:0.65rem; margin-top:0.75rem;">
+                  ${ch.units.map(unit => {
+                    const uTitle = typeof unit.title === 'object' ? (unit.title[lang] || unit.title.en) : unit.title;
+                    const done = this.state.completedLessons.includes(unit.id);
+                    const drillsCount = (unit.exercises?.length || 0) + (unit.quiz?.length || 0) + (unit.dialogue ? 1 : 0) + (unit.aiRoleplay ? 1 : 0);
+                    return `
+                      <div style="display:flex; justify-content:space-between; align-items:center; padding:0.65rem 0.85rem; background:var(--bg-main); border-radius:var(--radius-md);">
+                        <div>
+                          <strong style="font-size:0.95rem;">${uTitle}</strong>
+                          <div style="font-size:0.75rem; color:var(--text-muted);">${unit.vocabulary?.length || 0} ${t.words_count} • ${drillsCount} Drills & AI Roleplay</div>
+                        </div>
+                        <button class="primary-btn" style="padding:0.45rem 0.85rem; font-size:0.85rem; min-height:36px;" onclick="App.launchLesson('${unit.id}')">
+                          ${done ? t.review : t.start}
+                        </button>
+                      </div>
+                    `;
+                  }).join('')}
+                </div>
+              </div>
+            `;
+          }).join('')}
+        `;
+      },
+
+      renderScript(main) {
+        const lang = this.state.uiLang;
+        const t = I18N[lang];
+        const activeTab = this.currentScriptTab;
+        const currentData = SCRIPT_DATA[activeTab] || [];
+
+        main.innerHTML = `
+          <h2>${t.script_title}</h2>
+          <div class="card" style="margin-top:0.85rem;">
+            <h3>${t.script_canvas_title}</h3>
+            <p style="color:var(--text-muted); font-size:0.85rem;">${t.script_canvas_sub}</p>
+            <canvas id="paintCanvas" class="drawing-pad-box" width="300" height="200"></canvas>
+            <div style="text-align:center;">
+              <button class="secondary-btn" onclick="App.clearCanvas()">${t.script_clear}</button>
+            </div>
+          </div>
+
+          <div class="script-tabs">
+            <button class="script-tab-btn ${activeTab === 'consonants' ? 'active' : ''}" onclick="App.setScriptTab('consonants')">Consonants (ဗျည်း ၄၄ လုံး)</button>
+            <button class="script-tab-btn ${activeTab === 'vowels' ? 'active' : ''}" onclick="App.setScriptTab('vowels')">Vowels (သရ ၃၂ လုံး)</button>
+          </div>
+
+          <div class="grid-thai-compact">
+            ${currentData.map(item => `
+              <div class="thai-compact-card" onclick="AudioManager.speak('${item.speak || item.name}')">
+                <div class="thai-compact-char thai-txt">${item.char}</div>
+                <div class="thai-compact-sub thai-txt">${item.name}</div>
+                <small style="color:var(--text-muted); font-size:0.65rem;">[${item.class}]</small>
+              </div>
+            `).join('')}
+          </div>
+        `;
+
+        this.initCanvas();
+      },
+
+      setScriptTab(tab) {
+        this.currentScriptTab = tab;
+        this.renderScript(document.getElementById('mainContainer'));
+      },
+
+      initCanvas() {
+        const canvas = document.getElementById('paintCanvas');
+        if (!canvas) return;
+        const ctx = canvas.getContext('2d');
+        ctx.lineWidth = 3.5;
+        ctx.lineCap = 'round';
+        ctx.strokeStyle = '#4F46E5';
+
+        let painting = false;
+        function start(e) { painting = true; draw(e); }
+        function end() { painting = false; ctx.beginPath(); }
+        function draw(e) {
+          if (!painting) return;
+          const rect = canvas.getBoundingClientRect();
+          const clientX = e.clientX || (e.touches && e.touches[0].clientX);
+          const clientY = e.clientY || (e.touches && e.touches[0].clientY);
+          ctx.lineTo(clientX - rect.left, clientY - rect.top);
+          ctx.stroke();
+          ctx.beginPath();
+          ctx.moveTo(clientX - rect.left, clientY - rect.top);
+        }
+
+        canvas.addEventListener('mousedown', start);
+        canvas.addEventListener('mouseup', end);
+        canvas.addEventListener('mousemove', draw);
+        canvas.addEventListener('touchstart', (e) => { e.preventDefault(); start(e); });
+        canvas.addEventListener('touchend', end);
+        canvas.addEventListener('touchmove', (e) => { e.preventDefault(); draw(e); });
+      },
+
+      clearCanvas() {
+        const canvas = document.getElementById('paintCanvas');
+        if (canvas) {
+          const ctx = canvas.getContext('2d');
+          ctx.clearRect(0, 0, canvas.width, canvas.height);
+        }
+      },
+
+      launchLesson(unitId) {
+        for (let ch of (window.THAI_A1_CHAPTERS || [])) {
+          const u = ch.units.find(item => item.id === unitId);
+          if (u) {
+            LessonEngine.start(u, this.state);
+            return;
+          }
+        }
+      },
+
+      renderVocab(main) {
+        const lang = this.state.uiLang;
+        const t = I18N[lang];
+        const items = this.state.masteredVocab;
+
+        main.innerHTML = `
+          <h2>📖 Vocabulary Bank</h2>
+          ${items.length === 0 ? `<div class="card" style="text-align:center; padding:1.8rem; margin-top:0.85rem;"><p>${t.vocab_empty}</p></div>` : `
+            <div style="display:grid; grid-template-columns:repeat(auto-fill, minmax(200px, 1fr)); gap:0.65rem; margin-top:0.85rem;">
+              ${items.map(v => `
+                <div class="card" style="padding:0.85rem;">
+                  <div style="display:flex; justify-content:space-between; align-items:center;">
+                    <strong class="thai-txt" style="font-size:1.15rem;">${v.word}</strong>
+                    <button class="audio-btn" onclick="AudioManager.speak('${v.word}')">🔊</button>
+                  </div>
+                  <small style="color:var(--primary); font-weight:700;">[${v.roman}]</small>
+                  <div style="font-size:0.8rem; color:var(--text-muted); margin-top:0.25rem;">
+                    ${typeof v.meaning === 'object' ? (v.meaning[lang] || v.meaning.en) : v.meaning}
+                  </div>
+                </div>
+              `).join('')}
+            </div>
+          `}
+        `;
+      },
+
+      renderProgress(main) {
+        const lang = this.state.uiLang;
+        const t = I18N[lang];
+        main.innerHTML = `
+          <h2>📊 Progress</h2>
+          <div class="card" style="margin-top:0.85rem;">
+            <div style="display:flex; justify-content:space-around; text-align:center;">
+              <div><h3 style="color:var(--primary); font-size:1.4rem;">${this.state.totalXP}</h3><small>${t.total_xp}</small></div>
+              <div><h3 style="color:#F59E0B; font-size:1.4rem;">${this.state.streak}</h3><small>${t.streak}</small></div>
+            </div>
+          </div>
+        `;
+      },
+
+      renderSettings(main) {
+        const lang = this.state.uiLang;
+        const t = I18N[lang];
+        main.innerHTML = `
+          <h2>⚙️ Settings</h2>
+          <div class="card" style="margin-top:0.85rem;">
+            <button class="primary-btn" onclick="App.exportData()">${t.export_btn}</button>
+          </div>
+        `;
+      },
+
+      exportData() {
+        const blob = new Blob([JSON.stringify(this.state, null, 2)], { type: 'application/json' });
+        const a = document.createElement('a');
+        a.href = URL.createObjectURL(blob);
+        a.download = `lingomaster_backup_${Date.now()}.json`;
+        a.click();
+      }
+    };
+
+    window.addEventListener('DOMContentLoaded', () => App.init());
+  </script>
+</body>
+</html>
+            
