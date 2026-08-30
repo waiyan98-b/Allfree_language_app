@@ -13490,7 +13490,24 @@
       },
 
       launchLesson(unitId) {
-        for (let ch of (window.THAI_A1_CHAPTERS || [])) {
+        for (let ch of (    launchLesson(unitId) {
+      const allChapters = [
+        { id: "ch-1", title: { my: "Chapter 1", en: "Chapter 1" }, units: CHAPTER_1_UNITS },
+        { id: "ch-2", title: { my: "Chapter 2", en: "Chapter 2" }, units: CHAPTER_2_UNITS },
+        { id: "ch-3", title: { my: "Chapter 3", en: "Chapter 3" }, units: CHAPTER_3_UNITS },
+        { id: "ch-4", title: { my: "Chapter 4", en: "Chapter 4" }, units: CHAPTER_4_UNITS },
+        { id: "ch-5", title: { my: "Chapter 5", en: "Chapter 5" }, units: CHAPTER_5_UNITS },
+        { id: "ch-6", title: { my: "Chapter 6", en: "Chapter 6" }, units: CHAPTER_6_UNITS }
+      ];
+      for (let ch of allChapters) {
+        const u = (ch.units || []).find(item => item.id === unitId);
+        if (u) {
+          LessonEngine.start(u, this.state);
+          return;
+        }
+      }
+    },
+ || [])) {
           const u = (ch.units || []).find(item => item.id === unitId);
           if (u) {
             LessonEngine.start(u, this.state);
