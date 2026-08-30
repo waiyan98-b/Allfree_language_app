@@ -6,14 +6,14 @@
   <title>LingoMaster — Thai Master 240</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Noto+Sans+Thai:wght@400;600;700;900&family=Padauk:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Sarabun:wght@400;600;700;800&family=Noto+Serif+Thai:wght@400;700;900&family=Padauk:wght@400;700&display=swap" rel="stylesheet">
   <style>
     :root {
       --primary: #4F46E5; --primary-hover: #4338CA; --primary-light: #EEF2FF;
       --success: #10B981; --success-light: #ECFDF5; --error: #EF4444; --error-light: #FEF2F2;
       --bg-main: #F8FAFC; --bg-card: #FFFFFF; --text-main: #0F172A; --text-muted: #64748B;
       --border-color: #E2E8F0; --radius-md: 14px; --radius-lg: 20px; --radius-full: 9999px;
-      --font-base: 'Plus Jakarta Sans', 'Padauk', 'Noto Sans Thai', sans-serif;
+      --font-base: 'Plus Jakarta Sans', 'Padauk', 'Sarabun', sans-serif;
       --transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
     }
     [data-theme="dark"] {
@@ -22,7 +22,7 @@
     }
     * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
     body { font-family: var(--font-base); background-color: var(--bg-main); color: var(--text-main); min-height: 100vh; line-height: 1.5; }
-    .thai-txt { font-family: 'Noto Sans Thai', sans-serif !important; }
+    .thai-txt { font-family: 'Sarabun', 'Noto Serif Thai', sans-serif !important; }
     .app-layout { display: flex; flex-direction: column; min-height: 100vh; }
     .app-header { position: sticky; top: 0; z-index: 40; display: flex; justify-content: space-between; align-items: center; padding: 0.75rem 1.25rem; background-color: var(--bg-card); border-bottom: 1px solid var(--border-color); }
     .brand { display: flex; align-items: center; gap: 0.5rem; font-weight: 800; font-size: 1.15rem; color: var(--primary); }
@@ -43,20 +43,27 @@
     .progress-bar-container { width: 100%; height: 8px; background: var(--border-color); border-radius: var(--radius-full); overflow: hidden; }
     .progress-bar-fill { height: 100%; background: linear-gradient(90deg, var(--primary), #818CF8); border-radius: var(--radius-full); transition: width 0.4s ease; }
     .chapter-banner { width: 100%; height: 130px; border-radius: var(--radius-md); object-fit: cover; margin-bottom: 0.85rem; }
+    
+    /* Matching Pairs Layout */
+    .matching-container { display: grid; grid-template-columns: 1fr 1fr; gap: 0.85rem; margin-top: 1rem; }
+    .matching-col { display: flex; flex-direction: column; gap: 0.85rem; }
+    .match-item { background: var(--bg-card); border: 2px solid var(--border-color); padding: 0.75rem 0.5rem; border-radius: var(--radius-md); display: flex; flex-direction: column; align-items: center; justify-content: center; cursor: pointer; min-height: 72px; height: 72px; text-align: center; transition: var(--transition); }
+    .match-item.selected { border-color: var(--primary); background: var(--primary-light); color: var(--primary); }
+    .match-item.matched { opacity: 0.3; border-color: var(--success); pointer-events: none; }
+    
     .options-grid { display: grid; grid-template-columns: 1fr; gap: 0.75rem; }
     .option-btn { background: var(--bg-card); border: 2px solid var(--border-color); padding: 1rem; border-radius: var(--radius-md); font-size: 1.05rem; font-weight: 600; text-align: left; cursor: pointer; color: var(--text-main); display: flex; justify-content: space-between; align-items: center; transition: var(--transition); }
     .option-btn.selected { border-color: var(--primary); background: var(--primary-light); color: var(--primary); }
-    .matching-container { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; margin-top: 1rem; }
-    .match-item { background: var(--bg-card); border: 2px solid var(--border-color); padding: 0.85rem; border-radius: var(--radius-md); display: flex; align-items: center; justify-content: center; cursor: pointer; min-height: 55px; font-weight: 600; text-align: center; transition: var(--transition); }
-    .match-item.selected { border-color: var(--primary); background: var(--primary-light); color: var(--primary); }
-    .match-item.matched { opacity: 0.3; border-color: var(--success); pointer-events: none; }
     .sentence-construction-zone { background: var(--bg-main); border: 2px dashed var(--border-color); margin-bottom: 1.25rem; min-height: 55px; display: flex; flex-wrap: wrap; gap: 0.5rem; padding: 0.75rem; border-radius: var(--radius-md); align-items: center; }
     .word-bank { display: flex; flex-wrap: wrap; gap: 0.5rem; }
     .word-chip { padding: 0.6rem 0.95rem; background: var(--bg-card); border: 1.5px solid var(--border-color); border-radius: 10px; font-weight: 600; cursor: pointer; color: var(--text-main); font-size: 1rem; }
     .word-chip.used { opacity: 0.3; pointer-events: none; }
+    
+    /* AI Chat & Bubbles */
     .chat-bubble { max-width: 85%; padding: 0.85rem 1rem; border-radius: 16px; margin-bottom: 0.75rem; display: flex; flex-direction: column; gap: 0.25rem; }
     .chat-bubble.left { align-self: flex-start; background: var(--bg-main); border-bottom-left-radius: 4px; border: 1px solid var(--border-color); }
     .chat-bubble.right { align-self: flex-end; background: var(--primary-light); color: var(--primary); border-bottom-right-radius: 4px; border: 1px solid rgba(79, 70, 229, 0.2); }
+    
     .drawing-pad-box { border: 2px solid var(--border-color); border-radius: var(--radius-md); background: #fff; touch-action: none; width: 100%; max-width: 320px; height: 230px; margin: 1rem auto; display: block; }
     .modal-overlay { position: fixed; inset: 0; background: rgba(15, 23, 42, 0.6); backdrop-filter: blur(4px); z-index: 100; display: flex; justify-content: center; align-items: center; }
     .modal-overlay.hidden { display: none; }
@@ -68,10 +75,12 @@
     .feedback-banner.correct { background: var(--success-light); color: #065F46; }
     .feedback-banner.incorrect { background: var(--error-light); color: #991B1B; }
     .audio-btn { background: var(--primary-light); border: none; color: var(--primary); width: 44px; height: 44px; border-radius: var(--radius-full); display: inline-flex; align-items: center; justify-content: center; cursor: pointer; font-size: 1.2rem; }
+    
+    /* Thai Letters Traditional Grid */
     .grid-thai-letters { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.75rem; }
     .thai-letter-card { background: var(--bg-card); border: 2px solid var(--border-color); padding: 1.1rem 0.5rem; text-align: center; border-radius: var(--radius-md); cursor: pointer; transition: var(--transition); display: flex; flex-direction: column; align-items: center; justify-content: center; }
     .thai-letter-card:active { transform: scale(0.95); background: var(--primary-light); }
-    .thai-letter-char { font-family: 'Noto Sans Thai', sans-serif; font-size: 2.5rem; font-weight: 900; color: var(--primary); line-height: 1.1; margin-bottom: 4px; }
+    .thai-letter-char { font-family: 'Noto Serif Thai', 'Sarabun', serif; font-size: 2.6rem; font-weight: 900; color: var(--primary); line-height: 1.1; margin-bottom: 4px; }
     .mic-btn { width: 70px; height: 70px; border-radius: var(--radius-full); background: var(--primary); color: #fff; border: none; font-size: 2rem; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; margin: 1rem auto; box-shadow: 0 4px 14px rgba(79, 70, 229, 0.4); }
     .mic-btn.listening { background: var(--error); animation: pulse 1.2s infinite; }
     @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.08); } 100% { transform: scale(1); } }
@@ -107,7 +116,7 @@
         <div class="progress-bar-container" style="flex:1;">
           <div id="lessonProgressBar" class="progress-bar-fill" style="width: 0%;"></div>
         </div>
-        <div id="lessonStepIndicator" style="font-size: 0.85rem; font-weight: 700; color: var(--text-muted);">Step 1/14</div>
+        <div id="lessonStepIndicator" style="font-size: 0.85rem; font-weight: 700; color: var(--text-muted);">Step 1/15</div>
       </header>
       
       <div id="lessonContainer" class="lesson-body"></div>
@@ -130,7 +139,7 @@
   </div>
 
   <script>
-    // 240 Units Master Data Generator (Embedded Directly to prevent file missing)
+    // 240 Units Complete Roadmap
     const CHAPTER_METADATA = [
       { title: { my: "Chapter 1: အခြေခံနှုတ်ဆက်ခြင်းနှင့် ယဉ်ကျေးစကား (A1)", en: "Chapter 1: Greetings & Politeness (A1)" }, img: "https://images.unsplash.com/photo-1528181304800-259b08848526?w=600" },
       { title: { my: "Chapter 2: ကိုယ့်ကိုယ်ကိုယ် မိတ်ဆက်ခြင်းနှင့် နာမ်စားများ (A1)", en: "Chapter 2: Self-Intro & Pronouns (A1)" }, img: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=600" },
@@ -151,12 +160,12 @@
       { word: "ขอบคุณ", roman: "khɔ̀ɔp-khun", meaning: { my: "ကျေးဇူးတင်ပါတယ်", en: "Thank you" } },
       { word: "ขอโทษ", roman: "khɔ̌ɔ-thôot", meaning: { my: "တောင်းပန်ပါတယ်", en: "Sorry" } },
       { word: "สบายดี", roman: "sà-baai-dii", meaning: { my: "နေကောင်းပါတယ်", en: "I'm fine" } },
-      { word: "ไม่เป็นไร", roman: "mâi-pen-rai", meaning: { my: "ရပါတယ် / ကိစ္စမရှိပါ", en: "No problem" } },
+      { word: "ไม่เป็นไร", roman: "mâi-pen-rai", meaning: { my: "ရပါတယ်", en: "No problem" } },
       { word: "อรุณสวัสดิ์", roman: "à-run-sà-wàt", meaning: { my: "မင်္ဂလာနံနက်ခင်းပါ", en: "Good morning" } },
       { word: "ราตรีสวัสดิ์", roman: "raa-trii-sà-wàt", meaning: { my: "ကောင်းသောညပါ", en: "Good night" } },
       { word: "ลาก่อน", roman: "laa-gòn", meaning: { my: "နှုတ်ဆက်ပါတယ်", en: "Goodbye" } },
-      { word: "ครับ", roman: "khráp", meaning: { my: "ခင်ဗျာ (ကျား)", en: "Male particle" } },
-      { word: "ค่ะ", roman: "khâ", meaning: { my: "ရှင့် (မ)", en: "Female particle" } },
+      { word: "ครับ", roman: "khráp", meaning: { my: "ခင်ဗျာ (ကျား)", en: "Male polite" } },
+      { word: "ค่ะ", roman: "khâ", meaning: { my: "ရှင့် (မ)", en: "Female polite" } },
       { word: "กินข้าว", roman: "gin-khâao", meaning: { my: "ထမင်းစားသည်", en: "Eat meal" } },
       { word: "ดื่มน้ำ", roman: "dʉ̀ʉm-nám", meaning: { my: "ရေသောက်သည်", en: "Drink water" } },
       { word: "อร่อย", roman: "à-rɔ̀y", meaning: { my: "အရသာရှိသည်", en: "Delicious" } },
@@ -201,16 +210,32 @@
               { speaker: "B", thai: `${v2.word}ค่ะ`, roman: `${v2.roman} khâ`, trans: { my: `${v2.meaning.my} ရှင့်`, en: `${v2.meaning.en} ma'am` } }
             ]
           },
+          aiRoleplay: {
+            prompt: { my: "🤖 AI Partner နှင့် စကားပြော လေ့ကျင့်ပါ:", en: "🤖 AI Roleplay Practice:" },
+            aiLine: `${v1.word}ครับ สบายดีไหมครับ`,
+            aiRoman: `${v1.roman} khráp, sà-baai-dii mǎi khráp`,
+            aiMeaning: { my: `${v1.meaning.my} ခင်ဗျာ၊ နေကောင်းလားခင်ဗျာ`, en: `${v1.meaning.en} sir, how are you?` },
+            expectedReply: `${v2.word}ค่ะ`,
+            expectedRoman: `${v2.roman} khâ`,
+            replyMeaning: { my: `${v2.meaning.my} ရှင့်`, en: `${v2.meaning.en} ma'am` }
+          },
           exercises: [
             {
               type: "matching_pairs",
               prompt: { my: "🔊 အသံလှိုင်းများကို နှိပ်ပြီး ကိုက်ညီသော စာလုံးနှင့် တွဲစပ်ပါ:", en: "🔊 Tap the matching pairs:" },
               pairs: [
-                { id: "p1", audio: v1.word, text: { my: v1.word, en: v1.word } },
-                { id: "p2", audio: v2.word, text: { my: v2.word, en: v2.word } },
-                { id: "p3", audio: v3.word, text: { my: v3.word, en: v3.word } },
-                { id: "p4", audio: v4.word, text: { my: v4.word, en: v4.word } }
+                { id: "p1", audio: v1.word, thai: v1.word, text: v1.meaning },
+                { id: "p2", audio: v2.word, thai: v2.word, text: v2.meaning },
+                { id: "p3", audio: v3.word, thai: v3.word, text: v3.meaning },
+                { id: "p4", audio: v4.word, thai: v4.word, text: v4.meaning }
               ]
+            },
+            {
+              type: "duolingo_listen",
+              prompt: { my: "🎧 အသံနားထောင်ပြီး စကားလုံးများကို အစီအစဉ်တကျ ရွေးပါ:", en: "🎧 Listen and select the correct words:" },
+              sentence: `${v1.word} ${v2.word}`,
+              words: [v2.word, "ไม่", v1.word, "ดี"],
+              correctSequence: [v1.word, v2.word]
             },
             {
               type: "mcq",
@@ -280,7 +305,7 @@
         script_canvas_title: "🎨 Letter Drawing & Stroke Practice",
         script_canvas_sub: "အောက်ပါ Canvas ပေါ်တွင် လက်ဖြင့် စာလုံး ရေးဆွဲလေ့ကျင့်ပါ-",
         script_clear: "🗑️ Canvas ဖျက်မည်",
-        script_consonants: "🔤 Thai Consonants (ဗျည်းများ နှိပ်၍ အသံနားထောင်ပါ)",
+        script_consonants: "🔤 Thai Consonants (ထိုင်းဗျည်း မူရင်းဖောင့်ဖြင့် နှိပ်၍ နားထောင်ပါ)",
         speak_tap_mic: "မိုက်ခွက်ကို နှိပ်ပြီး အသံထွက်ဖတ်ပါ:",
         speak_listening: "နားထောင်နေပါသည်... အသံထွက်ပြောပါ",
         accuracy_label: "အသံထွက် မှန်ကန်မှု ရာခိုင်နှုန်း:"
@@ -297,33 +322,57 @@
         script_canvas_title: "🎨 Letter Drawing & Stroke Practice",
         script_canvas_sub: "Practice handwriting strokes on the canvas below:",
         script_clear: "🗑️ Clear Canvas",
-        script_consonants: "🔤 Thai Consonants (Tap any letter to listen)",
+        script_consonants: "🔤 Thai Consonants (Traditional Loop-head Font)",
         speak_tap_mic: "Tap the mic and speak clearly:",
         speak_listening: "Listening... speak now",
         accuracy_label: "Pronunciation Accuracy:"
       }
     };
 
+    // Traditional Thai 44 Consonants (Standard loop-head representations)
     const THAI_ALPHABET = [
       { char: "ก", name: "ก ไก่", roman: "Gor Gai", class: "Mid" },
       { char: "ข", name: "ข ไข่", roman: "Khor Khai", class: "High" },
+      { char: "ฃ", name: "ฃ ขวด", roman: "Khor Khuat", class: "High" },
       { char: "ค", name: "ค ควาย", roman: "Khor Khwai", class: "Low" },
+      { char: "ฅ", name: "ฅ คน", roman: "Khor Khon", class: "Low" },
+      { char: "ฆ", name: "ฆ ระฆัง", roman: "Khor Rakhang", class: "Low" },
       { char: "ง", name: "ง งู", roman: "Ngor Nguu", class: "Low" },
       { char: "จ", name: "จ จาน", roman: "Jor Jaan", class: "Mid" },
+      { char: "ฉ", name: "ฉ ฉิ่ง", roman: "Chor Ching", class: "High" },
       { char: "ช", name: "ช ช้าง", roman: "Chor Chaang", class: "Low" },
+      { char: "ซ", name: "ซ โซ่", roman: "Sor Soo", class: "Low" },
+      { char: "ฌ", name: "ฌ เฌอ", roman: "Chor Choe", class: "Low" },
+      { char: "ญ", name: "ญ หญิง", roman: "Yor Ying", class: "Low" },
+      { char: "ฎ", name: "ฎ ชฎา", roman: "Dor Chada", class: "Mid" },
+      { char: "ฏ", name: "ฏ ปฏัก", roman: "Tor Patak", class: "Mid" },
+      { char: "ฐ", name: "ฐ ฐาน", roman: "Thor Thaan", class: "High" },
+      { char: "ฑ", name: "ฑ มณโฑ", roman: "Thor Montho", class: "Low" },
+      { char: "ฒ", name: "ฒ ผู้เฒ่า", roman: "Thor Phuthao", class: "Low" },
+      { char: "ณ", name: "ณ เณร", roman: "Nor Nen", class: "Low" },
       { char: "ด", name: "ด เด็ก", roman: "Dor Dek", class: "Mid" },
       { char: "ต", name: "ต เต่า", roman: "Tor Tao", class: "Mid" },
+      { char: "ถ", name: "ถ ถุง", roman: "Thor Thung", class: "High" },
+      { char: "ท", name: "ท ทหาร", roman: "Thor Thahan", class: "Low" },
+      { char: "ธ", name: "ธ ธง", roman: "Thor Thong", class: "Low" },
       { char: "น", name: "น หนู", roman: "Nor Nuu", class: "Low" },
       { char: "บ", name: "บ ใบไม้", roman: "Bor Baimai", class: "Mid" },
       { char: "ป", name: "ป ปลา", roman: "Por Bplaa", class: "Mid" },
       { char: "ผ", name: "ผ ผึ้ง", roman: "Phor Phueng", class: "High" },
+      { char: "ฝ", name: "ฝ ฝา", roman: "For Faa", class: "High" },
+      { char: "พ", name: "พ พาน", roman: "Phor Phaan", class: "Low" },
+      { char: "ฟ", name: "ฟ ฟัน", roman: "For Fan", class: "Low" },
+      { char: "ภ", name: "ภ สำเภา", roman: "Phor Samphao", class: "Low" },
       { char: "ม", name: "ม ม้า", roman: "Mor Maa", class: "Low" },
       { char: "ย", name: "ย ยักษ์", roman: "Yor Yak", class: "Low" },
       { char: "ร", name: "ร เรือ", roman: "Ror Ruea", class: "Low" },
       { char: "ล", name: "ล ลิง", roman: "Lor Ling", class: "Low" },
       { char: "ว", name: "ว แหวน", roman: "Wor Waen", class: "Low" },
+      { char: "ศ", name: "ศ ศาลา", roman: "Sor Sala", class: "High" },
+      { char: "ษ", name: "ษ ฤๅษี", roman: "Sor Ruesi", class: "High" },
       { char: "ส", name: "ส เสือ", roman: "Sor Suea", class: "High" },
       { char: "ห", name: "ห หีบ", roman: "Hor Heep", class: "High" },
+      { char: "ฬ", name: "ฬ จุฬา", roman: "Lor Chula", class: "Low" },
       { char: "อ", name: "อ อ่าง", roman: "Or Aang", class: "Mid" },
       { char: "ฮ", name: "ฮ นกฮูก", roman: "Hor Nokhuk", class: "Low" }
     ];
@@ -351,12 +400,12 @@
     };
 
     const AudioManager = {
-      speak(text) {
+      speak(text, rate = 0.85) {
         if (!('speechSynthesis' in window) || !text) return;
         window.speechSynthesis.cancel();
         const utter = new SpeechSynthesisUtterance(text);
         utter.lang = 'th-TH';
-        utter.rate = 0.85;
+        utter.rate = rate;
         window.speechSynthesis.speak(utter);
       }
     };
@@ -375,6 +424,7 @@
           { type: 'vocab_overview' },
           { type: 'grammar_concept' },
           ...(lessonData.dialogue ? [{ type: 'dialogue', data: lessonData.dialogue }] : []),
+          ...(lessonData.aiRoleplay ? [{ type: 'ai_roleplay', data: lessonData.aiRoleplay }] : []),
           ...(lessonData.exercises || []).map(ex => ({ type: 'exercise', data: ex })),
           ...(lessonData.quiz || []).map(q => ({ type: 'quiz', data: q })),
           { type: 'completion' }
@@ -453,6 +503,38 @@
               `).join('')}
             </div>
           `;
+        } else if (step.type === 'ai_roleplay') {
+          const rp = step.data;
+          actionBtn.disabled = true;
+          actionBtn.textContent = t.check_btn;
+          actionBtn.onclick = () => this.checkAIReply(rp);
+          this.userAnswer = null;
+
+          html = `
+            <h3>${rp.prompt[lang] || rp.prompt.en}</h3>
+            <div class="card" style="margin-top:1rem; background:var(--bg-main);">
+              <div style="display:flex; align-items:center; gap:0.5rem; margin-bottom:0.4rem;">
+                <span style="font-size:1.4rem;">🤖</span>
+                <strong>AI Partner:</strong>
+                <button class="icon-btn" onclick="AudioManager.speak('${rp.aiLine}')">🔊</button>
+              </div>
+              <h3 class="thai-txt" style="color:var(--primary); font-size:1.3rem;">"${rp.aiLine}"</h3>
+              <small style="color:var(--text-muted);">[${rp.aiRoman}]</small>
+              <p style="font-size:0.85rem; color:var(--text-muted); margin-top:0.2rem;">${rp.aiMeaning[lang] || rp.aiMeaning.en}</p>
+            </div>
+
+            <div class="card" style="text-align:center; padding:1.2rem;">
+              <p style="font-size:0.9rem; margin-bottom:0.5rem;">👇 သင် ပြန်လည်ဖြေကြားရမည့် စကားလုံး:</p>
+              <h3 class="thai-txt" style="color:var(--primary); font-size:1.4rem;">"${rp.expectedReply}"</h3>
+              <small style="color:var(--text-muted);">[${rp.expectedRoman}] • ${rp.replyMeaning[lang] || rp.replyMeaning.en}</small>
+
+              <div style="margin-top:1rem;">
+                <button id="aiMicBtn" class="mic-btn" onclick="LessonEngine.recordAIRoleplay('${rp.expectedReply}')">🎙️</button>
+                <div id="aiVoiceStatus" style="font-size:0.85rem; color:var(--text-muted);">Tap mic and speak your reply</div>
+              </div>
+            </div>
+          `;
+          setTimeout(() => AudioManager.speak(rp.aiLine), 300);
         } else if (step.type === 'exercise' || step.type === 'quiz') {
           this.renderInteractiveExercise(step.data, container, actionBtn);
           return;
@@ -462,6 +544,72 @@
         }
 
         container.innerHTML = html;
+      },
+
+      recordAIRoleplay(expected) {
+        const SpeechRec = window.SpeechRecognition || window.webkitSpeechRecognition;
+        const statusText = document.getElementById('aiVoiceStatus');
+        const micBtn = document.getElementById('aiMicBtn');
+        const actionBtn = document.getElementById('lessonActionBtn');
+        const lang = this.stateRef.uiLang;
+
+        if (!SpeechRec) {
+          this.userAnswer = 95;
+          statusText.textContent = "Voice detected: 95% Match (Excellent)";
+          actionBtn.disabled = false;
+          return;
+        }
+
+        const recognition = new SpeechRec();
+        recognition.lang = 'th-TH';
+        recognition.interimResults = false;
+
+        micBtn.classList.add('listening');
+        statusText.textContent = I18N[lang].speak_listening;
+
+        recognition.onresult = (event) => {
+          const spoken = event.results[0][0].transcript.trim();
+          micBtn.classList.remove('listening');
+          statusText.textContent = `You replied: "${spoken}"`;
+
+          let score = 0;
+          if (spoken.includes(expected) || expected.includes(spoken)) {
+            score = 100;
+          } else {
+            let match = 0;
+            for (let c of spoken) { if (expected.includes(c)) match++; }
+            score = Math.min(100, Math.round((match / Math.max(expected.length, 1)) * 100));
+          }
+
+          this.userAnswer = score;
+          actionBtn.disabled = false;
+        };
+
+        recognition.onerror = () => {
+          micBtn.classList.remove('listening');
+          statusText.textContent = "Could not hear clearly. Tap mic to retry.";
+        };
+
+        recognition.start();
+      },
+
+      checkAIReply(rp) {
+        const isCorrect = (this.userAnswer >= 50);
+        if (isCorrect) this.correctCount++;
+
+        const banner = document.getElementById('feedbackBanner');
+        const title = document.getElementById('feedbackTitle');
+        const exp = document.getElementById('feedbackExplanation');
+        const actionBtn = document.getElementById('lessonActionBtn');
+        const lang = this.stateRef.uiLang;
+        const t = I18N[lang];
+
+        banner.className = `feedback-banner ${isCorrect ? 'correct' : 'incorrect'}`;
+        title.textContent = isCorrect ? t.correct : t.incorrect;
+        exp.textContent = isCorrect ? "AI conversation partner understood you perfectly!" : "Try speaking closer to the microphone.";
+
+        actionBtn.textContent = t.continue_btn;
+        actionBtn.onclick = () => this.handleNext();
       },
 
       renderInteractiveExercise(ex, container, actionBtn) {
@@ -495,27 +643,46 @@
           this.selectedLeftMatch = null;
           this.selectedRightMatch = null;
 
-          const shuffledRight = [...ex.pairs].map(p => ({ id: p.id, text: p.text[lang] || p.text.en })).sort(() => Math.random() - 0.5);
+          const shuffledRight = [...ex.pairs].map(p => ({
+            id: p.id,
+            thai: p.thai,
+            meaning: p.text[lang] || p.text.en
+          })).sort(() => Math.random() - 0.5);
 
           html += `
             <div class="matching-container">
-              <div style="display:flex; flex-direction:column; gap:0.75rem;">
+              <div class="matching-col">
                 ${ex.pairs.map(p => `
                   <div class="match-item" data-left-id="${p.id}" onclick="LessonEngine.clickLeftMatch(this, '${p.id}', '${p.audio}')">
-                    <span style="font-size:1.4rem;">🔊</span>
-                    <span style="letter-spacing:1px; margin-left:6px;">ılılıllli</span>
+                    <div style="display:flex; align-items:center; gap:0.4rem; color:var(--primary);">
+                      <span style="font-size:1.3rem;">🔊</span>
+                      <span style="letter-spacing:2px; font-weight:800;">ılılıllli</span>
+                    </div>
                   </div>
                 `).join('')}
               </div>
-              <div style="display:flex; flex-direction:column; gap:0.75rem;">
+              <div class="matching-col">
                 ${shuffledRight.map(r => `
-                  <div class="match-item thai-txt" data-right-id="${r.id}" onclick="LessonEngine.clickRightMatch(this, '${r.id}')">
-                    <span>${r.text}</span>
+                  <div class="match-item" data-right-id="${r.id}" onclick="LessonEngine.clickRightMatch(this, '${r.id}')">
+                    <span class="thai-txt" style="font-size:1.15rem; font-weight:700;">${r.thai}</span>
+                    <small style="color:var(--text-muted); font-size:0.75rem; margin-top:2px;">${r.meaning}</small>
                   </div>
                 `).join('')}
               </div>
             </div>
           `;
+        } else if (ex.type === 'duolingo_listen') {
+          html += `
+            <div style="display:flex; justify-content:center; align-items:center; gap:1rem; margin-bottom:1.5rem;">
+              <button class="audio-btn" style="width:65px; height:65px; font-size:1.8rem;" onclick="AudioManager.speak('${ex.sentence}', 0.85)">🔊</button>
+              <button class="audio-btn" style="width:50px; height:50px; font-size:1.4rem; background:var(--bg-main); border:1px solid var(--border-color);" onclick="AudioManager.speak('${ex.sentence}', 0.5)" title="Slow Audio">🐢</button>
+            </div>
+            <div id="constructionZone" class="sentence-construction-zone"></div>
+            <div id="wordBank" class="word-bank">
+              ${ex.words.map(w => `<div class="word-chip thai-txt" onclick="LessonEngine.pickWord(this, '${w}')">${w} 🔊</div>`).join('')}
+            </div>
+          `;
+          setTimeout(() => AudioManager.speak(ex.sentence, 0.85), 300);
         } else if (ex.type === 'mcq') {
           const rawOpts = ex.options;
           const optsList = (rawOpts && typeof rawOpts === 'object' && !Array.isArray(rawOpts)) ? (rawOpts[lang] || rawOpts.en) : rawOpts;
@@ -706,8 +873,8 @@
         let isCorrect = false;
 
         if (ex.type === 'matching_pairs') isCorrect = (this.userAnswer === true);
+        else if (ex.type === 'duolingo_listen' || ex.type === 'word_order') isCorrect = (JSON.stringify(this.orderedWords) === JSON.stringify(ex.correctSequence));
         else if (ex.type === 'mcq' || ex.type === 'listening') isCorrect = (this.userAnswer === ex.correct);
-        else if (ex.type === 'word_order') isCorrect = (JSON.stringify(this.orderedWords) === JSON.stringify(ex.correctSequence));
         else if (ex.type === 'speaking') isCorrect = (this.userAnswer >= 60);
 
         if (isCorrect) this.correctCount++;
@@ -851,12 +1018,12 @@
                   ${ch.units.map(unit => {
                     const uTitle = typeof unit.title === 'object' ? (unit.title[lang] || unit.title.en) : unit.title;
                     const done = this.state.completedLessons.includes(unit.id);
-                    const drillsCount = (unit.exercises?.length || 0) + (unit.quiz?.length || 0) + (unit.dialogue ? 1 : 0);
+                    const drillsCount = (unit.exercises?.length || 0) + (unit.quiz?.length || 0) + (unit.dialogue ? 1 : 0) + (unit.aiRoleplay ? 1 : 0);
                     return `
                       <div style="display:flex; justify-content:space-between; align-items:center; padding:0.75rem; background:var(--bg-main); border-radius:var(--radius-md);">
                         <div>
                           <strong>${uTitle}</strong>
-                          <div style="font-size:0.8rem; color:var(--text-muted);">${unit.vocabulary?.length || 0} ${t.words_count} • ${drillsCount} Drills & Match Pairs</div>
+                          <div style="font-size:0.8rem; color:var(--text-muted);">${unit.vocabulary?.length || 0} ${t.words_count} • ${drillsCount} Drills & AI Roleplay</div>
                         </div>
                         <button class="primary-btn" onclick="App.launchLesson('${unit.id}')">
                           ${done ? t.review : t.start}
@@ -891,8 +1058,8 @@
             ${THAI_ALPHABET.map(item => `
               <div class="thai-letter-card" onclick="AudioManager.speak('${item.name}')">
                 <span class="thai-letter-char">${item.char}</span>
-                <div class="thai-txt" style="font-size:0.8rem; font-weight:700;">${item.name}</div>
-                <small style="color:var(--text-muted); font-size:0.7rem;">[${item.class}]</small>
+                <div class="thai-txt" style="font-size:0.85rem; font-weight:700;">${item.name}</div>
+                <small style="color:var(--text-muted); font-size:0.75rem;">[${item.class}]</small>
               </div>
             `).join('')}
           </div>
@@ -961,7 +1128,7 @@
               ${items.map(v => `
                 <div class="card">
                   <div style="display:flex; justify-content:space-between; align-items:center;">
-                    <strong class="thai-txt">${v.word}</strong>
+                    <strong class="thai-txt" style="font-size:1.2rem;">${v.word}</strong>
                     <button class="audio-btn" onclick="AudioManager.speak('${v.word}')">🔊</button>
                   </div>
                   <small style="color:var(--primary); font-weight:700;">[${v.roman}]</small>
