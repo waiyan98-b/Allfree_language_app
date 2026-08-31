@@ -32,7 +32,7 @@ class ChapterListScreen extends StatelessWidget {
               leading: CircleAvatar(
                 backgroundColor: hasUnits ? AppColors.primary : Colors.grey.shade400,
                 foregroundColor: Colors.white,
-                child: Text('${chapter.chapterIndex}'),
+                child: Text('${chapter.number}'),
               ),
               title: Text(
                 chapter.title,
@@ -60,11 +60,11 @@ class ChapterListScreen extends StatelessWidget {
                         },
                       );
                     }).toList()
-                  : [
-                      const Padding(
+                  : const [
+                      Padding(
                         padding: EdgeInsets.all(16),
                         child: Text(
-                          'Units for this chapter are being added in upcoming content updates.',
+                          'Units for this chapter are coming soon.',
                           style: TextStyle(fontStyle: FontStyle.italic, color: Colors.grey),
                         ),
                       ),
