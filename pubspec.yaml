@@ -1,0 +1,43 @@
+name: allfree_language_app
+description: "Allfree Thai Language Learning Application - Comprehensive 12-Chapter Master Curriculum"
+publish_to: 'none'
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.0.0 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_localizations:
+    sdk: flutter
+
+  # State Management & Service Locator
+  provider: ^6.1.2
+
+  # Persistence & Local Storage
+  shared_preferences: ^2.2.3
+
+  # Audio Playback & Text-To-Speech
+  audioplayers: ^6.0.0
+  flutter_tts: ^4.0.2
+
+  # Speech Recognition (Audio Input)
+  speech_to_text: ^6.6.1
+
+  # UI Utilities & Icons
+  cupertino_icons: ^1.0.8
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^3.0.0
+
+flutter:
+  uses-material-design: true
+
+  assets:
+    - assets/images/
+    - assets/audio/
+    - assets/audio/thai/
+    - assets/fonts/
