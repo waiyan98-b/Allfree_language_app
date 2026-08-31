@@ -34,7 +34,7 @@ class CurriculumData {
         titleMyanmar: 'ဂဏန်းသင်္ချာ၊ အချိန်၊ ပြက္ခဒိန်နှင့် ရက်စွဲများ',
         cefrLevel: 'A1',
         unitsCount: 20,
-        units: [],
+        units: const [],
       ),
       ChapterModel(
         id: 'ch_4',
@@ -43,7 +43,7 @@ class CurriculumData {
         titleMyanmar: 'အစားအသောက်၊ စားသောက်ဆိုင်နှင့် လမ်းဘေးအစားအစာ မှာယူခြင်း',
         cefrLevel: 'A1-A2',
         unitsCount: 20,
-        units: [],
+        units: const [],
       ),
       ChapterModel(
         id: 'ch_5',
@@ -52,7 +52,7 @@ class CurriculumData {
         titleMyanmar: 'ဈေးဝယ်ခြင်း၊ ဈေးဆစ်ခြင်းနှင့် ငွေကြေးဆိုင်ရာ အသုံးအနှုန်းများ',
         cefrLevel: 'A2',
         unitsCount: 20,
-        units: [],
+        units: const [],
       ),
       ChapterModel(
         id: 'ch_6',
@@ -61,7 +61,7 @@ class CurriculumData {
         titleMyanmar: 'လမ်းညွှန်ချက်များ၊ ခရီးသွားခြင်းနှင့် အများသုံးသယ်ယူပို့ဆောင်ရေး',
         cefrLevel: 'A2',
         unitsCount: 20,
-        units: [],
+        units: const [],
       ),
       ChapterModel(
         id: 'ch_7',
@@ -70,7 +70,7 @@ class CurriculumData {
         titleMyanmar: 'နေ့စဉ်ဘဝ၊ မိသားစု၊ နေအိမ်နှင့် ဝါသနာများ',
         cefrLevel: 'A2',
         unitsCount: 20,
-        units: [],
+        units: const [],
       ),
       ChapterModel(
         id: 'ch_8',
@@ -79,7 +79,7 @@ class CurriculumData {
         titleMyanmar: 'ကျန်းမာရေး၊ ဆေးကုသမှုနှင့် အရေးပေါ်အခြေအနေများ',
         cefrLevel: 'A2-B1',
         unitsCount: 20,
-        units: [],
+        units: const [],
       ),
       ChapterModel(
         id: 'ch_9',
@@ -88,7 +88,7 @@ class CurriculumData {
         titleMyanmar: 'လုပ်ငန်းခွင်၊ စီးပွားရေး၊ အလုပ်အကိုင်နှင့် ဆက်သွယ်ရေး',
         cefrLevel: 'B1',
         unitsCount: 20,
-        units: [],
+        units: const [],
       ),
       ChapterModel(
         id: 'ch_10',
@@ -97,7 +97,7 @@ class CurriculumData {
         titleMyanmar: 'လူမှုဆက်ဆံရေး၊ ခံစားချက်၊ သဘောထားနှင့် နက်နဲသော စကားပြောဆိုမှု',
         cefrLevel: 'B1',
         unitsCount: 20,
-        units: [],
+        units: const [],
       ),
       ChapterModel(
         id: 'ch_11',
@@ -106,7 +106,7 @@ class CurriculumData {
         titleMyanmar: 'ထိုင်းယဉ်ကျေးမှု၊ ရိုးရာဓလေ့၊ အပြောစကားနှင့် မီဒီယာသုံးစကား',
         cefrLevel: 'B1-B2',
         unitsCount: 20,
-        units: [],
+        units: const [],
       ),
       ChapterModel(
         id: 'ch_12',
@@ -115,7 +115,7 @@ class CurriculumData {
         titleMyanmar: 'အဆင့်မြင့် ထိုင်းဘာသာ ကျွမ်းကျင်မှုနှင့် တရားဝင် အသုံးအနှုန်းများ',
         cefrLevel: 'B2',
         unitsCount: 20,
-        units: [],
+        units: const [],
       ),
     ];
   }
@@ -123,14 +123,13 @@ class CurriculumData {
   static List<UnitModel> _getChapter1Units() {
     return [
       UnitModel(
-        id: 'ch_1_unit_1',
         chapterIndex: 1,
         unitIndex: 1,
         title: 'Middle Class Consonants (Part 1)',
         titleMyanmar: 'အလယ်သံဗျည်းများ (အပိုင်း ၁)',
-        objective: 'Master 5 middle consonants: ก, จ, ด, ต, บ with their live tones.',
-        scriptItems: [
-          const ScriptModel(
+        objective: 'Master 3 middle consonants: ก, จ, ด with their live tones.',
+        scriptItems: const [
+          ScriptModel(
             symbol: 'ก',
             nameThai: 'ก ไก่',
             nameRoman: 'gor gai',
@@ -139,7 +138,7 @@ class CurriculumData {
             initialSound: 'g / k',
             finalSound: 'k',
           ),
-          const ScriptModel(
+          ScriptModel(
             symbol: 'จ',
             nameThai: 'จ จาน',
             nameRoman: 'jor jaan',
@@ -148,7 +147,7 @@ class CurriculumData {
             initialSound: 'j / ch',
             finalSound: 't',
           ),
-          const ScriptModel(
+          ScriptModel(
             symbol: 'ด',
             nameThai: 'ด เด็ก',
             nameRoman: 'dor dek',
@@ -158,8 +157,8 @@ class CurriculumData {
             finalSound: 't',
           ),
         ],
-        vocabulary: [
-          const VocabularyModel(
+        vocabulary: const [
+          VocabularyModel(
             id: 'v_gai',
             thai: 'ไก่',
             romanization: 'gài',
@@ -171,7 +170,7 @@ class CurriculumData {
             exampleRomanization: 'gin gài',
             exampleMyanmar: 'ကြက်သားစားသည်',
           ),
-          const VocabularyModel(
+          VocabularyModel(
             id: 'v_jaan',
             thai: 'จาน',
             romanization: 'jaan',
@@ -180,7 +179,7 @@ class CurriculumData {
             partOfSpeech: 'noun',
             primaryTone: ThaiTone.mid,
           ),
-          const VocabularyModel(
+          VocabularyModel(
             id: 'v_dek',
             thai: 'เด็ก',
             romanization: 'dèk',
@@ -190,8 +189,8 @@ class CurriculumData {
             primaryTone: ThaiTone.low,
           ),
         ],
-        grammar: [
-          const GrammarModel(
+        grammar: const [
+          GrammarModel(
             id: 'g_mid_tone',
             title: 'Middle Consonant Tone Rules',
             titleMyanmar: 'အလယ်သံဗျည်းများ၏ အသံထွက် ဥပဒေသ',
@@ -214,8 +213,8 @@ class CurriculumData {
             ],
           ),
         ],
-        dialogues: [
-          const DialogueModel(
+        dialogues: const [
+          DialogueModel(
             id: 'd_c1_u1',
             context: 'Identifying items on a table',
             contextMyanmar: 'စားပွဲပေါ်ရှိ ပစ္စည်းများကို ညွှန်ပြမေးမြန်းခြင်း',
@@ -225,17 +224,19 @@ class CurriculumData {
                 thai: 'นี่อะไรครับ',
                 romanization: 'nîi a-rai khráp',
                 myanmar: 'ဒါ ဘာလဲခင်ဗျာ။',
+                english: 'What is this?',
               ),
               DialogueLine(
                 speaker: 'Malee',
                 thai: 'นี่คือจานค่ะ',
                 romanization: 'nîi kheu jaan khâ',
                 myanmar: 'ဒါ ပန်းကန်ပါရှင်။',
+                english: 'This is a plate.',
               ),
             ],
           ),
         ],
-        exercises: [
+        exercises: const [
           FlashcardExercise(
             id: 'ex_c1_u1_1',
             instruction: 'Review Thai Middle Consonants',
@@ -248,6 +249,7 @@ class CurriculumData {
             id: 'ex_c1_u1_2',
             instruction: 'Choose the correct Myanmar meaning for ไก่',
             instructionMyanmar: 'ไก่ ၏ အဓိပ္ပာယ်အမှန်ကို ရွေးချယ်ပါ',
+            explanation: 'ไก่ means chicken in Thai.',
             question: 'ไก่ (gài)',
             options: ['ကြက် (Chicken)', 'ငါး (Fish)', 'ပန်းကန် (Plate)', 'ကလေး (Child)'],
             correctIndex: 0,
@@ -270,15 +272,14 @@ class CurriculumData {
   static List<UnitModel> _getChapter2Units() {
     return [
       UnitModel(
-        id: 'ch_2_unit_1',
         chapterIndex: 2,
         unitIndex: 1,
         title: 'Polite Particles & Greetings',
         titleMyanmar: 'ယဉ်ကျေးသော အသုံးအနှုန်းများနှင့် နှုတ်ဆက်ခြင်း',
         objective: 'Learn Sawasdee, Khrap, Kha, and fundamental politeness rules.',
-        scriptItems: [],
-        vocabulary: [
-          const VocabularyModel(
+        scriptItems: const [],
+        vocabulary: const [
+          VocabularyModel(
             id: 'v_sawasdee',
             thai: 'สวัสดี',
             romanization: 'sa-wàt-dii',
@@ -287,7 +288,7 @@ class CurriculumData {
             partOfSpeech: 'interjection',
             primaryTone: ThaiTone.mid,
           ),
-          const VocabularyModel(
+          VocabularyModel(
             id: 'v_khrap',
             thai: 'ครับ',
             romanization: 'khráp',
@@ -296,7 +297,7 @@ class CurriculumData {
             partOfSpeech: 'particle',
             primaryTone: ThaiTone.high,
           ),
-          const VocabularyModel(
+          VocabularyModel(
             id: 'v_kha',
             thai: 'ค่ะ',
             romanization: 'khâ',
@@ -306,8 +307,8 @@ class CurriculumData {
             primaryTone: ThaiTone.falling,
           ),
         ],
-        grammar: [
-          const GrammarModel(
+        grammar: const [
+          GrammarModel(
             id: 'g_polite_particles',
             title: 'Gender-based Polite Particles',
             titleMyanmar: 'ကျား/မ ယဉ်ကျေးစကားလုံးများ',
@@ -330,8 +331,8 @@ class CurriculumData {
             ],
           ),
         ],
-        dialogues: [
-          const DialogueModel(
+        dialogues: const [
+          DialogueModel(
             id: 'd_c2_u1',
             context: 'First meeting at a workplace',
             contextMyanmar: 'လုပ်ငန်းခွင်တွင် ပထမဆုံးအကြိမ် တွေ့ဆုံနှုတ်ဆက်ခြင်း',
@@ -341,21 +342,24 @@ class CurriculumData {
                 thai: 'สวัสดีครับ ผมชื่อเอนกครับ',
                 romanization: 'sa-wàt-dii khráp, phǒm chêu a-nèk khráp',
                 myanmar: 'မင်္ဂလာပါခင်ဗျာ၊ ကျွန်တော့်နာမည် အာနက်ခ် ပါခင်ဗျာ။',
+                english: 'Hello, my name is Anek.',
               ),
               DialogueLine(
                 speaker: 'Noi',
                 thai: 'สวัสดีค่ะ ดิฉันชื่อน้อยค่ะ',
                 romanization: 'sa-wàt-dii khâ, dì-chǎn chêu nói khâ',
                 myanmar: 'မင်္ဂလာပါရှင်၊ ကျွန်မနာမည် နွဲ့ ပါရှင်။',
+                english: 'Hello, my name is Noi.',
               ),
             ],
           ),
         ],
-        exercises: [
+        exercises: const [
           MultipleChoiceExercise(
             id: 'ex_c2_u1_1',
             instruction: 'What particle do male speakers use for politeness?',
             instructionMyanmar: 'အမျိုးသားများ အသုံးပြုရမည့် ယဉ်ကျေးစကားလုံးကို ရွေးပါ',
+            explanation: 'ครับ (khráp) is used by male speakers.',
             question: 'Male Polite Particle',
             options: ['ครับ (khráp)', 'ค่ะ (khâ)', 'นะ (ná)', 'จ้ะ (jâ)'],
             correctIndex: 0,
