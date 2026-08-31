@@ -12,20 +12,15 @@ dependencies:
   flutter_localizations:
     sdk: flutter
 
-  # State Management & Service Locator
+  # State Management & Persistence
   provider: ^6.1.2
-
-  # Persistence & Local Storage
   shared_preferences: ^2.2.3
 
-  # Audio Playback & Text-To-Speech
+  # Audio & Media
   audioplayers: ^6.0.0
-  flutter_tts: ^4.0.2
-
-  # Speech Recognition (Audio Input)
   speech_to_text: ^6.6.1
 
-  # UI Utilities & Icons
+  # UI Utilities
   cupertino_icons: ^1.0.8
 
 dev_dependencies:
@@ -35,9 +30,3 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
-
-  assets:
-    - assets/images/
-    - assets/audio/
-    - assets/audio/thai/
-    - assets/fonts/
