@@ -10,7 +10,7 @@ class CurriculumData {
   static List<ChapterModel> getChapters() {
     return [
       ChapterModel(
-        chapterIndex: 1,
+        number: 1,
         title: 'Thai Script & Phonetics Foundation',
         titleMyanmar: 'ထိုင်းစာအခြေခံ၊ အက္ခရာ၊ သရနှင့် အသံထွက် ဥပဒေသများ',
         cefrLevel: 'A1',
@@ -18,7 +18,7 @@ class CurriculumData {
         units: _getChapter1Units(),
       ),
       ChapterModel(
-        chapterIndex: 2,
+        number: 2,
         title: 'Greetings, Introductions & Politeness',
         titleMyanmar: 'နှုတ်ဆက်ခြင်း၊ မိတ်ဆက်ခြင်းနှင့် ယဉ်ကျေးသော စကားပြောပုံစံများ',
         cefrLevel: 'A1',
@@ -26,7 +26,7 @@ class CurriculumData {
         units: _getChapter2Units(),
       ),
       const ChapterModel(
-        chapterIndex: 3,
+        number: 3,
         title: 'Numbers, Time, Calendar & Scheduling',
         titleMyanmar: 'ဂဏန်းသင်္ချာ၊ အချိန်၊ ပြက္ခဒိန်နှင့် ရက်စွဲများ',
         cefrLevel: 'A1',
@@ -34,7 +34,7 @@ class CurriculumData {
         units: [],
       ),
       const ChapterModel(
-        chapterIndex: 4,
+        number: 4,
         title: 'Food, Dining & Ordering Street Food',
         titleMyanmar: 'အစားအသောက်၊ စားသောက်ဆိုင်နှင့် လမ်းဘေးအစားအစာ မှာယူခြင်း',
         cefrLevel: 'A1-A2',
@@ -42,7 +42,7 @@ class CurriculumData {
         units: [],
       ),
       const ChapterModel(
-        chapterIndex: 5,
+        number: 5,
         title: 'Shopping, Bargaining & Money Matters',
         titleMyanmar: 'ဈေးဝယ်ခြင်း၊ ဈေးဆစ်ခြင်းနှင့် ငွေကြေးဆိုင်ရာ အသုံးအနှုန်းများ',
         cefrLevel: 'A2',
@@ -50,7 +50,7 @@ class CurriculumData {
         units: [],
       ),
       const ChapterModel(
-        chapterIndex: 6,
+        number: 6,
         title: 'Directions, Travel & Public Transport',
         titleMyanmar: 'လမ်းညွှန်ချက်များ၊ ခရီးသွားခြင်းနှင့် အများသုံးသယ်ယူပို့ဆောင်ရေး',
         cefrLevel: 'A2',
@@ -58,7 +58,7 @@ class CurriculumData {
         units: [],
       ),
       const ChapterModel(
-        chapterIndex: 7,
+        number: 7,
         title: 'Daily Life, Family, Home & Hobbies',
         titleMyanmar: 'နေ့စဉ်ဘဝ၊ မိသားစု၊ နေအိမ်နှင့် ဝါသနာများ',
         cefrLevel: 'A2',
@@ -66,7 +66,7 @@ class CurriculumData {
         units: [],
       ),
       const ChapterModel(
-        chapterIndex: 8,
+        number: 8,
         title: 'Health, Medical Care & Emergency Situations',
         titleMyanmar: 'ကျန်းမာရေး၊ ဆေးကုသမှုနှင့် အရေးပေါ်အခြေအနေများ',
         cefrLevel: 'A2-B1',
@@ -74,7 +74,7 @@ class CurriculumData {
         units: [],
       ),
       const ChapterModel(
-        chapterIndex: 9,
+        number: 9,
         title: 'Workplace, Business, Jobs & Professional Life',
         titleMyanmar: 'လုပ်ငန်းခွင်၊ စီးပွားရေး၊ အလုပ်အကိုင်နှင့် ဆက်သွယ်ရေး',
         cefrLevel: 'B1',
@@ -82,7 +82,7 @@ class CurriculumData {
         units: [],
       ),
       const ChapterModel(
-        chapterIndex: 10,
+        number: 10,
         title: 'Social Life, Emotions, Opinions & Nuanced Talk',
         titleMyanmar: 'လူမှုဆက်ဆံရေး၊ ခံစားချက်၊ သဘောထားနှင့် နက်နဲသော စကားပြောဆိုမှု',
         cefrLevel: 'B1',
@@ -90,7 +90,7 @@ class CurriculumData {
         units: [],
       ),
       const ChapterModel(
-        chapterIndex: 11,
+        number: 11,
         title: 'Culture, Traditions, Slang & Media Thai',
         titleMyanmar: 'ထိုင်းယဉ်ကျေးမှု၊ ရိုးရာဓလေ့၊ အပြောစကားနှင့် မီဒီယာသုံးစကား',
         cefrLevel: 'B1-B2',
@@ -98,7 +98,7 @@ class CurriculumData {
         units: [],
       ),
       const ChapterModel(
-        chapterIndex: 12,
+        number: 12,
         title: 'Advanced Mastery & Formal Proficiency',
         titleMyanmar: 'အဆင့်မြင့် ထိုင်းဘာသာ ကျွမ်းကျင်မှုနှင့် တရားဝင် အသုံးအနှုန်းများ',
         cefrLevel: 'B2',
@@ -117,13 +117,14 @@ class CurriculumData {
         titleMyanmar: 'အလယ်သံဗျည်းများ (အပိုင်း ၁)',
         level: 'A1',
         objective: 'Master 3 middle consonants: ก, จ, ด with their live tones.',
+        objectiveMyanmar: 'အလယ်သံဗျည်း ၃ လုံးဖြစ်သော ก, จ, ด တို့၏ အသံထွက်ကို လေ့လာပါ။',
         scriptItems: const [
           ScriptModel(
             symbol: 'ก',
             nameThai: 'ก ไก่',
             nameRoman: 'gor gai',
             nameMyanmar: 'ကော်ကိုင် (ကြက်)',
-            category: ScriptCategory.middleConsonant,
+            category: ScriptCategory.consonant,
             consonantClass: ConsonantClass.middle,
             initialSound: 'g / k',
             finalSound: 'k',
@@ -133,7 +134,7 @@ class CurriculumData {
             nameThai: 'จ จาน',
             nameRoman: 'jor jaan',
             nameMyanmar: 'ကျော်ကျာန် (ပန်းကန်)',
-            category: ScriptCategory.middleConsonant,
+            category: ScriptCategory.consonant,
             consonantClass: ConsonantClass.middle,
             initialSound: 'j / ch',
             finalSound: 't',
@@ -143,7 +144,7 @@ class CurriculumData {
             nameThai: 'ด เด็ก',
             nameRoman: 'dor dek',
             nameMyanmar: 'ဒေါ်ဒက်ခ် (ကလေး)',
-            category: ScriptCategory.middleConsonant,
+            category: ScriptCategory.consonant,
             consonantClass: ConsonantClass.middle,
             initialSound: 'd',
             finalSound: 't',
@@ -253,7 +254,7 @@ class CurriculumData {
             pairs: {
               'ก': 'gor gai',
               'จ': 'jor jaan',
-              'ด': 'dor dek',
+              'ဒ': 'dor dek',
             },
           ),
         ],
@@ -270,6 +271,7 @@ class CurriculumData {
         titleMyanmar: 'ယဉ်ကျေးသော အသုံးအနှုန်းများနှင့် နှုတ်ဆက်ခြင်း',
         level: 'A1',
         objective: 'Learn Sawasdee, Khrap, Kha, and fundamental politeness rules.',
+        objectiveMyanmar: 'မင်္ဂလာပါ၊ ခင်ဗျာ၊ ရှင် စသည့် ယဉ်ကျေးသော စကားလုံးများကို လေ့လာပါ။',
         scriptItems: const [],
         vocabulary: const [
           VocabularyModel(
