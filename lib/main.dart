@@ -1,8 +1,35 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'core/theme/app_theme.dart';
+import 'services/storage_service.dart';
+import 'services/audio_service.dart';
+import 'services/tts_service.dart';
+import 'services/speech_service.dart';
+import 'services/srs_service.dart';
+import 'services/progress_service.dart';
+import 'screens/main_navigation_shell.dart';
 
-void main() {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  runApp(const ThaiLearningApp());
+  final prefs = await SharedPreferences.getInstance();
+  final storageService = StorageService(prefs);
+
+  runApp(
+    MultiProvider(
+      providers: [
+        Provider<StorageService>.value(value: storageService),
+        Provider<AudioService>(create: (_) => AudioService()),
+        Provider<TtsService>(create: (_) => TtsService()),
+        Provider<SpeechService>(create: (_) => SpeechService()),
+        Provider<SrsService>(create: (_) => SrsService(storageService)),
+        ChangeNotifierProvider<ProgressService>(
+          create: (_) => ProgressService(storageService),
+        ),
+      ],
+      child: const ThaiLearningApp(),
+    ),
+  );
 }
 
 class ThaiLearningApp extends StatelessWidget {
@@ -13,26 +40,10 @@ class ThaiLearningApp extends StatelessWidget {
     return MaterialApp(
       title: 'Allfree Thai',
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        useMaterial3: true,
-        brightness: Brightness.light,
-        primaryColor: const Color(0xFF1E88E5),
-        scaffoldBackgroundColor: const Color(0xFFF8F9FA),
-        colorScheme: const ColorScheme.light(
-          primary: Color(0xFF1E88E5),
-          secondary: Color(0xFFFF9800),
-          surface: Color(0xFFFFFFFF),
-          error: Color(0xFFE53935),
-        ),
-      ),
-      home: const Scaffold(
-        body: Center(
-          child: Text(
-            'Allfree Thai Learning App\nArchitecture Setup in Progress...',
-            textAlign: TextAlign.center,
-          ),
-        ),
-      ),
+      theme: AppTheme.lightTheme,
+      darkTheme: AppTheme.darkTheme,
+      themeMode: ThemeMode.system,
+      home: const MainNavigationShell(),
     );
   }
 }
