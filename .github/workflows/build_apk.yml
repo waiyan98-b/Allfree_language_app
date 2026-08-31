@@ -26,12 +26,11 @@ jobs:
         run: |
           flutter create . --project-name=allfree_language_app --org=com.example --platforms=android
 
-      - name: Update Gradle Wrapper to 8.3
+      - name: Update Gradle Wrapper to 8.4
         run: |
           cd android
-          gradle wrapper --gradle-version 8.3 --distribution-type all || true
-          sed -i 's/gradle-.*-all.zip/gradle-8.3-all.zip/g' gradle/wrapper/gradle-wrapper.properties || true
-          sed -i 's/gradle-.*-bin.zip/gradle-8.3-all.zip/g' gradle/wrapper/gradle-wrapper.properties || true
+          sed -i 's/gradle-.*-all.zip/gradle-8.4-all.zip/g' gradle/wrapper/gradle-wrapper.properties || true
+          sed -i 's/gradle-.*-bin.zip/gradle-8.4-all.zip/g' gradle/wrapper/gradle-wrapper.properties || true
           cd ..
 
       - name: Install Dependencies
