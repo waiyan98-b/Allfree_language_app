@@ -1,22 +1,28 @@
+import 'script_model.dart';
 import 'vocabulary_model.dart';
 import 'grammar_model.dart';
 import 'dialogue_model.dart';
-import 'script_model.dart';
 import 'exercise_model.dart';
 
 class UnitModel {
   final int chapterIndex;
   final int unitIndex;
+
   final String title;
   final String titleMyanmar;
+
   final String level;
+
   final String objective;
   final String objectiveMyanmar;
+
   final List<ScriptModel> scriptItems;
   final List<VocabularyModel> vocabulary;
   final List<GrammarModel> grammar;
   final List<DialogueModel> dialogues;
   final List<ExerciseModel> exercises;
+
+  final bool isCompleted;
 
   const UnitModel({
     required this.chapterIndex,
@@ -25,65 +31,58 @@ class UnitModel {
     required this.titleMyanmar,
     required this.level,
     required this.objective,
-    required this.objectiveMyanmar,
+    this.objectiveMyanmar = '',
     this.scriptItems = const [],
     this.vocabulary = const [],
     this.grammar = const [],
     this.dialogues = const [],
     this.exercises = const [],
+    this.isCompleted = false,
   });
 
-  String get id => 'ch_${chapterIndex}_unit_$unitIndex';
+  String get id => 'ch${chapterIndex}_unit$unitIndex';
 
-  Map<String, dynamic> toJson() {
-    return {
-      'chapterIndex': chapterIndex,
-      'unitIndex': unitIndex,
-      'title': title,
-      'titleMyanmar': titleMyanmar,
-      'level': level,
-      'objective': objective,
-      'objectiveMyanmar': objectiveMyanmar,
-      'scriptItems': scriptItems.map((s) => s.toJson()).toList(),
-      'vocabulary': vocabulary.map((v) => v.toJson()).toList(),
-      'grammar': grammar.map((g) => g.toJson()).toList(),
-      'dialogues': dialogues.map((d) => d.toJson()).toList(),
-      'exercises': exercises.map((e) => e.toJson()).toList(),
-    };
-  }
+  String get displayUnitNumber => '$chapterIndex.$unitIndex';
 
-  factory UnitModel.fromJson(Map<String, dynamic> json) {
+  bool get hasScript => scriptItems.isNotEmpty;
+
+  bool get hasVocabulary => vocabulary.isNotEmpty;
+
+  bool get hasGrammar => grammar.isNotEmpty;
+
+  bool get hasDialogues => dialogues.isNotEmpty;
+
+  bool get hasExercises => exercises.isNotEmpty;
+
+  UnitModel copyWith({
+    int? chapterIndex,
+    int? unitIndex,
+    String? title,
+    String? titleMyanmar,
+    String? level,
+    String? objective,
+    String? objectiveMyanmar,
+    List<ScriptModel>? scriptItems,
+    List<VocabularyModel>? vocabulary,
+    List<GrammarModel>? grammar,
+    List<DialogueModel>? dialogues,
+    List<ExerciseModel>? exercises,
+    bool? isCompleted,
+  }) {
     return UnitModel(
-      chapterIndex: json['chapterIndex'] as int,
-      unitIndex: json['unitIndex'] as int,
-      title: json['title'] as String,
-      titleMyanmar: json['titleMyanmar'] as String,
-      level: json['level'] as String,
-      objective: json['objective'] as String,
-      objectiveMyanmar: json['objectiveMyanmar'] as String,
-      scriptItems: (json['scriptItems'] as List<dynamic>?)
-              ?.map((item) => ScriptModel.fromJson(item as Map<String, dynamic>))
-              .toList() ??
-          [],
-      vocabulary: (json['vocabulary'] as List<dynamic>?)
-              ?.map((item) =>
-                  VocabularyModel.fromJson(item as Map<String, dynamic>))
-              .toList() ??
-          [],
-      grammar: (json['grammar'] as List<dynamic>?)
-              ?.map((item) => GrammarModel.fromJson(item as Map<String, dynamic>))
-              .toList() ??
-          [],
-      dialogues: (json['dialogues'] as List<dynamic>?)
-              ?.map((item) =>
-                  DialogueModel.fromJson(item as Map<String, dynamic>))
-              .toList() ??
-          [],
-      exercises: (json['exercises'] as List<dynamic>?)
-              ?.map((item) =>
-                  ExerciseModel.fromJson(item as Map<String, dynamic>))
-              .toList() ??
-          [],
+      chapterIndex: chapterIndex ?? this.chapterIndex,
+      unitIndex: unitIndex ?? this.unitIndex,
+      title: title ?? this.title,
+      titleMyanmar: titleMyanmar ?? this.titleMyanmar,
+      level: level ?? this.level,
+      objective: objective ?? this.objective,
+      objectiveMyanmar: objectiveMyanmar ?? this.objectiveMyanmar,
+      scriptItems: scriptItems ?? this.scriptItems,
+      vocabulary: vocabulary ?? this.vocabulary,
+      grammar: grammar ?? this.grammar,
+      dialogues: dialogues ?? this.dialogues,
+      exercises: exercises ?? this.exercises,
+      isCompleted: isCompleted ?? this.isCompleted,
     );
   }
 }
