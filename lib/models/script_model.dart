@@ -1,5 +1,3 @@
-import 'vocabulary_model.dart';
-
 enum ScriptCategory {
   consonant,
   vowelShort,
@@ -10,65 +8,80 @@ enum ScriptCategory {
   numeral,
 }
 
+enum ConsonantClass {
+  middle,
+  high,
+  low,
+}
+
 class ScriptModel {
-  final String symbol;
-  final String nameThai;
-  final String nameRoman;
-  final String nameMyanmar;
+  final String character;
+  final String? romanization;
+  final String? pronunciation;
   final ScriptCategory category;
-  final ConsonantClass consonantClass;
-  final String initialSound;
-  final String finalSound;
-  final List<List<double>> strokeOrderPath;
+  final ConsonantClass? consonantClass;
+  final String? tone;
+  final String? example;
+  final String? exampleMeaning;
+  final String? note;
 
   const ScriptModel({
-    required this.symbol,
-    required this.nameThai,
-    required this.nameRoman,
-    required this.nameMyanmar,
+    required this.character,
+    this.romanization,
+    this.pronunciation,
     required this.category,
-    this.consonantClass = ConsonantClass.none,
-    this.initialSound = '',
-    this.finalSound = '',
-    this.strokeOrderPath = const [],
+    this.consonantClass,
+    this.tone,
+    this.example,
+    this.exampleMeaning,
+    this.note,
   });
 
-  Map<String, dynamic> toJson() {
+  bool get isConsonant =>
+      category == ScriptCategory.consonant;
+
+  bool get isVowel =>
+      category == ScriptCategory.vowelShort ||
+      category == ScriptCategory.vowelLong ||
+      category == ScriptCategory.vowelCompound ||
+      category == ScriptCategory.vowelSpecial;
+
+  bool get isToneMark =>
+      category == ScriptCategory.toneMark;
+
+  Map<String, dynamic> toMap() {
     return {
-      'symbol': symbol,
-      'nameThai': nameThai,
-      'nameRoman': nameRoman,
-      'nameMyanmar': nameMyanmar,
+      'character': character,
+      'romanization': romanization,
+      'pronunciation': pronunciation,
       'category': category.name,
-      'consonantClass': consonantClass.name,
-      'initialSound': initialSound,
-      'finalSound': finalSound,
-      'strokeOrderPath': strokeOrderPath,
+      'consonantClass': consonantClass?.name,
+      'tone': tone,
+      'example': example,
+      'exampleMeaning': exampleMeaning,
+      'note': note,
     };
   }
 
-  factory ScriptModel.fromJson(Map<String, dynamic> json) {
+  factory ScriptModel.fromMap(Map<String, dynamic> map) {
     return ScriptModel(
-      symbol: json['symbol'] as String,
-      nameThai: json['nameThai'] as String,
-      nameRoman: json['nameRoman'] as String,
-      nameMyanmar: json['nameMyanmar'] as String,
+      character: map['character'] as String? ?? '',
+      romanization: map['romanization'] as String?,
+      pronunciation: map['pronunciation'] as String?,
       category: ScriptCategory.values.firstWhere(
-        (e) => e.name == json['category'],
+        (value) => value.name == map['category'],
         orElse: () => ScriptCategory.consonant,
       ),
-      consonantClass: ConsonantClass.values.firstWhere(
-        (e) => e.name == json['consonantClass'],
-        orElse: () => ConsonantClass.none,
-      ),
-      initialSound: json['initialSound'] as String? ?? '',
-      finalSound: json['finalSound'] as String? ?? '',
-      strokeOrderPath: (json['strokeOrderPath'] as List<dynamic>?)
-              ?.map((item) => (item as List<dynamic>)
-                  .map((point) => (point as num).toDouble())
-                  .toList())
-              .toList() ??
-          [],
+      consonantClass: map['consonantClass'] == null
+          ? null
+          : ConsonantClass.values.firstWhere(
+              (value) => value.name == map['consonantClass'],
+              orElse: () => ConsonantClass.middle,
+            ),
+      tone: map['tone'] as String?,
+      example: map['example'] as String?,
+      exampleMeaning: map['exampleMeaning'] as String?,
+      note: map['note'] as String?,
     );
   }
 }
