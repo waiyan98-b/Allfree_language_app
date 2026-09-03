@@ -11,44 +11,76 @@ class ChapterModel {
   final List<ExerciseModel> chapterMasteryTest;
 
   const ChapterModel({
-    required this.index,
+    int? index,
+    int? number,
     required this.title,
     required this.titleMyanmar,
     required this.cefrLevel,
-    required this.description,
+    this.description = '',
+    int? unitsCount,
     this.units = const [],
     this.chapterMasteryTest = const [],
-  });
+  }) : index = index ?? number ?? 0;
 
-  String get id => 'chapter_$index';
+  /// Backward compatibility for curriculum data
+  int get number => index;
 
-  Map<String, dynamic> toJson() {
+  /// Number of units planned for this chapter.
+  ///
+  /// If unitsCount is not explicitly supplied, the actual
+  /// number of units in [units] is used.
+  int get unitsCount => units.length;
+
+  bool get hasUnits => units.isNotEmpty;
+
+  bool get hasMasteryTest => chapterMasteryTest.isNotEmpty;
+
+  int get completedUnitCount {
+    return units.where((unit) => unit.isCompleted).length;
+  }
+
+  double get progress {
+    if (units.isEmpty) return 0.0;
+    return completedUnitCount / units.length;
+  }
+
+  Map<String, dynamic> toMap() {
     return {
       'index': index,
+      'number': number,
       'title': title,
       'titleMyanmar': titleMyanmar,
       'cefrLevel': cefrLevel,
       'description': description,
-      'units': units.map((u) => u.toJson()).toList(),
-      'chapterMasteryTest': chapterMasteryTest.map((e) => e.toJson()).toList(),
+      'unitsCount': unitsCount,
+      'units': units.map((unit) => unit.toMap()).toList(),
+      'chapterMasteryTest':
+          chapterMasteryTest.map((exercise) => exercise.toMap()).toList(),
     };
   }
 
-  factory ChapterModel.fromJson(Map<String, dynamic> json) {
+  factory ChapterModel.fromMap(Map<String, dynamic> map) {
     return ChapterModel(
-      index: json['index'] as int,
-      title: json['title'] as String,
-      titleMyanmar: json['titleMyanmar'] as String,
-      cefrLevel: json['cefrLevel'] as String,
-      description: json['description'] as String,
-      units: (json['units'] as List<dynamic>?)
-              ?.map((u) => UnitModel.fromJson(u as Map<String, dynamic>))
-              .toList() ??
-          [],
-      chapterMasteryTest: (json['chapterMasteryTest'] as List<dynamic>?)
-              ?.map((e) => ExerciseModel.fromJson(e as Map<String, dynamic>))
-              .toList() ??
-          [],
+      index: map['index'] as int? ?? map['number'] as int? ?? 0,
+      title: map['title'] as String? ?? '',
+      titleMyanmar: map['titleMyanmar'] as String? ?? '',
+      cefrLevel: map['cefrLevel'] as String? ?? '',
+      description: map['description'] as String? ?? '',
+      units: (map['units'] as List<dynamic>? ?? [])
+          .map(
+            (item) => UnitModel.fromMap(
+              Map<String, dynamic>.from(item as Map),
+            ),
+          )
+          .toList(),
+      chapterMasteryTest:
+          (map['chapterMasteryTest'] as List<dynamic>? ?? [])
+              .map(
+                (item) => ExerciseModel.fromMap(
+                  Map<String, dynamic>.from(item as Map),
+                ),
+              )
+              .toList(),
     );
   }
 }
